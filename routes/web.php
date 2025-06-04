@@ -13,7 +13,11 @@ Route::get('/', [LandingController::class, 'index'])->name('home');
 Route::get('/about', [AboutController::class, 'index'])->name('about.index');
 Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
 Route::get('/store', [StoreController::class, 'index'])->name('store.index');
-Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
+
+Route::prefix('/blog')->name('blog.')->group(function () {
+    Route::get('/', [BlogController::class, 'index'])->name('blog.index');
+    Route::get('/{blog_post:slug}', [BlogController::class, 'show'])->name('blog.show');
+});
 
 Route::prefix('/contact')->name('contact.')->group(function () {
     Route::get('/', [ContactController::class, 'index'])->name('index');
@@ -22,6 +26,4 @@ Route::prefix('/contact')->name('contact.')->group(function () {
 
 Route::post('/quote', [QuoteController::class, 'store'])->name('quote.store');
 
-Route::get('/under-construction', function () {
-    return view('construction');
-})->name('under-construction');
+Route::get('/under-construction', fn () => view('construction'))->name('under-construction');

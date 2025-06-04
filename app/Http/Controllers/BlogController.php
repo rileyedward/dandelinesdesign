@@ -19,4 +19,11 @@ class BlogController extends Controller
             'posts' => $posts,
         ]);
     }
+
+    public function show(BlogPost $blogPost): Response
+    {
+        return Inertia::render('blog/blog-show', [
+            'blogPost' => $blogPost,
+        ]);
+    }
 }

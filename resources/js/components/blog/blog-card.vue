@@ -18,7 +18,7 @@ const formattedDate = computed(() => {
 
 <template>
     <div class="blog-card overflow-hidden rounded-lg shadow-md transition-all duration-300 hover:shadow-lg">
-        <a href="#" class="block">
+        <a :href="`/blog/${post.slug}`" class="block">
             <div class="relative h-48 w-full overflow-hidden">
                 <img
                     v-if="post.image_url"
