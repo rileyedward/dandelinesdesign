@@ -1,30 +1,23 @@
 <?php
 
+use App\Http\Controllers\AboutController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\LandingController;
 use App\Http\Controllers\QuoteController;
+use App\Http\Controllers\ServiceController;
+use App\Http\Controllers\StoreController;
 use Illuminate\Support\Facades\Route;
-use Inertia\Inertia;
 
-Route::get('/', function () {
-    return Inertia::render('landing-page');
-})->name('home');
+Route::get('/', [LandingController::class, 'index'])->name('home');
+Route::get('/about', [AboutController::class, 'index'])->name('about.index');
+Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
+Route::get('/store', [StoreController::class, 'index'])->name('store.index');
+Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 
-Route::get('/about', function () {
-    return Inertia::render('about-page');
-})->name('about');
+Route::prefix('/contact')->name('contact.')->group(function () {
+    Route::get('/contact', [ContactController::class, 'index'])->name('index');
+    Route::post('/contact', [ContactController::class, 'store'])->name('store');
+});
 
-Route::get('/services', function () {
-    return Inertia::render('services/services-page');
-})->name('services');
-
-Route::get('/store', function () {
-    return Inertia::render('store-page');
-})->name('store');
-
-Route::get('/blog', function () {
-    return Inertia::render('blog-page');
-})->name('blog');
-
-Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
-Route::post('/contact', [ContactController::class, 'store'])->name('contact.store');
 Route::post('/quote', [QuoteController::class, 'store'])->name('quote.store');
