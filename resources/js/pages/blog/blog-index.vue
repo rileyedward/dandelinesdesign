@@ -20,11 +20,14 @@ defineProps<{
         </background>
 
         <div class="container mx-auto px-4 py-12">
-            <div class="mb-10 text-center">
-                <h2 class="mb-3 text-3xl font-bold text-gray-800">Latest Articles</h2>
-                <p class="mx-auto max-w-2xl text-gray-600">
-                    Explore our latest insights, tips, and creative inspirations to help you bring your vision to life.
-                </p>
+            <div class="mb-12 text-center">
+                <h2 class="mb-4 text-4xl font-bold text-gray-800">Journal & Inspirations</h2>
+                <div class="mx-auto max-w-2xl">
+                    <p class="leading-relaxed text-gray-600">
+                        Discover floral artistry, event design insights, and creative inspiration from our team of passionate designers.
+                    </p>
+                </div>
+                <div class="bg-primary mx-auto mt-6 h-1 w-24 rounded-full"></div>
             </div>
 
             <div v-if="posts.length > 0" class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">

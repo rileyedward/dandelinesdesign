@@ -10,7 +10,7 @@ class BlogController extends Controller
 {
     public function index(): Response
     {
-        $posts = BlogPost::where('is_published', true)
+        $posts = BlogPost::query()->where('is_published', true)
             ->orderBy('published_at', 'desc')
             ->orderBy('created_at', 'desc')
             ->get();

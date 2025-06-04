@@ -11,7 +11,7 @@ class ConstructionMiddleware
     public function handle(Request $request, Closure $next): Response
     {
         if (app()->environment('production')) {
-            if (!$request->routeIs('under-construction')) {
+            if (! $request->routeIs('under-construction')) {
                 return redirect()->route('under-construction');
             }
         }
