@@ -1,4 +1,4 @@
-export interface QuoteData {
+export interface QuoteMessageData {
     name: string;
     business_name: string | null;
     email: string;

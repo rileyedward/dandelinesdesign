@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ContactData } from '@/types/models/contact';
+import { ContactMessageData } from '@/types/models/contact-message';
 import { router } from '@inertiajs/vue3';
 import { reactive } from 'vue';
 import { route } from 'ziggy-js';
 
-const form = reactive<ContactData>({
+const form = reactive<ContactMessageData>({
     name: '',
     business_name: null,
     email: '',

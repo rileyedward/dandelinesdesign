@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { QuoteData } from '@/types/models/quote';
+import { QuoteMessageData } from '@/types/models/quote-message';
 import { router } from '@inertiajs/vue3';
 import { reactive } from 'vue';
 import { route } from 'ziggy-js';
 
-const form = reactive<QuoteData>({
+const form = reactive<QuoteMessageData>({
     name: '',
     business_name: null,
     email: '',

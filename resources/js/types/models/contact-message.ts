@@ -1,4 +1,4 @@
-export interface ContactData {
+export interface ContactMessageData {
     name: string;
     business_name: string | null;
     email: string;
