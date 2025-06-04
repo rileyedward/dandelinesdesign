@@ -16,8 +16,8 @@ Route::get('/store', [StoreController::class, 'index'])->name('store.index');
 Route::get('/blog', [BlogController::class, 'index'])->name('blog.index');
 
 Route::prefix('/contact')->name('contact.')->group(function () {
-    Route::get('/contact', [ContactController::class, 'index'])->name('index');
-    Route::post('/contact', [ContactController::class, 'store'])->name('store');
+    Route::get('/', [ContactController::class, 'index'])->name('index');
+    Route::post('/', [ContactController::class, 'store'])->name('store');
 });
 
 Route::post('/quote', [QuoteController::class, 'store'])->name('quote.store');
