@@ -19,7 +19,7 @@ return new class extends Migration
             $table->text('event_description');
             $table->integer('guest_count');
             $table->string('venue_name')->nullable();
-            $table->string('venue_address');
+            $table->string('venue_address')->nullable();
             $table->string('budget_range');
             $table->text('special_requests')->nullable();
             $table->timestamps();

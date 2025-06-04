@@ -18,7 +18,7 @@ class QuoteMessageRequest extends FormRequest
             'event_description' => ['required', 'string'],
             'guest_count' => ['required', 'integer', 'min:1'],
             'venue_name' => ['nullable', 'string', 'max:255'],
-            'venue_address' => ['required', 'string', 'max:255'],
+            'venue_address' => ['nullable', 'string', 'max:255'],
             'budget_range' => ['required', 'string', 'max:255'],
             'special_requests' => ['nullable', 'string'],
         ];
