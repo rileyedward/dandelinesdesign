@@ -24,12 +24,12 @@ const formattedDate = computed(() => {
             <div class="bg-primary mx-auto mt-6 h-1 w-24 rounded-full"></div>
         </div>
 
-        <div class="blog-content prose prose-lg mx-auto max-w-none after:clear-both after:content-[''] after:table after:block">
+        <div class="blog-content prose prose-lg mx-auto max-w-none after:clear-both after:block after:table after:content-['']">
             <img
                 v-if="blogPost.image_url"
                 :src="blogPost.image_url"
                 :alt="blogPost.title"
-                class="float-right ml-6 mb-4 h-auto w-full rounded-lg object-cover shadow-md md:w-1/3"
+                class="float-right mb-4 ml-6 h-auto w-full rounded-lg object-cover shadow-md md:w-1/3"
             />
             <div v-html="blogPost.content" />
         </div>
