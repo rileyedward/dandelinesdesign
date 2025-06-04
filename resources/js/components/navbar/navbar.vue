@@ -29,7 +29,7 @@ onUnmounted(() => {
         <div class="container mx-auto px-4">
             <!-- Desktop Layout -->
             <div class="hidden h-20 md:flex md:items-center md:justify-between">
-                <div class="md:flex md:items-center md:space-x-8 md:pl-8">
+                <div class="md:flex md:items-center md:space-x-10 md:pl-4">
                     <a v-for="link in leftNavLinks" :key="link.name" :href="link.href" class="text-gray-700 hover:text-gray-900">
                         {{ link.name }}
                     </a>
@@ -39,7 +39,7 @@ onUnmounted(() => {
                     <a href="#" class="text-xl font-bold text-gray-900">Dandelines Design</a>
                 </div>
 
-                <div class="md:flex md:items-center md:space-x-8 md:pr-8">
+                <div class="md:flex md:items-center md:space-x-10 md:pr-4">
                     <a v-for="link in rightNavLinks" :key="link.name" :href="link.href" class="text-gray-700 hover:text-gray-900">
                         {{ link.name }}
                     </a>
