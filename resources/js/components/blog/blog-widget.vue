@@ -10,12 +10,6 @@
             Explore our blog for the latest design trends, floral arrangement tips, event planning advice, and behind-the-scenes glimpses of our
             creative process. Stay inspired and informed with our regularly updated articles.
         </p>
-
-        <div class="mt-4 flex justify-center space-x-2">
-            <span class="rounded-full bg-pink-100 px-3 py-1 text-xs text-pink-800">Design</span>
-            <span class="rounded-full bg-green-100 px-3 py-1 text-xs text-green-800">Floral</span>
-            <span class="rounded-full bg-blue-100 px-3 py-1 text-xs text-blue-800">Events</span>
-        </div>
     </div>
 </template>
 
