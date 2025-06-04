@@ -14,17 +14,10 @@ import { services } from './services.config';
         </background>
 
         <div class="container mx-auto px-4 py-12">
-            <div class="max-w-5xl mx-auto space-y-8">
-                <div
-                    v-for="(service, index) in services"
-                    :key="index"
-                    class="flex"
-                    :class="index % 2 === 0 ? 'justify-start' : 'justify-end'"
-                >
+            <div class="mx-auto max-w-4xl space-y-8">
+                <div v-for="(service, index) in services" :key="index" class="flex" :class="index % 2 === 0 ? 'justify-start' : 'justify-end'">
                     <div class="w-full max-w-3xl">
-                        <service-banner
-                            :service="service"
-                        />
+                        <service-banner :service="service" />
                     </div>
                 </div>
             </div>
