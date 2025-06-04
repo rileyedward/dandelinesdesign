@@ -12,7 +12,7 @@ Route::get('/about', function () {
 })->name('about');
 
 Route::get('/services', function () {
-    return Inertia::render('services-page');
+    return Inertia::render('services/services-page');
 })->name('services');
 
 Route::get('/store', function () {
