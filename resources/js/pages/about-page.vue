@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import AboutSection from '@/components/about-section.vue';
 import Background from '@/components/background/background.vue';
 import AppLayout from '@/layouts/app-layout.vue';
 </script>
@@ -12,8 +13,7 @@ import AppLayout from '@/layouts/app-layout.vue';
         </background>
 
         <div class="container mx-auto px-4 py-12">
-            <h2 class="mb-6 text-2xl font-semibold">Our Story</h2>
-            <p>This content appears below the background image when scrolling.</p>
+            <about-section />
         </div>
     </app-layout>
 </template>
