@@ -19,8 +19,6 @@ const toggleFormType = (type: 'contact' | 'quote') => {
             <social-links />
         </background>
 
-
-        {{ formType }}
         <div id="contact-form-section" class="container mx-auto px-4 py-12">
             <div class="flex flex-col gap-8 md:flex-row">
                 <div class="md:w-5/12">
