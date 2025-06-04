@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ContactData } from '@/types/composables/contact';
+import { ContactData } from '@/types/models/contact';
 import { router } from '@inertiajs/vue3';
 import { reactive } from 'vue';
 import { route } from 'ziggy-js';

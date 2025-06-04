@@ -13,10 +13,3 @@ export interface QuoteData {
     special_requests: string | null;
     [key: string]: string | number | null | undefined;
 }
-
-export interface UseQuoteReturn {
-    form: QuoteData;
-    errors: Record<string, string>;
-    resetForm: () => void;
-    submitForm: () => void;
-}

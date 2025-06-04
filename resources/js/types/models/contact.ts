@@ -7,10 +7,3 @@ export interface ContactData {
     message: string;
     [key: string]: string | null | undefined;
 }
-
-export interface UseContactReturn {
-    form: ContactData;
-    errors: Record<string, string>;
-    resetForm: () => void;
-    submitForm: () => void;
-}

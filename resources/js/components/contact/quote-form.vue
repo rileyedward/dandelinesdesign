@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { QuoteData } from '@/types/composables/quote';
+import { QuoteData } from '@/types/models/quote';
 import { router } from '@inertiajs/vue3';
 import { reactive } from 'vue';
 import { route } from 'ziggy-js';
