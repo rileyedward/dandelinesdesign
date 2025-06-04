@@ -3,29 +3,29 @@ import { NavLink } from '@/types/components/navbar';
 export const leftNavLinks: NavLink[] = [
     {
         name: 'Home',
-        href: '#',
+        href: '/',
     },
     {
         name: 'About',
-        href: '#',
+        href: '/about',
     },
     {
         name: 'Services',
-        href: '#',
+        href: '/services',
     },
 ];
 
 export const rightNavLinks: NavLink[] = [
     {
         name: 'Store',
-        href: '#',
+        href: '/store',
     },
     {
         name: 'Blog',
-        href: '#',
+        href: '/blog',
     },
     {
         name: 'Contact',
-        href: '#',
+        href: '/contact',
     },
 ];
