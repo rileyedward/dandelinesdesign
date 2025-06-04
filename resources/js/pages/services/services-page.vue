@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import Background from '@/components/background/background.vue';
 import ServiceBanner from '@/components/service-banner.vue';
+import ServicesWidget from '@/components/services-widget.vue';
 import AppLayout from '@/layouts/app-layout.vue';
 import { services } from './services.config';
 </script>
@@ -11,6 +12,7 @@ import { services } from './services.config';
             <div class="flex h-full items-center justify-center">
                 <h1 class="text-4xl font-bold text-white">Our Services</h1>
             </div>
+            <services-widget />
         </background>
 
         <div class="container mx-auto px-4 py-12">
