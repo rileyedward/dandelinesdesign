@@ -21,3 +21,7 @@ Route::prefix('/contact')->name('contact.')->group(function () {
 });
 
 Route::post('/quote', [QuoteController::class, 'store'])->name('quote.store');
+
+Route::get('/under-construction', function () {
+    return view('construction');
+})->name('under-construction');
