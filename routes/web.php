@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -23,6 +24,4 @@ Route::get('/blog', function () {
     return Inertia::render('blog-page');
 })->name('blog');
 
-Route::get('/contact', function () {
-    return Inertia::render('contact-page');
-})->name('contact');
+Route::get('/contact', [ContactController::class, 'index'])->name('contact.index');
