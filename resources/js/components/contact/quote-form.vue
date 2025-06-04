@@ -57,7 +57,7 @@ const submitForm = () => {
 </script>
 
 <template>
-    <form @submit.prevent="submitForm" class="mx-auto max-w-2xl">
+    <form @submit.prevent="submitForm">
         <div class="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2">
             <div>
                 <label for="name" class="mb-1 block text-sm font-medium">Name *</label>
