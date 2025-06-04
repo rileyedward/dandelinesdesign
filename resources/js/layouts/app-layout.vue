@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import Footer from '@/components/footer/footer.vue';
 import Navbar from '@/components/navbar/navbar.vue';
 import { AppLayoutProps as Props } from '@/types/layouts/app-layout';
 import { Head as InertiaHead } from '@inertiajs/vue3';
@@ -16,4 +17,6 @@ withDefaults(defineProps<Props>(), {
     <main>
         <slot />
     </main>
+
+    <Footer />
 </template>
