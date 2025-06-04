@@ -4,14 +4,14 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\QuoteMessageRequest;
 use App\Models\QuoteMessage;
-use Inertia\Response;
+use Illuminate\Http\RedirectResponse;
 
 class QuoteController extends Controller
 {
-    public function store(QuoteMessageRequest $request): Response
+    public function store(QuoteMessageRequest $request): RedirectResponse
     {
         QuoteMessage::query()->create($request->validated());
 
-        return response()->back();
+        return redirect()->back();
     }
 }

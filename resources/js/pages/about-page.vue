@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import AboutSection from '@/components/about-section.vue';
 import Background from '@/components/background/background.vue';
+import TestimonialsSection from '@/components/testimonials-section.vue';
 import AppLayout from '@/layouts/app-layout.vue';
 </script>
 
@@ -15,5 +16,7 @@ import AppLayout from '@/layouts/app-layout.vue';
         <div class="container mx-auto px-4 py-12">
             <about-section />
         </div>
+
+        <testimonials-section />
     </app-layout>
 </template>
