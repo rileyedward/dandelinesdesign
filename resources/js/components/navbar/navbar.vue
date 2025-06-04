@@ -38,7 +38,7 @@ onUnmounted(() => {
                 </div>
 
                 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform">
-                    <a href="#" class="flex flex-col items-center">
+                    <a href="/" class="flex flex-col items-center">
                         <img v-if="!isIndexPage" src="/images/app-logo.png" alt="Dandelines Design Logo" class="h-10 w-auto" />
                         <span class="text-xs font-semibold text-gray-900">Dandelines Design</span>
                     </a>
@@ -54,7 +54,7 @@ onUnmounted(() => {
             <!-- Mobile Layout -->
             <div class="flex flex-col py-4 md:hidden">
                 <div class="mb-4 text-center">
-                    <a href="#" class="inline-flex flex-col items-center">
+                    <a href="/" class="inline-flex flex-col items-center">
                         <img v-if="!isIndexPage" src="/images/app-logo.png" alt="Dandelines Design Logo" class="h-10 w-auto" />
                         <span class="text-sm font-bold text-gray-900">Dandelines Design</span>
                     </a>

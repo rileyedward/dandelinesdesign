@@ -13,9 +13,6 @@ defineProps<{
 <template>
     <app-layout>
         <background imageUrl="/images/blog-background.jpg">
-            <div class="flex h-full items-center justify-center">
-                <h1 class="text-4xl font-bold text-white">Our Blog</h1>
-            </div>
             <blog-widget />
         </background>
 

@@ -10,9 +10,6 @@ import AppLayout from '@/layouts/app-layout.vue';
 <template>
     <app-layout>
         <background imageUrl="/images/about-background.jpg">
-            <div class="flex h-full items-center justify-center">
-                <h1 class="text-4xl font-bold text-white">About Us</h1>
-            </div>
             <about-widget />
         </background>
 

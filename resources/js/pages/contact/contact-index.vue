@@ -16,16 +16,13 @@ const toggleFormType = (type: 'contact' | 'quote') => {
 <template>
     <app-layout>
         <background imageUrl="/images/contact-background.jpg">
-            <div class="flex h-full items-center justify-center">
-                <h1 class="text-4xl font-bold text-white">Contact Us</h1>
-            </div>
             <social-links />
         </background>
 
         <div id="contact-form-section" class="container mx-auto px-4 py-12">
             <div class="flex flex-col gap-8 md:flex-row">
                 <div class="md:w-5/12">
-                    <img src="/images/design-service.jpg" alt="Contact Us" class="h-full w-full rounded-lg object-cover shadow-lg" />
+                    <img src="/images/design-service.jpg" alt="Contact Us" class="rounded-lg object-covershadow-lg" />
                 </div>
 
                 <div class="md:w-7/12">

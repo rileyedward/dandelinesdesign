@@ -8,9 +8,6 @@ import AppLayout from '@/layouts/app-layout.vue';
 <template>
     <app-layout>
         <background imageUrl="/images/services-background.jpg">
-            <div class="flex h-full items-center justify-center">
-                <h1 class="text-4xl font-bold text-white">Our Services</h1>
-            </div>
             <services-widget />
         </background>
 

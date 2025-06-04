@@ -15,7 +15,7 @@ withDefaults(defineProps<Props>(), {
             height: height,
         }"
     >
-        <div class="bg-opacity-40 absolute inset-0 bg-black" />
+        <div class="bg-opacity-40 absolute inset-0 bg-zinc-300" />
         <div class="relative z-10 container mx-auto h-full px-4">
             <slot />
         </div>
