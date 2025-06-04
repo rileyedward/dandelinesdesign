@@ -1,10 +1,12 @@
 <script setup lang="ts">
 import { Menu, X } from 'lucide-vue-next';
-import { onMounted, onUnmounted, ref } from 'vue';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 import { leftNavLinks, rightNavLinks } from './navbar.config';
 
 const isScrolled = ref(false);
 const isMobileMenuOpen = ref(false);
+
+const isIndexPage = computed<boolean>(() => window.location.pathname === '/');
 
 const handleScroll = () => {
     isScrolled.value = window.scrollY > 10;
@@ -37,7 +39,7 @@ onUnmounted(() => {
 
                 <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform">
                     <a href="#" class="flex flex-col items-center">
-                        <img src="/images/app-logo.png" alt="Dandelines Design Logo" class="h-10 w-auto" />
+                        <img v-if="!isIndexPage" src="/images/app-logo.png" alt="Dandelines Design Logo" class="h-10 w-auto" />
                         <span class="text-xs font-semibold text-gray-900">Dandelines Design</span>
                     </a>
                 </div>
@@ -53,7 +55,7 @@ onUnmounted(() => {
             <div class="flex flex-col py-4 md:hidden">
                 <div class="mb-4 text-center">
                     <a href="#" class="inline-flex flex-col items-center">
-                        <img src="/images/app-logo.png" alt="Dandelines Design Logo" class="h-10 w-auto" />
+                        <img v-if="!isIndexPage" src="/images/app-logo.png" alt="Dandelines Design Logo" class="h-10 w-auto" />
                         <span class="text-sm font-bold text-gray-900">Dandelines Design</span>
                     </a>
                 </div>

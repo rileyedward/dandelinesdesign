@@ -1,23 +1,24 @@
 <script setup lang="ts">
-import Background from '@/components/background/background.vue';
-import Card from '@/components/card/card.vue';
 import AppLayout from '@/layouts/app-layout.vue';
 </script>
 
 <template>
     <app-layout>
-        <background imageUrl="/images/landing-background.jpg">
-            <div class="flex h-full items-center justify-center">
-                <card :transparent="true">
-                    <h1 class="text-4xl font-bold">Welcome to Dandelines Design</h1>
-                    <p class="mt-4">This is an example of the new card component with transparency enabled.</p>
-                </card>
-            </div>
-        </background>
+        <div class="flex h-screen flex-col items-center bg-white pt-24">
+            <div class="text-center">
+                <img src="/images/app-logo.png" alt="Dandelines Design Logo" class="mx-auto mb-8 h-40 w-auto" />
 
-        <div class="container mx-auto px-4 py-12">
-            <h2 class="mb-6 text-2xl font-semibold">Additional Content</h2>
-            <p>This content appears below the background image when scrolling.</p>
+                <h1 class="mb-4 text-5xl font-bold text-gray-900">Dandelines Designs</h1>
+                <h2 class="mb-4 text-3xl font-semibold text-gray-800">Michele Grotenhuis</h2>
+                <p class="mb-8 text-xl text-gray-700">Event Planning & Design Services</p>
+
+                <a
+                    href="/contact"
+                    class="inline-block rounded-lg bg-gray-600 px-8 py-3 font-bold text-white transition duration-300 hover:bg-gray-700"
+                >
+                    Get in Touch
+                </a>
+            </div>
         </div>
     </app-layout>
 </template>
