@@ -1,9 +1,9 @@
 <script setup lang="ts">
 import AboutSection from '@/components/about-section.vue';
 import AboutWidget from '@/components/about-widget.vue';
-import AwardsSection from '@/components/awards-section.vue';
+import AwardsSection from '@/components/awards/awards-section.vue';
 import Background from '@/components/background/background.vue';
-import TestimonialsSection from '@/components/testimonials-section.vue';
+import TestimonialsSection from '@/components/testimonials/testimonials-section.vue';
 import AppLayout from '@/layouts/app-layout.vue';
 </script>
 

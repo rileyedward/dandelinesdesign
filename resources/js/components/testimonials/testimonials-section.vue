@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { testimonialRotationInterval, testimonials } from '@/pages/about/testimonials.config';
+import { testimonialRotationInterval, testimonials } from '@/components/testimonials/testimonials.config';
 import { Testimonial } from '@/types/components/testimonial';
 import { onBeforeUnmount, onMounted, ref } from 'vue';
 

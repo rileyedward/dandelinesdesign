@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { awards, awardsDisplayConfig } from '@/pages/about/awards-section.config';
+import { awards, awardsDisplayConfig } from '@/components/awards/awards-section.config';
 </script>
 
 <template>
