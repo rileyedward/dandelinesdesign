@@ -19,6 +19,8 @@ const toggleFormType = (type: 'contact' | 'quote') => {
             <social-links />
         </background>
 
+
+        {{ formType }}
         <div id="contact-form-section" class="container mx-auto px-4 py-12">
             <div class="flex flex-col gap-8 md:flex-row">
                 <div class="md:w-5/12">
@@ -45,24 +47,12 @@ const toggleFormType = (type: 'contact' | 'quote') => {
                         </div>
                     </div>
 
-                    <transition name="fade" mode="out-in">
+                    <div>
                         <contact-form v-if="formType === 'contact'" />
                         <quote-form v-else />
-                    </transition>
+                    </div>
                 </div>
             </div>
         </div>
     </app-layout>
 </template>
-
-<style scoped>
-.fade-enter-active,
-.fade-leave-active {
-    transition: opacity 0.3s ease;
-}
-
-.fade-enter-from,
-.fade-leave-to {
-    opacity: 0;
-}
-</style>
