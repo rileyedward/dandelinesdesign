@@ -2,8 +2,8 @@
 import Background from '@/components/background/background.vue';
 import ContactForm from '@/components/contact-form.vue';
 import QuoteForm from '@/components/quote-form.vue';
-import AppLayout from '@/layouts/app-layout.vue';
 import SocialLinks from '@/components/social-links/social-links.vue';
+import AppLayout from '@/layouts/app-layout.vue';
 import { ref } from 'vue';
 
 const formType = ref<'contact' | 'quote'>('contact');
@@ -23,13 +23,9 @@ const toggleFormType = (type: 'contact' | 'quote') => {
         </background>
 
         <div id="contact-form-section" class="container mx-auto px-4 py-12">
-            <div class="flex flex-col md:flex-row gap-8">
+            <div class="flex flex-col gap-8 md:flex-row">
                 <div class="md:w-5/12">
-                    <img
-                        src="/images/design-service.jpg"
-                        alt="Contact Us"
-                        class="w-full h-full object-cover rounded-lg shadow-lg"
-                    />
+                    <img src="/images/design-service.jpg" alt="Contact Us" class="h-full w-full rounded-lg object-cover shadow-lg" />
                 </div>
 
                 <div class="md:w-7/12">
@@ -37,14 +33,14 @@ const toggleFormType = (type: 'contact' | 'quote') => {
                         <div class="flex border-b border-gray-200">
                             <button
                                 @click="toggleFormType('contact')"
-                                class="py-2 px-4 font-medium"
+                                class="px-4 py-2 font-medium"
                                 :class="formType === 'contact' ? 'border-b-2 border-black' : ''"
                             >
                                 Contact Form
                             </button>
                             <button
                                 @click="toggleFormType('quote')"
-                                class="py-2 px-4 font-medium"
+                                class="px-4 py-2 font-medium"
                                 :class="formType === 'quote' ? 'border-b-2 border-black' : ''"
                             >
                                 Request a Quote
