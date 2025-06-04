@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { ContactMessageData } from '@/types/models/contact-message';
 import { router } from '@inertiajs/vue3';
-import { reactive } from 'vue';
+import { reactive, ref } from 'vue';
 import { route } from 'ziggy-js';
+import Modal from '@/components/modal/modal.vue';
 
 const form = reactive<ContactMessageData>({
     name: '',
@@ -14,6 +15,7 @@ const form = reactive<ContactMessageData>({
 });
 
 const errors = reactive<Record<string, string>>({});
+const isModalOpen = ref(false);
 
 const resetForm = () => {
     form.name = '';
@@ -28,12 +30,17 @@ const resetForm = () => {
     });
 };
 
+const closeModal = () => {
+    isModalOpen.value = false;
+};
+
 const submitForm = () => {
     router.post(route('contact.store'), form, {
         preserveScroll: true,
         preserveState: true,
         onSuccess: () => {
             resetForm();
+            isModalOpen.value = true;
         },
         onError: (err) => {
             Object.keys(err).forEach((key) => {
@@ -123,4 +130,11 @@ const submitForm = () => {
             </button>
         </div>
     </form>
+
+    <modal :is-open="isModalOpen" :on-close="closeModal">
+        <div class="text-center">
+            <h3 class="mb-4 text-lg font-medium text-gray-900">Thank you for sending a message</h3>
+            <p class="text-gray-600">We'll get back to you as soon as possible.</p>
+        </div>
+    </modal>
 </template>
