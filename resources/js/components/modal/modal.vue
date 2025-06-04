@@ -9,7 +9,7 @@ const closeModal = () => {
 </script>
 
 <template>
-    <div v-if="isOpen" class="fixed inset-0 z-50 flex items-center justify-center overflow-y-auto overflow-x-hidden">
+    <div v-if="isOpen" class="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto">
         <div class="fixed inset-0 backdrop-blur-sm transition-opacity" @click="closeModal"></div>
         <div class="relative z-10 mx-auto w-full max-w-md p-4">
             <div class="rounded-lg bg-white p-6 shadow-xl">
@@ -34,7 +34,7 @@ const closeModal = () => {
                 <div class="mt-4 flex justify-end">
                     <button
                         type="button"
-                        class="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-gray-500"
+                        class="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:ring-2 focus:ring-gray-500 focus:outline-none"
                         @click="closeModal"
                     >
                         Close

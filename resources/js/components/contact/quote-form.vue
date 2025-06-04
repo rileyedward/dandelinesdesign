@@ -1,9 +1,9 @@
 <script setup lang="ts">
+import Modal from '@/components/modal/modal.vue';
 import { QuoteMessageData } from '@/types/models/quote-message';
 import { router } from '@inertiajs/vue3';
 import { reactive, ref } from 'vue';
 import { route } from 'ziggy-js';
-import Modal from '@/components/modal/modal.vue';
 
 const form = reactive<QuoteMessageData>({
     name: '',
