@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Background from '@/components/background/background.vue';
-import StoreWidget from '@/components/store-widget.vue';
+import StoreWidget from '@/components/store/store-widget.vue';
 import AppLayout from '@/layouts/app-layout.vue';
 </script>
 

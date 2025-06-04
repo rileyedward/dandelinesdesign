@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Background from '@/components/background/background.vue';
-import ServiceBanner from '@/components/service-banner.vue';
-import ServicesWidget from '@/components/services-widget.vue';
+import ServiceBanner from '@/components/services/service-banner.vue';
+import ServicesWidget from '@/components/services/services-widget.vue';
 import AppLayout from '@/layouts/app-layout.vue';
 import { services } from './services.config';
 </script>

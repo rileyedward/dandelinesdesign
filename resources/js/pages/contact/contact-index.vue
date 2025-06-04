@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import Background from '@/components/background/background.vue';
-import ContactForm from '@/components/contact-form.vue';
-import QuoteForm from '@/components/quote-form.vue';
+import ContactForm from '@/components/contact/contact-form.vue';
+import QuoteForm from '@/components/contact/quote-form.vue';
 import SocialLinks from '@/components/social-links/social-links.vue';
 import AppLayout from '@/layouts/app-layout.vue';
 import { ref } from 'vue';

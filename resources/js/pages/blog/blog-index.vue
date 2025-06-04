@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import Background from '@/components/background/background.vue';
-import BlogWidget from '@/components/blog-widget.vue';
+import BlogWidget from '@/components/blog/blog-widget.vue';
 import AppLayout from '@/layouts/app-layout.vue';
 </script>
 
