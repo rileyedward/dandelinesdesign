@@ -2,10 +2,9 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use App\Models\Product;
-use App\Models\User;
 use App\Models\BlogPost;
+use App\Models\Product;
+use Illuminate\Console\Command;
 
 class SeedProductionCommand extends Command
 {
