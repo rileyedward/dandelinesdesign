@@ -1,17 +1,35 @@
 <script setup lang="ts">
 import { ModalProps as Props } from '@/types/components/modal';
+import { computed } from 'vue';
 
 const props = defineProps<Props>();
 
 const closeModal = () => {
     props.onClose();
 };
+
+const maxWidthClass = computed(() => {
+    switch (props.size) {
+        case 'sm':
+            return 'max-w-sm';
+        case 'md':
+            return 'max-w-md';
+        case 'lg':
+            return 'max-w-lg';
+        case 'xl':
+            return 'max-w-xl';
+        case '2xl':
+            return 'max-w-2xl';
+        default:
+            return 'max-w-md'; // Default size
+    }
+});
 </script>
 
 <template>
     <div v-if="isOpen" class="fixed inset-0 z-50 flex items-center justify-center overflow-x-hidden overflow-y-auto">
         <div class="fixed inset-0 backdrop-blur-sm transition-opacity" @click="closeModal"></div>
-        <div class="relative z-10 mx-auto w-full max-w-md p-4">
+        <div class="relative z-10 mx-auto w-full p-4" :class="maxWidthClass">
             <div class="rounded-lg bg-white p-6 shadow-xl">
                 <div class="flex items-start justify-between">
                     <div class="flex-1">

@@ -1,8 +1,9 @@
 <script setup lang="ts">
-import { ProductCardProps as Props } from '@/types/components/product-card';
+import { ProductCardEmits as Emits, ProductCardProps as Props } from '@/types/components/product-card';
 import { computed } from 'vue';
 
 const props = defineProps<Props>();
+const emit = defineEmits<Emits>();
 
 const formattedPrice = computed(() => {
     return new Intl.NumberFormat('en-US', {
@@ -10,10 +11,14 @@ const formattedPrice = computed(() => {
         currency: 'USD',
     }).format(props.product.price);
 });
+
+const handleClick = (): void => {
+    emit('click', props.product);
+};
 </script>
 
 <template>
-    <div class="product-card relative overflow-hidden rounded-lg shadow-md transition-all duration-300 hover:shadow-lg">
+    <div class="product-card relative overflow-hidden rounded-lg shadow-md transition-all duration-300 hover:shadow-lg" @click="handleClick">
         <div class="relative h-64 w-full overflow-hidden">
             <img
                 v-if="product.image_url"
@@ -25,10 +30,21 @@ const formattedPrice = computed(() => {
                 <span class="text-gray-400">No image available</span>
             </div>
 
-            <!-- Hover overlay with product info -->
-            <div class="product-info absolute inset-0 flex flex-col items-center justify-center bg-zinc-500 bg-opacity-60 p-4 text-white opacity-0 transition-opacity duration-300">
+            <!-- Availability Badge -->
+            <div class="absolute top-2 right-2 z-10">
+                <span
+                    class="inline-block rounded-full px-2 py-1 text-xs font-semibold"
+                    :class="product.is_available ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'"
+                >
+                    {{ product.is_available ? 'In Stock' : 'Out of Stock' }}
+                </span>
+            </div>
+
+            <div
+                class="product-info bg-opacity-60 absolute inset-0 flex flex-col items-center justify-center bg-zinc-500 p-4 text-white opacity-0 transition-opacity duration-300"
+            >
                 <h3 class="mb-2 text-center text-xl font-semibold">{{ product.name }}</h3>
-                <p class="text-lg font-bold text-primary">{{ formattedPrice }}</p>
+                <p class="text-primary text-lg font-bold">{{ formattedPrice }}</p>
                 <p v-if="product.description" class="mt-2 line-clamp-3 text-center text-sm">{{ product.description }}</p>
             </div>
         </div>

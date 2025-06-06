@@ -11,7 +11,6 @@ class StoreController extends Controller
     public function index(): Response
     {
         $products = Product::query()
-            ->where('is_available', true)
             ->orderBy('created_at', 'desc')
             ->get();
 

@@ -10,8 +10,8 @@ class ConstructionMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (app()->environment('production')) {
-            if (! $request->routeIs('under-construction')) {
+        if (app()->environment('local') && ! session('passcode_authenticated')) {
+            if (! $request->routeIs('under-construction') && ! $request->routeIs('under-construction.submit')) {
                 return redirect()->route('under-construction');
             }
         }

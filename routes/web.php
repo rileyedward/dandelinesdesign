@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\ConstructionController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\LandingController;
 use App\Http\Controllers\ProductController;
@@ -32,3 +33,4 @@ Route::prefix('/products')->name('products.')->group(function () {
 });
 
 Route::get('/under-construction', fn () => view('construction'))->name('under-construction');
+Route::post('/under-construction/submit', [ConstructionController::class, 'submit'])->name('under-construction.submit');

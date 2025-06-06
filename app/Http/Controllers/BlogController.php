@@ -16,7 +16,7 @@ class BlogController extends Controller
             ->get();
 
         return Inertia::render('blog/blog-index', [
-            'posts' => $posts,
+            'blogPosts' => $posts,
         ]);
     }
 
