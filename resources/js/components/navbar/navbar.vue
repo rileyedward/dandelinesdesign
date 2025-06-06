@@ -53,25 +53,25 @@ onUnmounted(() => {
 
             <!-- Mobile Layout -->
             <div class="flex flex-col py-4 md:hidden">
+                <div class="absolute top-8 left-4">
+                    <button type="button" class="text-gray-700 hover:text-gray-900" @click="toggleMobileMenu">
+                        <Menu v-if="!isMobileMenuOpen" class="h-6 w-6" />
+                        <X v-else class="h-6 w-6" />
+                    </button>
+                </div>
+
                 <div class="mb-4 text-center">
                     <a href="/" class="inline-flex flex-col items-center">
                         <img v-if="!isIndexPage" src="/images/app-logo.png" alt="Dandelines Design Logo" class="h-10 w-auto" />
                         <span class="text-sm font-bold text-gray-900">Dandelines Design</span>
                     </a>
                 </div>
-
-                <div class="absolute top-4 right-4">
-                    <button type="button" class="text-gray-700 hover:text-gray-900" @click="toggleMobileMenu">
-                        <Menu v-if="!isMobileMenuOpen" class="h-6 w-6" />
-                        <X v-else class="h-6 w-6" />
-                    </button>
-                </div>
             </div>
         </div>
 
         <!-- Mobile Menu -->
         <div v-if="isMobileMenuOpen" class="md:hidden">
-            <div class="space-y-1 px-4 pt-2 pb-3">
+            <div class="space-y-1 px-4 pt-2 pb-3 h-[700px]">
                 <a
                     v-for="link in [...leftNavLinks, ...rightNavLinks]"
                     :key="link.name"

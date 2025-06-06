@@ -4,7 +4,7 @@ import AppLayout from '@/layouts/app-layout.vue';
 
 <template>
     <app-layout>
-        <div class="flex h-screen flex-col items-center bg-white pt-24">
+        <div class="flex h-screen flex-col items-center bg-white pt-12 md:pt-24">
             <div class="text-center">
                 <img src="/images/app-logo.png" alt="Dandelines Design Logo" class="mx-auto mb-8 h-40 w-auto" />
 
