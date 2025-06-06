@@ -25,11 +25,10 @@ Route::prefix('/contact')->name('contact.')->group(function () {
     Route::post('/', [ContactController::class, 'store'])->name('store');
 });
 
+Route::post('/quote', [QuoteController::class, 'store'])->name('quote.store');
+
 Route::prefix('/products')->name('products.')->group(function () {
-    Route::get('/', [ProductController::class, 'index'])->name('index');
     Route::post('/', [ProductController::class, 'store'])->name('store');
 });
-
-Route::post('/quote', [QuoteController::class, 'store'])->name('quote.store');
 
 Route::get('/under-construction', fn () => view('construction'))->name('under-construction');

@@ -3,11 +3,9 @@ import Background from '@/components/background/background.vue';
 import BlogCard from '@/components/blog/blog-card.vue';
 import BlogWidget from '@/components/blog/blog-widget.vue';
 import AppLayout from '@/layouts/app-layout.vue';
-import { BlogPost } from '@/types/models/blog-post';
+import { BlogIndexPageProps as Props } from '@/types/pages/blog';
 
-defineProps<{
-    posts: BlogPost[];
-}>();
+defineProps<Props>();
 </script>
 
 <template>

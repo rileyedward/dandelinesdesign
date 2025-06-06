@@ -1,7 +1,10 @@
 <script setup lang="ts">
+import { StoreIndexPageProps as Props } from '@/types/pages/store';
 import Background from '@/components/background/background.vue';
 import StoreWidget from '@/components/store/store-widget.vue';
 import AppLayout from '@/layouts/app-layout.vue';
+
+defineProps<Props>();
 </script>
 
 <template>
