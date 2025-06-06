@@ -25,8 +25,8 @@ defineProps<Props>();
                 <div class="bg-primary mx-auto mt-6 h-1 w-24 rounded-full"></div>
             </div>
 
-            <div v-if="posts.length > 0" class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
-                <div v-for="post in posts" :key="post.id" class="flex w-full">
+            <div v-if="blogPosts.length > 0" class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+                <div v-for="post in blogPosts" :key="post.id" class="flex w-full">
                     <blog-card :post="post" />
                 </div>
             </div>
