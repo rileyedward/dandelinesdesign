@@ -71,7 +71,7 @@ onUnmounted(() => {
 
         <!-- Mobile Menu -->
         <div v-if="isMobileMenuOpen" class="md:hidden">
-            <div class="space-y-1 px-4 pt-2 pb-3 h-[700px]">
+            <div class="h-[700px] space-y-1 px-4 pt-2 pb-3">
                 <a
                     v-for="link in [...leftNavLinks, ...rightNavLinks]"
                     :key="link.name"
