@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import Modal from '@/components/modal/modal.vue';
+import VenmoButton from '@/components/store/venmo-button.vue';
 import { ProductModalProps as Props } from '@/types/components/product-modal';
 import { computed } from 'vue';
 
@@ -41,6 +42,10 @@ const formattedPrice = computed(() => {
                     >
                         {{ product.is_available ? 'In Stock' : 'Out of Stock' }}
                     </span>
+                </div>
+
+                <div class="mt-6">
+                    <venmo-button username="dandelinesdesign" :amount="product.price" :product-name="product.name" />
                 </div>
             </div>
         </div>
