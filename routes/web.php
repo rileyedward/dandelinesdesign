@@ -32,5 +32,7 @@ Route::prefix('/products')->name('products.')->group(function () {
     Route::post('/', [ProductController::class, 'store'])->name('store');
 });
 
-Route::get('/under-construction', fn () => view('construction'))->name('under-construction');
-Route::post('/under-construction/submit', [ConstructionController::class, 'submit'])->name('under-construction.submit');
+Route::prefix('/under-construction')->name('under-construction.')->group(function () {
+    Route::get('/', [ConstructionController::class, 'index'])->name('index');
+    Route::post('/submit', [ConstructionController::class, 'store'])->name('store');
+});

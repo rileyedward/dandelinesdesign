@@ -108,7 +108,7 @@
             <p>Thank you for your patience!</p>
 
             <div class="form-container">
-                <form action="{{ route('under-construction.submit') }}" method="POST">
+                <form action="{{ route('under-construction.store') }}" method="POST">
                     @csrf
                     <div class="form-group">
                         <label for="passcode">Enter Passcode</label>

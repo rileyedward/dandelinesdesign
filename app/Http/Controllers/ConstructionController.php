@@ -4,10 +4,16 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class ConstructionController extends Controller
 {
-    public function submit(Request $request): RedirectResponse
+    public function index(): View
+    {
+        return view('construction');
+    }
+
+    public function store(Request $request): RedirectResponse
     {
         $request->validate([
             'passcode' => 'required|string',
