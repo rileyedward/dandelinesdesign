@@ -12,8 +12,6 @@ class ContactController extends Controller
 {
     public function index(): Response
     {
-        logger()->info(ContactMessage::all());
-
         return Inertia::render('contact/contact-index');
     }
 
