@@ -10,7 +10,7 @@ class ConstructionMiddleware
 {
     public function handle(Request $request, Closure $next): Response
     {
-        if (app()->environment('local') && ! session('passcode_authenticated')) {
+        if (app()->environment('production') && ! session('passcode_authenticated')) {
             if (! $request->routeIs('under-construction.index') && ! $request->routeIs('under-construction.store')) {
                 return redirect()->route('under-construction.index');
             }
