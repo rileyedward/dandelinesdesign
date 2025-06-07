@@ -13,6 +13,6 @@ class Testimonial extends Model
 
     protected $fillable = [
         'name',
-        'testimonial',
+        'message',
     ];
 }

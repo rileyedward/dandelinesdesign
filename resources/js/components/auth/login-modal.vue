@@ -50,29 +50,29 @@ const submitForm = () => {
             <h3 class="mb-4 text-lg font-medium text-gray-900">Admin Login</h3>
         </div>
         <form @submit.prevent="submitForm">
-            <div class="mb-4">
-                <label for="username" class="mb-1 block text-sm font-medium">Username</label>
+            <div class="mb-6">
+                <label for="username" class="mb-2 block text-sm font-medium">Username</label>
                 <input
                     id="username"
                     v-model="form.username"
                     type="text"
-                    class="focus:ring-primary w-full rounded-md border px-4 py-2 focus:ring-2 focus:outline-none"
+                    class="focus:ring-primary w-full rounded-md border px-4 py-3 focus:ring-2 focus:outline-none"
                 />
                 <p v-if="errors.username" class="mt-1 text-sm text-red-600">{{ errors.username }}</p>
             </div>
 
-            <div class="mb-4">
-                <label for="password" class="mb-1 block text-sm font-medium">Password</label>
+            <div class="mb-6">
+                <label for="password" class="mb-2 block text-sm font-medium">Password</label>
                 <input
                     id="password"
                     v-model="form.password"
                     type="password"
-                    class="focus:ring-primary w-full rounded-md border px-4 py-2 focus:ring-2 focus:outline-none"
+                    class="focus:ring-primary w-full rounded-md border px-4 py-3 focus:ring-2 focus:outline-none"
                 />
                 <p v-if="errors.password" class="mt-1 text-sm text-red-600">{{ errors.password }}</p>
             </div>
 
-            <div class="mb-4 flex items-center">
+            <div class="mb-6 flex items-center">
                 <input
                     id="remember"
                     v-model="form.remember"
@@ -85,7 +85,7 @@ const submitForm = () => {
             <div class="flex justify-end">
                 <button
                     type="submit"
-                    class="rounded-md border border-gray-300 bg-white px-6 py-2 text-black hover:bg-gray-100 focus:ring-2 focus:ring-white focus:outline-none"
+                    class="rounded-md border border-gray-300 bg-white px-6 py-3 text-black hover:bg-gray-100 focus:ring-2 focus:ring-white focus:outline-none"
                 >
                     Login
                 </button>

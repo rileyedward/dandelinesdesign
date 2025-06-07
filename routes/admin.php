@@ -56,6 +56,7 @@ Route::middleware(['auth'])
             ->name('testimonials.')
             ->group(function () {
                 Route::get('/', 'admin')->name('index');
+                Route::post('/', 'store')->name('store');
                 Route::patch('/{testimonial}', 'update')->name('update');
                 Route::delete('/{testimonial}', 'destroy')->name('destroy');
             });
