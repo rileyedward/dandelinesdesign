@@ -46,6 +46,13 @@ import { FileText, MessageSquare, Quote, ShoppingBag, Star, Users } from 'lucide
                 subtitle="Manage customer testimonials"
                 :href="route('admin.testimonials.index')"
             />
+
+            <stat-metric
+                color="indigo"
+                :icon="Users"
+                title="Page Views"
+                subtitle="Track website visitors"
+            />
         </div>
     </admin-layout>
 </template>
