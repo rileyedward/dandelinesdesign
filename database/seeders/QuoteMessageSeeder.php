@@ -4,13 +4,145 @@ namespace Database\Seeders;
 
 use App\Models\QuoteMessage;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Carbon;
 
 class QuoteMessageSeeder extends Seeder
 {
     public function run(): void
     {
-        QuoteMessage::factory()
-            ->count(10)
-            ->create();
+        $data = [
+            [
+                'name' => 'Jennifer Anderson',
+                'business_name' => null,
+                'email' => 'jennifer.anderson@example.com',
+                'phone' => '555-123-4567',
+                'event_date' => Carbon::parse('2024-06-15'),
+                'event_type' => 'Wedding',
+                'event_description' => 'We are planning a garden wedding with about 120 guests. Looking for elegant floral arrangements with a romantic, vintage feel. Our colors are blush pink, ivory, and gold.',
+                'guest_count' => 120,
+                'venue_name' => 'Rosewood Gardens',
+                'venue_address' => '123 Bloom Street, Portland, OR',
+                'special_requests' => 'Would love to incorporate some family heirloom brooches into the bridal bouquet.',
+            ],
+            [
+                'name' => 'Michael Thompson',
+                'business_name' => 'Thompson Enterprises',
+                'email' => 'michael.thompson@example.com',
+                'phone' => '555-987-6543',
+                'event_date' => Carbon::parse('2024-09-22'),
+                'event_type' => 'Corporate Gala',
+                'event_description' => 'Annual company gala celebrating our 25th anniversary. Looking for sophisticated centerpieces and stage decorations that reflect our brand colors of navy and silver.',
+                'guest_count' => 200,
+                'venue_name' => 'Grand Ballroom Hotel',
+                'venue_address' => '456 Luxury Avenue, Portland, OR',
+                'special_requests' => 'Need to incorporate company logo into some of the arrangements.',
+            ],
+            [
+                'name' => 'Emily Rodriguez',
+                'business_name' => null,
+                'email' => 'emily.rodriguez@example.com',
+                'phone' => '555-234-5678',
+                'event_date' => Carbon::parse('2024-05-10'),
+                'event_type' => 'Baby Shower',
+                'event_description' => 'Hosting a baby shower for 30 guests. Theme is "Welcome to the World" with a travel motif. Looking for cute, whimsical arrangements.',
+                'guest_count' => 30,
+                'venue_name' => 'Home Residence',
+                'venue_address' => '789 Family Lane, Portland, OR',
+                'special_requests' => 'Would like arrangements that can be taken home by guests as favors.',
+            ],
+            [
+                'name' => 'David Wilson',
+                'business_name' => 'Wilson & Partners Law Firm',
+                'email' => 'david.wilson@example.com',
+                'phone' => '555-345-6789',
+                'event_date' => Carbon::parse('2024-11-05'),
+                'event_type' => 'Client Appreciation Event',
+                'event_description' => 'Hosting an evening reception for our top clients. Looking for elegant, understated arrangements that create a sophisticated atmosphere.',
+                'guest_count' => 75,
+                'venue_name' => 'The Metropolitan Club',
+                'venue_address' => '101 Downtown Plaza, Portland, OR',
+                'special_requests' => 'Arrangements should be low enough to allow for conversation across tables.',
+            ],
+            [
+                'name' => 'Sophia Martinez',
+                'business_name' => null,
+                'email' => 'sophia.martinez@example.com',
+                'phone' => '555-456-7890',
+                'event_date' => Carbon::parse('2024-07-28'),
+                'event_type' => 'Anniversary Party',
+                'event_description' => 'Celebrating our 25th wedding anniversary with family and friends. Looking for romantic floral arrangements with a touch of silver to represent our anniversary.',
+                'guest_count' => 50,
+                'venue_name' => 'Riverside Restaurant',
+                'venue_address' => '222 Waterfront Way, Portland, OR',
+                'special_requests' => 'Would like to incorporate some of the same flowers from our original wedding bouquet (roses, lilies).',
+            ],
+            [
+                'name' => 'Robert Johnson',
+                'business_name' => 'Johnson Events',
+                'email' => 'robert.johnson@example.com',
+                'phone' => '555-567-8901',
+                'event_date' => Carbon::parse('2024-10-15'),
+                'event_type' => 'Charity Fundraiser',
+                'event_description' => 'Annual fundraiser for local children\'s hospital. Theme is "A Night Under the Stars". Looking for dramatic, celestial-inspired arrangements.',
+                'guest_count' => 300,
+                'venue_name' => 'City Convention Center',
+                'venue_address' => '333 Event Boulevard, Portland, OR',
+                'special_requests' => 'Need arrangements to incorporate blue and silver colors, possibly with some twinkling lights.',
+            ],
+            [
+                'name' => 'Amanda Lee',
+                'business_name' => null,
+                'email' => 'amanda.lee@example.com',
+                'phone' => '555-678-9012',
+                'event_date' => Carbon::parse('2024-08-03'),
+                'event_type' => 'Bridal Shower',
+                'event_description' => 'Hosting a bridal shower for my sister. Theme is "From Miss to Mrs". Looking for romantic, feminine arrangements.',
+                'guest_count' => 25,
+                'venue_name' => 'Tea Room Cafe',
+                'venue_address' => '444 Garden Street, Portland, OR',
+                'special_requests' => 'Would like arrangements in teacups or vintage containers to match the tea party theme.',
+            ],
+            [
+                'name' => 'Daniel Kim',
+                'business_name' => 'Kim Family Restaurant',
+                'email' => 'daniel.kim@example.com',
+                'phone' => '555-789-0123',
+                'event_date' => Carbon::parse('2024-12-10'),
+                'event_type' => 'Restaurant Grand Opening',
+                'event_description' => 'Grand opening of our family restaurant. Looking for arrangements that create a welcoming atmosphere while incorporating elements of our Korean heritage.',
+                'guest_count' => 100,
+                'venue_name' => 'Kim Family Restaurant',
+                'venue_address' => '555 Culinary Court, Portland, OR',
+                'special_requests' => 'Would like to incorporate some traditional Korean flowers if possible.',
+            ],
+            [
+                'name' => 'Jessica Taylor',
+                'business_name' => null,
+                'email' => 'jessica.taylor@example.com',
+                'phone' => '555-890-1234',
+                'event_date' => Carbon::parse('2025-02-14'),
+                'event_type' => 'Valentine\'s Day Wedding',
+                'event_description' => 'Planning a Valentine\'s Day wedding. Looking for romantic, lush arrangements with lots of reds and pinks.',
+                'guest_count' => 150,
+                'venue_name' => 'Love\'s Chapel',
+                'venue_address' => '666 Romance Road, Portland, OR',
+                'special_requests' => 'Would like heart-shaped elements incorporated into the arrangements.',
+            ],
+            [
+                'name' => 'Thomas Brown',
+                'business_name' => 'Brown & Associates',
+                'email' => 'thomas.brown@example.com',
+                'phone' => '555-901-2345',
+                'event_date' => Carbon::parse('2024-04-20'),
+                'event_type' => 'Retirement Party',
+                'event_description' => 'Retirement party for our company CEO. Looking for sophisticated arrangements that celebrate his 30 years with the company.',
+                'guest_count' => 80,
+                'venue_name' => 'Executive Club',
+                'venue_address' => '777 Success Street, Portland, OR',
+                'special_requests' => 'Would like to incorporate the company colors (green and gold) subtly into the arrangements.',
+            ],
+        ];
+
+        QuoteMessage::query()->insert($data);
     }
 }
