@@ -9,13 +9,14 @@ withDefaults(defineProps<Props>(), {
 
 <template>
     <div
-        class="relative w-full bg-cover bg-center bg-no-repeat"
+        class="relative w-full bg-cover bg-center bg-no-repeat object-cover object-center"
         :style="{
             backgroundImage: `url(${imageUrl})`,
             height: height,
+            zIndex: 0,
         }"
     >
-        <div class="bg-opacity-40 absolute inset-0 bg-zinc-300" />
+        <div class="absolute inset-0" />
         <div class="relative z-10 container mx-auto h-full px-4">
             <slot />
         </div>
