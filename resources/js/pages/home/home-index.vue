@@ -8,7 +8,7 @@ import AppLayout from '@/layouts/app-layout.vue';
             <div class="text-center">
                 <img src="/images/app-logo.png" alt="Dandelines Design Logo" class="mx-auto mb-8 h-40 w-auto" />
 
-                <h1 class="mb-4 text-5xl font-bold text-gray-900">Dandelines Designs</h1>
+                <h1 class="mb-4 text-5xl font-bold text-gray-900">Dandelines Design</h1>
                 <h2 class="mb-4 text-3xl font-semibold text-gray-800">Michele Grotenhuis</h2>
                 <p class="mb-8 text-xl text-gray-700">Event Planning & Design Services</p>
 
