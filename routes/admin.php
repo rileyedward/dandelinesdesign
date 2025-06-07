@@ -15,22 +15,20 @@ Route::middleware(['auth'])
     ->group(function () {
         Route::get('/', [AdminController::class, 'index'])->name('index');
 
-        Route::controller(BlogController::class)
-            ->prefix('blog')
-            ->name('blog.')
-            ->group(function () {
-                Route::get('/', 'admin')->name('index');
-                Route::post('/', 'store')->name('store');
-                Route::patch('/{blogPost}', 'update')->name('update');
-                Route::delete('/{blogPost}', 'destroy')->name('destroy');
-            });
-
         Route::controller(ContactController::class)
             ->prefix('contact')
             ->name('contact.')
             ->group(function () {
                 Route::get('/', 'admin')->name('index');
                 Route::delete('/{contactMessage}', 'destroy')->name('destroy');
+            });
+
+        Route::controller(QuoteController::class)
+            ->prefix('quotes')
+            ->name('quotes.')
+            ->group(function () {
+                Route::get('/', 'admin')->name('index');
+                Route::delete('/{quote}', 'destroy')->name('destroy');
             });
 
         Route::controller(ProductController::class)
@@ -43,12 +41,14 @@ Route::middleware(['auth'])
                 Route::delete('/{product}', 'destroy')->name('destroy');
             });
 
-        Route::controller(QuoteController::class)
-            ->prefix('quotes')
-            ->name('quotes.')
+        Route::controller(BlogController::class)
+            ->prefix('blog')
+            ->name('blog.')
             ->group(function () {
                 Route::get('/', 'admin')->name('index');
-                Route::delete('/{quote}', 'destroy')->name('destroy');
+                Route::post('/', 'store')->name('store');
+                Route::patch('/{blogPost}', 'update')->name('update');
+                Route::delete('/{blogPost}', 'destroy')->name('destroy');
             });
 
         Route::controller(TestimonialController::class)

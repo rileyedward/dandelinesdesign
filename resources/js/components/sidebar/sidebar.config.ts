@@ -4,32 +4,32 @@ import { LayoutIcon, FileTextIcon, MessageSquareIcon, ShoppingBagIcon, QuoteIcon
 export const sidebarLinks: SidebarLink[] = [
     {
         name: 'Dashboard',
-        href: '/admin',
+        href: route('admin.index'),
         icon: LayoutIcon,
     },
     {
-        name: 'Blog Posts',
-        href: '/admin/blog-posts',
-        icon: FileTextIcon,
-    },
-    {
         name: 'Contact Messages',
-        href: '/admin/contact-messages',
+        href: route('admin.contact.index'),
         icon: MessageSquareIcon,
     },
     {
-        name: 'Products',
-        href: '/admin/products',
-        icon: ShoppingBagIcon,
-    },
-    {
         name: 'Quotes',
-        href: '/admin/quotes',
+        href: route('admin.quotes.index'),
         icon: QuoteIcon,
     },
     {
+        name: 'Products',
+        href: route('admin.products.index'),
+        icon: ShoppingBagIcon,
+    },
+    {
+        name: 'Blog Posts',
+        href: route('admin.blog.index'),
+        icon: FileTextIcon,
+    },
+    {
         name: 'Testimonials',
-        href: '/admin/testimonials',
+        href: route('admin.testimonials.index'),
         icon: StarIcon,
     },
 ];

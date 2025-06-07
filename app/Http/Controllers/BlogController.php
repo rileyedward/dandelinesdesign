@@ -26,12 +26,12 @@ class BlogController extends Controller
     {
         // TODO: Add authorization policy...
 
-        $posts = BlogPost::query()->where('is_published', true)
+        $posts = BlogPost::query()
             ->orderBy('published_at', 'desc')
             ->orderBy('created_at', 'desc')
             ->get();
 
-        return Inertia::render('/admin/admin-blog', [
+        return Inertia::render('admin/admin-blog', [
             'blogPosts' => $posts,
         ]);
     }
