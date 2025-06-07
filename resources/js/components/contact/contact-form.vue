@@ -53,6 +53,7 @@ const submitForm = () => {
 
 <template>
     <form @submit.prevent="submitForm">
+        <p class="mb-4 text-gray-600">Feel free to send me a message. I'll get back to you as soon as possible.</p>
         <div class="mb-8 grid grid-cols-1 gap-8 md:grid-cols-2">
             <div>
                 <label for="name" class="mb-2 block text-sm font-medium">Name *</label>
