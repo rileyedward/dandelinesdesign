@@ -16,6 +16,7 @@ export interface BlogPostData {
     title: string;
     content: string;
     image_url: string | null;
+    image?: File | null;
     is_published: boolean;
-    [key: string]: string | boolean | null | undefined;
+    [key: string]: string | boolean | null | undefined | File;
 }

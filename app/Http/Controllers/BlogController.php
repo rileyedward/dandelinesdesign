@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BlogPostRequest;
 use App\Models\BlogPost;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 use Inertia\Inertia;
 use Inertia\Response;
@@ -57,6 +58,15 @@ class BlogController extends Controller
             $data['excerpt'] = Str::limit(strip_tags($data['content']), 150);
         }
 
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $filename = time() . '_' . $image->getClientOriginalName();
+
+            $path = $image->storeAs('images/blog', $filename, 'public');
+
+            $data['image_url'] = '/storage/' . $path;
+        }
+
         BlogPost::query()->create($data);
 
         return redirect()->route('admin.blog.index');
@@ -70,6 +80,26 @@ class BlogController extends Controller
 
         if (! isset($data['excerpt'])) {
             $data['excerpt'] = Str::limit(strip_tags($data['content']), 150);
+        }
+
+        // Handle image upload
+        if ($request->hasFile('image')) {
+            // Delete old image if it exists
+            if ($blogPost->image_url) {
+                $oldPath = str_replace('/storage/', '', $blogPost->image_url);
+                if (Storage::disk('public')->exists($oldPath)) {
+                    Storage::disk('public')->delete($oldPath);
+                }
+            }
+
+            $image = $request->file('image');
+            $filename = time() . '_' . $image->getClientOriginalName();
+
+            // Store the image in the public/images/blog directory
+            $path = $image->storeAs('images/blog', $filename, 'public');
+
+            // Set the image_url to the public path
+            $data['image_url'] = '/storage/' . $path;
         }
 
         $blogPost->update($data);

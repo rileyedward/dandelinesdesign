@@ -11,6 +11,7 @@ class BlogPostRequest extends FormRequest
         return [
             'title' => ['required', 'string', 'max:255'],
             'content' => ['required', 'string'],
+            'image' => ['nullable', 'image', 'mimes:jpeg,png,jpg,gif', 'max:2048'],
             'image_url' => ['nullable', 'string', 'max:255'],
             'is_published' => ['nullable', 'boolean'],
         ];
