@@ -9,6 +9,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\StoreController;
+use App\Http\Controllers\TestimonialController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [LandingController::class, 'index'])->name('home');
@@ -37,6 +38,13 @@ Route::post('/quote', [QuoteController::class, 'store'])->name('quote.store');
 Route::controller(ProductController::class)
     ->prefix('/products')
     ->name('products.')
+    ->group(function () {
+        Route::post('/', 'store')->name('store');
+    });
+
+Route::controller(TestimonialController::class)
+    ->prefix('/testimonials')
+    ->name('testimonials.')
     ->group(function () {
         Route::post('/', 'store')->name('store');
     });
