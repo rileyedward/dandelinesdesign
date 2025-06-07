@@ -46,6 +46,8 @@ Route::middleware(['auth'])
             ->name('blog.')
             ->group(function () {
                 Route::get('/', 'admin')->name('index');
+                Route::get('/create', 'create')->name('create');
+                Route::get('/edit/{blogPost}', 'edit')->name('edit');
                 Route::post('/', 'store')->name('store');
                 Route::patch('/{blogPost}', 'update')->name('update');
                 Route::delete('/{blogPost}', 'destroy')->name('destroy');

@@ -12,8 +12,6 @@ class QuoteController extends Controller
 {
     public function admin(): Response
     {
-        // TODO: Add authorization policy...
-
         $unreadMessages = QuoteMessage::query()
             ->orderBy('created_at', 'desc')
             ->get();
@@ -38,8 +36,6 @@ class QuoteController extends Controller
 
     public function destroy(QuoteMessage $quote): RedirectResponse
     {
-        // TODO: Add authorization policy...
-
         $quote->delete();
 
         logger()->info('here');

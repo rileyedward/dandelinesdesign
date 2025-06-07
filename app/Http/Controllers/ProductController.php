@@ -12,8 +12,6 @@ class ProductController extends Controller
 {
     public function admin(): Response
     {
-        // TODO: Add authorization policy...
-
         $products = Product::query()
             ->orderBy('created_at', 'desc')
             ->get();
@@ -25,8 +23,6 @@ class ProductController extends Controller
 
     public function store(ProductRequest $request): RedirectResponse
     {
-        // TODO: Add authorization policy...
-
         Product::query()->create($request->validated());
 
         return redirect()->back();
@@ -34,8 +30,6 @@ class ProductController extends Controller
 
     public function update(ProductRequest $request, Product $product): RedirectResponse
     {
-        // TODO: Add authorization policy...
-
         $product->update($request->validated());
 
         return redirect()->back();
@@ -43,8 +37,6 @@ class ProductController extends Controller
 
     public function destroy(Product $product): RedirectResponse
     {
-        // TODO: Add authorization policy...
-
         $product->delete();
 
         return redirect()->back();

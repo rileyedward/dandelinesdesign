@@ -7,3 +7,11 @@ export interface BlogIndexPageProps {
 export interface BlogShowPageProps {
     blogPost: BlogPost;
 }
+
+export interface BlogAdminPageProps {
+    blogPosts: BlogPost[];
+}
+
+export interface BlogAdminEditPageProps {
+    blogPost: BlogPost;
+}

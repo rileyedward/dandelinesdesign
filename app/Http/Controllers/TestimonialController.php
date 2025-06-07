@@ -12,8 +12,6 @@ class TestimonialController extends Controller
 {
     public function admin(): Response
     {
-        // TODO: Add authorization policy...
-
         $testimonials = Testimonial::query()
             ->orderBy('created_at', 'desc')
             ->get();
@@ -32,8 +30,6 @@ class TestimonialController extends Controller
 
     public function update(TestimonialRequest $request, Testimonial $testimonial): RedirectResponse
     {
-        // TODO: Add authorization policy...
-
         $testimonial->update($request->validated());
 
         return redirect()->back();
@@ -41,8 +37,6 @@ class TestimonialController extends Controller
 
     public function destroy(Testimonial $testimonial): RedirectResponse
     {
-        // TODO: Add authorization policy...
-
         $testimonial->delete();
 
         return redirect()->back();

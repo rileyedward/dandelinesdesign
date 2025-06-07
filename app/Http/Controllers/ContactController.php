@@ -17,8 +17,6 @@ class ContactController extends Controller
 
     public function admin(): Response
     {
-        // TODO: Add authorization policy...
-
         $unreadMessages = ContactMessage::query()
             ->orderBy('created_at', 'desc')
             ->get();
@@ -43,8 +41,6 @@ class ContactController extends Controller
 
     public function destroy(ContactMessage $contactMessage): RedirectResponse
     {
-        // TODO: Add authorization policy...
-
         $contactMessage->delete();
 
         return redirect()->back();
