@@ -10,7 +10,6 @@ class TestimonialFactory extends Factory
     {
         return [
             'name' => fake()->name(),
-            'business_name' => fake()->company(),
             'message' => fake()->paragraph(3),
         ];
     }

@@ -1,20 +1,22 @@
 <script setup lang="ts">
-import { testimonialRotationInterval, testimonials } from '@/components/testimonials/testimonials.config';
-import { Testimonial } from '@/types/components/testimonial';
+import { TestimonialSectionProps as Props } from '@/types/components/testimonial-section';
+import { Testimonial } from '@/types/models/testimonial';
 import { onBeforeUnmount, onMounted, ref } from 'vue';
 
+const props = defineProps<Props>();
+
 const currentIndex = ref(0);
-const currentTestimonial = ref<Testimonial>(testimonials[0]);
+const currentTestimonial = ref<Testimonial>(props.testimonials[0]);
 
 let rotationTimer: number | null = null;
 
 const rotateTestimonial = () => {
-    currentIndex.value = (currentIndex.value + 1) % testimonials.length;
-    currentTestimonial.value = testimonials[currentIndex.value];
+    currentIndex.value = (currentIndex.value + 1) % props.testimonials.length;
+    currentTestimonial.value = props.testimonials[currentIndex.value];
 };
 
 onMounted(() => {
-    rotationTimer = window.setInterval(rotateTestimonial, testimonialRotationInterval);
+    rotationTimer = window.setInterval(rotateTestimonial, 8000);
 });
 
 onBeforeUnmount(() => {
@@ -31,8 +33,8 @@ onBeforeUnmount(() => {
 
             <div class="mx-auto max-w-3xl">
                 <div class="transition-opacity duration-500">
-                    <p class="mb-6 text-center text-lg text-gray-700 italic">"{{ currentTestimonial.text }}"</p>
-                    <p class="text-center text-gray-600">— {{ currentTestimonial.author }}</p>
+                    <p class="mb-6 text-center text-lg text-gray-700 italic">"{{ currentTestimonial.message }}"</p>
+                    <p class="text-center text-gray-600">— {{ currentTestimonial.name }}</p>
                 </div>
             </div>
         </div>

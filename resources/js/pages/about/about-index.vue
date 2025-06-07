@@ -5,6 +5,9 @@ import AwardsSection from '@/components/awards/awards-section.vue';
 import Background from '@/components/background/background.vue';
 import TestimonialsSection from '@/components/testimonials/testimonials-section.vue';
 import AppLayout from '@/layouts/app-layout.vue';
+import { AboutIndexPageProps as Props } from '@/types/pages/about';
+
+defineProps<Props>();
 </script>
 
 <template>
@@ -17,7 +20,7 @@ import AppLayout from '@/layouts/app-layout.vue';
             <about-section />
         </div>
 
-        <testimonials-section />
+        <testimonials-section :testimonials="testimonials" />
 
         <awards-section />
     </app-layout>
