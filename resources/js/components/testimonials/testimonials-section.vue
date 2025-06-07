@@ -27,7 +27,7 @@ onBeforeUnmount(() => {
 </script>
 
 <template>
-    <div class="w-full bg-gray-100 py-12">
+    <div class="w-full bg-gray-200 py-12">
         <div class="container mx-auto px-4">
             <h2 class="mb-8 text-center text-3xl font-bold">Testimonials</h2>
 
