@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { TestimonialUpdateModalEmits as Emits, TestimonialUpdateModalProps as Props } from '@/types/components/testimonial-update-modal';
 import { TestimonialData } from '@/types/models/testimonial';
-import { Save, X } from 'lucide-vue-next';
+import { Save, Trash2, X } from 'lucide-vue-next';
 import { ref, watch } from 'vue';
 
 const props = defineProps<Props>();
@@ -48,6 +48,13 @@ const handleSubmit = () => {
         emit('create', form.value);
     }
     closeModal();
+};
+
+const handleDelete = () => {
+    if (props.testimonial && confirm('Are you sure you want to delete this testimonial?')) {
+        emit('delete', props.testimonial.id);
+        closeModal();
+    }
 };
 </script>
 
@@ -101,22 +108,38 @@ const handleSubmit = () => {
                             </div>
                         </div>
                     </div>
-                    <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
-                        <button
-                            type="submit"
-                            class="inline-flex justify-center rounded-md bg-gray-100 p-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none sm:ml-3"
-                            title="Save"
-                        >
-                            <Save class="h-5 w-5" />
-                        </button>
-                        <button
-                            type="button"
-                            class="inline-flex justify-center rounded-md bg-gray-100 p-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none sm:ml-3"
-                            @click="closeModal"
-                            title="Cancel"
-                        >
-                            <X class="h-5 w-5" />
-                        </button>
+                    <div class="flex items-center justify-between bg-gray-50 px-4 py-3 sm:flex sm:px-6">
+                        <div>
+                            <button
+                                type="button"
+                                class="flex items-center gap-2 rounded-md bg-gray-100 px-3 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none sm:ml-3"
+                                @click="closeModal"
+                                title="Cancel"
+                            >
+                                <X class="h-5 w-5" />
+                                <span>Cancel</span>
+                            </button>
+                        </div>
+                        <div class="flex items-center justify-center">
+                            <button
+                                v-if="testimonial"
+                                type="button"
+                                class="flex items-center gap-2 rounded-md bg-red-100 px-3 py-2 text-red-700 hover:bg-red-200 hover:text-red-800 focus:ring-2 focus:ring-red-300 focus:ring-offset-2 focus:outline-none sm:ml-3"
+                                @click="handleDelete"
+                                title="Delete Testimonial"
+                            >
+                                <Trash2 class="h-5 w-5" />
+                                <span>Delete</span>
+                            </button>
+                            <button
+                                type="submit"
+                                class="flex items-center gap-2 rounded-md bg-green-100 px-3 py-2 text-green-700 hover:bg-green-200 hover:text-green-800 focus:ring-2 focus:ring-green-300 focus:ring-offset-2 focus:outline-none sm:ml-3"
+                                title="Save"
+                            >
+                                <Save class="h-5 w-5" />
+                                <span>Save</span>
+                            </button>
+                        </div>
                     </div>
                 </form>
             </div>

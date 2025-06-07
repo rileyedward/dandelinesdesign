@@ -6,5 +6,4 @@ export interface TestimonialBannerProps {
 
 export interface TestimonialBannerEmits {
     (e: 'update', testimonial: Testimonial): void;
-    (e: 'delete', id: number): void;
 }

@@ -165,7 +165,7 @@ const handleMarkAsRead = () => {
                     <button
                         v-if="quote && !isRead"
                         type="button"
-                        class="inline-flex items-center gap-2 justify-center rounded-md bg-green-100 px-3 py-2 text-green-700 hover:bg-green-200 hover:text-green-800 focus:ring-2 focus:ring-green-300 focus:ring-offset-2 focus:outline-none sm:ml-3"
+                        class="inline-flex items-center justify-center gap-2 rounded-md bg-green-100 px-3 py-2 text-green-700 hover:bg-green-200 hover:text-green-800 focus:ring-2 focus:ring-green-300 focus:ring-offset-2 focus:outline-none sm:ml-3"
                         @click="handleMarkAsRead"
                         title="Mark as Read"
                     >
@@ -174,7 +174,7 @@ const handleMarkAsRead = () => {
                     </button>
                     <button
                         type="button"
-                        class="inline-flex justify-center items-center text-sm rounded-md bg-gray-100 p-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none sm:ml-3"
+                        class="inline-flex items-center justify-center rounded-md bg-gray-100 p-2 text-sm text-gray-600 hover:bg-gray-200 hover:text-gray-800 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none sm:ml-3"
                         @click="closeModal"
                         title="Close"
                     >

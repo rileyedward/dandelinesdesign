@@ -73,7 +73,6 @@ const deleteTestimonial = (id: number) => {
                         :key="testimonial.id"
                         :testimonial="testimonial"
                         @update="openUpdateModal"
-                        @delete="deleteTestimonial"
                     />
                 </div>
             </div>
@@ -86,6 +85,7 @@ const deleteTestimonial = (id: number) => {
             @close="closeModal"
             @update="updateTestimonial"
             @create="createTestimonial"
+            @delete="deleteTestimonial"
         />
     </admin-layout>
 </template>

@@ -1,17 +1,13 @@
 <script setup lang="ts">
 import { TestimonialBannerEmits as Emits, TestimonialBannerProps as Props } from '@/types/components/testimonial-banner';
 import { formatDate } from '@/utils/date';
-import { Pencil, Trash2 } from 'lucide-vue-next';
+import { Pencil } from 'lucide-vue-next';
 
 const props = defineProps<Props>();
 const emit = defineEmits<Emits>();
 
 const handleUpdate = () => {
     emit('update', props.testimonial);
-};
-
-const handleDelete = () => {
-    emit('delete', props.testimonial.id);
 };
 </script>
 
@@ -29,13 +25,6 @@ const handleDelete = () => {
                     title="Edit Testimonial"
                 >
                     <Pencil class="h-5 w-5" />
-                </button>
-                <button
-                    @click="handleDelete"
-                    class="rounded-md bg-gray-100 p-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none"
-                    title="Delete Testimonial"
-                >
-                    <Trash2 class="h-5 w-5" />
                 </button>
             </div>
         </div>
