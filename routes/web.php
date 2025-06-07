@@ -5,6 +5,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ConstructionController;
 use App\Http\Controllers\ContactController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\ServiceController;
@@ -56,5 +57,7 @@ Route::controller(ConstructionController::class)
         Route::get('/', 'index')->name('index');
         Route::post('/submit', 'store')->name('store');
     });
+
+Route::post('/login', LoginController::class)->name('login');
 
 require __DIR__.'/admin.php';

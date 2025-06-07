@@ -37,7 +37,7 @@ const maxWidthClass = computed(() => {
                     </div>
                     <button
                         type="button"
-                        class="ml-4 inline-flex items-center rounded-lg bg-transparent p-1.5 text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900"
+                        class="absolute right-10 rounded-lg bg-transparent text-sm text-gray-400 hover:bg-gray-200 hover:text-gray-900"
                         @click="closeModal"
                     >
                         <svg class="h-5 w-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
@@ -47,15 +47,6 @@ const maxWidthClass = computed(() => {
                                 clip-rule="evenodd"
                             ></path>
                         </svg>
-                    </button>
-                </div>
-                <div class="mt-4 flex justify-end">
-                    <button
-                        type="button"
-                        class="rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:ring-2 focus:ring-gray-500 focus:outline-none"
-                        @click="closeModal"
-                    >
-                        Close
                     </button>
                 </div>
             </div>
