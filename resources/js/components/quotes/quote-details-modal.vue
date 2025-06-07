@@ -2,6 +2,7 @@
 import { QuoteMessage } from '@/types/models/quote-message';
 import { formatDate } from '@/utils/date';
 import { ref, watch } from 'vue';
+import { Check, X } from 'lucide-vue-next';
 
 interface Props {
     quote: QuoteMessage | null;
@@ -167,18 +168,20 @@ const handleMarkAsRead = () => {
                 <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                     <button
                         type="button"
-                        class="inline-flex w-full justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
+                        class="inline-flex justify-center rounded-md bg-gray-100 p-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none sm:ml-3"
                         @click="closeModal"
+                        title="Close"
                     >
-                        Close
+                        <X class="h-5 w-5" />
                     </button>
                     <button
                         v-if="quote && !isRead"
                         type="button"
-                        class="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
+                        class="inline-flex justify-center rounded-md bg-gray-100 p-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none sm:ml-3"
                         @click="handleMarkAsRead"
+                        title="Mark as Read"
                     >
-                        Mark as Read
+                        <Check class="h-5 w-5" />
                     </button>
                 </div>
             </div>

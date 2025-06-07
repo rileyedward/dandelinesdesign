@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { QuoteMessageBannerEmits as Emits, QuoteMessageBannerProps as Props } from '@/types/components/quote-message-banner';
 import { formatDate } from '@/utils/date';
+import { Check, Eye } from 'lucide-vue-next';
 
 const props = defineProps<Props>();
 const emit = defineEmits<Emits>();
@@ -34,29 +35,18 @@ const handleShowDetails = () => {
             <div class="flex items-start space-x-2">
                 <button
                     @click="handleShowDetails"
-                    class="rounded-md bg-gray-600 px-3 py-2 text-sm font-medium text-white hover:bg-gray-700 focus:ring-2 focus:ring-gray-500 focus:ring-offset-2 focus:outline-none"
+                    class="rounded-md bg-gray-100 p-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none"
+                    title="View Details"
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M10 12a2 2 0 100-4 2 2 0 000 4z" />
-                        <path
-                            fill-rule="evenodd"
-                            d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z"
-                            clip-rule="evenodd"
-                        />
-                    </svg>
+                    <Eye class="h-5 w-5" />
                 </button>
                 <button
                     v-if="!isRead"
                     @click="handleMarkAsRead"
-                    class="rounded-md bg-blue-600 px-3 py-2 text-sm font-medium text-white hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
+                    class="rounded-md bg-gray-100 p-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none"
+                    title="Mark as Read"
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path
-                            fill-rule="evenodd"
-                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                            clip-rule="evenodd"
-                        />
-                    </svg>
+                    <Check class="h-5 w-5" />
                 </button>
             </div>
         </div>

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ContactMessageBannerEmits as Emits, ContactMessageBannerProps as Props } from '@/types/components/contact-message-banner';
 import { formatDate } from '@/utils/date';
+import { Check } from 'lucide-vue-next';
 
 const props = defineProps<Props>();
 const emit = defineEmits<Emits>();
@@ -29,15 +30,10 @@ const handleMarkAsRead = () => {
             <div v-if="!isRead" class="flex items-start">
                 <button
                     @click="handleMarkAsRead"
-                    class="rounded-md bg-gray-600 px-3 py-2 text-sm font-medium text-white hover:bg-red-500 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:outline-none"
+                    class="rounded-md bg-gray-100 p-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none"
+                    title="Mark as Read"
                 >
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path
-                            fill-rule="evenodd"
-                            d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
-                            clip-rule="evenodd"
-                        />
-                    </svg>
+                    <Check class="h-5 w-5" />
                 </button>
             </div>
         </div>

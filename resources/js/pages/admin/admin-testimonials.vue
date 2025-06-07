@@ -6,6 +6,7 @@ import TestimonialBanner from '@/components/testimonials/testimonial-banner.vue'
 import TestimonialUpdateModal from '@/components/testimonials/testimonial-update-modal.vue';
 import { TestimonialsAdminPageProps as Props } from '@/types/pages/testimonials';
 import { Testimonial, TestimonialData } from '@/types/models/testimonial';
+import { Plus } from 'lucide-vue-next';
 
 defineProps<Props>();
 
@@ -53,12 +54,10 @@ const deleteTestimonial = (id: number) => {
                     <h2 class="text-xl font-semibold">All <span class="ml-2 rounded-full bg-blue-100 px-2.5 py-0.5 text-sm font-medium text-blue-800">{{ testimonials.length }}</span></h2>
                     <button
                         @click="openCreateModal"
-                        class="inline-flex items-center rounded-md bg-blue-600 px-4 py-2 text-sm font-bold text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                        class="rounded-md bg-gray-100 p-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none"
+                        title="Add Testimonial"
                     >
-                        <svg xmlns="http://www.w3.org/2000/svg" class="-ml-1 mr-2 h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                            <path fill-rule="evenodd" d="M10 5a1 1 0 011 1v3h3a1 1 0 110 2h-3v3a1 1 0 11-2 0v-3H6a1 1 0 110-2h3V6a1 1 0 011-1z" clip-rule="evenodd" />
-                        </svg>
-                        Add
+                        <Plus class="h-5 w-5" />
                     </button>
                 </div>
 
