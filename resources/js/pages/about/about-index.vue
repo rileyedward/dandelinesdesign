@@ -1,7 +1,6 @@
 <script setup lang="ts">
 import AboutSection from '@/components/about/about-section.vue';
 import AboutWidget from '@/components/about/about-widget.vue';
-import AwardsSection from '@/components/awards/awards-section.vue';
 import Background from '@/components/background/background.vue';
 import TestimonialsSection from '@/components/testimonials/testimonials-section.vue';
 import AppLayout from '@/layouts/app-layout.vue';
@@ -21,7 +20,5 @@ defineProps<Props>();
         </div>
 
         <testimonials-section :testimonials="testimonials" />
-
-        <awards-section />
     </app-layout>
 </template>
