@@ -16,23 +16,35 @@ Route::get('/about', [AboutController::class, 'index'])->name('about.index');
 Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
 Route::get('/store', [StoreController::class, 'index'])->name('store.index');
 
-Route::prefix('/blog')->name('blog.')->group(function () {
-    Route::get('/', [BlogController::class, 'index'])->name('blog.index');
-    Route::get('/{blog_post:slug}', [BlogController::class, 'show'])->name('blog.show');
-});
+Route::controller(BlogController::class)
+    ->prefix('/blog')
+    ->name('blog.')
+    ->group(function () {
+        Route::get('/', 'index')->name('blog.index');
+        Route::get('/{blog_post:slug}', 'show')->name('blog.show');
+    });
 
-Route::prefix('/contact')->name('contact.')->group(function () {
-    Route::get('/', [ContactController::class, 'index'])->name('index');
-    Route::post('/', [ContactController::class, 'store'])->name('store');
-});
+Route::controller(ContactController::class)
+    ->prefix('/contact')
+    ->name('contact.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/', 'store')->name('store');
+    });
 
 Route::post('/quote', [QuoteController::class, 'store'])->name('quote.store');
 
-Route::prefix('/products')->name('products.')->group(function () {
-    Route::post('/', [ProductController::class, 'store'])->name('store');
-});
+Route::controller(ProductController::class)
+    ->prefix('/products')
+    ->name('products.')
+    ->group(function () {
+        Route::post('/', 'store')->name('store');
+    });
 
-Route::prefix('/under-construction')->name('under-construction.')->group(function () {
-    Route::get('/', [ConstructionController::class, 'index'])->name('index');
-    Route::post('/submit', [ConstructionController::class, 'store'])->name('store');
-});
+Route::controller(ConstructionController::class)
+    ->prefix('/under-construction')
+    ->name('under-construction.')
+    ->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::post('/submit', 'store')->name('store');
+    });
