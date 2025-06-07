@@ -14,7 +14,8 @@ export interface ProductData {
     name: string;
     description: string;
     image_url: string | null;
+    image?: File | null;
     price: number;
     is_available: boolean;
-    [key: string]: string | number | boolean | null | undefined;
+    [key: string]: string | number | boolean | null | undefined | File;
 }
