@@ -1,12 +1,12 @@
 <script setup lang="ts">
-import { router } from '@inertiajs/vue3';
-import { ref } from 'vue';
-import AdminLayout from '@/layouts/admin-layout.vue';
 import TestimonialBanner from '@/components/testimonials/testimonial-banner.vue';
 import TestimonialUpdateModal from '@/components/testimonials/testimonial-update-modal.vue';
-import { TestimonialsAdminPageProps as Props } from '@/types/pages/testimonials';
+import AdminLayout from '@/layouts/admin-layout.vue';
 import { Testimonial, TestimonialData } from '@/types/models/testimonial';
+import { TestimonialsAdminPageProps as Props } from '@/types/pages/testimonials';
+import { router } from '@inertiajs/vue3';
 import { Plus } from 'lucide-vue-next';
+import { ref } from 'vue';
 
 defineProps<Props>();
 
@@ -51,7 +51,10 @@ const deleteTestimonial = (id: number) => {
         <div class="container mx-auto">
             <div class="mb-8">
                 <div class="mb-4 flex items-center justify-between">
-                    <h2 class="text-xl font-semibold">All <span class="ml-2 rounded-full bg-blue-100 px-2.5 py-0.5 text-sm font-medium text-blue-800">{{ testimonials.length }}</span></h2>
+                    <h2 class="text-xl font-semibold">
+                        All
+                        <span class="ml-2 rounded-full bg-blue-100 px-2.5 py-0.5 text-sm font-medium text-blue-800">{{ testimonials.length }}</span>
+                    </h2>
                     <button
                         @click="openCreateModal"
                         class="rounded-md bg-gray-100 p-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none"

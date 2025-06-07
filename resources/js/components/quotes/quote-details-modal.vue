@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { QuoteMessage } from '@/types/models/quote-message';
 import { formatDate } from '@/utils/date';
-import { ref, watch } from 'vue';
 import { Check, X } from 'lucide-vue-next';
+import { ref, watch } from 'vue';
 
 interface Props {
     quote: QuoteMessage | null;

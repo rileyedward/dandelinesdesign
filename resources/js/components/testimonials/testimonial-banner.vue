@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { TestimonialBannerProps as Props, TestimonialBannerEmits as Emits } from '@/types/components/testimonial-banner';
+import { TestimonialBannerEmits as Emits, TestimonialBannerProps as Props } from '@/types/components/testimonial-banner';
 import { formatDate } from '@/utils/date';
 import { Pencil, Trash2 } from 'lucide-vue-next';
 

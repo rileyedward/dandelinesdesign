@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { TestimonialUpdateModalProps as Props, TestimonialUpdateModalEmits as Emits } from '@/types/components/testimonial-update-modal';
+import { TestimonialUpdateModalEmits as Emits, TestimonialUpdateModalProps as Props } from '@/types/components/testimonial-update-modal';
 import { TestimonialData } from '@/types/models/testimonial';
-import { ref, watch } from 'vue';
 import { Save, X } from 'lucide-vue-next';
+import { ref, watch } from 'vue';
 
 const props = defineProps<Props>();
 const emit = defineEmits<Emits>();
@@ -13,22 +13,26 @@ const form = ref<TestimonialData>({
     message: '',
 });
 
-watch(() => props.isOpen, (newValue) => {
-    if (newValue) {
-        setTimeout(() => {
-            isVisible.value = true;
-        }, 50);
+watch(
+    () => props.isOpen,
+    (newValue) => {
+        if (newValue) {
+            setTimeout(() => {
+                isVisible.value = true;
+            }, 50);
 
-        if (props.testimonial) {
-            form.value = {
-                name: props.testimonial.name,
-                message: props.testimonial.message,
-            };
+            if (props.testimonial) {
+                form.value = {
+                    name: props.testimonial.name,
+                    message: props.testimonial.message,
+                };
+            }
+        } else {
+            isVisible.value = false;
         }
-    } else {
-        isVisible.value = false;
-    }
-}, { immediate: true });
+    },
+    { immediate: true },
+);
 
 const closeModal = () => {
     isVisible.value = false;
@@ -61,13 +65,13 @@ const handleSubmit = () => {
             <!-- Modal panel -->
             <div
                 class="inline-block transform overflow-hidden rounded-lg bg-white text-left align-bottom shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-lg sm:align-middle"
-                :class="{ 'opacity-100 translate-y-0': isVisible, 'opacity-0 translate-y-4': !isVisible }"
+                :class="{ 'translate-y-0 opacity-100': isVisible, 'translate-y-4 opacity-0': !isVisible }"
             >
                 <form @submit.prevent="handleSubmit">
                     <div class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                         <div class="sm:flex sm:items-start">
                             <div class="mt-3 w-full text-center sm:mt-0 sm:text-left">
-                                <h3 class="text-lg font-medium leading-6 text-gray-900" id="modal-title">
+                                <h3 class="text-lg leading-6 font-medium text-gray-900" id="modal-title">
                                     {{ props.testimonial ? 'Update Testimonial' : 'Add Testimonial' }}
                                 </h3>
 
