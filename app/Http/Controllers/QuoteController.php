@@ -14,12 +14,18 @@ class QuoteController extends Controller
     {
         // TODO: Add authorization policy...
 
-        $quoteMessages = QuoteMessage::query()
+        $unreadMessages = QuoteMessage::query()
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $readMessages = QuoteMessage::query()
+            ->onlyTrashed()
             ->orderBy('created_at', 'desc')
             ->get();
 
         return Inertia::render('admin/admin-quotes', [
-            'quoteMessages' => $quoteMessages,
+            'unreadMessages' => $unreadMessages,
+            'readMessages' => $readMessages,
         ]);
     }
 
@@ -30,11 +36,13 @@ class QuoteController extends Controller
         return redirect()->back();
     }
 
-    public function destroy(QuoteMessage $quoteMessage): RedirectResponse
+    public function destroy(QuoteMessage $quote): RedirectResponse
     {
         // TODO: Add authorization policy...
 
-        $quoteMessage->delete();
+        $quote->delete();
+
+        logger()->info('here');
 
         return redirect()->back();
     }
