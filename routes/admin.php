@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\PageViewController;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
@@ -63,6 +64,14 @@ Route::middleware(['auth'])
                 Route::post('/', 'store')->name('store');
                 Route::patch('/{testimonial}', 'update')->name('update');
                 Route::delete('/{testimonial}', 'destroy')->name('destroy');
+            });
+
+        Route::controller(PageViewController::class)
+            ->prefix('page-views')
+            ->name('page-views.')
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/count', 'count')->name('count');
             });
     });
 

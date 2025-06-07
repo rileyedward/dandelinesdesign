@@ -2,6 +2,7 @@
 
 use App\Http\Middleware\ConstructionMiddleware;
 use App\Http\Middleware\HandleInertiaRequests;
+use App\Http\Middleware\TrackPageViews;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
 use Illuminate\Foundation\Configuration\Middleware;
@@ -20,6 +21,7 @@ return Application::configure(basePath: dirname(__DIR__))
             HandleInertiaRequests::class,
             AddLinkHeadersForPreloadedAssets::class,
             ConstructionMiddleware::class,
+            TrackPageViews::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {
