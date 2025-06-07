@@ -4,14 +4,14 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ConstructionController;
 use App\Http\Controllers\ContactController;
-use App\Http\Controllers\LandingController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\ServiceController;
 use App\Http\Controllers\StoreController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [LandingController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [AboutController::class, 'index'])->name('about.index');
 Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
 Route::get('/store', [StoreController::class, 'index'])->name('store.index');
