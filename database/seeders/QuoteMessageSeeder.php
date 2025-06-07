@@ -23,6 +23,8 @@ class QuoteMessageSeeder extends Seeder
                 'venue_name' => 'Rosewood Gardens',
                 'venue_address' => '123 Bloom Street, Portland, OR',
                 'special_requests' => 'Would love to incorporate some family heirloom brooches into the bridal bouquet.',
+                'created_at' => now()->subDays(rand(1, 30)),
+                'updated_at' => now()->subDays(rand(0, 1)),
             ],
             [
                 'name' => 'Michael Thompson',
@@ -36,6 +38,8 @@ class QuoteMessageSeeder extends Seeder
                 'venue_name' => 'Grand Ballroom Hotel',
                 'venue_address' => '456 Luxury Avenue, Portland, OR',
                 'special_requests' => 'Need to incorporate company logo into some of the arrangements.',
+                'created_at' => now()->subDays(rand(1, 30)),
+                'updated_at' => now()->subDays(rand(0, 1)),
             ],
             [
                 'name' => 'Emily Rodriguez',
@@ -49,6 +53,8 @@ class QuoteMessageSeeder extends Seeder
                 'venue_name' => 'Home Residence',
                 'venue_address' => '789 Family Lane, Portland, OR',
                 'special_requests' => 'Would like arrangements that can be taken home by guests as favors.',
+                'created_at' => now()->subDays(rand(1, 30)),
+                'updated_at' => now()->subDays(rand(0, 1)),
             ],
             [
                 'name' => 'David Wilson',
@@ -62,6 +68,8 @@ class QuoteMessageSeeder extends Seeder
                 'venue_name' => 'The Metropolitan Club',
                 'venue_address' => '101 Downtown Plaza, Portland, OR',
                 'special_requests' => 'Arrangements should be low enough to allow for conversation across tables.',
+                'created_at' => now()->subDays(rand(1, 30)),
+                'updated_at' => now()->subDays(rand(0, 1)),
             ],
             [
                 'name' => 'Sophia Martinez',
@@ -75,6 +83,8 @@ class QuoteMessageSeeder extends Seeder
                 'venue_name' => 'Riverside Restaurant',
                 'venue_address' => '222 Waterfront Way, Portland, OR',
                 'special_requests' => 'Would like to incorporate some of the same flowers from our original wedding bouquet (roses, lilies).',
+                'created_at' => now()->subDays(rand(1, 30)),
+                'updated_at' => now()->subDays(rand(0, 1)),
             ],
             [
                 'name' => 'Robert Johnson',
@@ -88,6 +98,8 @@ class QuoteMessageSeeder extends Seeder
                 'venue_name' => 'City Convention Center',
                 'venue_address' => '333 Event Boulevard, Portland, OR',
                 'special_requests' => 'Need arrangements to incorporate blue and silver colors, possibly with some twinkling lights.',
+                'created_at' => now()->subDays(rand(1, 30)),
+                'updated_at' => now()->subDays(rand(0, 1)),
             ],
             [
                 'name' => 'Amanda Lee',
@@ -101,6 +113,8 @@ class QuoteMessageSeeder extends Seeder
                 'venue_name' => 'Tea Room Cafe',
                 'venue_address' => '444 Garden Street, Portland, OR',
                 'special_requests' => 'Would like arrangements in teacups or vintage containers to match the tea party theme.',
+                'created_at' => now()->subDays(rand(1, 30)),
+                'updated_at' => now()->subDays(rand(0, 1)),
             ],
             [
                 'name' => 'Daniel Kim',
@@ -114,6 +128,8 @@ class QuoteMessageSeeder extends Seeder
                 'venue_name' => 'Kim Family Restaurant',
                 'venue_address' => '555 Culinary Court, Portland, OR',
                 'special_requests' => 'Would like to incorporate some traditional Korean flowers if possible.',
+                'created_at' => now()->subDays(rand(1, 30)),
+                'updated_at' => now()->subDays(rand(0, 1)),
             ],
             [
                 'name' => 'Jessica Taylor',
@@ -127,6 +143,8 @@ class QuoteMessageSeeder extends Seeder
                 'venue_name' => 'Love\'s Chapel',
                 'venue_address' => '666 Romance Road, Portland, OR',
                 'special_requests' => 'Would like heart-shaped elements incorporated into the arrangements.',
+                'created_at' => now()->subDays(rand(1, 30)),
+                'updated_at' => now()->subDays(rand(0, 1)),
             ],
             [
                 'name' => 'Thomas Brown',
@@ -140,6 +158,8 @@ class QuoteMessageSeeder extends Seeder
                 'venue_name' => 'Executive Club',
                 'venue_address' => '777 Success Street, Portland, OR',
                 'special_requests' => 'Would like to incorporate the company colors (green and gold) subtly into the arrangements.',
+                'created_at' => now()->subDays(rand(1, 30)),
+                'updated_at' => now()->subDays(rand(0, 1)),
             ],
         ];
 
