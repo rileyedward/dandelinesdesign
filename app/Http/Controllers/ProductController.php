@@ -22,17 +22,29 @@ class ProductController extends Controller
         ]);
     }
 
+    public function create(): Response
+    {
+        return Inertia::render('admin/admin-product-create');
+    }
+
+    public function edit(Product $product): Response
+    {
+        return Inertia::render('admin/admin-product-edit', [
+            'product' => $product,
+        ]);
+    }
+
     public function store(ProductRequest $request): RedirectResponse
     {
         $data = $request->validated();
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $filename = time() . '_' . $image->getClientOriginalName();
+            $filename = time().'_'.$image->getClientOriginalName();
 
             $path = $image->storeAs('images/products', $filename, 'public');
 
-            $data['image_url'] = '/storage/' . $path;
+            $data['image_url'] = '/storage/'.$path;
         }
 
         Product::query()->create($data);
@@ -53,11 +65,11 @@ class ProductController extends Controller
             }
 
             $image = $request->file('image');
-            $filename = time() . '_' . $image->getClientOriginalName();
+            $filename = time().'_'.$image->getClientOriginalName();
 
             $path = $image->storeAs('images/products', $filename, 'public');
 
-            $data['image_url'] = '/storage/' . $path;
+            $data['image_url'] = '/storage/'.$path;
         }
 
         $product->update($data);

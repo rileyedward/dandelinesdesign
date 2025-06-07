@@ -36,6 +36,8 @@ Route::middleware(['auth'])
             ->name('products.')
             ->group(function () {
                 Route::get('/', 'admin')->name('index');
+                Route::get('/create', 'create')->name('create');
+                Route::get('/edit/{product}', 'edit')->name('edit');
                 Route::post('/', 'store')->name('store');
                 Route::patch('/{product}', 'update')->name('update');
                 Route::delete('/{product}', 'destroy')->name('destroy');
