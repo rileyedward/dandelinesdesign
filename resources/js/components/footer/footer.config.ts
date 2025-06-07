@@ -1,5 +1,5 @@
 import { ContactInfo, FooterSocialLink, NavigationLinkGroup } from '@/types/components/footer';
-import { Facebook, Instagram, Twitter } from 'lucide-vue-next';
+import { Facebook, Instagram, MessageSquareIcon } from 'lucide-vue-next';
 
 export const navigationLinks: NavigationLinkGroup[] = [
     {
@@ -24,13 +24,13 @@ export const navigationLinks: NavigationLinkGroup[] = [
 ];
 
 export const socialLinks: FooterSocialLink[] = [
-    { name: 'Facebook', icon: Facebook, href: 'https://facebook.com/dandelinesdesign' },
     { name: 'Instagram', icon: Instagram, href: 'https://instagram.com/dandelinesdesign' },
-    { name: 'Twitter', icon: Twitter, href: 'https://twitter.com/dandelinesdesign' },
+    { name: 'Facebook', icon: Facebook, href: 'https://facebook.com/dandelinesdesign' },
+    { name: 'Threads', icon: MessageSquareIcon, href: 'https://threads.net/dandelinesdesign' },
 ];
 
 export const contactInfo: ContactInfo = {
-    email: 'hello@dandelinesdesign.com',
-    phone: '(555) 123-4567',
-    address: '123 Design Street, Creative City, CD 12345',
+    email: 'dandelines@gmail.com',
+    phone: '(816) 509-9824',
+    address: 'Kansas City, MO, USA',
 };
