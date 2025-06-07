@@ -15,12 +15,6 @@ const navigateToCreate = () => {
 const navigateToEdit = (blogPost: BlogPost) => {
     router.visit(`/admin/blog/edit/${blogPost.id}`);
 };
-
-const deleteBlogPost = (id: number) => {
-    if (confirm('Are you sure you want to delete this blog post?')) {
-        router.delete(`/admin/blog/${id}`);
-    }
-};
 </script>
 
 <template>
@@ -45,7 +39,7 @@ const deleteBlogPost = (id: number) => {
                     <p class="text-gray-600">No blog posts found</p>
                 </div>
                 <div v-else class="space-y-4">
-                    <blog-post-banner v-for="post in blogPosts" :key="post.id" :blog-post="post" @edit="navigateToEdit" @delete="deleteBlogPost" />
+                    <blog-post-banner v-for="post in blogPosts" :key="post.id" :blog-post="post" @edit="navigateToEdit" />
                 </div>
             </div>
         </div>

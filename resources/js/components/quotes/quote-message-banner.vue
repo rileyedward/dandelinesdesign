@@ -1,14 +1,10 @@
 <script setup lang="ts">
 import { QuoteMessageBannerEmits as Emits, QuoteMessageBannerProps as Props } from '@/types/components/quote-message-banner';
 import { formatDate } from '@/utils/date';
-import { Check, Eye } from 'lucide-vue-next';
+import { Eye } from 'lucide-vue-next';
 
 const props = defineProps<Props>();
 const emit = defineEmits<Emits>();
-
-const handleMarkAsRead = () => {
-    emit('markAsRead', props.quoteMessage.id);
-};
 
 const handleShowDetails = () => {
     emit('showDetails', props.quoteMessage);
@@ -39,14 +35,6 @@ const handleShowDetails = () => {
                     title="View Details"
                 >
                     <Eye class="h-5 w-5" />
-                </button>
-                <button
-                    v-if="!isRead"
-                    @click="handleMarkAsRead"
-                    class="rounded-md bg-gray-100 p-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none"
-                    title="Mark as Read"
-                >
-                    <Check class="h-5 w-5" />
                 </button>
             </div>
         </div>

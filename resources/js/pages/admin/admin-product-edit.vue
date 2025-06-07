@@ -144,29 +144,32 @@ const cancelForm = () => {
                     <button
                         type="button"
                         @click="deleteProduct"
-                        class="rounded-md bg-gray-100 p-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none"
+                        class="flex items-center gap-2 rounded-md bg-red-100 px-3 py-2 text-red-700 hover:bg-red-200 hover:text-red-800 focus:ring-2 focus:ring-red-300 focus:ring-offset-2 focus:outline-none"
                         title="Delete Product"
                     >
                         <Trash2 class="h-5 w-5" />
+                        <span>Delete</span>
                     </button>
 
                     <div class="flex space-x-2">
                         <button
                             type="button"
                             @click="cancelForm"
-                            class="rounded-md bg-gray-100 p-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none"
+                            class="flex items-center gap-2 rounded-md bg-gray-100 px-3 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none"
                             title="Cancel"
                         >
                             <X class="h-5 w-5" />
+                            <span>Cancel</span>
                         </button>
                         <button
                             type="submit"
                             :disabled="isSubmitting"
-                            class="rounded-md bg-gray-100 p-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none"
+                            class="flex items-center gap-2 rounded-md bg-green-100 px-3 py-2 text-green-700 hover:bg-green-200 hover:text-green-800 focus:ring-2 focus:ring-green-300 focus:ring-offset-2 focus:outline-none"
                             :class="{ 'cursor-not-allowed opacity-75': isSubmitting }"
                             title="Save Changes"
                         >
                             <Save class="h-5 w-5" />
+                            <span>Save</span>
                         </button>
                     </div>
                 </div>

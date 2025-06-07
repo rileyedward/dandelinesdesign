@@ -15,12 +15,6 @@ const navigateToCreate = () => {
 const navigateToEdit = (product: Product) => {
     router.visit(`/admin/products/edit/${product.id}`);
 };
-
-const deleteProduct = (id: number) => {
-    if (confirm('Are you sure you want to delete this product?')) {
-        router.delete(`/admin/products/${id}`);
-    }
-};
 </script>
 
 <template>
@@ -45,7 +39,7 @@ const deleteProduct = (id: number) => {
                     <p class="text-gray-600">No products found</p>
                 </div>
                 <div v-else class="space-y-4">
-                    <product-banner v-for="product in products" :key="product.id" :product="product" @edit="navigateToEdit" @delete="deleteProduct" />
+                    <product-banner v-for="product in products" :key="product.id" :product="product" @edit="navigateToEdit" />
                 </div>
             </div>
         </div>

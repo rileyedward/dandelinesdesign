@@ -6,5 +6,4 @@ export interface ProductBannerProps {
 
 export interface ProductBannerEmits {
     (e: 'edit', product: Product): void;
-    (e: 'delete', id: number): void;
 }

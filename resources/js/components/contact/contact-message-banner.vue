@@ -7,7 +7,9 @@ const props = defineProps<Props>();
 const emit = defineEmits<Emits>();
 
 const handleMarkAsRead = () => {
-    emit('markAsRead', props.contactMessage.id);
+    if (confirm('Are you sure you want to mark this message as read?')) {
+        emit('markAsRead', props.contactMessage.id);
+    }
 };
 </script>
 
@@ -30,7 +32,7 @@ const handleMarkAsRead = () => {
             <div v-if="!isRead" class="flex items-start">
                 <button
                     @click="handleMarkAsRead"
-                    class="rounded-md bg-gray-100 p-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none"
+                    class="flex items-center gap-2 rounded-md bg-green-100 px-3 py-2 text-green-700 hover:bg-green-200 hover:text-green-800 focus:ring-2 focus:ring-green-300 focus:ring-offset-2 focus:outline-none"
                     title="Mark as Read"
                 >
                     <Check class="h-5 w-5" />

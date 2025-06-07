@@ -6,5 +6,4 @@ export interface BlogPostBannerProps {
 
 export interface BlogPostBannerEmits {
     (e: 'edit', blogPost: BlogPost): void;
-    (e: 'delete', id: number): void;
 }

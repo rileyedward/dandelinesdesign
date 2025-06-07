@@ -1,17 +1,13 @@
 <script setup lang="ts">
 import { BlogPostBannerEmits as Emits, BlogPostBannerProps as Props } from '@/types/components/blog-post-banner';
 import { formatDate } from '@/utils/date';
-import { Pencil, Trash2 } from 'lucide-vue-next';
+import { Eye } from 'lucide-vue-next';
 
 const props = defineProps<Props>();
 const emit = defineEmits<Emits>();
 
 const handleEdit = () => {
     emit('edit', props.blogPost);
-};
-
-const handleDelete = () => {
-    emit('delete', props.blogPost.id);
 };
 </script>
 
@@ -42,14 +38,7 @@ const handleDelete = () => {
                     class="rounded-md bg-gray-100 p-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none"
                     title="Edit Blog Post"
                 >
-                    <Pencil class="h-5 w-5" />
-                </button>
-                <button
-                    @click="handleDelete"
-                    class="rounded-md bg-gray-100 p-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none"
-                    title="Delete Blog Post"
-                >
-                    <Trash2 class="h-5 w-5" />
+                    <Eye class="h-5 w-5" />
                 </button>
             </div>
         </div>
