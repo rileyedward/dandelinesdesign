@@ -16,7 +16,6 @@ const form = reactive<QuoteMessageData>({
     guest_count: 50,
     venue_name: null,
     venue_address: '',
-    budget_range: '',
     special_requests: null,
 });
 
@@ -34,7 +33,6 @@ const resetForm = () => {
     form.guest_count = 0;
     form.venue_name = null;
     form.venue_address = '';
-    form.budget_range = '';
     form.special_requests = null;
 
     Object.keys(errors).forEach((key) => {
@@ -111,7 +109,7 @@ const submitForm = () => {
             </div>
 
             <div>
-                <label for="event_date" class="mb-2 block text-sm font-medium">Event Date *</label>
+                <label for="event_date" class="mb-2 block text-sm font-medium">Event Date</label>
                 <input
                     id="event_date"
                     v-model="form.event_date"
@@ -122,7 +120,7 @@ const submitForm = () => {
             </div>
 
             <div>
-                <label for="event_type" class="mb-2 block text-sm font-medium">Event Type *</label>
+                <label for="event_type" class="mb-2 block text-sm font-medium">Event Type</label>
                 <input
                     id="event_type"
                     v-model="form.event_type"
@@ -133,7 +131,7 @@ const submitForm = () => {
             </div>
 
             <div>
-                <label for="guest_count" class="mb-2 block text-sm font-medium">Guest Count *</label>
+                <label for="guest_count" class="mb-2 block text-sm font-medium">Guest Count</label>
                 <input
                     id="guest_count"
                     v-model="form.guest_count"
@@ -165,22 +163,6 @@ const submitForm = () => {
                 class="focus:ring-primary w-full rounded-md border px-4 py-3 focus:ring-2 focus:outline-none"
             />
             <p v-if="errors.venue_address" class="mt-1 text-sm text-red-600">{{ errors.venue_address }}</p>
-        </div>
-
-        <div class="mb-8">
-            <label for="budget_range" class="mb-2 block text-sm font-medium">Budget Range *</label>
-            <select
-                id="budget_range"
-                v-model="form.budget_range"
-                class="focus:ring-primary w-full rounded-md border px-4 py-3 focus:ring-2 focus:outline-none"
-            >
-                <option value="">Select a budget range</option>
-                <option value="$1,000 - $2,500">$1,000 - $2,500</option>
-                <option value="$2,500 - $5,000">$2,500 - $5,000</option>
-                <option value="$5,000 - $10,000">$5,000 - $10,000</option>
-                <option value="$10,000+">$10,000+</option>
-            </select>
-            <p v-if="errors.budget_range" class="mt-1 text-sm text-red-600">{{ errors.budget_range }}</p>
         </div>
 
         <div class="mb-8">

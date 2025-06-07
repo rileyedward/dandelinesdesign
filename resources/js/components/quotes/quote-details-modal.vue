@@ -116,10 +116,6 @@ const handleMarkAsRead = () => {
                                             <p class="text-sm font-medium text-gray-500">Guest Count</p>
                                             <p class="text-base text-gray-900">{{ quote.guest_count }}</p>
                                         </div>
-                                        <div>
-                                            <p class="text-sm font-medium text-gray-500">Budget Range</p>
-                                            <p class="text-base text-gray-900">{{ quote.budget_range }}</p>
-                                        </div>
                                     </div>
                                 </div>
 

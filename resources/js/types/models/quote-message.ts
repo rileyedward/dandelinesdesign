@@ -10,7 +10,6 @@ export interface QuoteMessage {
     guest_count: number;
     venue_name: string | null;
     venue_address: string | null;
-    budget_range: string;
     special_requests: string | null;
     created_at: string;
     updated_at: string;
@@ -27,7 +26,6 @@ export interface QuoteMessageData {
     guest_count: number;
     venue_name: string | null;
     venue_address: string | null;
-    budget_range: string;
     special_requests: string | null;
     [key: string]: string | number | null | undefined;
 }

@@ -14,13 +14,12 @@ return new class extends Migration
             $table->string('business_name')->nullable();
             $table->string('email');
             $table->string('phone')->nullable();
-            $table->date('event_date');
-            $table->string('event_type');
+            $table->date('event_date')->nullable();
+            $table->string('event_type')->nullable();
             $table->text('event_description');
-            $table->integer('guest_count');
+            $table->integer('guest_count')->nullable();
             $table->string('venue_name')->nullable();
             $table->string('venue_address')->nullable();
-            $table->string('budget_range');
             $table->text('special_requests')->nullable();
             $table->timestamps();
             $table->softDeletes();

@@ -23,7 +23,6 @@ class QuoteMessage extends Model
         'guest_count',
         'venue_name',
         'venue_address',
-        'budget_range',
         'special_requests',
     ];
 }

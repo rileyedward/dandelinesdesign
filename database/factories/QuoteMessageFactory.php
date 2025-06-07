@@ -12,7 +12,6 @@ class QuoteMessageFactory extends Factory
     public function definition(): array
     {
         $eventTypes = ['Wedding', 'Birthday', 'Corporate Event', 'Anniversary', 'Graduation', 'Holiday Party'];
-        $budgetRanges = ['$1,000-$2,500', '$2,500-$5,000', '$5,000-$10,000', '$10,000+'];
 
         return [
             'name' => fake()->name(),
@@ -25,7 +24,6 @@ class QuoteMessageFactory extends Factory
             'guest_count' => fake()->numberBetween(10, 500),
             'venue_name' => fake()->optional(0.8)->company().' '.fake()->randomElement(['Venue', 'Hall', 'Gardens', 'Ballroom']),
             'venue_address' => fake()->address(),
-            'budget_range' => fake()->randomElement($budgetRanges),
             'special_requests' => fake()->optional(0.6)->paragraph(),
         ];
     }
