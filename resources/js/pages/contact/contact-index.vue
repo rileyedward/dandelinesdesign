@@ -15,7 +15,7 @@ const toggleFormType = (type: 'contact' | 'quote') => {
 
 <template>
     <app-layout>
-        <background imageUrl="/images/contact-background.jpg">
+        <background imageUrl="/images/background/contact-bg.jpeg">
             <social-links />
         </background>
 

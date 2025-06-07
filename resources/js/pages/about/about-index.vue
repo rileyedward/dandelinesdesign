@@ -11,7 +11,7 @@ defineProps<Props>();
 
 <template>
     <app-layout>
-        <background imageUrl="/images/about-background.jpg">
+        <background imageUrl="/images/background/about-bg.jpg">
             <about-widget />
         </background>
 

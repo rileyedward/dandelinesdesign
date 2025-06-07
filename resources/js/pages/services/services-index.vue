@@ -7,7 +7,7 @@ import AppLayout from '@/layouts/app-layout.vue';
 
 <template>
     <app-layout>
-        <background imageUrl="/images/services-background.jpg">
+        <background imageUrl="/images/background/services-bg.jpg">
             <services-widget />
         </background>
 

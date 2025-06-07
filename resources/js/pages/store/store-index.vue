@@ -25,7 +25,7 @@ const closeProductModal = () => {
 
 <template>
     <app-layout>
-        <background imageUrl="/images/store-background.jpg">
+        <background imageUrl="/images/background/store-bg.jpeg">
             <store-widget />
         </background>
 
