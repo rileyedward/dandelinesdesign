@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('budget_range');
             $table->text('special_requests')->nullable();
             $table->timestamps();
+            $table->softDeletes();
         });
     }
 

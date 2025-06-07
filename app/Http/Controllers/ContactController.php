@@ -15,9 +15,31 @@ class ContactController extends Controller
         return Inertia::render('contact/contact-index');
     }
 
+    public function admin(): Response
+    {
+        // TODO: Add authorization policy...
+
+        $contactMessages = ContactMessage::query()
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return Inertia::render('admin/admin-contact', [
+            'contactMessages' => $contactMessages,
+        ]);
+    }
+
     public function store(ContactMessageRequest $request): RedirectResponse
     {
         ContactMessage::query()->create($request->validated());
+
+        return redirect()->back();
+    }
+
+    public function destroy(ContactMessage $contactMessage): RedirectResponse
+    {
+        // TODO: Add authorization policy...
+
+        $contactMessage->delete();
 
         return redirect()->back();
     }
