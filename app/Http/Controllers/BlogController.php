@@ -60,4 +60,13 @@ class BlogController extends Controller
             'blogPost' => $blogPost,
         ]);
     }
+
+    public function destroy(BlogPost $blogPost): RedirectResponse
+    {
+        // TODO: Add authorization policy...
+
+        $blogPost->delete();
+
+        return redirect()->back();
+    }
 }

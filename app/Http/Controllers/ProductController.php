@@ -40,4 +40,14 @@ class ProductController extends Controller
 
         return redirect()->back();
     }
+
+
+    public function destroy(Product $product): RedirectResponse
+    {
+        // TODO: Add authorization policy...
+
+        $product->delete();
+
+        return redirect()->back();
+    }
 }
