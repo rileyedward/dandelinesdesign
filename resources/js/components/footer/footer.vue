@@ -1,15 +1,15 @@
 <script setup lang="ts">
-import { Mail, MapPin, Phone } from 'lucide-vue-next';
-import { contactInfo, navigationLinks, socialLinks } from './footer.config';
 import LoginModal from '@/components/auth/login-modal.vue';
+import { Mail, MapPin, Phone } from 'lucide-vue-next';
 import { ref } from 'vue';
+import { contactInfo, navigationLinks, socialLinks } from './footer.config';
 
 const currentYear = new Date().getFullYear();
 const isLoginModalOpen = ref(false);
 
 const toggleLoginModal = (): void => {
     isLoginModalOpen.value = !isLoginModalOpen.value;
-}
+};
 </script>
 
 <template>
@@ -69,7 +69,7 @@ const toggleLoginModal = (): void => {
                     </ul>
                     <button
                         @click="toggleLoginModal"
-                        class="mt-4 inline-flex items-center justify-center rounded-md bg-gray-800 px-4 py-2 text-sm font-medium text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-gray-500"
+                        class="mt-4 inline-flex items-center justify-center rounded-md bg-gray-800 px-4 py-2 text-sm font-medium text-white hover:bg-gray-700 focus:ring-2 focus:ring-gray-500 focus:outline-none"
                     >
                         Admin Login
                     </button>

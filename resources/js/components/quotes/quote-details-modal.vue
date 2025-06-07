@@ -19,15 +19,19 @@ const emit = defineEmits<Emits>();
 
 const isVisible = ref(false);
 
-watch(() => props.isOpen, (newValue) => {
-    if (newValue) {
-        setTimeout(() => {
-            isVisible.value = true;
-        }, 50);
-    } else {
-        isVisible.value = false;
-    }
-}, { immediate: true });
+watch(
+    () => props.isOpen,
+    (newValue) => {
+        if (newValue) {
+            setTimeout(() => {
+                isVisible.value = true;
+            }, 50);
+        } else {
+            isVisible.value = false;
+        }
+    },
+    { immediate: true },
+);
 
 const closeModal = () => {
     isVisible.value = false;
@@ -58,20 +62,20 @@ const handleMarkAsRead = () => {
             <!-- Modal panel -->
             <div
                 class="inline-block transform overflow-hidden rounded-lg bg-white text-left align-bottom shadow-xl transition-all sm:my-8 sm:w-full sm:max-w-3xl sm:align-middle"
-                :class="{ 'opacity-100 translate-y-0': isVisible, 'opacity-0 translate-y-4': !isVisible }"
+                :class="{ 'translate-y-0 opacity-100': isVisible, 'translate-y-4 opacity-0': !isVisible }"
             >
                 <div v-if="quote" class="bg-white px-4 pt-5 pb-4 sm:p-6 sm:pb-4">
                     <div class="sm:flex sm:items-start">
                         <div class="mt-3 w-full text-center sm:mt-0 sm:text-left">
-                            <h3 class="text-2xl font-bold leading-6 text-gray-900" id="modal-title">
+                            <h3 class="text-2xl leading-6 font-bold text-gray-900" id="modal-title">
                                 {{ quote.event_type }}
                             </h3>
 
-                            <div class="mt-6 grid grid-cols-1 gap-y-6 gap-x-4 sm:grid-cols-2">
+                            <div class="mt-6 grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
                                 <!-- Contact Information -->
                                 <div class="sm:col-span-2">
                                     <h4 class="text-lg font-semibold text-gray-900">Contact Information</h4>
-                                    <div class="mt-2 grid grid-cols-1 gap-y-3 gap-x-4 sm:grid-cols-2">
+                                    <div class="mt-2 grid grid-cols-1 gap-x-4 gap-y-3 sm:grid-cols-2">
                                         <div>
                                             <p class="text-sm font-medium text-gray-500">Name</p>
                                             <p class="text-base text-gray-900">{{ quote.name }}</p>
@@ -98,7 +102,7 @@ const handleMarkAsRead = () => {
                                 <!-- Event Details -->
                                 <div class="sm:col-span-2">
                                     <h4 class="text-lg font-semibold text-gray-900">Event Details</h4>
-                                    <div class="mt-2 grid grid-cols-1 gap-y-3 gap-x-4 sm:grid-cols-2">
+                                    <div class="mt-2 grid grid-cols-1 gap-x-4 gap-y-3 sm:grid-cols-2">
                                         <div>
                                             <p class="text-sm font-medium text-gray-500">Event Type</p>
                                             <p class="text-base text-gray-900">{{ quote.event_type }}</p>
@@ -121,7 +125,7 @@ const handleMarkAsRead = () => {
                                 <!-- Venue Information -->
                                 <div class="sm:col-span-2" v-if="quote.venue_name || quote.venue_address">
                                     <h4 class="text-lg font-semibold text-gray-900">Venue Information</h4>
-                                    <div class="mt-2 grid grid-cols-1 gap-y-3 gap-x-4 sm:grid-cols-2">
+                                    <div class="mt-2 grid grid-cols-1 gap-x-4 gap-y-3 sm:grid-cols-2">
                                         <div v-if="quote.venue_name">
                                             <p class="text-sm font-medium text-gray-500">Venue Name</p>
                                             <p class="text-base text-gray-900">{{ quote.venue_name }}</p>
@@ -137,7 +141,7 @@ const handleMarkAsRead = () => {
                                 <div class="sm:col-span-2">
                                     <h4 class="text-lg font-semibold text-gray-900">Event Description</h4>
                                     <div class="mt-2">
-                                        <p class="text-base text-gray-900 whitespace-pre-line">{{ quote.event_description }}</p>
+                                        <p class="text-base whitespace-pre-line text-gray-900">{{ quote.event_description }}</p>
                                     </div>
                                 </div>
 
@@ -145,7 +149,7 @@ const handleMarkAsRead = () => {
                                 <div class="sm:col-span-2" v-if="quote.special_requests">
                                     <h4 class="text-lg font-semibold text-gray-900">Special Requests</h4>
                                     <div class="mt-2">
-                                        <p class="text-base text-gray-900 whitespace-pre-line">{{ quote.special_requests }}</p>
+                                        <p class="text-base whitespace-pre-line text-gray-900">{{ quote.special_requests }}</p>
                                     </div>
                                 </div>
 
@@ -163,7 +167,7 @@ const handleMarkAsRead = () => {
                 <div class="bg-gray-50 px-4 py-3 sm:flex sm:flex-row-reverse sm:px-6">
                     <button
                         type="button"
-                        class="inline-flex w-full justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
+                        class="inline-flex w-full justify-center rounded-md border border-transparent bg-blue-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-blue-700 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
                         @click="closeModal"
                     >
                         Close
@@ -171,7 +175,7 @@ const handleMarkAsRead = () => {
                     <button
                         v-if="quote && !isRead"
                         type="button"
-                        class="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-offset-2 sm:ml-3 sm:w-auto sm:text-sm"
+                        class="inline-flex w-full justify-center rounded-md border border-transparent bg-green-600 px-4 py-2 text-base font-medium text-white shadow-sm hover:bg-green-700 focus:ring-2 focus:ring-green-500 focus:ring-offset-2 focus:outline-none sm:ml-3 sm:w-auto sm:text-sm"
                         @click="handleMarkAsRead"
                     >
                         Mark as Read

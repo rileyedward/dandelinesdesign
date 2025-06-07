@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import { AdminLayoutProps as Props } from '@/types/layouts/admin-layout';
-import { Head as InertiaHead } from '@inertiajs/vue3';
 import Footer from '@/components/footer/footer.vue';
 import Sidebar from '@/components/sidebar/sidebar.vue';
+import { AdminLayoutProps as Props } from '@/types/layouts/admin-layout';
+import { Head as InertiaHead } from '@inertiajs/vue3';
 
 withDefaults(defineProps<Props>(), {
     pageTitle: 'Dandelines Admin',

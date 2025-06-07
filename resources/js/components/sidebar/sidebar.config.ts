@@ -1,5 +1,5 @@
 import { SidebarLink } from '@/types/components/sidebar';
-import { LayoutIcon, FileTextIcon, MessageSquareIcon, ShoppingBagIcon, QuoteIcon, StarIcon } from 'lucide-vue-next';
+import { FileTextIcon, LayoutIcon, MessageSquareIcon, QuoteIcon, ShoppingBagIcon, StarIcon } from 'lucide-vue-next';
 
 export const sidebarLinks: SidebarLink[] = [
     {

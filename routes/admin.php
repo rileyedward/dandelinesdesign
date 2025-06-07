@@ -3,10 +3,10 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\LoginController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\QuoteController;
 use App\Http\Controllers\TestimonialController;
-use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 
 Route::middleware(['auth'])

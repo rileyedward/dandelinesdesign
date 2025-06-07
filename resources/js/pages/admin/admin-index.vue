@@ -1,11 +1,10 @@
 <script setup lang="ts">
 import AdminLayout from '@/layouts/admin-layout.vue';
-import { FileText, MessageSquare, ShoppingBag, Quote, Star } from 'lucide-vue-next';
+import { FileText, MessageSquare, Quote, ShoppingBag, Star } from 'lucide-vue-next';
 </script>
 
 <template>
     <admin-layout page-title="Dashboard" page-description="Welcome to the Dandelines Design admin panel.">
-
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             <a href="/admin/blog-posts" class="rounded-lg bg-white p-6 shadow-md transition-all hover:shadow-lg">
                 <div class="mb-4 flex h-12 w-12 items-center justify-center rounded-full bg-blue-100 text-blue-600">

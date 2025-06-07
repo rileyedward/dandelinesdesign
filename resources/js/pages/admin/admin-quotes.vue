@@ -1,11 +1,11 @@
 <script setup lang="ts">
+import QuoteDetailsModal from '@/components/quotes/quote-details-modal.vue';
+import QuoteMessageBanner from '@/components/quotes/quote-message-banner.vue';
+import AdminLayout from '@/layouts/admin-layout.vue';
+import { QuoteMessage } from '@/types/models/quote-message';
+import { QuoteAdminPageProps as Props } from '@/types/pages/quotes';
 import { router } from '@inertiajs/vue3';
 import { ref } from 'vue';
-import AdminLayout from '@/layouts/admin-layout.vue';
-import QuoteMessageBanner from '@/components/quotes/quote-message-banner.vue';
-import QuoteDetailsModal from '@/components/quotes/quote-details-modal.vue';
-import { QuoteAdminPageProps as Props } from '@/types/pages/quotes';
-import { QuoteMessage } from '@/types/models/quote-message';
 
 defineProps<Props>();
 
@@ -46,9 +46,12 @@ const closeModal = () => {
             <div class="mb-8">
                 <button
                     @click="toggleUnreadMessages"
-                    class="mb-4 flex w-full items-center justify-between rounded-lg bg-gray-100 px-4 py-3 text-left font-medium text-gray-900 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    class="mb-4 flex w-full items-center justify-between rounded-lg bg-gray-100 px-4 py-3 text-left font-medium text-gray-900 hover:bg-gray-200 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
                 >
-                    <h2 class="text-xl font-semibold">Unread Quotes <span class="ml-2 rounded-full bg-red-100 px-2.5 py-0.5 text-sm font-medium text-red-800">{{ unreadMessages.length }}</span></h2>
+                    <h2 class="text-xl font-semibold">
+                        Unread Quotes
+                        <span class="ml-2 rounded-full bg-red-100 px-2.5 py-0.5 text-sm font-medium text-red-800">{{ unreadMessages.length }}</span>
+                    </h2>
                     <svg
                         class="h-5 w-5 transform transition-transform duration-300"
                         :class="{ 'rotate-180': !unreadMessagesExpanded }"
@@ -56,14 +59,15 @@ const closeModal = () => {
                         viewBox="0 0 20 20"
                         fill="currentColor"
                     >
-                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        <path
+                            fill-rule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clip-rule="evenodd"
+                        />
                     </svg>
                 </button>
 
-                <div
-                    v-show="unreadMessagesExpanded"
-                    class="overflow-hidden transition-all duration-300 ease-in-out"
-                >
+                <div v-show="unreadMessagesExpanded" class="overflow-hidden transition-all duration-300 ease-in-out">
                     <div v-if="unreadMessages.length === 0" class="rounded-lg bg-gray-50 p-6 text-center">
                         <p class="text-gray-600">No unread quotes</p>
                     </div>
@@ -84,9 +88,14 @@ const closeModal = () => {
             <div>
                 <button
                     @click="toggleReadMessages"
-                    class="mb-4 flex w-full items-center justify-between rounded-lg bg-gray-100 px-4 py-3 text-left font-medium text-gray-900 hover:bg-gray-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
+                    class="mb-4 flex w-full items-center justify-between rounded-lg bg-gray-100 px-4 py-3 text-left font-medium text-gray-900 hover:bg-gray-200 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
                 >
-                    <h2 class="text-xl font-semibold">Read Quotes <span class="ml-2 rounded-full bg-yellow-100 px-2.5 py-0.5 text-sm font-medium text-yellow-800">{{ readMessages.length }}</span></h2>
+                    <h2 class="text-xl font-semibold">
+                        Read Quotes
+                        <span class="ml-2 rounded-full bg-yellow-100 px-2.5 py-0.5 text-sm font-medium text-yellow-800">{{
+                            readMessages.length
+                        }}</span>
+                    </h2>
                     <svg
                         class="h-5 w-5 transform transition-transform duration-300"
                         :class="{ 'rotate-180': !readMessagesExpanded }"
@@ -94,14 +103,15 @@ const closeModal = () => {
                         viewBox="0 0 20 20"
                         fill="currentColor"
                     >
-                        <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
+                        <path
+                            fill-rule="evenodd"
+                            d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z"
+                            clip-rule="evenodd"
+                        />
                     </svg>
                 </button>
 
-                <div
-                    v-show="readMessagesExpanded"
-                    class="overflow-hidden transition-all duration-300 ease-in-out"
-                >
+                <div v-show="readMessagesExpanded" class="overflow-hidden transition-all duration-300 ease-in-out">
                     <div v-if="readMessages.length === 0" class="rounded-lg bg-gray-50 p-6 text-center">
                         <p class="text-gray-600">No read quotes</p>
                     </div>
@@ -122,7 +132,7 @@ const closeModal = () => {
         <quote-details-modal
             :quote="selectedQuote"
             :is-open="isModalOpen"
-            :is-read="selectedQuote ? readMessages.some(m => m.id === selectedQuote.id) : false"
+            :is-read="selectedQuote ? readMessages.some((m) => m.id === selectedQuote.id) : false"
             @close="closeModal"
             @mark-as-read="markAsRead"
         />

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref, onMounted, onUnmounted } from 'vue';
 import { Menu, X } from 'lucide-vue-next';
+import { onMounted, onUnmounted, ref } from 'vue';
 import { sidebarLinks } from './sidebar.config';
 
 const isMobileMenuOpen = ref(false);
@@ -47,10 +47,7 @@ onUnmounted(() => {
         <div class="py-4">
             <ul class="space-y-2 px-3">
                 <li v-for="link in sidebarLinks" :key="link.name">
-                    <a
-                        :href="link.href"
-                        class="flex items-center rounded-lg p-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900"
-                    >
+                    <a :href="link.href" class="flex items-center rounded-lg p-2 text-gray-700 hover:bg-gray-100 hover:text-gray-900">
                         <component :is="link.icon" class="mr-3 h-5 w-5" />
                         <span>{{ link.name }}</span>
                     </a>
@@ -62,7 +59,7 @@ onUnmounted(() => {
     <!-- Mobile Sidebar Overlay -->
     <div
         v-if="isMobile && isMobileMenuOpen"
-        class="fixed inset-0 z-30 bg-black bg-opacity-50 transition-opacity md:hidden"
+        class="bg-opacity-50 fixed inset-0 z-30 bg-black transition-opacity md:hidden"
         @click="toggleMobileMenu"
     ></div>
 
@@ -93,5 +90,4 @@ onUnmounted(() => {
             </ul>
         </div>
     </aside>
-
 </template>
