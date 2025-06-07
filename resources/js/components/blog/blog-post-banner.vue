@@ -36,7 +36,7 @@ const handleEdit = () => {
                 <button
                     @click="handleEdit"
                     class="rounded-md bg-gray-100 p-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none"
-                    title="Edit Blog Post"
+                    title="Edit Product"
                 >
                     <Eye class="h-5 w-5" />
                 </button>

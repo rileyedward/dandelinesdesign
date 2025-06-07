@@ -107,10 +107,11 @@ const cancelForm = () => {
                     <button
                         type="button"
                         @click="cancelForm"
-                        class="rounded-md bg-gray-100 p-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none"
+                        class="flex items-center gap-2 rounded-md bg-gray-100 px-3 py-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none"
                         title="Cancel"
                     >
                         <X class="h-5 w-5" />
+                        <span>Cancel</span>
                     </button>
                     <button
                         type="submit"
