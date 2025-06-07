@@ -60,11 +60,11 @@ class BlogController extends Controller
 
         if ($request->hasFile('image')) {
             $image = $request->file('image');
-            $filename = time() . '_' . $image->getClientOriginalName();
+            $filename = time().'_'.$image->getClientOriginalName();
 
             $path = $image->storeAs('images/blog', $filename, 'public');
 
-            $data['image_url'] = '/storage/' . $path;
+            $data['image_url'] = '/storage/'.$path;
         }
 
         BlogPost::query()->create($data);
@@ -93,13 +93,13 @@ class BlogController extends Controller
             }
 
             $image = $request->file('image');
-            $filename = time() . '_' . $image->getClientOriginalName();
+            $filename = time().'_'.$image->getClientOriginalName();
 
             // Store the image in the public/images/blog directory
             $path = $image->storeAs('images/blog', $filename, 'public');
 
             // Set the image_url to the public path
-            $data['image_url'] = '/storage/' . $path;
+            $data['image_url'] = '/storage/'.$path;
         }
 
         $blogPost->update($data);

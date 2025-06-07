@@ -84,7 +84,7 @@ const cancelForm = () => {
 
                     <!-- Show current image if it exists -->
                     <div v-if="form.image_url" class="mb-3">
-                        <img :src="form.image_url" alt="Current blog image" class="h-40 w-auto object-cover rounded-md mb-2" />
+                        <img :src="form.image_url" alt="Current blog image" class="mb-2 h-40 w-auto rounded-md object-cover" />
                         <p class="text-sm text-gray-500">Current image</p>
                     </div>
 
@@ -92,8 +92,8 @@ const cancelForm = () => {
                         id="image"
                         type="file"
                         accept="image/*"
-                        @change="(e) => form.image = e.target.files?.[0] || null"
-                        class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200"
+                        @change="(e) => (form.image = e.target.files?.[0] || null)"
+                        class="block w-full text-sm text-gray-500 file:mr-4 file:rounded-md file:border-0 file:bg-gray-100 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-gray-700 hover:file:bg-gray-200"
                     />
                     <p class="mt-1 text-sm text-gray-500">Upload a new blog image (JPEG, PNG, GIF only, max 2MB)</p>
                     <p v-if="errors.image" class="mt-1 text-sm text-red-600">{{ errors.image }}</p>

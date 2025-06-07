@@ -71,8 +71,8 @@ const cancelForm = () => {
                         id="image"
                         type="file"
                         accept="image/*"
-                        @change="(e) => form.image = e.target.files?.[0] || null"
-                        class="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-md file:border-0 file:text-sm file:font-semibold file:bg-gray-100 file:text-gray-700 hover:file:bg-gray-200"
+                        @change="(e) => (form.image = e.target.files?.[0] || null)"
+                        class="block w-full text-sm text-gray-500 file:mr-4 file:rounded-md file:border-0 file:bg-gray-100 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-gray-700 hover:file:bg-gray-200"
                     />
                     <p class="mt-1 text-sm text-gray-500">Upload a blog image (JPEG, PNG, GIF only, max 2MB)</p>
                     <p v-if="errors.image" class="mt-1 text-sm text-red-600">{{ errors.image }}</p>
