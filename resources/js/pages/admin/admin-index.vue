@@ -4,11 +4,7 @@ import { FileText, MessageSquare, ShoppingBag, Quote, Star } from 'lucide-vue-ne
 </script>
 
 <template>
-    <admin-layout page-title="Admin Dashboard">
-        <div class="mb-8">
-            <h1 class="text-3xl font-bold text-gray-900">Dashboard</h1>
-            <p class="mt-2 text-gray-600">Welcome to the Dandelines Design admin panel.</p>
-        </div>
+    <admin-layout page-title="Dashboard" page-description="Welcome to the Dandelines Design admin panel.">
 
         <div class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
             <a href="/admin/blog-posts" class="rounded-lg bg-white p-6 shadow-md transition-all hover:shadow-lg">

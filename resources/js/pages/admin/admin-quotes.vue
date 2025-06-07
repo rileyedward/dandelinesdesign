@@ -3,7 +3,6 @@ import AdminLayout from '@/layouts/admin-layout.vue';
 </script>
 
 <template>
-    <admin-layout page-title="Admin Dashboard">
-        <h1>Quotes</h1>
+    <admin-layout page-title="Quotes" page-description="Manage customer quote requests and inquiries">
     </admin-layout>
 </template>

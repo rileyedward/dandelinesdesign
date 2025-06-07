@@ -19,12 +19,18 @@ class ContactController extends Controller
     {
         // TODO: Add authorization policy...
 
-        $contactMessages = ContactMessage::query()
+        $unreadMessages = ContactMessage::query()
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        $readMessages = ContactMessage::query()
+            ->onlyTrashed()
             ->orderBy('created_at', 'desc')
             ->get();
 
         return Inertia::render('admin/admin-contact', [
-            'contactMessages' => $contactMessages,
+            'unreadMessages' => $unreadMessages,
+            'readMessages' => $readMessages,
         ]);
     }
 

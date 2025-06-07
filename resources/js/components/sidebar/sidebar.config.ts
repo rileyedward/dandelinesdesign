@@ -8,7 +8,7 @@ export const sidebarLinks: SidebarLink[] = [
         icon: LayoutIcon,
     },
     {
-        name: 'Contact Messages',
+        name: 'Messages',
         href: route('admin.contact.index'),
         icon: MessageSquareIcon,
     },
