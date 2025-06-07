@@ -1,8 +1,8 @@
 <script setup lang="ts">
-import AdminLayout from '@/layouts/admin-layout.vue';
 import StatMetric from '@/components/stat-metric/stat-metric.vue';
-import { FileText, MessageSquare, Quote, ShoppingBag, Star, Users } from 'lucide-vue-next';
+import AdminLayout from '@/layouts/admin-layout.vue';
 import { AdminIndexPageProps as Props } from '@/types/pages/admin';
+import { FileText, MessageSquare, Quote, ShoppingBag, Star, Users } from 'lucide-vue-next';
 
 defineProps<Props>();
 </script>

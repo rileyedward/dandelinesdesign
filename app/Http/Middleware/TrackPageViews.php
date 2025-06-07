@@ -33,7 +33,7 @@ class TrackPageViews
             ]
         );
 
-        logger()->info('Page view tracked ' . $pageView->id);
+        logger()->info('Page view tracked '.$pageView->id);
 
         return $next($request);
     }

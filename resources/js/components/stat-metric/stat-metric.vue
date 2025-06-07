@@ -5,11 +5,7 @@ defineProps<Props>();
 </script>
 
 <template>
-    <component
-        :is="href ? 'a' : 'div'"
-        :href="href"
-        class="rounded-lg bg-white p-6 shadow-md transition-all hover:shadow-lg"
-    >
+    <component :is="href ? 'a' : 'div'" :href="href" class="rounded-lg bg-white p-6 shadow-md transition-all hover:shadow-lg">
         <div
             class="mb-4 flex h-12 w-12 items-center justify-center rounded-full"
             :class="{
