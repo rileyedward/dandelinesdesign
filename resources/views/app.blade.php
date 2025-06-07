@@ -12,6 +12,7 @@
         <link rel="icon" href="/favicon.ico" sizes="any">
         <link rel="icon" href="/favicon.svg" type="image/svg+xml">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
+        <link rel="manifest" href="/manifest.json">
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,5 +26,15 @@
     </head>
     <body class="font-sans antialiased">
         @inertia
+
+        {{-- Service Worker --}}
+        <script>
+            if ('serviceWorker' === in navigator) {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then(() => console.log("Service Worker Registered!"))
+                    .catch((error) => console.error("Service Worker Registration Failed:", error));
+
+            }
+        </script>
     </body>
 </html>
