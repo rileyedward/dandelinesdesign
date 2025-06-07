@@ -75,4 +75,8 @@ Route::middleware(['auth'])
             });
     });
 
+Route::get('/login', function () {
+    return redirect()->route('home');
+});
+
 Route::post('/login', LoginController::class)->name('login');
