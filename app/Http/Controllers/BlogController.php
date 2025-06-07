@@ -53,7 +53,7 @@ class BlogController extends Controller
 
         $data['slug'] = Str::slug($data['title']);
 
-        if (!isset($data['excerpt'])) {
+        if (! isset($data['excerpt'])) {
             $data['excerpt'] = Str::limit(strip_tags($data['content']), 150);
         }
 
@@ -68,7 +68,7 @@ class BlogController extends Controller
 
         $data['slug'] = Str::slug($data['title']);
 
-        if (!isset($data['excerpt'])) {
+        if (! isset($data['excerpt'])) {
             $data['excerpt'] = Str::limit(strip_tags($data['content']), 150);
         }
 

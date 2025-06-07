@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { router } from '@inertiajs/vue3';
-import { Plus } from 'lucide-vue-next';
-import AdminLayout from '@/layouts/admin-layout.vue';
 import BlogPostBanner from '@/components/blog/blog-post-banner.vue';
+import AdminLayout from '@/layouts/admin-layout.vue';
 import { BlogPost } from '@/types/models/blog-post';
 import { BlogAdminPageProps as Props } from '@/types/pages/blog';
+import { router } from '@inertiajs/vue3';
+import { Plus } from 'lucide-vue-next';
 
 defineProps<Props>();
 
@@ -45,13 +45,7 @@ const deleteBlogPost = (id: number) => {
                     <p class="text-gray-600">No blog posts found</p>
                 </div>
                 <div v-else class="space-y-4">
-                    <blog-post-banner
-                        v-for="post in blogPosts"
-                        :key="post.id"
-                        :blog-post="post"
-                        @edit="navigateToEdit"
-                        @delete="deleteBlogPost"
-                    />
+                    <blog-post-banner v-for="post in blogPosts" :key="post.id" :blog-post="post" @edit="navigateToEdit" @delete="deleteBlogPost" />
                 </div>
             </div>
         </div>

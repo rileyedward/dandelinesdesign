@@ -1,10 +1,10 @@
 <script setup lang="ts">
-import { ref, reactive } from 'vue';
-import { router } from '@inertiajs/vue3';
 import AdminLayout from '@/layouts/admin-layout.vue';
 import { BlogPostData } from '@/types/models/blog-post';
 import { BlogAdminEditPageProps as Props } from '@/types/pages/blog';
+import { router } from '@inertiajs/vue3';
 import { Save, Trash2, X } from 'lucide-vue-next';
+import { reactive, ref } from 'vue';
 
 const props = defineProps<Props>();
 
@@ -31,7 +31,7 @@ const submitForm = () => {
         },
         onFinish: () => {
             isSubmitting.value = false;
-        }
+        },
     });
 };
 
@@ -40,7 +40,7 @@ const deleteBlogPost = () => {
         router.delete(`/admin/blog/${props.blogPost.id}`, {
             onSuccess: () => {
                 router.visit('/admin/blog');
-            }
+            },
         });
     }
 };
@@ -53,7 +53,7 @@ const cancelForm = () => {
 <template>
     <admin-layout page-title="Edit Blog Post" page-description="Update an existing blog post">
         <div class="container mx-auto">
-            <form @submit.prevent="submitForm" class="bg-white rounded-lg shadow-md p-6">
+            <form @submit.prevent="submitForm" class="rounded-lg bg-white p-6 shadow-md">
                 <div class="mb-6">
                     <label for="title" class="mb-2 block text-sm font-medium text-gray-700">Title *</label>
                     <input
@@ -125,7 +125,7 @@ const cancelForm = () => {
                             type="submit"
                             :disabled="isSubmitting"
                             class="rounded-md bg-gray-100 p-2 text-gray-600 hover:bg-gray-200 hover:text-gray-800 focus:ring-2 focus:ring-gray-300 focus:ring-offset-2 focus:outline-none"
-                            :class="{ 'opacity-75 cursor-not-allowed': isSubmitting }"
+                            :class="{ 'cursor-not-allowed opacity-75': isSubmitting }"
                             title="Save Changes"
                         >
                             <Save class="h-5 w-5" />

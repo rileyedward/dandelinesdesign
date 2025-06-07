@@ -28,7 +28,11 @@ const handleDelete = () => {
                         {{ props.blogPost.is_published ? 'Published' : 'Draft' }}
                     </span>
                     <span class="text-sm text-gray-600">
-                        {{ props.blogPost.published_at ? `Published on ${formatDate(props.blogPost.published_at, true)}` : `Created on ${formatDate(props.blogPost.created_at, true)}` }}
+                        {{
+                            props.blogPost.published_at
+                                ? `Published on ${formatDate(props.blogPost.published_at, true)}`
+                                : `Created on ${formatDate(props.blogPost.created_at, true)}`
+                        }}
                     </span>
                 </div>
             </div>
@@ -50,7 +54,9 @@ const handleDelete = () => {
             </div>
         </div>
         <div class="mt-4">
-            <p class="text-gray-700">{{ props.blogPost.excerpt || props.blogPost.content.substring(0, 150) + (props.blogPost.content.length > 150 ? '...' : '') }}</p>
+            <p class="text-gray-700">
+                {{ props.blogPost.excerpt || props.blogPost.content.substring(0, 150) + (props.blogPost.content.length > 150 ? '...' : '') }}
+            </p>
         </div>
     </div>
 </template>
