@@ -13,6 +13,7 @@ class DatabaseSeeder extends Seeder
             TestimonialSeeder::class,
             BlogPostSeeder::class,
             ProductSeeder::class,
+            ContactMessageSeeder::class,
         ]);
     }
 }

@@ -56,3 +56,5 @@ Route::controller(ConstructionController::class)
         Route::get('/', 'index')->name('index');
         Route::post('/submit', 'store')->name('store');
     });
+
+require __DIR__.'/admin.php';
