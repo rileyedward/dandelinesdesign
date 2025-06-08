@@ -19,7 +19,7 @@
                 <p>
                     I am excited to expand beyond events creatively. I invite you to follow along, be inspired by the details of our beautifully
                     designed events as well as the specially selected items of textiles and art pieces I will share. I would love to meet and consult
-                    on any design project you are planning whether it be an upcoming event or home decor project. Please reach out, lets meet and get
+                    on any design project you are planning whether it be an upcoming event, floral design, or that project piece that completes the room. Please reach out, lets meet and get
                     creative!
                 </p>
             </div>

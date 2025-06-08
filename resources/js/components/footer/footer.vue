@@ -19,7 +19,7 @@ const toggleLoginModal = (): void => {
                 <div class="mb-8 md:mb-0">
                     <h2 class="mb-4 text-xl font-bold text-gray-900">Dandelines Design</h2>
                     <p class="mb-4 text-gray-600">
-                        Creating beautiful, functional designs that bring your vision to life. We specialize in custom designs for all your needs.
+                        Creating beautiful events that bring your vision to life. and the find details that make your moment special.
                     </p>
                     <div class="flex space-x-4">
                         <a
