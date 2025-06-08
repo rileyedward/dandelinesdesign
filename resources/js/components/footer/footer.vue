@@ -19,7 +19,7 @@ const toggleLoginModal = (): void => {
                 <div class="mb-8 md:mb-0">
                     <h2 class="mb-4 text-xl font-bold text-gray-900">Dandelines Design</h2>
                     <p class="mb-4 text-gray-600">
-                        We get to know each client to craft unforgettable events that reflect their unique story.
+                        We get to know each client to create unforgettable events that reflect their unique story.
                     </p>
                     <div class="flex space-x-4">
                         <a
