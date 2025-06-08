@@ -12,7 +12,7 @@
             <h3 class="mb-4 text-xl text-gray-600">Owner and Designer</h3>
             <div class="space-y-4">
                 <p>
-                    Hello, my name is Michele Grotenhuis, the creator behind Dandelines Design. My main focus is Event Planning, however, I have
+                    My name is Michele Grotenhuis, the creator behind Dandelines Design. My main focus is event planning, however, I have
                     always had a true passion for textiles and every kind of art medium imaginable. As long as I can remember, I have wanted to create
                     my own business , creating shoppable displays with my work and a curated selection of things I love.
                 </p>
