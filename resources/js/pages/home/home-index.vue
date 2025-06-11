@@ -13,7 +13,7 @@ onMounted(() => {
 
 <template>
     <app-layout>
-        <div class="flex h-screen flex-col items-center bg-white pt-12 md:pt-24 overflow-hidden">
+        <div class="flex h-screen flex-col items-center overflow-hidden bg-white pt-12 md:pt-24">
             <div class="text-center">
                 <transition
                     enter-active-class="transition duration-2000 transform delay-600"
@@ -33,9 +33,7 @@ onMounted(() => {
                     enter-from-class="opacity-0 -translate-x-full"
                     enter-to-class="opacity-100 translate-x-0"
                 >
-                    <h1 v-if="isLoaded" class="mb-4 text-5xl font-bold text-gray-900">
-                        Dandelines Design
-                    </h1>
+                    <h1 v-if="isLoaded" class="mb-4 text-5xl font-bold text-gray-900">Dandelines Design</h1>
                 </transition>
 
                 <transition
@@ -43,9 +41,7 @@ onMounted(() => {
                     enter-from-class="opacity-0 translate-x-full"
                     enter-to-class="opacity-100 translate-x-0"
                 >
-                    <h2 v-if="isLoaded" class="mb-4 text-3xl font-semibold text-gray-800">
-                        Michele Grotenhuis
-                    </h2>
+                    <h2 v-if="isLoaded" class="mb-4 text-3xl font-semibold text-gray-800">Michele Grotenhuis</h2>
                 </transition>
 
                 <transition
@@ -53,9 +49,7 @@ onMounted(() => {
                     enter-from-class="opacity-0 scale-50"
                     enter-to-class="opacity-100 scale-100"
                 >
-                    <p v-if="isLoaded" class="mb-8 text-xl text-gray-700">
-                        Event Planning & Design Services
-                    </p>
+                    <p v-if="isLoaded" class="mb-8 text-xl text-gray-700">Event Planning & Design Services</p>
                 </transition>
 
                 <transition
@@ -66,7 +60,7 @@ onMounted(() => {
                     <a
                         v-if="isLoaded"
                         href="/contact"
-                        class="inline-block rounded-lg bg-gray-600 px-8 py-3 font-bold text-white transition duration-300 hover:bg-pink-500 hover:scale-110 hover:rotate-2 transform"
+                        class="inline-block transform rounded-lg bg-gray-600 px-8 py-3 font-bold text-white transition duration-300 hover:scale-110 hover:rotate-2 hover:bg-pink-500"
                     >
                         Get in Touch
                     </a>
