@@ -1,10 +1,8 @@
 # Dandelines Design
 
-Simplify your budgeting.
+Branding and store site for Dandelines Design.
 
 ## Overview
-
-Branding and store site for Dandelines Design.
 
 ### What is Dandelines Design?
 
