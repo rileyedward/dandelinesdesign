@@ -12,8 +12,6 @@ class AboutController extends Controller
     {
         $testimonials = Testimonial::query()->get();
 
-        logger()->info($testimonials);
-
         return Inertia::render('about/about-index', [
             'testimonials' => $testimonials,
         ]);

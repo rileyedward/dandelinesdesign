@@ -82,9 +82,7 @@ class BlogController extends Controller
             $data['excerpt'] = Str::limit(strip_tags($data['content']), 150);
         }
 
-        // Handle image upload
         if ($request->hasFile('image')) {
-            // Delete old image if it exists
             if ($blogPost->image_url) {
                 $oldPath = str_replace('/storage/', '', $blogPost->image_url);
                 if (Storage::disk('public')->exists($oldPath)) {
@@ -95,10 +93,8 @@ class BlogController extends Controller
             $image = $request->file('image');
             $filename = time().'_'.$image->getClientOriginalName();
 
-            // Store the image in the public/images/blog directory
             $path = $image->storeAs('images/blog', $filename, 'public');
 
-            // Set the image_url to the public path
             $data['image_url'] = '/storage/'.$path;
         }
 
