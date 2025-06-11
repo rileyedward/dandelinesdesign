@@ -17,7 +17,7 @@ class GenerateNewUser extends Command
         $password = bcrypt($this->argument('password'));
 
         User::create([
-            'name' => $username,
+            'username' => $username,
             'password' => $password,
         ]);
 
