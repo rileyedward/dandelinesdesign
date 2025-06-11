@@ -63,7 +63,11 @@ const submitForm = () => {
 
 <template>
     <form @submit.prevent="submitForm">
-        <p class="mb-4 text-gray-600">Submit a quote request to get started on your event. Please provide as much detail as possible.</p>
+        <p class="mb-4 text-gray-600">
+            Hi, we're excited to help! To provide you with an accurate quote, please fill out the form below with as
+            much detail as possible. The more information you share about your event - from guest count to special requirements - the better we can
+            tailor our services to meet your needs.
+        </p>
         <div class="mb-8 grid grid-cols-1 gap-8 md:grid-cols-2">
             <div>
                 <label for="name" class="mb-2 block text-sm font-medium">Name *</label>
@@ -77,17 +81,6 @@ const submitForm = () => {
             </div>
 
             <div>
-                <label for="business_name" class="mb-2 block text-sm font-medium">Business Name</label>
-                <input
-                    id="business_name"
-                    v-model="form.business_name"
-                    type="text"
-                    class="focus:ring-primary w-full rounded-md border px-4 py-3 focus:ring-2 focus:outline-none"
-                />
-                <p v-if="errors.business_name" class="mt-1 text-sm text-red-600">{{ errors.business_name }}</p>
-            </div>
-
-            <div>
                 <label for="email" class="mb-2 block text-sm font-medium">Email *</label>
                 <input
                     id="email"
@@ -96,6 +89,17 @@ const submitForm = () => {
                     class="focus:ring-primary w-full rounded-md border px-4 py-3 focus:ring-2 focus:outline-none"
                 />
                 <p v-if="errors.email" class="mt-1 text-sm text-red-600">{{ errors.email }}</p>
+            </div>
+
+            <div>
+                <label for="business_name" class="mb-2 block text-sm font-medium">Business Name</label>
+                <input
+                    id="business_name"
+                    v-model="form.business_name"
+                    type="text"
+                    class="focus:ring-primary w-full rounded-md border px-4 py-3 focus:ring-2 focus:outline-none"
+                />
+                <p v-if="errors.business_name" class="mt-1 text-sm text-red-600">{{ errors.business_name }}</p>
             </div>
 
             <div>

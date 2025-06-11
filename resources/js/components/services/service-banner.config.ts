@@ -9,7 +9,7 @@ export const services: ServiceBanner[] = [
         imageOnLeft: true,
     },
     {
-        image_url: '/images/services/floral-service.jpg',
+        image_url: '/images/services/floral-service.jpeg',
         title: 'Floral',
         description:
             'Beautiful flowers make a statement. They complete a table, brighten a room, say I love you , thank you, or just because. A single stem or a dozen of your favorite blooms, we can create any type of arrangement you need. Formal, contemporary, outside of the box ideas that make your event shine. I especially love creating that perfect table scape, as well as that little bouquet that says, thinking of you.',

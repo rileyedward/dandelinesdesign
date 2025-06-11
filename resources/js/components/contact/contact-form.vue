@@ -53,7 +53,9 @@ const submitForm = () => {
 
 <template>
     <form @submit.prevent="submitForm">
-        <p class="mb-4 text-gray-600">Feel free to send me a message. I'll get back to you as soon as possible.</p>
+        <p class="mb-4 text-gray-600">
+            Get in touch with us! Whether you have a question, a project idea, or just want to say hello, I'm here to help. Please fill out the form below and we'll get back to you as soon as possible.
+        </p>
         <div class="mb-8 grid grid-cols-1 gap-8 md:grid-cols-2">
             <div>
                 <label for="name" class="mb-2 block text-sm font-medium">Name *</label>

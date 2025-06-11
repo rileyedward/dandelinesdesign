@@ -24,13 +24,13 @@ export const navigationLinks: NavigationLinkGroup[] = [
 ];
 
 export const socialLinks: FooterSocialLink[] = [
-    { name: 'Instagram', icon: Instagram, href: 'https://instagram.com/dandelinesdesign' },
-    { name: 'Facebook', icon: Facebook, href: 'https://facebook.com/dandelinesdesign' },
-    { name: 'Threads', icon: MessageSquareIcon, href: 'https://threads.net/dandelinesdesign' },
+    { name: 'Instagram', icon: Instagram, href: 'https://www.instagram.com/dandelines_design' },
+    { name: 'Facebook', icon: Facebook, href: 'https://www.facebook.com/michele.grotenhuis' },
+    { name: 'Threads', icon: MessageSquareIcon, href: 'https://www.threads.com/@michelegrotenhuis' },
 ];
 
 export const contactInfo: ContactInfo = {
-    email: 'dandelinesdesign@gmail.com',
+    email: 'dandelines@gmail.com',
     phone: '(816) 509-9824',
     address: 'Independence, MO, USA',
 };

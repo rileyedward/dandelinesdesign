@@ -2,7 +2,7 @@
     <div class="mx-auto flex max-w-4xl flex-col items-center gap-8 md:flex-row">
         <div class="w-full md:w-1/3">
             <img
-                src="/images/profile-image.jpg"
+                src="/images/about/profile-image.jpg"
                 alt="Michele Grotenhuis"
                 class="h-64 w-full rounded-lg object-cover object-center shadow-md md:h-screen md:max-h-[24rem]"
             />

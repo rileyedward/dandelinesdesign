@@ -32,12 +32,12 @@ const closeProductModal = () => {
         <div class="container mx-auto px-4 py-12">
             <div class="mb-12 text-center">
                 <h2 class="mb-4 text-4xl font-bold text-gray-800">Our Products</h2>
-                <div class="mx-auto max-w-2xl">
+                <div class="mx-auto max-w-lg">
                     <p class="leading-relaxed text-gray-600">
                         Discover our handcrafted floral arrangements and unique gifts created with love and attention to detail.
                     </p>
                 </div>
-                <div class="bg-primary mx-auto mt-6 h-1 w-24 rounded-full" style="background-color: #f59e0b"></div>
+                <div class="mx-auto mt-6 h-1 w-24 rounded-full bg-black"></div>
             </div>
 
             <div v-if="products.length > 0" class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">

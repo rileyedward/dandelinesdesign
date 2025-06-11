@@ -4,22 +4,22 @@ import { FacebookIcon, InstagramIcon, MailIcon, MessageCircleIcon } from 'lucide
 export const socialLinks: SocialLink[] = [
     {
         name: 'Instagram',
-        url: 'https://instagram.com/#',
+        url: 'https://www.instagram.com/dandelines_design',
         icon: InstagramIcon,
     },
     {
         name: 'Facebook',
-        url: 'https://facebook.com/#',
+        url: 'https://www.facebook.com/michele.grotenhuis',
         icon: FacebookIcon,
     },
     {
         name: 'Threads',
-        url: 'https://threads.net/#',
+        url: 'https://www.threads.com/@michelegrotenhuis',
         icon: MessageCircleIcon,
     },
     {
         name: 'Email',
-        url: 'mailto:contact@dandelinesdesign.com',
+        url: 'mailto:dandelines@gmail.com',
         icon: MailIcon,
     },
 ];

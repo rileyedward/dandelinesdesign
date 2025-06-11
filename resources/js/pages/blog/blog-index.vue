@@ -17,7 +17,7 @@ defineProps<Props>();
         <div class="container mx-auto px-4 py-12">
             <div class="mb-12 text-center">
                 <h2 class="mb-4 text-4xl font-bold text-gray-800">Journal & Inspirations</h2>
-                <div class="mx-auto max-w-2xl">
+                <div class="mx-auto max-w-lg">
                     <p class="leading-relaxed text-gray-600">
                         Discover floral artistry, event design insights, and creative inspiration from our team of passionate designers.
                     </p>
@@ -32,7 +32,7 @@ defineProps<Props>();
             </div>
 
             <div v-else class="my-12 text-center">
-                <p class="text-gray-600">No blog posts available at the moment. Check back soon!</p>
+                <p class="text-gray-600">No blog posts available at the moment. Check again soon!</p>
             </div>
         </div>
     </app-layout>

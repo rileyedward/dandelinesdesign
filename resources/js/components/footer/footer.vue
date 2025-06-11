@@ -78,11 +78,6 @@ const toggleLoginModal = (): void => {
 
             <div class="flex flex-col items-center justify-between space-y-4 md:flex-row md:space-y-0">
                 <p class="text-sm text-gray-600">&copy; {{ currentYear }} Dandelines Design. All rights reserved.</p>
-                <div class="flex space-x-6">
-                    <a href="/terms" class="text-sm text-gray-600 transition-colors hover:text-gray-900">Terms of Service</a>
-                    <a href="/privacy" class="text-sm text-gray-600 transition-colors hover:text-gray-900">Privacy Policy</a>
-                    <a href="/cookies" class="text-sm text-gray-600 transition-colors hover:text-gray-900">Cookie Policy</a>
-                </div>
             </div>
         </div>
     </footer>
