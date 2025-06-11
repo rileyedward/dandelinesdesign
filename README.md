@@ -23,7 +23,6 @@ approach makes professional financial planning accessible to everyone.
 - **Blog**: Articles and updates about budgeting, financial tips, and company news.
 - **Store**: Shop for digital budget planners, templates, and financial planning tools.
 
-
 ## Getting Started
 
 ### Prerequisites
