@@ -1,4 +1,4 @@
-const CACHE_NAME = "dandelions-cache-v1";
+const CACHE_NAME = "dandelines-cache-v1";
 const urlsToCache = [
     "/",
     "/css/app.css",

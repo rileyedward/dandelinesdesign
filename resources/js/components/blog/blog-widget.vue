@@ -1,6 +1,6 @@
 <template>
     <div class="blog-widget-card max-w-sm rounded-lg bg-white p-6 shadow-md">
-        <h3 class="mb-2 text-center text-xl font-semibold">Dandelions Blog</h3>
+        <h3 class="mb-2 text-center text-xl font-semibold">Dandelines Blog</h3>
 
         <p class="mb-3 text-center text-sm text-gray-600 italic">Inspiration, Tips & Creative Insights</p>
 

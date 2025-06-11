@@ -2,6 +2,30 @@
 
 Simplify your budgeting.
 
+## Overview
+
+Branding and store site for Dandelines Design.
+
+### What is Dandelines Design?
+
+Dandelines Design is a comprehensive branding and e-commerce platform specializing in digital budget planners and
+financial planning tools. We combine beautiful design with practical functionality to help individuals and businesses
+better manage their finances through customizable planning solutions.
+
+### Why Use Dandelines Design?
+
+Dandelines Design offers several compelling benefits. We create premium branded solutions that elevate your financial
+planning experience through customizable tools, clear documentation, and dedicated support. Our cost-effective digital
+approach makes professional financial planning accessible to everyone.
+
+### Key Features
+
+- **Branding**: Professional branding elements including logo, colors, typography, and brand guidelines.
+- **Contact**: Contact form and business contact information for inquiries and support.
+- **Blog**: Articles and updates about budgeting, financial tips, and company news.
+- **Store**: Shop for digital budget planners, templates, and financial planning tools.
+
+
 ## Getting Started
 
 ### Prerequisites
