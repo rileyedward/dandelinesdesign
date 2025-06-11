@@ -19,6 +19,6 @@ defineProps<Props>();
             <about-section />
         </div>
 
-        <testimonials-section :testimonials="testimonials" />
+        <testimonials-section v-if="testimonials.length" :testimonials="testimonials" />
     </app-layout>
 </template>
