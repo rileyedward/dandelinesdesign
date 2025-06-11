@@ -21,8 +21,8 @@ const toggleFormType = (type: 'contact' | 'quote') => {
 
         <div id="contact-form-section" class="container mx-auto px-4 py-12">
             <div class="flex flex-col gap-8 md:flex-row">
-                <div class="md:w-5/12 border-2 h-fit object-cover shadow-lg rounded-lg p-1">
-                    <img src="/images/contact/contact-form.jpeg" alt="Contact Us" class="object-cover shadow-lg rounded-lg" />
+                <div class="h-fit rounded-lg border-2 object-cover p-1 shadow-lg md:w-5/12">
+                    <img src="/images/contact/contact-form.jpeg" alt="Contact Us" class="rounded-lg object-cover shadow-lg" />
                 </div>
 
                 <div class="md:w-7/12">

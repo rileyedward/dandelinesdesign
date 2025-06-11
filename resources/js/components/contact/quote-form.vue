@@ -64,9 +64,9 @@ const submitForm = () => {
 <template>
     <form @submit.prevent="submitForm">
         <p class="mb-4 text-gray-600">
-            Hi, we're excited to help! To provide you with an accurate quote, please fill out the form below with as
-            much detail as possible. The more information you share about your event - from guest count to special requirements - the better we can
-            tailor our services to meet your needs.
+            Hi, we're excited to help! To provide you with an accurate quote, please fill out the form below with as much detail as possible. The more
+            information you share about your event - from guest count to special requirements - the better we can tailor our services to meet your
+            needs.
         </p>
         <div class="mb-8 grid grid-cols-1 gap-8 md:grid-cols-2">
             <div>
