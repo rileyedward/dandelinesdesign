@@ -30,7 +30,7 @@ export const socialLinks: FooterSocialLink[] = [
 ];
 
 export const contactInfo: ContactInfo = {
-    email: 'dandelines@gmail.com',
+    email: 'dandelinesdesign@gmail.com',
     phone: '(816) 509-9824',
     address: 'Independence, MO, USA',
 };

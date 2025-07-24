@@ -18,7 +18,9 @@ const toggleLoginModal = (): void => {
             <div class="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-4">
                 <div class="mb-8 md:mb-0">
                     <h2 class="mb-4 text-xl font-bold text-gray-900">Dandelines Design</h2>
-                    <p class="mb-4 text-gray-600">We get to know each client to create unforgettable events that reflect their unique story.</p>
+                    <p class="mb-4 text-gray-600">
+                        Creating beautiful events that bring your vision to life and the fine details that make your moments special.
+                    </p>
                     <div class="flex space-x-4">
                         <a
                             v-for="social in socialLinks"

@@ -49,7 +49,8 @@ onMounted(() => {
                     enter-from-class="opacity-0 scale-50"
                     enter-to-class="opacity-100 scale-100"
                 >
-                    <p v-if="isLoaded" class="mb-8 text-xl text-gray-700">Event Planning & Design Services</p>
+                    <!-- TODO: Savate -->
+                    <p v-if="isLoaded" class="mb-8 text-xl text-gray-700">Artist • Event Planning • Design</p>
                 </transition>
 
                 <transition
@@ -57,6 +58,7 @@ onMounted(() => {
                     enter-from-class="opacity-0 translate-y-20"
                     enter-to-class="opacity-100 translate-y-0"
                 >
+                    <!-- TODO: Euphoria Font -->
                     <a
                         v-if="isLoaded"
                         href="/contact"
