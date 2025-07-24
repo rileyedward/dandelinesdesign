@@ -19,7 +19,7 @@ export const services: ServiceBanner[] = [
         image_url: '/images/services/design-service.jpg',
         title: 'Artwork & Design',
         description:
-            'Comprehensive digital marketing strategies to increase your online presence, drive traffic to your website, and convert visitors into customers.',
+            'Mixed media and textiles were what used to be a hobby, has become an opportunity to share. Visit my store for the newest available work. New pieces will be updated and available as they are completed.',
         imageOnLeft: true,
     },
 ];
