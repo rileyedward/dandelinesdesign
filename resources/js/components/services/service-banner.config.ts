@@ -19,7 +19,7 @@ export const services: ServiceBanner[] = [
         image_url: '/images/services/design-service.jpg',
         title: 'Artwork & Design',
         description:
-            'Mixed media and textiles were what used to be a hobby, has become an opportunity to share. Visit my store for the newest available work. New pieces will be updated and available as they are completed.',
+            'Mixed media and textiles are what define most of my work. What used to be a hobby has transitioned into an opportunity to create and share what I love doing. Check out my store for available pieces, and please check back often for new work.',
         imageOnLeft: true,
     },
 ];
