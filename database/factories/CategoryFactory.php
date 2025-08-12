@@ -17,7 +17,7 @@ class CategoryFactory extends Factory
             'Custom Pieces',
             'Seasonal Collections',
             'Wedding Arrangements',
-            'Corporate Designs'
+            'Corporate Designs',
         ]);
 
         return [

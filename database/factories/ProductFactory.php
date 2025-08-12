@@ -18,10 +18,10 @@ class ProductFactory extends Factory
             'Hand-painted Canvas Original',
             'Corporate Event Decor Package',
             'Botanical Wall Art Collection',
-            'Luxury Bridal Bouquet'
+            'Luxury Bridal Bouquet',
         ];
 
-        $name = $this->faker->randomElement($productNames) . ' #' . $this->faker->numberBetween(1, 999);
+        $name = $this->faker->randomElement($productNames).' #'.$this->faker->numberBetween(1, 999);
 
         return [
             'category_id' => Category::factory(),
