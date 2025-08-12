@@ -20,6 +20,6 @@ class AuthRegisterController extends Controller
     {
         $user = User::query()->create($request->validated());
 
-        return to_route('home');
+        return to_route('admin.dashboard.index');
     }
 }

@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactMessageController;
@@ -13,6 +14,8 @@ Route::middleware('auth')
     ->prefix('admin')
     ->name('admin.')
     ->group(function () {
+        Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard.index');
+
         Route::controller(ContactMessageController::class)
             ->prefix('contact-message')
             ->name('contact-message.')

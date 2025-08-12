@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, reactive } from 'vue';
-import { useRouter, useRoute } from 'vue-router';
+import { router, usePage } from '@inertiajs/vue3';
 import { ChevronDown, ChevronUp, ChevronRight, Menu as MenuIcon, User } from 'lucide-vue-next';
 import type { UiSidebarProps as Props, UiSidebarEmits as Emits, SidebarItem } from './ui-sidebar';
 import UiDropdownMenu from '@/components/ui/data/dropdown-menu/ui-dropdown-menu.vue';
@@ -21,21 +21,15 @@ const activeRouteValue = ref(props.activeRoute);
 const isMobileMenuOpen = ref(false);
 const expandedItems = reactive<Record<string, boolean>>({});
 
-const router = useRouter();
-const route = useRoute();
-
-const routes = computed(() => {
-  return router
-    .getRoutes()
-    .filter(route => route.name && route.path !== '/' && !route.path.includes(':'))
-    .map(route => ({
-      label: route.name.toString().charAt(0).toUpperCase() + route.name.toString().slice(1),
-      route: route.path,
-    }));
-});
+const page = usePage();
 
 const navItems = computed(() => {
-  return props.items.length > 0 ? props.items : routes.value;
+  return props.items;
+});
+
+// Get current URL path for active state detection
+const currentPath = computed(() => {
+  return page.url;
 });
 
 watch(
@@ -46,14 +40,14 @@ watch(
 );
 
 watch(
-  () => route.path,
+  () => currentPath.value,
   newPath => {
     activeRouteValue.value = newPath;
   }
 );
 
 onMounted(() => {
-  activeRouteValue.value = route.path;
+  activeRouteValue.value = currentPath.value;
 });
 
 const toggleSidebar = (): void => {
@@ -77,7 +71,7 @@ const handleNavigate = (item: SidebarItem): void => {
     emit('update:activeRoute', item.route || '');
 
     if (item.route) {
-      router.push(item.route);
+      router.visit(item.route);
     }
 
     isMobileMenuOpen.value = false;
@@ -177,10 +171,9 @@ const sidebarClasses = computed(() => {
                   v-if="item.children && item.children.length > 0"
                   :class="['mt-1 space-y-1 pl-4', expandedItems[item.label] ? 'block' : 'hidden']"
                 >
-                  <a
+                  <div
                     v-for="child in item.children"
                     :key="child.route || child.label"
-                    :href="child.route || '#'"
                     :class="[
                       'group flex items-center px-2 py-2 text-sm font-medium rounded-md',
                       activeRouteValue === child.route
@@ -196,7 +189,7 @@ const sidebarClasses = computed(() => {
                       class="mr-3 flex-shrink-0 h-5 w-5"
                     />
                     {{ child.label }}
-                  </a>
+                  </div>
                 </div>
               </div>
             </div>
@@ -276,10 +269,9 @@ const sidebarClasses = computed(() => {
                   v-if="item.children && item.children.length > 0"
                   :class="['mt-1 space-y-1 pl-4', expandedItems[item.label] ? 'block' : 'hidden']"
                 >
-                  <a
+                  <div
                     v-for="child in item.children"
                     :key="child.route || child.label"
-                    :href="child.route || '#'"
                     :class="[
                       'group flex items-center px-2 py-2 text-sm font-medium rounded-md',
                       activeRouteValue === child.route
@@ -302,7 +294,7 @@ const sidebarClasses = computed(() => {
                       />
                       {{ child.label }}
                     </span>
-                  </a>
+                  </div>
                 </div>
               </div>
             </div>
