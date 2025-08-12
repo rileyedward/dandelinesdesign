@@ -1,8 +1,18 @@
 <script setup lang="ts">
 import CommonPageHeader from '@/components/common/page-header/common-page-header.vue';
+import QuoteRequestList from '@/components/quote-request/quote-request-list/quote-request-list.vue';
 import SidebarLayout from '@/layouts/sidebar/sidebar-layout.vue';
 import { Head } from '@inertiajs/vue3';
-import { Construction, MessageSquare } from 'lucide-vue-next';
+import { MessageSquare } from 'lucide-vue-next';
+import { QuoteRequest } from '@/types/quote-request';
+
+defineProps<{
+    pendingRequests: QuoteRequest[];
+    contactedRequests: QuoteRequest[];
+    quotedRequests: QuoteRequest[];
+    completedRequests: QuoteRequest[];
+    cancelledRequests: QuoteRequest[];
+}>();
 </script>
 
 <template>
@@ -12,20 +22,13 @@ import { Construction, MessageSquare } from 'lucide-vue-next';
         <div class="space-y-6">
             <common-page-header title="Quote Requests" subtitle="Manage customer quote requests" :icon="MessageSquare" variant="info" />
 
-            <!-- Under Construction Content -->
-            <div class="flex flex-col items-center justify-center py-20">
-                <div class="text-center">
-                    <div class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-yellow-100">
-                        <Construction class="h-10 w-10 text-yellow-600" />
-                    </div>
-
-                    <h2 class="mt-6 text-xl font-semibold text-gray-900">Page Under Construction</h2>
-
-                    <p class="mt-2 max-w-md text-sm text-gray-600">
-                        This page is being developed. Quote request management features will be available soon.
-                    </p>
-                </div>
-            </div>
+            <QuoteRequestList
+                :pending-requests="pendingRequests"
+                :contacted-requests="contactedRequests"
+                :quoted-requests="quotedRequests"
+                :completed-requests="completedRequests"
+                :cancelled-requests="cancelledRequests"
+            />
         </div>
     </sidebar-layout>
 </template>

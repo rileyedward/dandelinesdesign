@@ -18,7 +18,19 @@ class QuoteRequestController extends BaseController
 
     public function index(Request $request): Response
     {
-        return inertia('admin/quote-requests/quote-requests-index');
+        $pendingRequests = QuoteRequest::query()->where('status', 'pending')->get();
+        $contactedRequests = QuoteRequest::query()->where('status', 'contacted')->get();
+        $quotedRequests = QuoteRequest::query()->where('status', 'quoted')->get();
+        $completedRequests = QuoteRequest::query()->where('status', 'completed')->get();
+        $cancelledRequests = QuoteRequest::query()->where('status', 'cancelled')->get();
+
+        return inertia('admin/quote-requests/quote-requests-index', [
+            'pendingRequests' => $pendingRequests,
+            'contactedRequests' => $contactedRequests,
+            'quotedRequests' => $quotedRequests,
+            'completedRequests' => $completedRequests,
+            'cancelledRequests' => $cancelledRequests,
+        ]);
     }
 
     public function show(Request $request, int $id): Response
