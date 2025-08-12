@@ -21,7 +21,6 @@ Route::middleware('auth')
             ->name('messages.')
             ->group(function () {
                 Route::get('/', 'index')->name('index');
-                Route::post('/', 'store')->name('store');
                 Route::patch('/{id}', 'update')->name('update');
                 Route::delete('/{id}', 'destroy')->name('destroy');
             });
@@ -42,7 +41,6 @@ Route::middleware('auth')
             ->name('quotes.')
             ->group(function () {
                 Route::get('/', 'index')->name('index');
-                Route::post('/', 'store')->name('store');
                 Route::patch('/{id}', 'update')->name('update');
                 Route::delete('/{id}', 'destroy')->name('destroy');
             });
