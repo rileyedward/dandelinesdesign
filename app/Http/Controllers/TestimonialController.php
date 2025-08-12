@@ -18,7 +18,6 @@ class TestimonialController extends BaseController
 
     public function index(Request $request): Response
     {
-        // TODO: Add page route...
-        return inertia(null);
+        return inertia('admin/testimonials/testimonials-index');
     }
 }

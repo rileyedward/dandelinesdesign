@@ -1,22 +1,7 @@
 import type { DropdownMenuItem } from '@/components/ui/data/dropdown-menu/ui-dropdown-menu';
 import type { SidebarItem } from '@/components/ui/navigation/sidebar/ui-sidebar';
-import {
-    AlertTriangle,
-    BarChart3,
-    Bell,
-    Calendar,
-    CheckSquare,
-    ChevronDown,
-    Circle,
-    CreditCard,
-    Home,
-    Layout,
-    LogOut,
-    MessageSquare,
-    Settings,
-    Table,
-    Type,
-} from 'lucide-vue-next';
+import { router } from '@inertiajs/vue3';
+import { FileText, Home, LogOut, Mail, MessageSquare, Package, Settings, ShoppingBag, Star, Tag, UserCheck, Users } from 'lucide-vue-next';
 
 export interface SidebarLayoutConfig {
     title: string;
@@ -28,77 +13,44 @@ export interface SidebarLayoutConfig {
 }
 
 const config: SidebarLayoutConfig = {
-    title: 'Component Library',
+    title: 'Dandeline Designs',
     sidebarItems: [
-        { label: 'Home', route: '/', icon: Home },
+        { label: 'Dashboard', route: '/admin/dashboard', icon: Home },
         {
-            label: 'Forms',
-            icon: CheckSquare,
+            label: 'Content Management',
+            icon: FileText,
             children: [
-                { label: 'Button', route: '/button', icon: Circle },
-                { label: 'Input', route: '/input', icon: Type },
-                { label: 'Textarea', route: '/textarea', icon: Type },
-                { label: 'Select', route: '/select', icon: CheckSquare },
-                { label: 'Checkbox', route: '/checkbox', icon: CheckSquare },
-                { label: 'Radio', route: '/radio', icon: CheckSquare },
-                { label: 'MultiSelect', route: '/multiselect', icon: CheckSquare },
-                { label: 'DatePicker', route: '/datepicker', icon: Calendar },
-                { label: 'Slider', route: '/slider', icon: Circle },
-                { label: 'Range', route: '/range', icon: Circle },
-                { label: 'Counter', route: '/counter', icon: Circle },
-                { label: 'File Upload', route: '/file-upload', icon: Circle },
-                { label: 'Switch', route: '/switch', icon: Circle },
+                { label: 'Blog Posts', route: '/admin/blog', icon: FileText },
+                { label: 'Contact Messages', route: '/admin/messages', icon: Mail },
             ],
         },
         {
-            label: 'Navigation',
-            icon: Layout,
+            label: 'Customer Relations',
+            icon: Users,
             children: [
-                { label: 'Breadcrumb', route: '/breadcrumb', icon: Layout },
-                { label: 'Dropdown', route: '/dropdown', icon: Layout },
-                { label: 'Dropdown Menu', route: '/dropdown-menu', icon: ChevronDown },
-                { label: 'Menu', route: '/menu', icon: Layout },
-                { label: 'Tab', route: '/tab', icon: Layout },
+                { label: 'Quote Requests', route: '/admin/requests', icon: MessageSquare },
+                { label: 'Testimonials', route: '/admin/testimonials', icon: Star },
+                { label: 'Leads', route: '/admin/lead', icon: UserCheck },
             ],
         },
         {
-            label: 'Feedback',
-            icon: Bell,
+            label: 'Ecommerce',
+            icon: ShoppingBag,
             children: [
-                { label: 'Alert', route: '/alert', icon: AlertTriangle },
-                { label: 'Toast', route: '/toast', icon: Bell },
-                { label: 'Modal', route: '/modal', icon: MessageSquare },
-            ],
-        },
-        {
-            label: 'Layout',
-            icon: Layout,
-            children: [
-                { label: 'Card', route: '/card', icon: CreditCard },
-                { label: 'Container', route: '/container', icon: Layout },
-                { label: 'Drawer', route: '/drawer', icon: Layout },
-            ],
-        },
-        {
-            label: 'Data',
-            icon: BarChart3,
-            children: [
-                { label: 'Accordion', route: '/accordion', icon: BarChart3 },
-                { label: 'Chart', route: '/chart', icon: BarChart3 },
-                { label: 'Table', route: '/table', icon: Table },
-                { label: 'Tooltip', route: '/tooltip', icon: MessageSquare },
+                { label: 'Categories', route: '/admin/categories', icon: Tag },
+                { label: 'Products', route: '/admin/products', icon: Package },
             ],
         },
     ],
     profileMenu: {
-        userName: 'John Doe',
+        userName: 'Admin User',
         menuItems: [
             {
                 id: 'settings',
                 label: 'Settings',
                 icon: Settings,
                 disabled: false,
-                href: '/settings',
+                href: '/admin/settings',
             },
             {
                 id: 'divider',
@@ -112,7 +64,7 @@ const config: SidebarLayoutConfig = {
                 variant: 'danger' as const,
                 disabled: false,
                 action: () => {
-                    // TODO...
+                    router.delete(route('auth.login.destroy'));
                 },
             },
         ],

@@ -18,7 +18,11 @@ class QuoteRequestController extends BaseController
 
     public function index(Request $request): Response
     {
-        // TODO: Add page route...
-        return inertia(null);
+        return inertia('admin/quote-requests/quote-requests-index');
+    }
+
+    public function show(Request $request, int $id): Response
+    {
+        return inertia('admin/quote-requests/quote-requests-show');
     }
 }

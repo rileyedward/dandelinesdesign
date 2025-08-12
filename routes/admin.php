@@ -17,8 +17,8 @@ Route::middleware('auth')
         Route::get('/dashboard', [AdminDashboardController::class, 'index'])->name('dashboard.index');
 
         Route::controller(ContactMessageController::class)
-            ->prefix('contact-message')
-            ->name('contact-message.')
+            ->prefix('messages')
+            ->name('messages.')
             ->group(function () {
                 Route::get('/', 'index')->name('index');
                 Route::post('/', 'store')->name('store');
@@ -27,18 +27,19 @@ Route::middleware('auth')
             });
 
         Route::controller(BlogPostController::class)
-            ->prefix('blog-post')
-            ->name('blog-post.')
+            ->prefix('blog')
+            ->name('blog.')
             ->group(function () {
                 Route::get('/', 'index')->name('index');
                 Route::post('/', 'store')->name('store');
+                Route::get('/{id}', 'show')->name('show');
                 Route::patch('/{id}', 'update')->name('update');
                 Route::delete('/{id}', 'destroy')->name('destroy');
             });
 
         Route::controller(QuoteRequestController::class)
-            ->prefix('quote-request')
-            ->name('quote-request.')
+            ->prefix('quotes')
+            ->name('quotes.')
             ->group(function () {
                 Route::get('/', 'index')->name('index');
                 Route::post('/', 'store')->name('store');
@@ -47,8 +48,8 @@ Route::middleware('auth')
             });
 
         Route::controller(TestimonialController::class)
-            ->prefix('testimonial')
-            ->name('testimonial.')
+            ->prefix('testimonials')
+            ->name('testimonials.')
             ->group(function () {
                 Route::get('/', 'index')->name('index');
                 Route::post('/', 'store')->name('store');
@@ -57,18 +58,19 @@ Route::middleware('auth')
             });
 
         Route::controller(LeadController::class)
-            ->prefix('lead')
-            ->name('lead.')
+            ->prefix('leads')
+            ->name('leads.')
             ->group(function () {
                 Route::get('/', 'index')->name('index');
                 Route::post('/', 'store')->name('store');
+                Route::get('/{id}', 'show')->name('show');
                 Route::patch('/{id}', 'update')->name('update');
                 Route::delete('/{id}', 'destroy')->name('destroy');
             });
 
         Route::controller(CategoryController::class)
-            ->prefix('category')
-            ->name('category.')
+            ->prefix('categories')
+            ->name('categories.')
             ->group(function () {
                 Route::get('/', 'index')->name('index');
                 Route::post('/', 'store')->name('store');
@@ -77,11 +79,12 @@ Route::middleware('auth')
             });
 
         Route::controller(ProductController::class)
-            ->prefix('product')
-            ->name('product.')
+            ->prefix('products')
+            ->name('products.')
             ->group(function () {
                 Route::get('/', 'index')->name('index');
                 Route::post('/', 'store')->name('store');
+                Route::get('/{id}', 'show')->name('show');
                 Route::patch('/{id}', 'update')->name('update');
                 Route::delete('/{id}', 'destroy')->name('destroy');
             });
