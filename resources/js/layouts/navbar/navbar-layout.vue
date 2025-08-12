@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import UiNavbar from '@/components/navigation/navbar/ui-navbar.vue';
+import UiNavbar from '@/components/ui/navigation/navbar/ui-navbar.vue';
 import defaultConfig from './navbar-layout.config';
 import type { NavbarLayoutConfig } from './navbar-layout.config';
 

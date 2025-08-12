@@ -1,5 +1,5 @@
 import type { LucideIcon } from 'lucide-vue-next';
-import type { DropdownMenuItem } from '@/components/data/dropdown-menu/ui-dropdown-menu';
+import type { DropdownMenuItem } from '@/components/ui/data/dropdown-menu/ui-dropdown-menu';
 
 export interface SidebarItem {
   label: string;

@@ -3,8 +3,8 @@ import { ref, computed, watch, onMounted, reactive } from 'vue';
 import { useRouter, useRoute } from 'vue-router';
 import { ChevronDown, ChevronUp, ChevronRight, Menu as MenuIcon, User } from 'lucide-vue-next';
 import type { UiSidebarProps as Props, UiSidebarEmits as Emits, SidebarItem } from './ui-sidebar';
-import UiDropdownMenu from '@/components/data/dropdown-menu/ui-dropdown-menu.vue';
-import type { DropdownMenuItem } from '@/components/data/dropdown-menu/ui-dropdown-menu';
+import UiDropdownMenu from '@/components/ui/data/dropdown-menu/ui-dropdown-menu.vue';
+import type { DropdownMenuItem } from '@/components/ui/data/dropdown-menu/ui-dropdown-menu';
 
 const props = withDefaults(defineProps<Props>(), {
   title: 'Navigation',

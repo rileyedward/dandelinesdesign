@@ -15,8 +15,8 @@ import {
   LogOut,
   Settings,
 } from 'lucide-vue-next';
-import type { SidebarItem } from '@/components/navigation/sidebar/ui-sidebar';
-import type { DropdownMenuItem } from '@/components/data/dropdown-menu/ui-dropdown-menu';
+import type { SidebarItem } from '@/components/ui/navigation/sidebar/ui-sidebar';
+import type { DropdownMenuItem } from '@/components/ui/data/dropdown-menu/ui-dropdown-menu';
 
 export interface SidebarLayoutConfig {
   title: string;

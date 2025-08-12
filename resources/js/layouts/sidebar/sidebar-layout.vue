@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref } from 'vue';
-import UiSidebar from '@/components/navigation/sidebar/ui-sidebar.vue';
+import UiSidebar from '@/components/ui/navigation/sidebar/ui-sidebar.vue';
 import defaultConfig from './sidebar-layout.config';
 import type { SidebarLayoutConfig } from './sidebar-layout.config';
 
