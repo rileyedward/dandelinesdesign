@@ -18,6 +18,12 @@ class ContactMessageController extends BaseController
 
     public function index(Request $request): Response
     {
-        return inertia('admin/contact-messages/contact-messages-index');
+        $unreadMessages = ContactMessage::query()->where('is_read', false)->get();
+        $readMessages = ContactMessage::query()->where('is_read', true)->get();
+
+        return inertia('admin/contact-messages/contact-messages-index', [
+            'unreadMessages' => $unreadMessages,
+            'readMessages' => $readMessages
+        ]);
     }
 }
