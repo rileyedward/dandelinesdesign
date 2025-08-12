@@ -10,11 +10,6 @@ abstract class BaseRepository implements BaseRepositoryInterface
 {
     public string $model;
 
-    public function all(): Collection
-    {
-        return $this->model::all();
-    }
-
     public function findById(int $id): Model
     {
         return $this->model::findOrFail($id);

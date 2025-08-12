@@ -15,16 +15,6 @@ abstract class BaseService implements BaseServiceInterface
 
     public array $commonRelations = [];
 
-    public function getAll(): Collection
-    {
-        return $this->repository->all();
-    }
-
-    public function show(Request $request, Model $model): Model
-    {
-        return $model;
-    }
-
     public function getById(int $id, ?array $relations = null): Model
     {
         $model = $this->repository->findById($id);

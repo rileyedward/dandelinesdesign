@@ -7,8 +7,6 @@ use Illuminate\Support\Collection;
 
 interface BaseRepositoryInterface
 {
-    public function all(): Collection;
-
     public function findById(int $id): Model;
 
     public function store(array $data): Model;

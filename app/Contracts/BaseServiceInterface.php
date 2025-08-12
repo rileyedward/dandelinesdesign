@@ -8,10 +8,6 @@ use Illuminate\Support\Collection;
 
 interface BaseServiceInterface
 {
-    public function getAll(): Collection;
-
-    public function show(Request $request, Model $model): Model;
-
     public function getById(int $id, ?array $relations = null): Model;
 
     public function store(array $input): Model;
