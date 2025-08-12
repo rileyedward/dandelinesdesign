@@ -33,20 +33,14 @@ abstract class BaseService implements BaseServiceInterface
         return $this->loadRelationships($model, $relationsToLoad);
     }
 
-    public function store(array $input, ?array $relations = null): Model
+    public function store(array $input): Model
     {
-        $model = $this->repository->store($input);
-        $relationsToLoad = $this->resolveRelations($relations);
-
-        return $this->loadRelationships($model, $relationsToLoad);
+        return $this->repository->store($input);
     }
 
-    public function update(array $input, Model $model, ?array $relations = null): Model
+    public function update(array $input, Model $model): Model
     {
-        $updatedModel = $this->repository->update($input, $model);
-        $relationsToLoad = $this->resolveRelations($relations);
-
-        return $this->loadRelationships($updatedModel, $relationsToLoad);
+        return $this->repository->update($input, $model);
     }
 
     public function delete(Model $model): bool
