@@ -4,7 +4,6 @@ namespace App\Repositories;
 
 use App\Contracts\BaseRepositoryInterface;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Collection;
 
 abstract class BaseRepository implements BaseRepositoryInterface
 {

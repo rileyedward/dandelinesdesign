@@ -4,8 +4,6 @@ namespace App\Services;
 
 use App\Contracts\BaseServiceInterface;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 
 abstract class BaseService implements BaseServiceInterface
 {
