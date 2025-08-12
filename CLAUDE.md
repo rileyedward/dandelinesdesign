@@ -150,9 +150,28 @@ Current CRUD entities in the system:
 - **Quote Requests**: Service quote requests for floral design/event planning
 - **Testimonials**: Customer testimonials with ratings and featured status
 - **Leads**: CRM-style lead management with status tracking
+- **Categories**: Product organization and filtering system
+- **Products**: Ecommerce items (design prints, artwork, floral arrangements) with pricing and inventory
 
 ### Base Class Features
 
 - **BaseRepository**: Provides `findById()`, `store()`, `update()`, `delete()`
 - **BaseService**: Adds relationship loading via `$relations` array
 - **BaseController**: Handles validation, filtering, and standard CRUD operations
+
+### Ecommerce System
+
+Simple ecommerce implementation for gallery-style product sales:
+
+**Categories**:
+- Organize products into logical groups (Floral Arrangements, Design Prints, etc.)
+- Fields: name, slug, description, is_active, sort_order
+- One-to-many relationship with Products
+
+**Products**:
+- Simple product catalog without variations or complex options
+- Fields: category_id, name, slug, description, price, image_url, is_active, is_featured, stock_quantity
+- Belongs-to relationship with Category
+- Designed for items like design prints, artwork, floral arrangements
+- Basic inventory tracking with stock_quantity
+- Featured flag for highlighting special products
