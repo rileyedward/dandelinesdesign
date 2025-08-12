@@ -13,8 +13,7 @@ class AuthRegisterController extends Controller
 {
     public function index(Request $request): Response
     {
-        // TODO: Add route...
-        return inertia(null);
+        return inertia('auth/auth-register');
     }
 
     public function store(AuthRegisterRequest $request): RedirectResponse

@@ -12,8 +12,7 @@ class AuthLoginController extends Controller
 {
     public function index(Request $request): Response
     {
-        // TODO: Add route...
-        return inertia(null);
+        return inertia('auth/auth-login');
     }
 
     public function store(AuthLoginRequest $request): RedirectResponse
