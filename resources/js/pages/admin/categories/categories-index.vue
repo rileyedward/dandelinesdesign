@@ -1,8 +1,14 @@
 <script setup lang="ts">
+import CategoryList from '@/components/category/category-list/category-list.vue';
 import CommonPageHeader from '@/components/common/page-header/common-page-header.vue';
 import SidebarLayout from '@/layouts/sidebar/sidebar-layout.vue';
+import type { Category } from '@/types/category';
 import { Head } from '@inertiajs/vue3';
-import { Construction, Tag } from 'lucide-vue-next';
+import { Tag } from 'lucide-vue-next';
+
+defineProps<{
+    categories: Category[];
+}>();
 </script>
 
 <template>
@@ -12,20 +18,7 @@ import { Construction, Tag } from 'lucide-vue-next';
         <div class="space-y-6">
             <common-page-header title="Categories" subtitle="Manage product categories" :icon="Tag" variant="secondary" />
 
-            <!-- Under Construction Content -->
-            <div class="flex flex-col items-center justify-center py-20">
-                <div class="text-center">
-                    <div class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-yellow-100">
-                        <Construction class="h-10 w-10 text-yellow-600" />
-                    </div>
-
-                    <h2 class="mt-6 text-xl font-semibold text-gray-900">Page Under Construction</h2>
-
-                    <p class="mt-2 max-w-md text-sm text-gray-600">
-                        This page is being developed. Category management features will be available soon.
-                    </p>
-                </div>
-            </div>
+            <category-list :categories="categories" />
         </div>
     </sidebar-layout>
 </template>

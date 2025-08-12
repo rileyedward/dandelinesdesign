@@ -24,7 +24,10 @@ class ProductFactory extends Factory
         $name = $this->faker->randomElement($productNames).' #'.$this->faker->numberBetween(1, 999);
 
         return [
-            'category_id' => Category::factory(),
+            'category_id' => function () {
+                $category = Category::inRandomOrder()->first();
+                return $category ? $category->id : Category::factory()->create()->id;
+            },
             'name' => $name,
             'slug' => Str::slug($name),
             'description' => $this->faker->paragraphs(2, true),

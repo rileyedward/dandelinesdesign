@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { ref, computed, watch, onMounted, reactive } from 'vue';
-import { router, usePage } from '@inertiajs/vue3';
+import { usePage } from '@inertiajs/vue3';
 import { ChevronDown, ChevronUp, ChevronRight, Menu as MenuIcon, User } from 'lucide-vue-next';
 import type { UiSidebarProps as Props, UiSidebarEmits as Emits, SidebarItem } from './ui-sidebar';
 import UiDropdownMenu from '@/components/ui/data/dropdown-menu/ui-dropdown-menu.vue';
@@ -27,7 +27,6 @@ const navItems = computed(() => {
   return props.items;
 });
 
-// Get current URL path for active state detection
 const currentPath = computed(() => {
   return page.url;
 });
@@ -71,7 +70,7 @@ const handleNavigate = (item: SidebarItem): void => {
     emit('update:activeRoute', item.route || '');
 
     if (item.route) {
-      router.visit(item.route);
+      window.location.href = item.route;
     }
 
     isMobileMenuOpen.value = false;

@@ -18,11 +18,19 @@ class ProductController extends BaseController
 
     public function index(Request $request): Response
     {
-        return inertia('admin/products/products-index');
+        $products = Product::query()->get();
+
+        return inertia('admin/products/products-index', [
+            'products' => $products,
+        ]);
     }
 
     public function show(Request $request, int $id): Response
     {
-        return inertia('admin/products/products-show');
+        $product = Product::findOrFail($id);
+        
+        return inertia('admin/products/products-show', [
+            'product' => $product,
+        ]);
     }
 }

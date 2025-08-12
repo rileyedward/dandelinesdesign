@@ -15,7 +15,7 @@ class CategoryFactory extends Factory
             'Artwork Originals',
             'Event Decor',
             'Custom Pieces',
-            'Seasonal Collections',
+            'Specialty Collections',
             'Wedding Arrangements',
             'Corporate Designs',
         ]);

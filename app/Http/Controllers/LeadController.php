@@ -18,11 +18,19 @@ class LeadController extends BaseController
 
     public function index(Request $request): Response
     {
-        return inertia('admin/leads/leads-index');
+        $leads = Lead::query()->get();
+
+        return inertia('admin/leads/leads-index', [
+            'leads' => $leads,
+        ]);
     }
 
     public function show(Request $request, int $id): Response
     {
-        return inertia('admin/leads/leads-show');
+        $lead = Lead::findOrFail($id);
+        
+        return inertia('admin/leads/leads-show', [
+            'lead' => $lead,
+        ]);
     }
 }
