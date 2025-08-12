@@ -11,7 +11,7 @@ Route::prefix('auth')->name('auth.')->group(function () {
         ->name('register.')
         ->group(function () {
             Route::get('/', 'index')->name('index');
-            Route::get('/', 'store')->name('store');
+            Route::post('/', 'store')->name('store');
         });
 
     Route::controller(AuthLoginController::class)
@@ -19,7 +19,7 @@ Route::prefix('auth')->name('auth.')->group(function () {
         ->name('login.')
         ->group(function () {
             Route::get('/', 'index')->name('index');
-            Route::get('/', 'store')->name('store');
+            Route::post('/', 'store')->name('store');
             Route::delete('/', 'destroy')->name('destroy');
         });
 
