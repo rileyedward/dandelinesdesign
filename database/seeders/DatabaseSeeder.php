@@ -15,5 +15,9 @@ class DatabaseSeeder extends Seeder
             'email' => 'admin@dandelinesdesign.com',
             'password' => bcrypt('password'),
         ]);
+
+        $this->call([
+            BlogPostSeeder::class,
+        ]);
     }
 }

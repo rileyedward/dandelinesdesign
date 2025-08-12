@@ -2,33 +2,28 @@
 import { Head } from '@inertiajs/vue3';
 import SidebarLayout from '@/layouts/sidebar/sidebar-layout.vue';
 import CommonPageHeader from '@/components/common/page-header/common-page-header.vue';
-import { Construction, FileText } from 'lucide-vue-next';
+import BlogList from '@/components/blog/blog-list/blog-list.vue';
+import type { BlogPost } from '@/types/blog';
+import { FileText } from 'lucide-vue-next';
+
+defineProps<{
+    blogPosts: BlogPost[];
+}>();
 </script>
 
 <template>
-  <Head title="Blog Posts" />
-  
-  <sidebar-layout>
-    <div class="space-y-6">
-      <common-page-header
-        title="Blog Posts"
-        subtitle="Manage your blog content"
-        :icon="FileText"
-        variant="primary"
-      />
+    <Head title="Blog Posts" />
 
-      <!-- Under Construction Content -->
-      <div class="flex flex-col items-center justify-center py-20">
-        <div class="text-center">
-          <div class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-yellow-100">
-            <Construction class="h-10 w-10 text-yellow-600" />
-          </div>
+    <sidebar-layout>
+        <div class="space-y-6">
+            <common-page-header
+                title="Blog Posts"
+                subtitle="Manage your blog content"
+                :icon="FileText"
+                variant="primary"
+            />
 
-          <h2 class="mt-6 text-xl font-semibold text-gray-900">Page Under Construction</h2>
-
-          <p class="mt-2 max-w-md text-sm text-gray-600">This page is being developed. Blog post management features will be available soon.</p>
+            <blog-list :blog-posts="blogPosts" />
         </div>
-      </div>
-    </div>
-  </sidebar-layout>
+    </sidebar-layout>
 </template>

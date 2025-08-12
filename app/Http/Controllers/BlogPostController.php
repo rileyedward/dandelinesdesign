@@ -18,11 +18,19 @@ class BlogPostController extends BaseController
 
     public function index(Request $request): Response
     {
-        return inertia('admin/blog-posts/blog-posts-index');
+        $blogPosts = BlogPost::query()->get();
+
+        return inertia('admin/blog-posts/blog-posts-index', [
+            'blogPosts' => $blogPosts,
+        ]);
     }
 
     public function show(Request $request, int $id): Response
     {
-        return inertia('admin/blog-posts/blog-posts-show');
+        $blogPost = BlogPost::findOrFail($id);
+        
+        return inertia('admin/blog-posts/blog-posts-show', [
+            'blogPost' => $blogPost,
+        ]);
     }
 }
