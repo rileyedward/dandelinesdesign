@@ -10,7 +10,9 @@ use Illuminate\Support\Collection;
 abstract class BaseService implements BaseServiceInterface
 {
     public mixed $repository;
+
     public array $relations = [];
+
     public array $commonRelations = [];
 
     public function getAll(): Collection
