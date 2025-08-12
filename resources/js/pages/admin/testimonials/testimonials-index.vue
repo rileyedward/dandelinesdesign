@@ -3,6 +3,12 @@ import CommonPageHeader from '@/components/common/page-header/common-page-header
 import SidebarLayout from '@/layouts/sidebar/sidebar-layout.vue';
 import { Head } from '@inertiajs/vue3';
 import { Construction, Star } from 'lucide-vue-next';
+import { Testimonial } from '@/types/testimonial';
+import TestimonialList from '@/components/testimonial/testimonial-list/testimonial-list.vue';
+
+defineProps<{
+    testimonials: Testimonial[];
+}>();
 </script>
 
 <template>
@@ -12,20 +18,7 @@ import { Construction, Star } from 'lucide-vue-next';
         <div class="space-y-6">
             <common-page-header title="Testimonials" subtitle="Manage customer testimonials" :icon="Star" variant="warning" />
 
-            <!-- Under Construction Content -->
-            <div class="flex flex-col items-center justify-center py-20">
-                <div class="text-center">
-                    <div class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-yellow-100">
-                        <Construction class="h-10 w-10 text-yellow-600" />
-                    </div>
-
-                    <h2 class="mt-6 text-xl font-semibold text-gray-900">Page Under Construction</h2>
-
-                    <p class="mt-2 max-w-md text-sm text-gray-600">
-                        This page is being developed. Testimonial management features will be available soon.
-                    </p>
-                </div>
-            </div>
+            <testimonial-list :testimonials="testimonials" />
         </div>
     </sidebar-layout>
 </template>
