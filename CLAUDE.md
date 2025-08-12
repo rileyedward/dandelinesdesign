@@ -82,3 +82,77 @@ The application follows a layered architecture pattern:
 - Controllers should extend `BaseController` when following standard CRUD patterns
 - Authorization policies are planned but not yet implemented (see TODO comments)
 - Input filtering removes 'with' parameter from request data in base controller
+
+## Working with Backend CRUD
+
+This project implements a comprehensive CRUD pattern with service-repository architecture. When adding new entities, follow these steps:
+
+### Creating New CRUD Entities
+
+For each new entity (e.g., `BlogPost`), create these files in this order:
+
+1. **Migration** (`database/migrations/`)
+   - Create with `php artisan make:migration create_table_name_table`
+   - Include `id`, appropriate columns, `timestamps()`, and `softDeletes()`
+
+2. **Model** (`app/Models/`)
+   - Extend `Model`, use `HasFactory` and `SoftDeletes` traits
+   - Define `$table`, `$fillable`, and `$casts` properties
+   - Follow naming convention: `BlogPost` model for `blog_posts` table
+
+3. **Factory** (`database/factories/`)
+   - For testing and seeding with faker data
+   - Define realistic test data in `definition()` method
+
+4. **Request** (`app/Http/Requests/`)
+   - Handle validation for store/update operations
+   - For unique fields (like email), use `Rule::unique()` with ignore for updates:
+     ```php
+     $entityId = $this->route('id');
+     $isUpdate = $this->isMethod('patch') || $this->isMethod('put');
+     Rule::unique('table', 'column')->ignore($isUpdate ? $entityId : null)
+     ```
+
+5. **Repository Interface** (`app/Contracts/`)
+   - Extend `BaseRepositoryInterface`
+   - Usually empty unless custom methods needed
+
+6. **Repository** (`app/Repositories/`)
+   - Extend `BaseRepository` and implement interface
+   - Define `public string $model = ModelClass::class;`
+
+7. **Service Interface** (`app/Contracts/`)
+   - Extend `BaseServiceInterface`
+   - Usually empty unless custom methods needed
+
+8. **Service** (`app/Services/`)
+   - Extend `BaseService` and implement interface
+   - Inject repository interface in constructor
+   - Define `$relations = []` for eager loading
+
+9. **Controller** (`app/Http/Controllers/`)
+   - Extend `BaseController`
+   - Define `$modelClass`, `$serviceInterface`, `$requestClass`
+   - Add `index()` method returning `inertia(null)` with TODO comment
+
+10. **Routes** (`routes/admin.php`)
+    - Add controller import and route group with standard CRUD routes
+    - Follow pattern: prefix, name, and standard REST methods
+
+11. **Register Services** (`app/Providers/AppServiceProvider.php`)
+    - Bind repository and service interfaces to implementations
+
+### Available Entities
+
+Current CRUD entities in the system:
+- **Contact Messages**: Customer inquiries and messages
+- **Blog Posts**: Content management with title, slug, and markdown content
+- **Quote Requests**: Service quote requests for floral design/event planning
+- **Testimonials**: Customer testimonials with ratings and featured status
+- **Leads**: CRM-style lead management with status tracking
+
+### Base Class Features
+
+- **BaseRepository**: Provides `findById()`, `store()`, `update()`, `delete()`
+- **BaseService**: Adds relationship loading via `$relations` array
+- **BaseController**: Handles validation, filtering, and standard CRUD operations
