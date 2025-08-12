@@ -12,7 +12,7 @@ class ContactMessageFactory extends Factory
             'name' => $this->faker->name(),
             'business_name' => $this->faker->optional(0.7)->company(),
             'email' => $this->faker->safeEmail(),
-            'phone' => $this->faker->optional(0.8)->phoneNumber(),
+            'phone_number' => $this->faker->optional(0.8)->phoneNumber(),
             'subject' => $this->faker->optional(0.9)->sentence(),
             'message' => $this->faker->paragraph(3),
             'is_read' => $this->faker->boolean(20),

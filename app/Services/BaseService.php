@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Services\Base;
+namespace App\Services;
 
-use App\Contracts\Base\BaseServiceInterface;
+use App\Contracts\BaseServiceInterface;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use Illuminate\Support\Collection;

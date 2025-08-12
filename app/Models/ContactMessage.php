@@ -16,7 +16,7 @@ class ContactMessage extends Model
         'name',
         'business_name',
         'email',
-        'phone',
+        'phone_number',
         'subject',
         'message',
     ];
