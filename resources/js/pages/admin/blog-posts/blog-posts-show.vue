@@ -1,60 +1,55 @@
 <script setup lang="ts">
-import { Head } from '@inertiajs/vue3';
-import SidebarLayout from '@/layouts/sidebar/sidebar-layout.vue';
 import CommonPageHeader from '@/components/common/page-header/common-page-header.vue';
+import SidebarLayout from '@/layouts/sidebar/sidebar-layout.vue';
 import type { BlogPost } from '@/types/blog';
-import { FileText, Calendar, Eye } from 'lucide-vue-next';
+import { Head } from '@inertiajs/vue3';
+import { Calendar, Eye, FileText } from 'lucide-vue-next';
 
 defineProps<{
-  blogPost: BlogPost;
+    blogPost: BlogPost;
 }>();
 </script>
 
 <template>
-  <Head :title="blogPost.title" />
-  
-  <sidebar-layout>
-    <div class="space-y-6">
-      <common-page-header
-        :title="blogPost.title"
-        subtitle="Blog post details"
-        :icon="FileText"
-        variant="primary"
-      />
+    <Head :title="blogPost.title" />
 
-      <!-- Blog Post Content -->
-      <div class="bg-white rounded-lg shadow-sm border p-6">
+    <sidebar-layout>
         <div class="space-y-6">
-          <!-- Meta Information -->
-          <div class="flex items-center space-x-6 text-sm text-gray-500 border-b pb-4">
-            <div class="flex items-center">
-              <Calendar class="h-4 w-4 mr-1" />
-              Created: {{ new Date(blogPost.created_at).toLocaleDateString() }}
-            </div>
-            <div class="flex items-center">
-              <Eye class="h-4 w-4 mr-1" />
-              Status: 
-              <span :class="blogPost.is_published ? 'text-green-600 ml-1' : 'text-yellow-600 ml-1'">
-                {{ blogPost.is_published ? 'Published' : 'Draft' }}
-              </span>
-            </div>
-          </div>
+            <common-page-header :title="blogPost.title" subtitle="Blog post details" :icon="FileText" variant="primary" />
 
-          <!-- Slug -->
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Slug</label>
-            <code class="text-sm bg-gray-100 px-2 py-1 rounded">{{ blogPost.slug }}</code>
-          </div>
+            <!-- Blog Post Content -->
+            <div class="rounded-lg border bg-white p-6 shadow-sm">
+                <div class="space-y-6">
+                    <!-- Meta Information -->
+                    <div class="flex items-center space-x-6 border-b pb-4 text-sm text-gray-500">
+                        <div class="flex items-center">
+                            <Calendar class="mr-1 h-4 w-4" />
+                            Created: {{ new Date(blogPost.created_at).toLocaleDateString() }}
+                        </div>
+                        <div class="flex items-center">
+                            <Eye class="mr-1 h-4 w-4" />
+                            Status:
+                            <span :class="blogPost.is_published ? 'ml-1 text-green-600' : 'ml-1 text-yellow-600'">
+                                {{ blogPost.is_published ? 'Published' : 'Draft' }}
+                            </span>
+                        </div>
+                    </div>
 
-          <!-- Content -->
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-2">Content</label>
-            <div class="prose max-w-none bg-gray-50 p-4 rounded-lg">
-              {{ blogPost.content }}
+                    <!-- Slug -->
+                    <div>
+                        <label class="mb-1 block text-sm font-medium text-gray-700">Slug</label>
+                        <code class="rounded bg-gray-100 px-2 py-1 text-sm">{{ blogPost.slug }}</code>
+                    </div>
+
+                    <!-- Content -->
+                    <div>
+                        <label class="mb-2 block text-sm font-medium text-gray-700">Content</label>
+                        <div class="prose max-w-none rounded-lg bg-gray-50 p-4">
+                            {{ blogPost.content }}
+                        </div>
+                    </div>
+                </div>
             </div>
-          </div>
         </div>
-      </div>
-    </div>
-  </sidebar-layout>
+    </sidebar-layout>
 </template>

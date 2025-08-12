@@ -1,34 +1,29 @@
 <script setup lang="ts">
-import { Head } from '@inertiajs/vue3';
-import SidebarLayout from '@/layouts/sidebar/sidebar-layout.vue';
 import CommonPageHeader from '@/components/common/page-header/common-page-header.vue';
+import SidebarLayout from '@/layouts/sidebar/sidebar-layout.vue';
+import { Head } from '@inertiajs/vue3';
 import { Construction, MessageSquare } from 'lucide-vue-next';
 </script>
 
 <template>
-  <Head title="Quote Request Details" />
-  
-  <sidebar-layout>
-    <div class="space-y-6">
-      <common-page-header
-        title="Quote Request Details"
-        subtitle="View quote request information"
-        :icon="MessageSquare"
-        variant="info"
-      />
+    <Head title="Quote Request Details" />
 
-      <!-- Under Construction Content -->
-      <div class="flex flex-col items-center justify-center py-20">
-        <div class="text-center">
-          <div class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-yellow-100">
-            <Construction class="h-10 w-10 text-yellow-600" />
-          </div>
+    <sidebar-layout>
+        <div class="space-y-6">
+            <common-page-header title="Quote Request Details" subtitle="View quote request information" :icon="MessageSquare" variant="info" />
 
-          <h2 class="mt-6 text-xl font-semibold text-gray-900">Page Under Construction</h2>
+            <!-- Under Construction Content -->
+            <div class="flex flex-col items-center justify-center py-20">
+                <div class="text-center">
+                    <div class="mx-auto flex h-20 w-20 items-center justify-center rounded-full bg-yellow-100">
+                        <Construction class="h-10 w-10 text-yellow-600" />
+                    </div>
 
-          <p class="mt-2 max-w-md text-sm text-gray-600">This page is being developed. Quote request details will be available soon.</p>
+                    <h2 class="mt-6 text-xl font-semibold text-gray-900">Page Under Construction</h2>
+
+                    <p class="mt-2 max-w-md text-sm text-gray-600">This page is being developed. Quote request details will be available soon.</p>
+                </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </sidebar-layout>
+    </sidebar-layout>
 </template>
