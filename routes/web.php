@@ -7,7 +7,7 @@ Route::get('/', function () {
 })->name('home');
 
 Route::get('/about', function () {
-    return inertia('about');
+    return inertia('about/about-index');
 });
 
 Route::get('/services', function () {

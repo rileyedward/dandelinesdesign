@@ -2,6 +2,7 @@
 import CommonBackground from '@/components/common/common-background/common-background.vue';
 import NavbarLayout from '@/layouts/navbar/navbar-layout.vue';
 import { onMounted, ref } from 'vue';
+import { aboutCopy, profileImageUrl } from '@/pages/about/about-index.config';
 
 const isLoaded = ref<boolean>(false);
 
@@ -28,6 +29,25 @@ onMounted(() => {
                 </p>
             </div>
         </common-background>
+
+        <div class="container mx-auto px-4 py-12">
+            <div class="mx-auto flex max-w-4xl flex-col items-center gap-8 md:flex-row">
+                <div class="w-full md:w-1/3">
+                    <img
+                        :src="profileImageUrl"
+                        alt="Michele Grotenhuis"
+                        class="h-64 w-full rounded-lg object-cover object-center shadow-md md:h-screen md:max-h-[24rem]"
+                    />
+                </div>
+                <div class="w-full md:w-2/3">
+                    <div class="space-y-4">
+                        <p v-for="(copy, index) in aboutCopy" :key="index">
+                            {{ copy }}
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
     </navbar-layout>
 </template>
 
