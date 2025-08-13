@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import QuoteRequestBanner from '@/components/quote-request/quote-request-banner/quote-request-banner.vue';
+import QuoteRequestUpdateModal from '@/components/quote-request/quote-request-update-modal/quote-request-update-modal.vue';
 import type { TabItem } from '@/components/ui/navigation/tab/ui-tab';
 import UiTab from '@/components/ui/navigation/tab/ui-tab.vue';
+import type { QuoteRequest } from '@/types/quote-request';
 import { Clock, DollarSign, MessageSquare, Phone } from 'lucide-vue-next';
 import { ref } from 'vue';
 import type { QuoteRequestListProps as Props } from './quote-request-list';
@@ -13,6 +15,8 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const selectedTab = ref('pending');
+const showUpdateModal = ref(false);
+const selectedQuoteRequest = ref<QuoteRequest | null>(null);
 
 const tabs: TabItem[] = [
     { label: `Pending (${props.pendingRequests.length})`, value: 'pending', icon: Clock },
@@ -21,6 +25,15 @@ const tabs: TabItem[] = [
     { label: `Completed (${props.completedRequests.length})`, value: 'completed', icon: MessageSquare },
     { label: `Cancelled (${props.cancelledRequests.length})`, value: 'cancelled', icon: MessageSquare },
 ];
+
+const handleQuoteRequestClick = (quoteRequest: QuoteRequest) => {
+    selectedQuoteRequest.value = quoteRequest;
+    showUpdateModal.value = true;
+};
+
+const handleQuoteRequestUpdated = () => {
+    window.location.reload();
+};
 </script>
 
 <template>
@@ -36,7 +49,14 @@ const tabs: TabItem[] = [
                         <div v-if="pendingRequests.length === 0" class="py-8 text-center text-gray-500">No pending quote requests</div>
 
                         <div v-else class="grid grid-cols-1 gap-6 md:grid-cols-2">
-                            <quote-request-banner v-for="request in pendingRequests" :key="request.id" :request="request" />
+                            <div
+                                v-for="request in pendingRequests"
+                                :key="request.id"
+                                class="cursor-pointer"
+                                @click="handleQuoteRequestClick(request)"
+                            >
+                                <quote-request-banner :request="request" />
+                            </div>
                         </div>
                     </div>
 
@@ -44,7 +64,14 @@ const tabs: TabItem[] = [
                         <div v-if="contactedRequests.length === 0" class="py-8 text-center text-gray-500">No contacted quote requests</div>
 
                         <div v-else class="grid grid-cols-1 gap-6 md:grid-cols-2">
-                            <quote-request-banner v-for="request in contactedRequests" :key="request.id" :request="request" />
+                            <div
+                                v-for="request in contactedRequests"
+                                :key="request.id"
+                                class="cursor-pointer"
+                                @click="handleQuoteRequestClick(request)"
+                            >
+                                <quote-request-banner :request="request" />
+                            </div>
                         </div>
                     </div>
 
@@ -52,7 +79,9 @@ const tabs: TabItem[] = [
                         <div v-if="quotedRequests.length === 0" class="py-8 text-center text-gray-500">No quoted quote requests</div>
 
                         <div v-else class="grid grid-cols-1 gap-6 md:grid-cols-2">
-                            <quote-request-banner v-for="request in quotedRequests" :key="request.id" :request="request" />
+                            <div v-for="request in quotedRequests" :key="request.id" class="cursor-pointer" @click="handleQuoteRequestClick(request)">
+                                <quote-request-banner :request="request" />
+                            </div>
                         </div>
                     </div>
 
@@ -60,7 +89,14 @@ const tabs: TabItem[] = [
                         <div v-if="completedRequests.length === 0" class="py-8 text-center text-gray-500">No completed quote requests</div>
 
                         <div v-else class="grid grid-cols-1 gap-6 md:grid-cols-2">
-                            <quote-request-banner v-for="request in completedRequests" :key="request.id" :request="request" />
+                            <div
+                                v-for="request in completedRequests"
+                                :key="request.id"
+                                class="cursor-pointer"
+                                @click="handleQuoteRequestClick(request)"
+                            >
+                                <quote-request-banner :request="request" />
+                            </div>
                         </div>
                     </div>
 
@@ -68,11 +104,25 @@ const tabs: TabItem[] = [
                         <div v-if="cancelledRequests.length === 0" class="py-8 text-center text-gray-500">No cancelled quote requests</div>
 
                         <div v-else class="grid grid-cols-1 gap-6 md:grid-cols-2">
-                            <QuoteRequestBanner v-for="request in cancelledRequests" :key="request.id" :request="request" />
+                            <div
+                                v-for="request in cancelledRequests"
+                                :key="request.id"
+                                class="cursor-pointer"
+                                @click="handleQuoteRequestClick(request)"
+                            >
+                                <quote-request-banner :request="request" />
+                            </div>
                         </div>
                     </div>
                 </template>
             </UiTab>
         </div>
+
+        <quote-request-update-modal
+            v-if="selectedQuoteRequest"
+            v-model:show="showUpdateModal"
+            :quote-request="selectedQuoteRequest"
+            @updated="handleQuoteRequestUpdated"
+        />
     </div>
 </template>

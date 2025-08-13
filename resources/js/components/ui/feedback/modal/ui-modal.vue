@@ -27,7 +27,7 @@ const overlayClasses = computed<string>(() => {
   if (props.centered) {
     classes.push('items-center justify-center');
   } else {
-    classes.push('items-start justify-center pt-16');
+    classes.push('items-start justify-center pt-8');
   }
 
   if (props.scrollable) {
@@ -43,7 +43,7 @@ const modalClasses = computed<string>(() => {
   const classes: string[] = [
     'bg-white rounded-lg shadow-xl',
     'transform transition-all duration-300',
-    'mx-4 my-8',
+    'mx-4 my-4',
     'max-h-full',
   ];
 
