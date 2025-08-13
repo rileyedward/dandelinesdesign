@@ -50,12 +50,6 @@ const handleCancel = () => {
         size="lg"
         @update:show="(value) => emit('update:show', value)"
     >
-        <category-form
-            :category="category"
-            :processing="form.processing"
-            :errors="form.errors"
-            @submit="handleSubmit"
-            @cancel="handleCancel"
-        />
+        <category-form :category="category" :processing="form.processing" :errors="form.errors" @submit="handleSubmit" @cancel="handleCancel" />
     </ui-modal>
 </template>

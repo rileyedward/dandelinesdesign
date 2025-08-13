@@ -41,11 +41,6 @@ const handleCategoryUpdated = () => {
             </div>
         </div>
 
-        <category-update-modal
-            v-if="selectedCategory"
-            v-model:show="showUpdateModal"
-            :category="selectedCategory"
-            @updated="handleCategoryUpdated"
-        />
+        <category-update-modal v-if="selectedCategory" v-model:show="showUpdateModal" :category="selectedCategory" @updated="handleCategoryUpdated" />
     </div>
 </template>

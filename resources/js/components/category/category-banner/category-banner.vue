@@ -28,7 +28,10 @@ const truncateDescription = (description: string, maxLength: number = 150) => {
                 <h3 class="text-lg font-semibold text-gray-900">{{ category.name }}</h3>
                 <p class="text-sm text-gray-600">{{ category.slug }}</p>
             </div>
-            <div v-if="showStatus" :class="['rounded-full px-2 py-1 text-xs', category.is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800']">
+            <div
+                v-if="showStatus"
+                :class="['rounded-full px-2 py-1 text-xs', category.is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800']"
+            >
                 <CheckCircle v-if="category.is_active" class="mr-1 inline-block h-3 w-3" />
                 <XCircle v-else class="mr-1 inline-block h-3 w-3" />
                 {{ category.is_active ? 'Active' : 'Inactive' }}
