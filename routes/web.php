@@ -11,7 +11,7 @@ Route::get('/about', function () {
 });
 
 Route::get('/services', function () {
-    return inertia('services');
+    return inertia('services/services-index');
 });
 
 Route::get('/contact', function () {
