@@ -1,2 +1,7 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
+
+html,
+body {
+    font-family: 'Antic Didone', serif;
+}
