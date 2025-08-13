@@ -52,7 +52,7 @@ onMounted(() => {
                     <!-- TODO: Euphoria Font -->
                     <a
                         v-if="isLoaded"
-                        href="/contact"
+                        href="/contact/contact-index"
                         class="inline-block rounded-lg bg-gray-600 px-8 py-3 font-bold text-white transition duration-300 hover:bg-pink-500"
                     >
                         Get in Touch
