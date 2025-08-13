@@ -1,14 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AboutController;
 
 Route::get('/', function () {
     return inertia('home/home-index');
 })->name('home');
 
-Route::get('/about', function () {
-    return inertia('about/about-index');
-});
+Route::get('/about', AboutController::class)->name('about');
 
 Route::get('/services', function () {
     return inertia('services/services-index');
