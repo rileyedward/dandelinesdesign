@@ -52,20 +52,9 @@ const handleSubmit = () => {
 
             <div class="flex items-center justify-between">
                 <ui-checkbox v-model="form.remember" label="Remember me" :disabled="form.processing" />
-
-                <a href="#" class="text-sm text-purple-600 transition-colors hover:text-purple-500"> Forgot password? </a>
             </div>
 
             <ui-button label="Sign in" type="submit" variant="primary" size="lg" :loading="form.processing" :disabled="form.processing" full-width />
         </form>
-
-        <div class="text-center">
-            <p class="text-sm text-gray-600">
-                Don't have an account?
-                <Link :href="route('auth.register.index')" class="font-medium text-purple-600 transition-colors hover:text-purple-500">
-                    Sign up
-                </Link>
-            </p>
-        </div>
     </div>
 </template>

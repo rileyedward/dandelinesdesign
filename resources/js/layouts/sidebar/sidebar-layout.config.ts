@@ -16,22 +16,13 @@ const config: SidebarLayoutConfig = {
     title: 'Dandeline Designs',
     sidebarItems: [
         { label: 'Dashboard', route: '/admin/dashboard', icon: Home },
-        { label: 'Notifications', route: '#notifications', icon: Bell },
-        {
-            label: 'Content Management',
-            icon: FileText,
-            children: [
-                { label: 'Blog Posts', route: '/admin/blog', icon: FileText },
-                { label: 'Contact Messages', route: '/admin/messages', icon: Mail },
-            ],
-        },
         {
             label: 'Customer Relations',
             icon: Users,
             children: [
-                { label: 'Quote Requests', route: '/admin/quotes', icon: MessageSquare },
-                { label: 'Testimonials', route: '/admin/testimonials', icon: Star },
                 { label: 'Leads', route: '/admin/leads', icon: UserCheck },
+                { label: 'Contact Messages', route: '/admin/messages', icon: Mail },
+                { label: 'Quote Requests', route: '/admin/quotes', icon: MessageSquare },
             ],
         },
         {
@@ -42,22 +33,19 @@ const config: SidebarLayoutConfig = {
                 { label: 'Products', route: '/admin/products', icon: Package },
             ],
         },
+        {
+            label: 'Content Management',
+            icon: FileText,
+            children: [
+                { label: 'Blog Posts', route: '/admin/blog', icon: FileText },
+                { label: 'Testimonials', route: '/admin/testimonials', icon: Star },
+            ],
+        },
+        { label: 'Notifications', route: '#notifications', icon: Bell },
     ],
     profileMenu: {
         userName: 'Admin User',
         menuItems: [
-            {
-                id: 'settings',
-                label: 'Settings',
-                icon: Settings,
-                disabled: false,
-                href: '/admin/settings',
-            },
-            {
-                id: 'divider',
-                label: '',
-                separator: true,
-            },
             {
                 id: 'logout',
                 label: 'Log Out',

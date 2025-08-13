@@ -12,7 +12,6 @@ const { isOpen: isSidebarOpen } = useSidebarState();
 watch(activeRoute, (newRoute) => {
     if (newRoute === '#notifications') {
         showNotificationDrawer.value = true;
-        // Reset the active route to prevent the sidebar from highlighting the notifications item
         setTimeout(() => {
             activeRoute.value = '';
         }, 100);
