@@ -1,10 +1,26 @@
 <script setup lang="ts">
+import LeadUpdateDrawer from '@/components/lead/lead-update-drawer/lead-update-drawer.vue';
 import { Building, Calendar, Edit, Mail, Phone, User } from 'lucide-vue-next';
+import { ref } from 'vue';
 import type { LeadInfoProps as Props } from './lead-info';
 
 const { lead } = withDefaults(defineProps<Props>(), {
     showEditButton: true,
 });
+
+const emit = defineEmits<{
+    (e: 'updated'): void;
+}>();
+
+const showUpdateDrawer = ref(false);
+
+const handleEditClick = () => {
+    showUpdateDrawer.value = true;
+};
+
+const handleLeadUpdated = () => {
+    emit('updated');
+};
 
 const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
@@ -67,6 +83,7 @@ const formatStatus = (status: string) => {
                     v-if="showEditButton"
                     class="rounded-lg p-2 text-gray-400 transition-colors hover:bg-gray-100 hover:text-gray-600"
                     aria-label="Edit lead"
+                    @click="handleEditClick"
                 >
                     <Edit class="h-5 w-5" />
                 </button>
@@ -122,5 +139,13 @@ const formatStatus = (status: string) => {
                 <p class="text-sm text-gray-700 whitespace-pre-wrap">{{ lead.notes }}</p>
             </div>
         </div>
+
+        <!-- Update Drawer -->
+        <lead-update-drawer
+            :show="showUpdateDrawer"
+            :lead="lead"
+            @update:show="showUpdateDrawer = $event"
+            @updated="handleLeadUpdated"
+        />
     </div>
 </template>

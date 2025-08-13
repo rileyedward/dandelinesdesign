@@ -4,3 +4,7 @@ export interface LeadInfoProps {
     lead: Lead;
     showEditButton?: boolean;
 }
+
+export interface LeadInfoEmits {
+    (event: 'updated'): void;
+}
