@@ -1,8 +1,10 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactMessageController;
 use App\Http\Controllers\QuoteRequestController;
+use App\Http\Controllers\StoreController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -18,6 +20,9 @@ Route::get('/services', function () {
 Route::get('/contact', function () {
     return inertia('contact/contact-index');
 });
+
+Route::get('/blog', [BlogController::class, 'index'])->name('blog');
+Route::get('/store', [StoreController::class, 'index'])->name('store');
 
 Route::post('/contact', [ContactMessageController::class, 'store'])->name('contact.store');
 Route::post('/quote', [QuoteRequestController::class, 'store'])->name('quote.store');

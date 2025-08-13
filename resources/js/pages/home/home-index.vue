@@ -43,9 +43,7 @@ onMounted(() => {
                     enter-from-class="opacity-0 transform translate-y-8"
                     enter-to-class="opacity-100 transform translate-y-0"
                 >
-                    <h1 v-if="isLoaded" class="mb-6 text-6xl font-bold tracking-tight text-gray-900 lg:text-7xl">
-                        Dandelines Design
-                    </h1>
+                    <h1 v-if="isLoaded" class="mb-6 text-6xl font-bold tracking-tight text-gray-900 lg:text-7xl">Dandelines Design</h1>
                 </transition>
 
                 <transition
