@@ -11,15 +11,15 @@ Route::get('/', function () {
     return inertia('home/home-index');
 })->name('home');
 
-Route::get('/about', AboutController::class)->name('about');
+Route::get('/about', AboutController::class)->name('about.index');
 
 Route::get('/services', function () {
     return inertia('services/services-index');
-});
+})->name('services.index');
 
 Route::get('/contact', function () {
     return inertia('contact/contact-index');
-});
+})->name('contact.index');
 
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
 Route::get('/store', [StoreController::class, 'index'])->name('store');

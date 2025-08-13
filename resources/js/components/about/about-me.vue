@@ -48,10 +48,6 @@
                                 <span class="rounded-full bg-amber-100 px-4 py-2 text-sm font-medium text-amber-800">Custom Consultation</span>
                             </div>
                         </div>
-
-                        <div class="rounded-2xl border border-rose-100 bg-gradient-to-r from-rose-50 to-pink-50 p-6">
-                            <p class="text-center text-lg font-medium text-gray-800 italic">"Please reach out, let's meet and get creative!"</p>
-                        </div>
                     </div>
                 </div>
             </div>

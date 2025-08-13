@@ -115,48 +115,6 @@ onBeforeUnmount(() => {
                         :aria-label="`Go to testimonial ${index + 1}`"
                     ></button>
                 </div>
-
-                <div class="mt-12 grid gap-6 md:grid-cols-3">
-                    <div class="rounded-2xl bg-white p-6 text-center shadow-lg">
-                        <div class="mb-3 inline-flex h-12 w-12 items-center justify-center rounded-full bg-rose-100">
-                            <svg class="h-6 w-6 text-rose-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-                                />
-                            </svg>
-                        </div>
-                        <h3 class="text-lg font-semibold text-gray-900">Passion-Driven</h3>
-                        <p class="mt-2 text-gray-600">Every project is infused with genuine love and creativity</p>
-                    </div>
-
-                    <div class="rounded-2xl bg-white p-6 text-center shadow-lg">
-                        <div class="mb-3 inline-flex h-12 w-12 items-center justify-center rounded-full bg-pink-100">
-                            <svg class="h-6 w-6 text-pink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-                                />
-                            </svg>
-                        </div>
-                        <h3 class="text-lg font-semibold text-gray-900">Detail-Oriented</h3>
-                        <p class="mt-2 text-gray-600">Meticulous attention to every element that makes your vision shine</p>
-                    </div>
-
-                    <div class="rounded-2xl bg-white p-6 text-center shadow-lg">
-                        <div class="mb-3 inline-flex h-12 w-12 items-center justify-center rounded-full bg-amber-100">
-                            <svg class="h-6 w-6 text-amber-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                            </svg>
-                        </div>
-                        <h3 class="text-lg font-semibold text-gray-900">Innovative</h3>
-                        <p class="mt-2 text-gray-600">Fresh ideas and creative solutions for every unique project</p>
-                    </div>
-                </div>
             </div>
 
             <div v-else class="mx-auto max-w-3xl rounded-2xl bg-white p-12 shadow-lg">
