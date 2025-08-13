@@ -1,83 +1,94 @@
 <script setup lang="ts">
-import { ref, computed, watch } from 'vue';
-import { useRoute } from 'vue-router';
-import { Menu as MenuIcon } from 'lucide-vue-next';
+import { Menu, X } from 'lucide-vue-next';
+import { computed, onMounted, onUnmounted, ref } from 'vue';
 import type { UiNavbarProps as Props, UiNavbarEmits as Emits } from './ui-navbar';
 
-const props = withDefaults(defineProps<Props>(), {
-  title: 'Component Library',
-  items: () => [],
-  showMobileMenuButton: true,
-  showLogo: true,
-  logoSrc: '',
-  fixed: true,
-  transparent: false,
-  activeRoute: '',
+withDefaults(defineProps<Props>(), {
+    leftNavLinks: () => [],
+    rightNavLinks: () => [],
 });
 
 const emit = defineEmits<Emits>();
 
-const activeRouteValue = ref(props.activeRoute);
+const isScrolled = ref(false);
+const isMobileMenuOpen = ref(false);
 
-const route = useRoute();
+const isIndexPage = computed<boolean>(() => window.location.pathname === '/');
 
-watch(
-  () => props.activeRoute,
-  newValue => {
-    activeRouteValue.value = newValue;
-  }
-);
-
-watch(
-  () => route.path,
-  newPath => {
-    activeRouteValue.value = newPath;
-  }
-);
-
-const toggleSidebar = (): void => {
-  emit('toggle-sidebar');
+const handleScroll = () => {
+    isScrolled.value = window.scrollY > 10;
 };
 
-const navbarClasses = computed(() => {
-  return [
-    'bg-white border-b border-gray-200',
-    props.fixed ? 'sticky top-0 z-30' : 'relative',
-    props.transparent ? 'bg-transparent border-transparent' : '',
-  ];
+const toggleMobileMenu = () => {
+    isMobileMenuOpen.value = !isMobileMenuOpen.value;
+    emit('mobile-menu-toggle');
+};
+
+onMounted(() => {
+    window.addEventListener('scroll', handleScroll);
+    handleScroll();
+});
+
+onUnmounted(() => {
+    window.removeEventListener('scroll', handleScroll);
 });
 </script>
 
 <template>
-  <nav :class="navbarClasses">
-    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex justify-between h-16">
-        <div class="flex">
-          <div class="flex items-center md:hidden">
-            <button
-              v-if="showMobileMenuButton"
-              class="inline-flex items-center justify-center p-2 rounded-md text-gray-500 hover:text-gray-600 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-500"
-              @click="toggleSidebar"
-            >
-              <span class="sr-only">Toggle sidebar</span>
-              <menu-icon class="h-6 w-6" />
-            </button>
-          </div>
+    <nav class="fixed top-0 right-0 left-0 z-50 w-full bg-white transition-shadow duration-300" :class="{ 'shadow-md': isScrolled }">
+        <div class="container mx-auto px-4">
+            <div class="hidden h-20 gap-96 md:flex md:items-center md:justify-center">
+                <div class="md:flex md:items-center md:space-x-10 md:pl-4">
+                    <a v-for="link in leftNavLinks" :key="link.name" :href="link.href" class="text-gray-700 hover:text-gray-900">
+                        {{ link.name }}
+                    </a>
+                </div>
 
-          <div class="flex-shrink-0 flex items-center">
-            <img v-if="showLogo && logoSrc" :src="logoSrc" class="h-8 w-auto" alt="Logo" />
-            <span v-if="title" class="text-lg font-semibold text-gray-900 ml-2">{{ title }}</span>
-          </div>
+                <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 transform">
+                    <a href="/" class="flex flex-col items-center">
+                        <img v-if="!isIndexPage" src="/images/app-logo.png" alt="Dandelines Design Logo" class="h-10 w-auto" />
+                        <span class="text-xs font-semibold text-gray-900">Dandelines Design</span>
+                    </a>
+                </div>
 
-          <div class="hidden md:ml-6 md:flex md:space-x-4">
-            <slot name="items"></slot>
-          </div>
+                <div class="md:flex md:items-center md:space-x-10 md:pr-4">
+                    <a v-for="link in rightNavLinks" :key="link.name" :href="link.href" class="text-gray-700 hover:text-gray-900">
+                        {{ link.name }}
+                    </a>
+                </div>
+            </div>
+
+            <div class="flex flex-col py-4 md:hidden">
+                <div class="absolute top-8 left-4">
+                    <button type="button" class="text-gray-700 hover:text-gray-900" @click="toggleMobileMenu">
+                        <Menu v-if="!isMobileMenuOpen" class="h-6 w-6" />
+                        <X v-else class="h-6 w-6" />
+                    </button>
+                </div>
+
+                <div class="mb-4 text-center">
+                    <a href="/" class="inline-flex flex-col items-center">
+                        <img src="/images/app-logo.png" alt="Dandelines Design Logo" class="h-10 w-auto" />
+                        <span class="text-sm font-bold text-gray-900">Dandelines Design</span>
+                    </a>
+                </div>
+            </div>
         </div>
 
-        <div class="flex items-center">
-          <slot name="right"></slot>
+        <div v-if="isMobileMenuOpen" class="md:hidden">
+            <div class="h-[700px] space-y-1 px-4 pt-2 pb-3">
+                <a
+                    v-for="link in [...leftNavLinks, ...rightNavLinks]"
+                    :key="link.name"
+                    :href="link.href"
+                    class="block py-2 text-gray-700 hover:text-gray-900"
+                    @click="isMobileMenuOpen = false"
+                >
+                    {{ link.name }}
+                </a>
+            </div>
         </div>
-      </div>
-    </div>
-  </nav>
+    </nav>
+
+    <div class="h-20"></div>
 </template>

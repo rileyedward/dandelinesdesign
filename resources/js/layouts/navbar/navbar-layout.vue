@@ -1,43 +1,26 @@
 <script setup lang="ts">
+import UiFooter from '@/components/ui/footer/ui-footer.vue';
 import UiNavbar from '@/components/ui/navigation/navbar/ui-navbar.vue';
-import type { NavbarLayoutConfig } from './navbar-layout.config';
+import { Head as InertiaHead } from '@inertiajs/vue3';
 import defaultConfig from './navbar-layout.config';
 
 interface Props {
-    config?: NavbarLayoutConfig;
+    pageTitle?: string;
 }
 
 const props = withDefaults(defineProps<Props>(), {
-    config: () => defaultConfig,
+    pageTitle: 'Dandelines Design',
 });
-
-const toggleSidebar = () => {
-    console.log('Toggle sidebar event received');
-};
 </script>
 
 <template>
-    <div class="flex min-h-screen flex-col bg-gray-50">
-        <ui-navbar :title="props.config.title" @toggle-sidebar="toggleSidebar">
-            <template #right>
-                <div class="flex items-center space-x-4">
-                    <button
-                        v-for="(item, index) in props.config.navbarRightItems"
-                        :key="index"
-                        class="rounded-full p-2 text-gray-500 hover:bg-gray-100"
-                        :aria-label="item.ariaLabel"
-                        @click="item.onClick && item.onClick()"
-                    >
-                        <component :is="item.icon" class="h-5 w-5" />
-                    </button>
-                </div>
-            </template>
-        </ui-navbar>
+    <inertia-head :title="props.pageTitle" />
 
-        <main class="flex-1 p-4">
-            <div class="mx-auto max-w-7xl">
-                <slot />
-            </div>
-        </main>
-    </div>
+    <ui-navbar :left-nav-links="defaultConfig.leftNavLinks" :right-nav-links="defaultConfig.rightNavLinks" />
+
+    <main>
+        <slot />
+    </main>
+
+    <ui-footer :contact-info="defaultConfig.contactInfo" :navigation-links="defaultConfig.navigationLinks" :social-links="defaultConfig.socialLinks" />
 </template>
