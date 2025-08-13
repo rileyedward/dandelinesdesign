@@ -47,12 +47,7 @@ const handleMessageUpdated = () => {
                         <div v-if="unreadMessages.length === 0" class="py-8 text-center text-gray-500">No unread messages</div>
 
                         <div v-else class="grid grid-cols-1 gap-6 md:grid-cols-2">
-                            <div
-                                v-for="message in unreadMessages"
-                                :key="message.id"
-                                class="cursor-pointer"
-                                @click="handleMessageClick(message)"
-                            >
+                            <div v-for="message in unreadMessages" :key="message.id" class="cursor-pointer" @click="handleMessageClick(message)">
                                 <contact-message-banner :message="message" />
                             </div>
                         </div>
@@ -62,12 +57,7 @@ const handleMessageUpdated = () => {
                         <div v-if="readMessages.length === 0" class="py-8 text-center text-gray-500">No read messages</div>
 
                         <div v-else class="grid grid-cols-1 gap-6 md:grid-cols-2">
-                            <div
-                                v-for="message in readMessages"
-                                :key="message.id"
-                                class="cursor-pointer"
-                                @click="handleMessageClick(message)"
-                            >
+                            <div v-for="message in readMessages" :key="message.id" class="cursor-pointer" @click="handleMessageClick(message)">
                                 <contact-message-banner :message="message" />
                             </div>
                         </div>
@@ -77,11 +67,6 @@ const handleMessageUpdated = () => {
         </div>
 
         <!-- Message Modal -->
-        <contact-message-modal
-            v-if="selectedMessage"
-            v-model:show="showModal"
-            :message="selectedMessage"
-            @updated="handleMessageUpdated"
-        />
+        <contact-message-modal v-if="selectedMessage" v-model:show="showModal" :message="selectedMessage" @updated="handleMessageUpdated" />
     </div>
 </template>

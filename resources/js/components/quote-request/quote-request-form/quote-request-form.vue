@@ -61,8 +61,17 @@ const handleDelete = () => {
 <template>
     <form @submit.prevent="handleSubmit" class="space-y-6">
         <div class="space-y-6">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <ui-input v-model="name" type="text" label="Name" :prefix-icon="User" :error-text="errors.name" :disabled="true" readonly full-width />
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
+                <ui-input
+                    v-model="name"
+                    type="text"
+                    label="Name"
+                    :prefix-icon="User"
+                    :error-text="errors.name"
+                    :disabled="true"
+                    readonly
+                    full-width
+                />
                 <ui-input
                     v-model="email"
                     type="email"
@@ -75,7 +84,7 @@ const handleDelete = () => {
                 />
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <ui-input
                     v-model="phone_number"
                     type="tel"
@@ -97,7 +106,7 @@ const handleDelete = () => {
                 />
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <ui-input
                     v-model="event_date"
                     type="text"
@@ -120,7 +129,7 @@ const handleDelete = () => {
                 />
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <ui-input
                     v-model="guest_count"
                     type="number"

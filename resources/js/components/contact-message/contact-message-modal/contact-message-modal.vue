@@ -130,12 +130,7 @@ const copyPhone = async () => {
                     <Mail class="mr-2 h-5 w-5 text-gray-500" />
                     <span>{{ message.email }}</span>
                 </div>
-                <ui-button
-                    :variant="emailCopied ? 'success' : 'secondary'"
-                    size="sm"
-                    :prefix-icon="emailCopied ? Check : Copy"
-                    @click="copyEmail"
-                >
+                <ui-button :variant="emailCopied ? 'success' : 'secondary'" size="sm" :prefix-icon="emailCopied ? Check : Copy" @click="copyEmail">
                     {{ emailCopied ? 'Copied!' : 'Copy Email' }}
                 </ui-button>
             </div>
@@ -145,12 +140,7 @@ const copyPhone = async () => {
                     <Phone class="mr-2 h-5 w-5 text-gray-500" />
                     <span>{{ message.phone_number }}</span>
                 </div>
-                <ui-button
-                    :variant="phoneCopied ? 'success' : 'secondary'"
-                    size="sm"
-                    :prefix-icon="phoneCopied ? Check : Copy"
-                    @click="copyPhone"
-                >
+                <ui-button :variant="phoneCopied ? 'success' : 'secondary'" size="sm" :prefix-icon="phoneCopied ? Check : Copy" @click="copyPhone">
                     {{ phoneCopied ? 'Copied!' : 'Copy Phone' }}
                 </ui-button>
             </div>
@@ -158,18 +148,10 @@ const copyPhone = async () => {
 
         <!-- Action Buttons -->
         <div class="flex justify-end space-x-3">
-            <ui-button
-                :variant="message.is_read ? 'primary' : 'secondary'"
-                @click="toggleReadStatus"
-            >
+            <ui-button :variant="message.is_read ? 'primary' : 'secondary'" @click="toggleReadStatus">
                 {{ message.is_read ? 'Mark as Unread' : 'Mark as Read' }}
             </ui-button>
-            <ui-button
-                variant="secondary"
-                @click="handleClose"
-            >
-                Close
-            </ui-button>
+            <ui-button variant="secondary" @click="handleClose"> Close </ui-button>
         </div>
     </ui-modal>
 </template>
