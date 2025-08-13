@@ -36,10 +36,13 @@ const handleSubmit = (testimonial: any) => {
 
 <template>
   <div>
-    <ui-button variant="primary" size="sm" @click="showModal = true">
-      <Plus class="w-4 h-4 mr-1" />
-      Add Testimonial
-    </ui-button>
+    <ui-button
+        label="Add Testimonial"
+        variant="primary"
+        size="sm"
+        :prefix-icon="Plus"
+        @click="showModal = true"
+    />
 
     <ui-modal
       :show="showModal"

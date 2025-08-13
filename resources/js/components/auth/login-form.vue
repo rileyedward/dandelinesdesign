@@ -56,9 +56,7 @@ const handleSubmit = () => {
                 <a href="#" class="text-sm text-purple-600 transition-colors hover:text-purple-500"> Forgot password? </a>
             </div>
 
-            <ui-button type="submit" variant="primary" size="lg" :loading="form.processing" :disabled="form.processing" full-width>
-                Sign in
-            </ui-button>
+            <ui-button label="Sign in" type="submit" variant="primary" size="lg" :loading="form.processing" :disabled="form.processing" full-width />
         </form>
 
         <div class="text-center">

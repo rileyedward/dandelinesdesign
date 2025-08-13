@@ -43,8 +43,7 @@ const handleCancel = () => {
 <template>
   <form @submit.prevent="handleSubmit" class="space-y-6">
     <div class="space-y-4">
-      <!-- Name Field -->
-      <UiInput
+      <ui-input
         v-model="name"
         type="text"
         label="Name"
@@ -56,8 +55,7 @@ const handleCancel = () => {
         full-width
       />
 
-      <!-- Title Field -->
-      <UiInput
+      <ui-input
         v-model="title"
         type="text"
         label="Title"
@@ -68,8 +66,7 @@ const handleCancel = () => {
         full-width
       />
 
-      <!-- Quote Field -->
-      <UiTextarea
+      <ui-textarea
         v-model="quote"
         label="Testimonial Quote"
         placeholder="Enter the testimonial quote"
@@ -80,13 +77,12 @@ const handleCancel = () => {
         rows="4"
       />
 
-      <!-- Rating Field -->
       <div class="space-y-2">
         <label class="block text-sm font-medium text-gray-700 flex items-center">
           <Star class="w-4 h-4 mr-1 text-yellow-500" />
           Rating (1-5)
         </label>
-        <UiSlider
+        <ui-slider
           v-model="rating"
           :min="1"
           :max="5"
@@ -97,9 +93,8 @@ const handleCancel = () => {
         <p v-if="errors.rating" class="mt-1 text-sm text-red-600">{{ errors.rating }}</p>
       </div>
 
-      <!-- Checkboxes -->
       <div class="flex flex-col space-y-3">
-        <UiCheckbox
+        <ui-checkbox
           v-model="is_featured"
           label="Featured Testimonial"
           description="Display this testimonial prominently on the website"
@@ -107,7 +102,7 @@ const handleCancel = () => {
           :disabled="processing"
         />
 
-        <UiCheckbox
+        <ui-checkbox
           v-model="is_active"
           label="Active Testimonial"
           description="Show this testimonial on the website"
@@ -117,24 +112,22 @@ const handleCancel = () => {
       </div>
     </div>
 
-    <!-- Form Actions -->
     <div class="flex justify-end space-x-3">
-      <UiButton
+      <ui-button
+        label="Cancel"
         type="button"
         variant="secondary"
         :disabled="processing"
         @click="handleCancel"
-      >
-        Cancel
-      </UiButton>
-      <UiButton
+      />
+      <ui-button
         type="submit"
         variant="primary"
         :loading="processing"
         :disabled="processing"
       >
         {{ isEditing ? 'Update' : 'Create' }} Testimonial
-      </UiButton>
+      </ui-button>
     </div>
   </form>
 </template>
