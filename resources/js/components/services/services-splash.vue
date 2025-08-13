@@ -12,8 +12,8 @@ import CommonBackground from '@/components/common/common-background/common-backg
             <hr class="mx-auto mb-3 w-16 border-t border-gray-300" />
 
             <p class="text-center text-sm text-gray-700">
-                From stunning floral arrangements to comprehensive event planning and creative design, we offer a range of services tailored to
-                bring your vision to life. Each service is crafted with attention to detail and a commitment personal and excellent service.
+                From stunning floral arrangements to comprehensive event planning and creative design, we offer a range of services tailored to bring
+                your vision to life. Each service is crafted with attention to detail and a commitment personal and excellent service.
             </p>
         </div>
     </common-background>

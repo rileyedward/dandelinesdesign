@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import CommonBackground from '@/components/common/common-background/common-background.vue';
 import NavbarLayout from '@/layouts/navbar/navbar-layout.vue';
-import { onMounted, ref } from 'vue';
 import { aboutCopy, profileImageUrl } from '@/pages/about/about-index.config';
+import { onMounted, ref } from 'vue';
 
 const isLoaded = ref<boolean>(false);
 
