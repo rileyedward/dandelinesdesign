@@ -55,7 +55,11 @@ defineProps<Props>();
                         </p>
                     </div>
 
-                    <a :href="route('contact.index')" class="flex gap-3" :class="{ 'justify-start': service.imageOnLeft, 'justify-end': !service.imageOnLeft }">
+                    <a
+                        :href="route('contact.index')"
+                        class="flex gap-3"
+                        :class="{ 'justify-start': service.imageOnLeft, 'justify-end': !service.imageOnLeft }"
+                    >
                         <div
                             class="inline-flex items-center rounded-full px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-lg"
                             :class="{
