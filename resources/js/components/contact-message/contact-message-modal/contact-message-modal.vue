@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import GenerateLeadButton from '@/components/lead/generate-lead-button/generate-lead-button.vue';
 import UiModal from '@/components/ui/feedback/modal/ui-modal.vue';
 import UiButton from '@/components/ui/forms/button/ui-button.vue';
 import type { ContactMessage } from '@/types/contact-message';
@@ -58,6 +59,23 @@ const copyToClipboard = async (text: string) => {
 
 const handleClose = () => {
     emit('update:show', false);
+};
+
+const generateContactMessageNotes = (contactMessage: ContactMessage): string => {
+    return `Generated from Contact Message:
+Subject: ${contactMessage.subject}
+Message: ${contactMessage.message}`;
+};
+
+const handleLeadGenerated = () => {
+    // The redirect will be handled by the backend
+    // We can close the modal
+    emit('update:show', false);
+};
+
+const handleError = (errors: Record<string, string>) => {
+    // Handle errors if needed
+    console.error('Error generating lead:', errors);
 };
 
 const emailCopied = ref(false);
@@ -144,6 +162,22 @@ const copyPhone = async () => {
                     {{ phoneCopied ? 'Copied!' : 'Copy Phone' }}
                 </ui-button>
             </div>
+        </div>
+
+        <!-- Lead Generation -->
+        <div class="mt-4 mb-6 border-t pt-4">
+            <h4 class="mb-2 text-sm font-medium text-gray-900">Lead Generation</h4>
+            <generate-lead-button
+                :name="message.name"
+                :email="message.email"
+                :phone_number="message.phone_number"
+                :company="message.business_name"
+                :source="'website'"
+                :notes="generateContactMessageNotes(message)"
+                variant="outline"
+                @lead-generated="handleLeadGenerated"
+                @error="handleError"
+            />
         </div>
 
         <!-- Action Buttons -->

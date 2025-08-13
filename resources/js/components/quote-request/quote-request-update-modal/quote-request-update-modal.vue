@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import GenerateLeadButton from '@/components/lead/generate-lead-button/generate-lead-button.vue';
 import QuoteRequestForm from '@/components/quote-request/quote-request-form/quote-request-form.vue';
 import UiModal from '@/components/ui/feedback/modal/ui-modal.vue';
 import type { QuoteRequest } from '@/types/quote-request';
@@ -13,6 +14,28 @@ const emit = defineEmits<{
     (e: 'update:show', value: boolean): void;
     (e: 'updated'): void;
 }>();
+
+const generateQuoteRequestNotes = (quoteRequest: QuoteRequest): string => {
+    return `Generated from Quote Request:
+Service: ${quoteRequest.service_type}
+Event Date: ${quoteRequest.event_date}
+Location: ${quoteRequest.event_location}
+Guest Count: ${quoteRequest.guest_count}
+Budget: ${quoteRequest.budget}
+Description: ${quoteRequest.description}
+${quoteRequest.notes ? `Notes: ${quoteRequest.notes}` : ''}`;
+};
+
+const handleLeadGenerated = () => {
+    // The redirect will be handled by the backend
+    // We can close the modal
+    emit('update:show', false);
+};
+
+const handleError = (errors: Record<string, string>) => {
+    // Handle errors if needed
+    console.error('Error generating lead:', errors);
+};
 
 const form = useForm({
     name: props.quoteRequest?.name || '',
@@ -72,5 +95,32 @@ const handleDelete = () => {
             @cancel="handleCancel"
             @delete="handleDelete"
         />
+
+        <template #footer>
+            <div class="flex justify-between">
+                <generate-lead-button
+                    :name="quoteRequest.name"
+                    :email="quoteRequest.email"
+                    :phone_number="quoteRequest.phone_number"
+                    :source="'website'"
+                    :notes="generateQuoteRequestNotes(quoteRequest)"
+                    @lead-generated="handleLeadGenerated"
+                    @error="handleError"
+                />
+
+                <div class="flex gap-2">
+                    <ui-button label="Cancel" type="button" variant="secondary" :disabled="form.processing" @click="handleCancel" />
+                    <ui-button
+                        type="submit"
+                        variant="primary"
+                        :loading="form.processing"
+                        :disabled="form.processing"
+                        @click="handleSubmit(quoteRequest)"
+                    >
+                        Update
+                    </ui-button>
+                </div>
+            </div>
+        </template>
     </ui-modal>
 </template>

@@ -1,10 +1,23 @@
 <script setup lang="ts">
+import NotificationDrawer from '@/components/notification/notification-drawer/notification-drawer.vue';
 import UiSidebar from '@/components/ui/navigation/sidebar/ui-sidebar.vue';
-import { ref } from 'vue';
+import { useSidebarState } from '@/composables/useSidebarState';
+import { ref, watch } from 'vue';
 import defaultConfig from './sidebar-layout.config';
 
 const activeRoute = ref('');
-const isSidebarOpen = ref(true);
+const showNotificationDrawer = ref(false);
+const { isOpen: isSidebarOpen } = useSidebarState();
+
+watch(activeRoute, (newRoute) => {
+    if (newRoute === '#notifications') {
+        showNotificationDrawer.value = true;
+        // Reset the active route to prevent the sidebar from highlighting the notifications item
+        setTimeout(() => {
+            activeRoute.value = '';
+        }, 100);
+    }
+});
 </script>
 
 <template>
@@ -24,6 +37,11 @@ const isSidebarOpen = ref(true);
                 </div>
             </main>
         </div>
+
+        <notification-drawer
+            :show="showNotificationDrawer"
+            @update:show="showNotificationDrawer = $event"
+        />
     </div>
 </template>
 

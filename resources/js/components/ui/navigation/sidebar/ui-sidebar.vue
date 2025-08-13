@@ -1,10 +1,11 @@
 <script setup lang="ts">
-import { ref, computed, watch, onMounted, reactive } from 'vue';
-import { usePage } from '@inertiajs/vue3';
+import { ref, computed, watch, onMounted } from 'vue';
+import { usePage, router } from '@inertiajs/vue3';
 import { ChevronDown, ChevronUp, ChevronRight, Menu as MenuIcon, User } from 'lucide-vue-next';
 import type { UiSidebarProps as Props, UiSidebarEmits as Emits, SidebarItem } from './ui-sidebar';
 import UiDropdownMenu from '@/components/ui/data/dropdown-menu/ui-dropdown-menu.vue';
 import type { DropdownMenuItem } from '@/components/ui/data/dropdown-menu/ui-dropdown-menu';
+import { useSidebarState } from '@/composables/useSidebarState';
 
 const props = withDefaults(defineProps<Props>(), {
   title: 'Navigation',
@@ -16,10 +17,25 @@ const props = withDefaults(defineProps<Props>(), {
 
 const emit = defineEmits<Emits>();
 
-const isOpen = ref(props.defaultOpen);
+const {
+  isOpen,
+  expandedItems,
+  isMobileMenuOpen,
+  toggleSidebar,
+  toggleMenuItem,
+  toggleMobileMenu,
+  closeMobileMenu
+} = useSidebarState();
+
+if (isOpen.value !== props.defaultOpen) {
+  isOpen.value = props.defaultOpen;
+}
+
 const activeRouteValue = ref(props.activeRoute);
-const isMobileMenuOpen = ref(false);
-const expandedItems = reactive<Record<string, boolean>>({});
+
+router.on('start', () => {
+  closeMobileMenu();
+});
 
 const page = usePage();
 
@@ -49,18 +65,10 @@ onMounted(() => {
   activeRouteValue.value = currentPath.value;
 });
 
-const toggleSidebar = (): void => {
+const toggleSidebarWrapper = (): void => {
   if (props.collapsible) {
-    isOpen.value = !isOpen.value;
+    toggleSidebar();
   }
-};
-
-const toggleMobileMenu = (): void => {
-  isMobileMenuOpen.value = !isMobileMenuOpen.value;
-};
-
-const toggleItemExpansion = (itemLabel: string): void => {
-  expandedItems[itemLabel] = !expandedItems[itemLabel];
 };
 
 const handleNavigate = (item: SidebarItem): void => {
@@ -73,7 +81,7 @@ const handleNavigate = (item: SidebarItem): void => {
       window.location.href = item.route;
     }
 
-    isMobileMenuOpen.value = false;
+    closeMobileMenu();
   }
 };
 
@@ -105,14 +113,14 @@ const sidebarClasses = computed(() => {
     </div>
 
     <div v-if="isMobileMenuOpen" class="md:hidden fixed inset-0 z-40 flex">
-      <div class="fixed inset-0 bg-gray-600 bg-opacity-75" @click="isMobileMenuOpen = false"></div>
+      <div class="fixed inset-0 bg-gray-600 bg-opacity-75" @click="closeMobileMenu"></div>
 
       <div class="relative flex-1 flex flex-col max-w-xs w-full bg-white">
         <div class="px-4 pt-5 pb-4 flex items-center justify-between">
           <h2 class="text-lg font-medium text-gray-900">{{ title }}</h2>
           <button
             class="ml-1 flex items-center justify-center h-10 w-10 rounded-full focus:outline-none focus:ring-2 focus:ring-inset focus:ring-purple-500"
-            @click="isMobileMenuOpen = false"
+            @click="closeMobileMenu"
           >
             <span class="sr-only">Close sidebar</span>
             <svg
@@ -147,7 +155,7 @@ const sidebarClasses = computed(() => {
                   ]"
                   @click.prevent="
                     item.children && item.children.length > 0
-                      ? toggleItemExpansion(item.label)
+                      ? toggleMenuItem(item.label)
                       : !item.disabled && handleNavigate(item)
                   "
                 >
@@ -225,7 +233,7 @@ const sidebarClasses = computed(() => {
           <h2 v-if="isOpen" class="text-lg font-medium text-gray-900">{{ title }}</h2>
           <button
             class="p-2 rounded-md text-gray-500 hover:text-gray-600 hover:bg-gray-100"
-            @click="toggleSidebar"
+            @click="toggleSidebarWrapper"
           >
             <component :is="isOpen ? ChevronUp : ChevronDown" class="w-5 h-5" />
           </button>
@@ -245,7 +253,7 @@ const sidebarClasses = computed(() => {
                   ]"
                   @click.prevent="
                     item.children && item.children.length > 0
-                      ? toggleItemExpansion(item.label)
+                      ? toggleMenuItem(item.label)
                       : !item.disabled && handleNavigate(item)
                   "
                 >

@@ -10,6 +10,8 @@ use App\Contracts\ContactMessageRepositoryInterface;
 use App\Contracts\ContactMessageServiceInterface;
 use App\Contracts\LeadRepositoryInterface;
 use App\Contracts\LeadServiceInterface;
+use App\Contracts\NotificationRepositoryInterface;
+use App\Contracts\NotificationServiceInterface;
 use App\Contracts\ProductRepositoryInterface;
 use App\Contracts\ProductServiceInterface;
 use App\Contracts\QuoteRequestRepositoryInterface;
@@ -20,6 +22,7 @@ use App\Repositories\BlogPostRepository;
 use App\Repositories\CategoryRepository;
 use App\Repositories\ContactMessageRepository;
 use App\Repositories\LeadRepository;
+use App\Repositories\NotificationRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\QuoteRequestRepository;
 use App\Repositories\TestimonialRepository;
@@ -27,6 +30,7 @@ use App\Services\BlogPostService;
 use App\Services\CategoryService;
 use App\Services\ContactMessageService;
 use App\Services\LeadService;
+use App\Services\NotificationService;
 use App\Services\ProductService;
 use App\Services\QuoteRequestService;
 use App\Services\TestimonialService;
@@ -63,10 +67,17 @@ class AppServiceProvider extends ServiceProvider
         // Products
         $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
         $this->app->bind(ProductServiceInterface::class, ProductService::class);
+
+        // Notifications
+        $this->app->bind(NotificationRepositoryInterface::class, NotificationRepository::class);
+        $this->app->bind(NotificationServiceInterface::class, NotificationService::class);
     }
 
     public function boot(): void
     {
-        //
+        // Register model observers
+        \App\Models\ContactMessage::observe(\App\Observers\ContactMessageObserver::class);
+        \App\Models\QuoteRequest::observe(\App\Observers\QuoteRequestObserver::class);
+        \App\Models\Lead::observe(\App\Observers\LeadObserver::class);
     }
 }
