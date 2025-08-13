@@ -28,7 +28,7 @@ class ProductController extends BaseController
     public function show(Request $request, int $id): Response
     {
         $product = Product::findOrFail($id);
-        
+
         return inertia('admin/products/products-show', [
             'product' => $product,
         ]);

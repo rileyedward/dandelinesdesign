@@ -23,7 +23,7 @@ class ContactMessageController extends BaseController
 
         return inertia('admin/contact-messages/contact-messages-index', [
             'unreadMessages' => $unreadMessages,
-            'readMessages' => $readMessages
+            'readMessages' => $readMessages,
         ]);
     }
 }

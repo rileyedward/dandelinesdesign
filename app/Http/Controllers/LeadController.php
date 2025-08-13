@@ -28,7 +28,7 @@ class LeadController extends BaseController
     public function show(Request $request, int $id): Response
     {
         $lead = Lead::findOrFail($id);
-        
+
         return inertia('admin/leads/leads-show', [
             'lead' => $lead,
         ]);

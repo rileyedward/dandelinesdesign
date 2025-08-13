@@ -28,7 +28,7 @@ class CategoryController extends BaseController
     public function show(Request $request, int $id): Response
     {
         $category = Category::findOrFail($id);
-        
+
         return inertia('admin/categories/categories-show', [
             'category' => $category,
         ]);

@@ -28,7 +28,7 @@ class BlogPostController extends BaseController
     public function show(Request $request, int $id): Response
     {
         $blogPost = BlogPost::findOrFail($id);
-        
+
         return inertia('admin/blog-posts/blog-posts-show', [
             'blogPost' => $blogPost,
         ]);

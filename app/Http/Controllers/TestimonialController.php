@@ -21,7 +21,7 @@ class TestimonialController extends BaseController
         $testimonials = Testimonial::query()->get();
 
         return inertia('admin/testimonials/testimonials-index', [
-            'testimonials' => $testimonials
+            'testimonials' => $testimonials,
         ]);
     }
 }
