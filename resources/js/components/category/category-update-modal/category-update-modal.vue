@@ -40,6 +40,17 @@ const handleSubmit = (category: any) => {
 const handleCancel = () => {
     emit('update:show', false);
 };
+
+const handleDelete = () => {
+    if (confirm('Are you sure you want to delete this category? This action cannot be undone.')) {
+        form.delete(route('admin.categories.destroy', props.category.id), {
+            onSuccess: () => {
+                emit('update:show', false);
+                emit('updated');
+            },
+        });
+    }
+};
 </script>
 
 <template>
@@ -50,6 +61,6 @@ const handleCancel = () => {
         size="lg"
         @update:show="(value) => emit('update:show', value)"
     >
-        <category-form :category="category" :processing="form.processing" :errors="form.errors" @submit="handleSubmit" @cancel="handleCancel" />
+        <category-form :category="category" :processing="form.processing" :errors="form.errors" @submit="handleSubmit" @cancel="handleCancel" @delete="handleDelete" />
     </ui-modal>
 </template>

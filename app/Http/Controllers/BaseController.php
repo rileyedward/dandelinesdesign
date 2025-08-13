@@ -65,7 +65,10 @@ class BaseController extends Controller
 
         // TODO: Uncomment once authorization policy structure is setup...
         // $this->authorize('destroy', $model);
-        return $this->service->delete($model);
+
+        $this->service->delete($model);
+
+        return back();
     }
 
     protected function filterInputData(array $input): array

@@ -9,4 +9,5 @@ export interface CategoryFormProps {
 export interface CategoryFormEmits {
     (event: 'submit', category: Partial<Category>): void;
     (event: 'cancel'): void;
+    (event: 'delete'): void;
 }

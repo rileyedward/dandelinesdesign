@@ -9,4 +9,5 @@ export interface TestimonialFormProps {
 export interface TestimonialFormEmits {
     (event: 'submit', testimonial: Partial<Testimonial>): void;
     (event: 'cancel'): void;
+    (event: 'delete'): void;
 }

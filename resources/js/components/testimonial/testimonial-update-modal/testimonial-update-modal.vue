@@ -42,6 +42,17 @@ const handleSubmit = (testimonial: any) => {
 const handleCancel = () => {
     emit('update:show', false);
 };
+
+const handleDelete = () => {
+    if (confirm('Are you sure you want to delete this testimonial? This action cannot be undone.')) {
+        form.delete(route('admin.testimonials.destroy', props.testimonial.id), {
+            onSuccess: () => {
+                emit('update:show', false);
+                emit('updated');
+            },
+        });
+    }
+};
 </script>
 
 <template>
@@ -58,6 +69,7 @@ const handleCancel = () => {
             :errors="form.errors"
             @submit="handleSubmit"
             @cancel="handleCancel"
+            @delete="handleDelete"
         />
     </ui-modal>
 </template>
