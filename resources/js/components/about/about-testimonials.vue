@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { onBeforeUnmount, onMounted, ref } from 'vue';
 import { Testimonial } from '@/types/testimonial';
+import { onBeforeUnmount, onMounted, ref } from 'vue';
 
 interface Props {
     testimonials: Testimonial[];
