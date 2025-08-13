@@ -1,7 +1,7 @@
 import type { DropdownMenuItem } from '@/components/ui/data/dropdown-menu/ui-dropdown-menu';
 import type { SidebarItem } from '@/components/ui/navigation/sidebar/ui-sidebar';
 import { router } from '@inertiajs/vue3';
-import { Bell, FileText, Home, LogOut, Mail, MessageSquare, Package, Settings, ShoppingBag, Star, Tag, UserCheck, Users } from 'lucide-vue-next';
+import { Bell, FileText, Home, LogOut, Mail, MessageSquare, Package, ShoppingBag, Star, Tag, UserCheck, Users } from 'lucide-vue-next';
 
 export interface SidebarLayoutConfig {
     title: string;

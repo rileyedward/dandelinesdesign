@@ -2,7 +2,7 @@
 import UiButton from '@/components/ui/forms/button/ui-button.vue';
 import UiCheckbox from '@/components/ui/forms/checkbox/ui-checkbox.vue';
 import UiInput from '@/components/ui/forms/input/ui-input.vue';
-import { Link, useForm } from '@inertiajs/vue3';
+import { useForm } from '@inertiajs/vue3';
 import { Lock, Mail } from 'lucide-vue-next';
 
 const form = useForm({
