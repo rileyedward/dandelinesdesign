@@ -67,7 +67,7 @@ const handleDelete = () => {
         <div class="space-y-6">
             <!-- Contact Information -->
             <div>
-                <h3 class="text-sm font-medium text-gray-900 mb-4 uppercase tracking-wide">Contact Information</h3>
+                <h3 class="mb-4 text-sm font-medium tracking-wide text-gray-900 uppercase">Contact Information</h3>
                 <div class="space-y-4">
                     <ui-input
                         v-model="name"
@@ -120,7 +120,7 @@ const handleDelete = () => {
 
             <!-- Lead Details -->
             <div>
-                <h3 class="text-sm font-medium text-gray-900 mb-4 uppercase tracking-wide">Lead Details</h3>
+                <h3 class="mb-4 text-sm font-medium tracking-wide text-gray-900 uppercase">Lead Details</h3>
                 <div class="space-y-4">
                     <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                         <ui-select
@@ -148,7 +148,7 @@ const handleDelete = () => {
 
             <!-- Notes -->
             <div>
-                <h3 class="text-sm font-medium text-gray-900 mb-4 uppercase tracking-wide">Notes</h3>
+                <h3 class="mb-4 text-sm font-medium tracking-wide text-gray-900 uppercase">Notes</h3>
                 <ui-textarea
                     v-model="notes"
                     label="Notes"

@@ -50,18 +50,8 @@ const handleCancel = () => {
     <div>
         <ui-button label="Add Lead" variant="primary" size="sm" :prefix-icon="Plus" @click="showDrawer = true" />
 
-        <ui-drawer
-            v-model:show="showDrawer"
-            title="Create New Lead"
-            description="Add a new lead to your CRM system"
-            width="500px"
-        >
-            <lead-form 
-                :processing="form.processing" 
-                :errors="form.errors" 
-                @submit="handleSubmit" 
-                @cancel="handleCancel" 
-            />
+        <ui-drawer v-model:show="showDrawer" title="Create New Lead" description="Add a new lead to your CRM system" width="500px">
+            <lead-form :processing="form.processing" :errors="form.errors" @submit="handleSubmit" @cancel="handleCancel" />
         </ui-drawer>
     </div>
 </template>

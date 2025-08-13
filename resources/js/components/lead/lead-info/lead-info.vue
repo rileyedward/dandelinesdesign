@@ -66,11 +66,9 @@ const formatStatus = (status: string) => {
         <div class="border-b border-gray-200 p-6">
             <div class="flex items-start justify-between">
                 <div class="flex-1">
-                    <div class="flex items-center gap-3 mb-2">
+                    <div class="mb-2 flex items-center gap-3">
                         <h2 class="text-xl font-semibold text-gray-900">{{ lead.name }}</h2>
-                        <div
-                            :class="['rounded-full px-3 py-1 text-xs font-medium', getStatusColor(lead.status)]"
-                        >
+                        <div :class="['rounded-full px-3 py-1 text-xs font-medium', getStatusColor(lead.status)]">
                             {{ formatStatus(lead.status) }}
                         </div>
                     </div>
@@ -92,8 +90,8 @@ const formatStatus = (status: string) => {
 
         <!-- Contact Information -->
         <div class="p-6">
-            <h3 class="mb-4 text-sm font-medium text-gray-900 uppercase tracking-wide">Contact Information</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <h3 class="mb-4 text-sm font-medium tracking-wide text-gray-900 uppercase">Contact Information</h3>
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div class="flex items-center">
                     <Mail class="mr-3 h-4 w-4 text-gray-400" />
                     <div>
@@ -113,8 +111,8 @@ const formatStatus = (status: string) => {
 
         <!-- Lead Details -->
         <div v-if="lead.source" class="border-t border-gray-200 p-6">
-            <h3 class="mb-4 text-sm font-medium text-gray-900 uppercase tracking-wide">Lead Details</h3>
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <h3 class="mb-4 text-sm font-medium tracking-wide text-gray-900 uppercase">Lead Details</h3>
+            <div class="grid grid-cols-1 gap-4 md:grid-cols-2">
                 <div class="flex items-center">
                     <User class="mr-3 h-4 w-4 text-gray-400" />
                     <div>
@@ -134,18 +132,13 @@ const formatStatus = (status: string) => {
 
         <!-- Notes Section -->
         <div v-if="lead.notes" class="border-t border-gray-200 p-6">
-            <h3 class="mb-3 text-sm font-medium text-gray-900 uppercase tracking-wide">Notes</h3>
+            <h3 class="mb-3 text-sm font-medium tracking-wide text-gray-900 uppercase">Notes</h3>
             <div class="rounded-lg bg-gray-50 p-4">
-                <p class="text-sm text-gray-700 whitespace-pre-wrap">{{ lead.notes }}</p>
+                <p class="text-sm whitespace-pre-wrap text-gray-700">{{ lead.notes }}</p>
             </div>
         </div>
 
         <!-- Update Drawer -->
-        <lead-update-drawer
-            :show="showUpdateDrawer"
-            :lead="lead"
-            @update:show="showUpdateDrawer = $event"
-            @updated="handleLeadUpdated"
-        />
+        <lead-update-drawer :show="showUpdateDrawer" :lead="lead" @update:show="showUpdateDrawer = $event" @updated="handleLeadUpdated" />
     </div>
 </template>
