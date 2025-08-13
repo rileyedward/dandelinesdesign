@@ -20,6 +20,7 @@ return new class extends Migration
             $table->decimal('budget', 10, 2)->nullable();
             $table->text('description');
             $table->enum('status', ['pending', 'contacted', 'quoted', 'completed', 'cancelled'])->default('pending');
+            $table->text('notes')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

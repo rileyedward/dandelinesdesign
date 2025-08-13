@@ -10,6 +10,7 @@ export interface QuoteRequest {
     budget?: number;
     description: string;
     status: 'pending' | 'contacted' | 'quoted' | 'completed' | 'cancelled';
+    notes?: string;
     created_at: string;
     updated_at: string;
     deleted_at?: string;

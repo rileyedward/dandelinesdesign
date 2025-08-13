@@ -20,6 +20,7 @@ class QuoteRequestRequest extends FormRequest
             'budget' => ['nullable', 'numeric', 'min:0'],
             'description' => ['required', 'string'],
             'status' => ['nullable', Rule::in(['pending', 'contacted', 'quoted', 'completed', 'cancelled'])],
+            'notes' => ['nullable', 'string'],
         ];
     }
 }

@@ -23,6 +23,7 @@ class QuoteRequest extends Model
         'budget',
         'description',
         'status',
+        'notes',
     ];
 
     protected $casts = [
