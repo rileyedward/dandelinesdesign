@@ -22,5 +22,9 @@ const props = withDefaults(defineProps<Props>(), {
         <slot />
     </main>
 
-    <ui-footer :contact-info="defaultConfig.contactInfo" :navigation-links="defaultConfig.navigationLinks" :social-links="defaultConfig.socialLinks" />
+    <ui-footer
+        :contact-info="defaultConfig.contactInfo"
+        :navigation-links="defaultConfig.navigationLinks"
+        :social-links="defaultConfig.socialLinks"
+    />
 </template>
