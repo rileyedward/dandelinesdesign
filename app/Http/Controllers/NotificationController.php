@@ -11,7 +11,9 @@ use Illuminate\Http\Request;
 class NotificationController extends BaseController
 {
     protected string $modelClass = Notification::class;
+
     protected $serviceInterface = NotificationServiceInterface::class;
+
     protected ?string $requestClass = NotificationRequest::class;
 
     public function getUnread(Request $request): JsonResponse

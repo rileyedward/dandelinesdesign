@@ -2,8 +2,8 @@
 
 namespace App\Observers;
 
-use App\Models\QuoteRequest;
 use App\Models\Notification;
+use App\Models\QuoteRequest;
 
 class QuoteRequestObserver
 {

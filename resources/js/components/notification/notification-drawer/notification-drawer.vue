@@ -40,13 +40,13 @@ const handleMarkAllAsRead = () => {
         width="450px"
         @update:show="(value) => emit('update:show', value)"
     >
-        <div class="space-y-4 h-full flex flex-col">
+        <div class="flex h-full flex-col space-y-4">
             <div v-if="notifications.length > 0" class="flex items-center justify-between border-b border-gray-200 pb-3">
                 <p class="text-sm font-medium text-gray-900">{{ unreadCount }} unread notification{{ unreadCount !== 1 ? 's' : '' }}</p>
                 <UiButton v-if="unreadCount > 0" variant="outline" size="sm" @click="handleMarkAllAsRead"> Mark all read </UiButton>
             </div>
 
-            <div v-if="isLoading" class="flex-grow flex items-center justify-center py-12">
+            <div v-if="isLoading" class="flex flex-grow items-center justify-center py-12">
                 <div class="text-center">
                     <div class="mx-auto mb-4 h-8 w-8 animate-spin rounded-full border-b-2 border-blue-600"></div>
                     <p class="text-gray-500">Loading notifications...</p>

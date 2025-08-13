@@ -38,10 +38,7 @@ watch(activeRoute, (newRoute) => {
             </main>
         </div>
 
-        <notification-drawer
-            :show="showNotificationDrawer"
-            @update:show="showNotificationDrawer = $event"
-        />
+        <notification-drawer :show="showNotificationDrawer" @update:show="showNotificationDrawer = $event" />
     </div>
 </template>
 
