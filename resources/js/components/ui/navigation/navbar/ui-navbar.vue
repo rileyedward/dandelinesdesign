@@ -103,7 +103,7 @@ onUnmounted(() => {
                 <div class="absolute top-8 left-4">
                     <button
                         type="button"
-                        class="rounded-full p-2 text-gray-700 transition-all duration-300 hover:bg-emerald-50 hover:text-emerald-600"
+                        class="rounded-full p-2 text-gray-700 transition-all duration-300 hover:bg-gray-100 hover:text-black"
                         @click="toggleMobileMenu"
                     >
                         <Menu v-if="!isMobileMenuOpen" class="h-6 w-6" />
@@ -118,7 +118,7 @@ onUnmounted(() => {
                             alt="Dandelines Design Logo"
                             class="h-10 w-auto drop-shadow-sm transition-all duration-300 group-hover:drop-shadow-md"
                         />
-                        <span class="text-sm font-bold text-gray-900 transition-all duration-300 group-hover:text-emerald-600">
+                        <span class="text-sm font-bold text-gray-900 transition-all duration-300 group-hover:text-black">
                             Dandelines Design
                         </span>
                     </a>
@@ -136,8 +136,8 @@ onUnmounted(() => {
                     v-for="link in [...leftNavLinks, ...rightNavLinks]"
                     :key="link.name"
                     :href="link.href"
-                    class="block py-3 px-4 rounded-lg transition-all duration-300 hover:bg-emerald-50"
-                    :class="isActive(link.href) ? 'bg-emerald-50 text-emerald-600 font-medium' : 'text-gray-700 hover:text-emerald-600'"
+                    class="block py-3 px-4 rounded-lg transition-all duration-300 hover:bg-gray-100"
+                    :class="isActive(link.href) ? 'bg-gray-100 text-black font-medium' : 'text-gray-700 hover:text-black'"
                     @click="isMobileMenuOpen = false"
                 >
                     {{ link.name }}

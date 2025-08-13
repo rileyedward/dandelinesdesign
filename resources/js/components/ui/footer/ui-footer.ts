@@ -28,6 +28,4 @@ export interface UiFooterProps {
     socialLinks: FooterSocialLink[];
 }
 
-export interface UiFooterEmits {
-    (event: 'admin-login-click'): void;
-}
+export interface UiFooterEmits {}
