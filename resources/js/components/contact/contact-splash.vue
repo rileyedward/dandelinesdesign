@@ -23,7 +23,9 @@ const scrollToContactForm = () => {
         :overlay-opacity="0.3"
         overlay-color="rgba(6, 78, 59, 0.4)"
     >
-        <div class="social-links-card max-w-xs rounded-2xl border border-white/20 bg-white/95 p-8 shadow-2xl backdrop-blur-sm transition-all duration-500 hover:shadow-emerald-100/30">
+        <div
+            class="social-links-card max-w-xs rounded-2xl border border-white/20 bg-white/95 p-8 shadow-2xl backdrop-blur-sm transition-all duration-500 hover:shadow-emerald-100/30"
+        >
             <div class="mb-4 text-center">
                 <div class="mx-auto mb-3 h-1 w-16 rounded-full bg-gradient-to-r from-emerald-400 to-teal-500"></div>
                 <h3 class="text-2xl font-bold text-gray-900">Connect with me!</h3>

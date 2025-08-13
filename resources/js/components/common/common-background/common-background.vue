@@ -74,14 +74,11 @@ onUnmounted(() => {
 <template>
     <div
         ref="backgroundRef"
-        class="relative w-full bg-cover bg-center bg-no-repeat object-cover object-center overflow-hidden"
+        class="relative w-full overflow-hidden bg-cover bg-center bg-no-repeat object-cover object-center"
         :style="backgroundStyle"
     >
         <!-- Overlay -->
-        <div
-            class="absolute inset-0 transition-opacity duration-700"
-            :style="overlayStyle"
-        />
+        <div class="absolute inset-0 transition-opacity duration-700" :style="overlayStyle" />
 
         <!-- Content -->
         <div class="relative z-10 container mx-auto h-full px-4">
