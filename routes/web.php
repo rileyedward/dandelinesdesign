@@ -1,7 +1,7 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AboutController;
+use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
     return inertia('home/home-index');
