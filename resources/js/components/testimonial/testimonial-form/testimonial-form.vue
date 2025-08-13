@@ -74,7 +74,7 @@ const handleCancel = () => {
                 :disabled="processing"
                 required
                 full-width
-                rows="4"
+                :rows="4"
             />
 
             <div class="space-y-2">
