@@ -30,13 +30,3 @@ onMounted(() => {
         <about-testimonials v-if="testimonials.length" :testimonials="testimonials" />
     </navbar-layout>
 </template>
-
-<style scoped>
-.about-widget-card {
-    position: absolute;
-    top: 50%;
-    left: 10%;
-    transform: translateY(-50%);
-    z-index: 20;
-}
-</style>

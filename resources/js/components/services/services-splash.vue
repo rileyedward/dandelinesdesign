@@ -4,17 +4,24 @@ import CommonBackground from '@/components/common/common-background/common-backg
 
 <template>
     <common-background image-url="/images/background/services-bg.jpg">
-        <div class="services-widget-card max-w-sm rounded-lg bg-white p-6 shadow-md">
-            <h3 class="mb-2 text-center text-xl font-semibold">Our Services</h3>
+        <div class="services-widget-card max-w-sm rounded-2xl border border-white/20 bg-white/95 p-8 shadow-2xl backdrop-blur-sm">
+            <div class="mb-4 text-center">
+                <div class="mx-auto mb-3 h-1 w-16 rounded-full bg-gradient-to-r from-amber-400 to-orange-500"></div>
+                <h3 class="text-2xl font-bold text-gray-900">Our Services</h3>
+            </div>
 
-            <p class="mb-3 text-center text-sm text-gray-600 italic">Exceptional Design & Event Solutions</p>
+            <p class="mb-4 text-center text-sm font-medium tracking-wider text-amber-600 uppercase">Exceptional Design & Event Solutions</p>
 
-            <hr class="mx-auto mb-3 w-16 border-t border-gray-300" />
-
-            <p class="text-center text-sm text-gray-700">
+            <p class="text-center text-sm leading-relaxed text-gray-700">
                 From stunning floral arrangements to comprehensive event planning and creative design, we offer a range of services tailored to bring
-                your vision to life. Each service is crafted with attention to detail and a commitment personal and excellent service.
+                your vision to life. Each service is crafted with attention to detail and a commitment to personal and excellent service.
             </p>
+
+            <div class="mt-6 flex justify-center space-x-2">
+                <div class="h-2 w-2 animate-pulse rounded-full bg-amber-400"></div>
+                <div class="h-2 w-2 animate-pulse rounded-full bg-orange-400" style="animation-delay: 0.2s"></div>
+                <div class="h-2 w-2 animate-pulse rounded-full bg-yellow-400" style="animation-delay: 0.4s"></div>
+            </div>
         </div>
     </common-background>
 </template>
