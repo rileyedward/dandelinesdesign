@@ -1,7 +1,7 @@
 <script setup lang="ts">
+import CommonBackground from '@/components/common/common-background/common-background.vue';
 import NavbarLayout from '@/layouts/navbar/navbar-layout.vue';
 import { onMounted, ref } from 'vue';
-import CommonBackground from '@/components/common/common-background/common-background.vue';
 
 const isLoaded = ref<boolean>(false);
 
@@ -23,8 +23,8 @@ onMounted(() => {
                 <hr class="mx-auto mb-3 w-16 border-t border-gray-300" />
 
                 <p class="text-center text-sm text-gray-700">
-                    At Dandelines Designs, we believe in creating beautiful events that bring your vision to life. We specialiaze in custom design, and the
-                    fine details that make your moment special.
+                    At Dandelines Designs, we believe in creating beautiful events that bring your vision to life. We specialiaze in custom design,
+                    and the fine details that make your moment special.
                 </p>
             </div>
         </common-background>

@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import NavbarLayout from '@/layouts/navbar/navbar-layout.vue';
 import CommonBackground from '@/components/common/common-background/common-background.vue';
+import NavbarLayout from '@/layouts/navbar/navbar-layout.vue';
 import { socialLinks } from '@/pages/contact/contact-index.config';
 
 const scrollToContactForm = () => {
@@ -24,8 +24,8 @@ const scrollToContactForm = () => {
                 <h3 class="mb-4 text-center text-xl font-semibold">Connect with me!</h3>
 
                 <p class="mb-4 text-center text-sm text-gray-600">
-                    I'd love to hear from you! Whether you have a question about my services, want to discuss your vision, or simply want to say hello, reach
-                    out through any of these platforms. Your creative journey is just a message away!
+                    I'd love to hear from you! Whether you have a question about my services, want to discuss your vision, or simply want to say
+                    hello, reach out through any of these platforms. Your creative journey is just a message away!
                 </p>
 
                 <div class="mb-4 flex flex-wrap justify-center gap-4">

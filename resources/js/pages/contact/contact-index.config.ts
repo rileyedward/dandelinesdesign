@@ -1,5 +1,5 @@
-import { FacebookIcon, InstagramIcon, MailIcon, MessageCircleIcon } from 'lucide-vue-next';
 import type { LucideIcon } from 'lucide-vue-next';
+import { FacebookIcon, InstagramIcon, MailIcon, MessageCircleIcon } from 'lucide-vue-next';
 
 interface SocialLink {
     name: string;
