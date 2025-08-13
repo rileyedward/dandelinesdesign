@@ -4,6 +4,7 @@ import { onMounted, ref } from 'vue';
 import { Testimonial } from '@/types/testimonial';
 import AboutSplash from '@/components/about/about-splash.vue';
 import AboutMe from '@/components/about/about-me.vue';
+import AboutTestimonials from '@/components/about/about-testimonials.vue';
 
 interface Props {
     testimonials: Testimonial[];
@@ -25,6 +26,8 @@ onMounted(() => {
         <about-splash />
 
         <about-me />
+
+        <about-testimonials v-if="testimonials.length" :testimonials="testimonials" />
     </navbar-layout>
 </template>
 
