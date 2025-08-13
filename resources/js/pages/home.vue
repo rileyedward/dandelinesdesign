@@ -20,19 +20,10 @@ onMounted(() => {
                     enter-from-class="opacity-0"
                     enter-to-class="opacity-100"
                 >
-                    <img
-                        v-if="isLoaded"
-                        src="/images/app-logo.png"
-                        alt="Dandelines Design Logo"
-                        class="mx-auto mb-8 h-40 w-auto"
-                    />
+                    <img v-if="isLoaded" src="/images/app-logo.png" alt="Dandelines Design Logo" class="mx-auto mb-8 h-40 w-auto" />
                 </transition>
 
-                <transition
-                    enter-active-class="transition duration-2000 ease-out"
-                    enter-from-class="opacity-0"
-                    enter-to-class="opacity-100"
-                >
+                <transition enter-active-class="transition duration-2000 ease-out" enter-from-class="opacity-0" enter-to-class="opacity-100">
                     <h1 v-if="isLoaded" class="mb-4 text-5xl font-bold text-gray-900">Dandelines Design</h1>
                 </transition>
 
