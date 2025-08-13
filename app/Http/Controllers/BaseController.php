@@ -54,7 +54,7 @@ class BaseController extends Controller
 
         $updateData = $this->filterInputData($validatedData);
 
-        $this->service->update($model, $updateData);
+        $this->service->update($updateData, $model);
 
         return back();
     }

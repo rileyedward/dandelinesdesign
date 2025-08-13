@@ -1,8 +1,14 @@
 <script setup lang="ts">
+import { ref } from 'vue';
 import { Star, Calendar } from 'lucide-vue-next';
 import type { TestimonialListProps as Props } from './testimonial-list';
+import TestimonialUpdateModal from '@/components/testimonial/testimonial-update-modal/testimonial-update-modal.vue';
+import type { Testimonial } from '@/types/testimonial';
 
 defineProps<Props>();
+
+const showUpdateModal = ref(false);
+const selectedTestimonial = ref<Testimonial | null>(null);
 
 const formatDate = (dateString: string) => {
   return new Date(dateString).toLocaleDateString('en-US', {
@@ -10,6 +16,15 @@ const formatDate = (dateString: string) => {
     month: 'short',
     day: 'numeric',
   });
+};
+
+const handleTestimonialClick = (testimonial: Testimonial) => {
+  selectedTestimonial.value = testimonial;
+  showUpdateModal.value = true;
+};
+
+const handleTestimonialUpdated = () => {
+  window.location.reload();
 };
 </script>
 
@@ -27,7 +42,8 @@ const formatDate = (dateString: string) => {
       <div
         v-for="testimonial in testimonials"
         :key="testimonial.id"
-        class="bg-white rounded-lg shadow-md p-6 border border-gray-200 transition-all duration-300 hover:shadow-lg hover:scale-105 hover:border-blue-300"
+        class="bg-white rounded-lg shadow-md p-6 border border-gray-200 transition-all duration-300 hover:shadow-lg hover:scale-105 hover:border-blue-300 cursor-pointer"
+        @click="handleTestimonialClick(testimonial)"
       >
         <div class="flex justify-between items-start mb-4">
           <div>
@@ -62,5 +78,12 @@ const formatDate = (dateString: string) => {
         </div>
       </div>
     </div>
+
+    <testimonial-update-modal
+      v-if="selectedTestimonial"
+      v-model:show="showUpdateModal"
+      :testimonial="selectedTestimonial"
+      @updated="handleTestimonialUpdated"
+    />
   </div>
 </template>
