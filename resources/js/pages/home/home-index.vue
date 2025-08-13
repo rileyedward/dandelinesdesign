@@ -13,11 +13,9 @@ onMounted(() => {
 
 <template>
     <navbar-layout>
-        <!-- Hero Section -->
         <div
             class="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-stone-50 to-rose-50"
         >
-            <!-- Background Decorative Elements -->
             <div class="absolute inset-0 overflow-hidden">
                 <div class="absolute -top-20 -left-20 h-96 w-96 rounded-full bg-gradient-to-br from-rose-200/30 to-pink-300/20 blur-3xl"></div>
                 <div class="absolute -right-20 -bottom-20 h-96 w-96 rounded-full bg-gradient-to-br from-amber-200/30 to-orange-300/20 blur-3xl"></div>
@@ -32,7 +30,7 @@ onMounted(() => {
                     enter-from-class="opacity-0 transform scale-95"
                     enter-to-class="opacity-100 transform scale-100"
                 >
-                    <div v-if="isLoaded" class="mb-8">
+                    <div v-if="isLoaded">
                         <div class="relative inline-block">
                             <div class="absolute -inset-4 rounded-full bg-white/60 blur-2xl"></div>
                             <img src="/images/app-logo.png" alt="Dandelines Design Logo" class="relative mx-auto h-40 w-auto drop-shadow-2xl" />
@@ -46,9 +44,7 @@ onMounted(() => {
                     enter-to-class="opacity-100 transform translate-y-0"
                 >
                     <h1 v-if="isLoaded" class="mb-6 text-6xl font-bold tracking-tight text-gray-900 lg:text-7xl">
-                        <span class="bg-gradient-to-r from-rose-600 via-pink-600 to-amber-600 bg-clip-text text-transparent">
-                            Dandelines Design
-                        </span>
+                        Dandelines Design
                     </h1>
                 </transition>
 
@@ -133,7 +129,6 @@ onMounted(() => {
                 </transition>
             </div>
 
-            <!-- Scroll Indicator -->
             <transition
                 enter-active-class="transition duration-2000 ease-out delay-1200"
                 enter-from-class="opacity-0 transform translate-y-4"
@@ -150,7 +145,6 @@ onMounted(() => {
             </transition>
         </div>
 
-        <!-- Features Section -->
         <div class="bg-white py-24">
             <div class="container mx-auto px-6">
                 <div class="mx-auto max-w-6xl">
@@ -228,7 +222,6 @@ onMounted(() => {
             </div>
         </div>
 
-        <!-- Call to Action Section -->
         <div class="bg-gradient-to-r from-rose-500 to-pink-600 py-20">
             <div class="container mx-auto px-6 text-center">
                 <div class="mx-auto max-w-3xl">

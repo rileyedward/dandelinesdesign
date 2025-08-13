@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\AboutController;
+use App\Http\Controllers\ContactMessageController;
+use App\Http\Controllers\QuoteRequestController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -16,6 +18,9 @@ Route::get('/services', function () {
 Route::get('/contact', function () {
     return inertia('contact/contact-index');
 });
+
+Route::post('/contact', [ContactMessageController::class, 'store'])->name('contact.store');
+Route::post('/quote', [QuoteRequestController::class, 'store'])->name('quote.store');
 
 require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';

@@ -10,7 +10,7 @@ class ContactMessageRequest extends FormRequest
     {
         return [
             'name' => ['required', 'string'],
-            'business_name' => ['required', 'string'],
+            'business_name' => ['nullable', 'string'],
             'email' => ['required', 'email'],
             'phone_number' => ['nullable', 'string'],
             'subject' => ['required', 'string'],
