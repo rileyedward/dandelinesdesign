@@ -15,6 +15,7 @@ class ContactMessageRequest extends FormRequest
             'phone_number' => ['nullable', 'string'],
             'subject' => ['required', 'string'],
             'message' => ['required', 'string'],
+            'is_read' => ['nullable', 'boolean'],
         ];
     }
 }
