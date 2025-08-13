@@ -22,7 +22,7 @@ const formatDate = (dateString: string) => {
 
 const getStatusBadge = (status: string) => {
     const classes = 'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium';
-    
+
     switch (status?.toLowerCase()) {
         case 'new':
             return h('span', { class: `${classes} bg-blue-100 text-blue-800` }, 'New');
@@ -40,24 +40,19 @@ const getStatusBadge = (status: string) => {
 };
 
 const getContactInfo = (email: string, phone: string) => {
-    return h('div', { class: 'space-y-1' }, [
-        h('div', { class: 'flex items-center text-sm text-gray-600' }, [
-            h(Mail, { class: 'w-3 h-3 mr-1' }),
-            email || 'No email'
-        ]),
-        phone ? h('div', { class: 'flex items-center text-sm text-gray-600' }, [
-            h(Phone, { class: 'w-3 h-3 mr-1' }),
-            phone
-        ]) : null
-    ].filter(Boolean));
+    return h(
+        'div',
+        { class: 'space-y-1' },
+        [
+            h('div', { class: 'flex items-center text-sm text-gray-600' }, [h(Mail, { class: 'w-3 h-3 mr-1' }), email || 'No email']),
+            phone ? h('div', { class: 'flex items-center text-sm text-gray-600' }, [h(Phone, { class: 'w-3 h-3 mr-1' }), phone]) : null,
+        ].filter(Boolean),
+    );
 };
 
 const getCompanyDisplay = (company: string) => {
     if (!company) return h('span', { class: 'text-gray-400 text-sm' }, 'No company');
-    return h('div', { class: 'flex items-center text-sm text-gray-600' }, [
-        h(Building, { class: 'w-3 h-3 mr-1' }),
-        company
-    ]);
+    return h('div', { class: 'flex items-center text-sm text-gray-600' }, [h(Building, { class: 'w-3 h-3 mr-1' }), company]);
 };
 
 const getDateDisplay = (dateString: string) => {

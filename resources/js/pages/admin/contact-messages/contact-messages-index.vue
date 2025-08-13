@@ -2,9 +2,9 @@
 import CommonPageHeader from '@/components/common/page-header/common-page-header.vue';
 import ContactMessageList from '@/components/contact-message/contact-message-list/contact-message-list.vue';
 import SidebarLayout from '@/layouts/sidebar/sidebar-layout.vue';
+import { ContactMessage } from '@/types/contact-message';
 import { Head } from '@inertiajs/vue3';
 import { Mail } from 'lucide-vue-next';
-import { ContactMessage } from '@/types/contact-message';
 
 defineProps<{
     unreadMessages: ContactMessage[];

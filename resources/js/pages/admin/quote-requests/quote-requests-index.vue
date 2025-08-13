@@ -2,9 +2,9 @@
 import CommonPageHeader from '@/components/common/page-header/common-page-header.vue';
 import QuoteRequestList from '@/components/quote-request/quote-request-list/quote-request-list.vue';
 import SidebarLayout from '@/layouts/sidebar/sidebar-layout.vue';
+import { QuoteRequest } from '@/types/quote-request';
 import { Head } from '@inertiajs/vue3';
 import { MessageSquare } from 'lucide-vue-next';
-import { QuoteRequest } from '@/types/quote-request';
 
 defineProps<{
     pendingRequests: QuoteRequest[];

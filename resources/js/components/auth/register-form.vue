@@ -74,7 +74,15 @@ const handleSubmit = () => {
                 full-width
             />
 
-            <ui-button label="Create account" type="submit" variant="primary" size="lg" :loading="form.processing" :disabled="form.processing" full-width />
+            <ui-button
+                label="Create account"
+                type="submit"
+                variant="primary"
+                size="lg"
+                :loading="form.processing"
+                :disabled="form.processing"
+                full-width
+            />
         </form>
 
         <div class="text-center">

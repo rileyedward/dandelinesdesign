@@ -37,10 +37,7 @@ const getStatusBadge = (isActive: boolean) => {
 };
 
 const getPriceDisplay = (price: string) => {
-    return h('div', { class: 'flex items-center text-sm font-medium text-gray-900' }, [
-        h(DollarSign, { class: 'w-3 h-3 mr-1' }),
-        price || '0.00'
-    ]);
+    return h('div', { class: 'flex items-center text-sm font-medium text-gray-900' }, [h(DollarSign, { class: 'w-3 h-3 mr-1' }), price || '0.00']);
 };
 
 const getDateDisplay = (dateString: string) => {

@@ -1,11 +1,11 @@
 <script setup lang="ts">
 import CommonPageHeader from '@/components/common/page-header/common-page-header.vue';
+import TestimonialCreateModal from '@/components/testimonial/testimonial-create-modal/testimonial-create-modal.vue';
+import TestimonialList from '@/components/testimonial/testimonial-list/testimonial-list.vue';
 import SidebarLayout from '@/layouts/sidebar/sidebar-layout.vue';
+import { Testimonial } from '@/types/testimonial';
 import { Head } from '@inertiajs/vue3';
 import { Star } from 'lucide-vue-next';
-import { Testimonial } from '@/types/testimonial';
-import TestimonialList from '@/components/testimonial/testimonial-list/testimonial-list.vue';
-import TestimonialCreateModal from '@/components/testimonial/testimonial-create-modal/testimonial-create-modal.vue';
 
 defineProps<{
     testimonials: Testimonial[];

@@ -37,10 +37,7 @@ const getStatusBadge = (isActive: boolean) => {
 };
 
 const getSortOrderDisplay = (sortOrder: number) => {
-    return h('div', { class: 'flex items-center text-sm text-gray-600' }, [
-        h(Hash, { class: 'w-3 h-3 mr-1' }),
-        sortOrder.toString()
-    ]);
+    return h('div', { class: 'flex items-center text-sm text-gray-600' }, [h(Hash, { class: 'w-3 h-3 mr-1' }), sortOrder.toString()]);
 };
 
 const getDateDisplay = (dateString: string) => {

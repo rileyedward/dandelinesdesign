@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import ProductList from '@/components/product/product-list/product-list.vue';
 import CommonPageHeader from '@/components/common/page-header/common-page-header.vue';
+import ProductList from '@/components/product/product-list/product-list.vue';
 import SidebarLayout from '@/layouts/sidebar/sidebar-layout.vue';
 import type { Product } from '@/types/product';
 import { Head } from '@inertiajs/vue3';
