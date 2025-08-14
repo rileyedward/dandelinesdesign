@@ -2,7 +2,7 @@
 import BlogCard from '@/components/blog/blog-card/blog-card.vue';
 import type { BlogGridProps as Props } from './blog-grid';
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
     loading: false,
     noDataText: 'No blog posts available at the moment.',
     loadingText: 'Loading blog posts...',

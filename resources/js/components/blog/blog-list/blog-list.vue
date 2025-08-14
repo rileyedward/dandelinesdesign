@@ -2,7 +2,7 @@
 import BlogBanner from '@/components/blog/blog-banner/blog-banner.vue';
 import type { BlogListProps as Props } from './blog-list';
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
     loading: false,
     noDataText: 'No blog posts found',
     loadingText: 'Loading blog posts...',

@@ -56,7 +56,7 @@ const handleError = (error: string) => {
     successMessage.value = '';
 };
 
-const handleImageRemove = (image: ImageData) => {
+const handleImageRemove = () => {
     uploadedImage.value = undefined;
 };
 

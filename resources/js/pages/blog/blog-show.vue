@@ -4,7 +4,7 @@ import NavbarLayout from '@/layouts/navbar/navbar-layout.vue';
 import type { BlogPost } from '@/types/blog';
 import { Head } from '@inertiajs/vue3';
 
-const props = defineProps<{
+defineProps<{
     blogPost: BlogPost;
 }>();
 </script>

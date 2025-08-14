@@ -14,26 +14,6 @@ const emit = defineEmits<{
     (e: 'updated'): void;
 }>();
 
-const generateQuoteRequestNotes = (quoteRequest: QuoteRequest): string => {
-    return `Generated from Quote Request:
-Service: ${quoteRequest.service_type}
-Event Date: ${quoteRequest.event_date}
-Location: ${quoteRequest.event_location}
-Guest Count: ${quoteRequest.guest_count}
-Budget: ${quoteRequest.budget}
-Description: ${quoteRequest.description}
-${quoteRequest.notes ? `Notes: ${quoteRequest.notes}` : ''}`;
-};
-
-const handleLeadGenerated = () => {
-    emit('update:show', false);
-};
-
-const handleError = (errors: Record<string, string>) => {
-    // Handle errors if needed
-    console.error('Error generating lead:', errors);
-};
-
 const form = useForm({
     name: props.quoteRequest?.name || '',
     email: props.quoteRequest?.email || '',

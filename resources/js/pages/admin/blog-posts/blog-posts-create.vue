@@ -16,15 +16,6 @@ const form = useForm({
     is_published: false,
 });
 
-const generateSlug = (title: string) => {
-    return title
-        .toLowerCase()
-        .replace(/[^a-z0-9 -]/g, '')
-        .replace(/\s+/g, '-')
-        .replace(/-+/g, '-')
-        .trim('-');
-};
-
 const handleSubmit = () => {
     form.post(route('admin.blog.store'), {
         onSuccess: () => {},

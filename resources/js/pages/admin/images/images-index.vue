@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import ImageUploadModal from '@/components/image/image-upload-modal/image-upload-modal.vue';
-import ImagesList from '@/components/image/images-list/images-list.vue';
 import UiButton from '@/components/ui/forms/button/ui-button.vue';
 import type { ImageData } from '@/components/ui/forms/image-upload/ui-image-upload';
 import SidebarLayout from '@/layouts/sidebar/sidebar-layout.vue';

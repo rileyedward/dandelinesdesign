@@ -57,10 +57,6 @@ const copyToClipboard = async (text: string) => {
     }
 };
 
-const handleClose = () => {
-    emit('update:show', false);
-};
-
 const generateContactMessageNotes = (contactMessage: ContactMessage): string => {
     return `Generated from Contact Message:
 Subject: ${contactMessage.subject}

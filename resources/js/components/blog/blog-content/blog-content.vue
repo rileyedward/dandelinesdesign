@@ -3,7 +3,7 @@ import { router } from '@inertiajs/vue3';
 import { ArrowLeft, Calendar } from 'lucide-vue-next';
 import type { BlogContentProps as Props } from './blog-content';
 
-const props = defineProps<Props>();
+defineProps<Props>();
 
 const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {

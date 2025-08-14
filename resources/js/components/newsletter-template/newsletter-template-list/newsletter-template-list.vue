@@ -2,7 +2,7 @@
 import NewsletterTemplateBanner from '@/components/newsletter-template/newsletter-template-banner/newsletter-template-banner.vue';
 import type { NewsletterTemplateListProps as Props } from './newsletter-template-list';
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
     loading: false,
     noDataText: 'No newsletter templates found',
     loadingText: 'Loading newsletter templates...',
