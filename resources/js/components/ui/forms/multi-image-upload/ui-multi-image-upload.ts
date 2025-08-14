@@ -7,6 +7,8 @@ export interface ImageData {
   mime_type: string;
   size: number;
   alt_text?: string;
+  created_at?: string;
+  updated_at?: string;
 }
 
 export interface UiMultiImageUploadProps {

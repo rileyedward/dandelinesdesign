@@ -127,6 +127,8 @@ Route::middleware('auth')
             ->prefix('images')
             ->name('images.')
             ->group(function () {
+                Route::get('/', 'index')->name('index');
                 Route::post('/', 'store')->name('store');
+                Route::delete('/{id}', 'destroy')->name('destroy');
             });
     });

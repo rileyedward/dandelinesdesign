@@ -10,11 +10,13 @@ use Illuminate\Support\Str;
 
 class ImageService extends BaseService implements ImageServiceInterface
 {
+    public mixed $repository;
+
     public array $relations = [];
 
     public function __construct(ImageRepositoryInterface $repository)
     {
-        parent::__construct($repository);
+        $this->repository = $repository;
     }
 
     public function uploadImage(UploadedFile $file, ?string $altText = null): array
