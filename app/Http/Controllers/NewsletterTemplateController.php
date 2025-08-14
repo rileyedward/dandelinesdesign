@@ -11,7 +11,9 @@ use Inertia\Response;
 class NewsletterTemplateController extends BaseController
 {
     protected string $modelClass = NewsletterTemplate::class;
+
     protected $serviceInterface = NewsletterTemplateServiceInterface::class;
+
     protected ?string $requestClass = NewsletterTemplateRequest::class;
 
     public function index(Request $request): Response

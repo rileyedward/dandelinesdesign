@@ -20,12 +20,7 @@ const props = withDefaults(defineProps<Props>(), {
         </div>
 
         <div v-else class="grid grid-cols-1 gap-6">
-            <newsletter-template-banner 
-                v-for="template in newsletterTemplates" 
-                :key="template.id" 
-                :template="template" 
-                :show-status="true" 
-            />
+            <newsletter-template-banner v-for="template in newsletterTemplates" :key="template.id" :template="template" :show-status="true" />
         </div>
     </div>
 </template>

@@ -11,9 +11,10 @@ use Inertia\Response;
 class NewsletterSubscriberController extends BaseController
 {
     protected string $modelClass = NewsletterSubscriber::class;
-    protected $serviceInterface = NewsletterSubscriberServiceInterface::class;
-    protected ?string $requestClass = NewsletterSubscriberRequest::class;
 
+    protected $serviceInterface = NewsletterSubscriberServiceInterface::class;
+
+    protected ?string $requestClass = NewsletterSubscriberRequest::class;
 
     public function index(Request $request): Response
     {

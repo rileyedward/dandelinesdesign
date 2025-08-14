@@ -10,7 +10,7 @@ class NewsletterSubscriberSeeder extends Seeder
     public function run(): void
     {
         // Create a variety of newsletter subscribers with different statuses and attributes
-        
+
         // Active subscribers (majority)
         NewsletterSubscriber::factory()->count(150)->create([
             'status' => 'active',

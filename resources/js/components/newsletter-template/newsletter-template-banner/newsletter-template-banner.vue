@@ -77,9 +77,7 @@ const getEngagementRate = () => {
         </div>
 
         <div class="mb-4">
-            <p v-if="template.preview_text" class="text-sm text-gray-600 mb-2 italic">
-                "{{ template.preview_text }}"
-            </p>
+            <p v-if="template.preview_text" class="mb-2 text-sm text-gray-600 italic">"{{ template.preview_text }}"</p>
             <p class="text-gray-700">{{ truncateContent(template.content) }}</p>
         </div>
 
@@ -105,16 +103,14 @@ const getEngagementRate = () => {
         <!-- Tags -->
         <div v-if="template.tags && template.tags.length > 0" class="mb-4">
             <div class="flex flex-wrap gap-1">
-                <span 
-                    v-for="tag in template.tags.slice(0, 3)" 
-                    :key="tag" 
+                <span
+                    v-for="tag in template.tags.slice(0, 3)"
+                    :key="tag"
                     class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700"
                 >
                     {{ tag }}
                 </span>
-                <span v-if="template.tags.length > 3" class="text-xs text-gray-500">
-                    +{{ template.tags.length - 3 }} more
-                </span>
+                <span v-if="template.tags.length > 3" class="text-xs text-gray-500"> +{{ template.tags.length - 3 }} more </span>
             </div>
         </div>
 

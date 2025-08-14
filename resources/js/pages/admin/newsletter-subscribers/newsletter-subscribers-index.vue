@@ -18,15 +18,10 @@ defineProps<{
 
     <sidebar-layout>
         <div class="space-y-6">
-            <common-page-header 
-                title="Newsletter Subscribers" 
-                subtitle="Manage newsletter subscriptions" 
-                :icon="Mail" 
-                variant="primary" 
-            />
+            <common-page-header title="Newsletter Subscribers" subtitle="Manage newsletter subscriptions" :icon="Mail" variant="primary" />
 
-            <NewsletterSubscriberList 
-                :active-subscribers="activeSubscribers" 
+            <NewsletterSubscriberList
+                :active-subscribers="activeSubscribers"
                 :inactive-subscribers="inactiveSubscribers"
                 :unsubscribed-subscribers="unsubscribedSubscribers"
             />

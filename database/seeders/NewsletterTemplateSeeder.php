@@ -10,7 +10,7 @@ class NewsletterTemplateSeeder extends Seeder
     public function run(): void
     {
         // Create a variety of newsletter templates with different statuses
-        
+
         // Draft templates (new/in-progress)
         NewsletterTemplate::factory()->count(8)->create([
             'status' => 'draft',

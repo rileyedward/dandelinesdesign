@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import NavbarLayout from '@/layouts/navbar/navbar-layout.vue';
 import NewsletterSubscription from '@/components/newsletter/newsletter-subscription.vue';
+import NavbarLayout from '@/layouts/navbar/navbar-layout.vue';
 import { onMounted, ref } from 'vue';
 
 const isLoaded = ref<boolean>(false);

@@ -24,7 +24,7 @@ return new class extends Migration
             $table->json('tags')->nullable(); // Subscriber tags/segments
             $table->timestamps();
             $table->softDeletes();
-            
+
             $table->index(['email', 'status']);
             $table->index('status');
         });

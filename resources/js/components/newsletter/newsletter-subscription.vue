@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import { ref } from 'vue';
 import { useForm } from '@inertiajs/vue3';
+import { ref } from 'vue';
 
 const props = defineProps<{
     title?: string;
@@ -41,7 +41,7 @@ const handleSubmit = () => {
         },
         onFinish: () => {
             isSubmitting.value = false;
-        }
+        },
     });
 };
 </script>
@@ -55,7 +55,7 @@ const handleSubmit = () => {
                     {{ props.description || defaultDescription }}
                 </p>
 
-                <div v-if="!isSuccess" class="mx-auto max-w-md rounded-xl border border-amber-200/50 bg-white/80 backdrop-blur-sm p-8 shadow-xl">
+                <div v-if="!isSuccess" class="mx-auto max-w-md rounded-xl border border-amber-200/50 bg-white/80 p-8 shadow-xl backdrop-blur-sm">
                     <form @submit.prevent="handleSubmit" class="space-y-5">
                         <div>
                             <input
@@ -65,7 +65,7 @@ const handleSubmit = () => {
                                 class="w-full rounded-lg border-0 bg-white/90 px-6 py-4 text-lg text-gray-800 shadow-sm focus:ring-2 focus:ring-amber-300"
                                 required
                             />
-                            <p v-if="form.errors.email" class="mt-1 text-left text-sm text-amber-800 font-medium">
+                            <p v-if="form.errors.email" class="mt-1 text-left text-sm font-medium text-amber-800">
                                 {{ form.errors.email }}
                             </p>
                         </div>
@@ -92,7 +92,11 @@ const handleSubmit = () => {
                         >
                             <svg v-if="isSubmitting" class="mr-3 h-5 w-5 animate-spin" viewBox="0 0 24 24">
                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle>
-                                <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                <path
+                                    class="opacity-75"
+                                    fill="currentColor"
+                                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"
+                                ></path>
                             </svg>
                             <svg v-else class="mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path
@@ -105,7 +109,7 @@ const handleSubmit = () => {
                             {{ isSubmitting ? 'Subscribing...' : 'Subscribe Now' }}
                         </button>
 
-                        <p v-if="errorMessage" class="mt-2 text-sm text-amber-800 font-medium">
+                        <p v-if="errorMessage" class="mt-2 text-sm font-medium text-amber-800">
                             {{ errorMessage }}
                         </p>
                     </form>
@@ -116,9 +120,7 @@ const handleSubmit = () => {
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     <h3 class="mb-2 text-2xl font-bold text-gray-900">Thank You for Subscribing!</h3>
-                    <p class="text-gray-600">
-                        You've been successfully added to our newsletter. We're excited to share our latest updates with you.
-                    </p>
+                    <p class="text-gray-600">You've been successfully added to our newsletter. We're excited to share our latest updates with you.</p>
                 </div>
             </div>
         </div>

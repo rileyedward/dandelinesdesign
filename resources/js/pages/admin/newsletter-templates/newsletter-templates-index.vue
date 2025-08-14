@@ -1,6 +1,6 @@
 <script setup lang="ts">
-import NewsletterTemplateList from '@/components/newsletter-template/newsletter-template-list/newsletter-template-list.vue';
 import CommonPageHeader from '@/components/common/page-header/common-page-header.vue';
+import NewsletterTemplateList from '@/components/newsletter-template/newsletter-template-list/newsletter-template-list.vue';
 import UiButton from '@/components/ui/forms/button/ui-button.vue';
 import SidebarLayout from '@/layouts/sidebar/sidebar-layout.vue';
 import type { NewsletterTemplate } from '@/types/newsletter-template';
@@ -21,20 +21,9 @@ const handleCreateTemplate = () => {
 
     <sidebar-layout>
         <div class="space-y-6">
-            <common-page-header 
-                title="Newsletter Templates" 
-                subtitle="Manage your email templates" 
-                :icon="Mail" 
-                variant="primary"
-            >
+            <common-page-header title="Newsletter Templates" subtitle="Manage your email templates" :icon="Mail" variant="primary">
                 <template #actions>
-                    <ui-button 
-                        label="Create Template" 
-                        variant="primary" 
-                        size="sm" 
-                        :prefix-icon="Plus" 
-                        @click="handleCreateTemplate" 
-                    />
+                    <ui-button label="Create Template" variant="primary" size="sm" :prefix-icon="Plus" @click="handleCreateTemplate" />
                 </template>
             </common-page-header>
 

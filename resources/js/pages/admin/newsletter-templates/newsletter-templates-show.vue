@@ -57,12 +57,7 @@ const handleDelete = () => {
 
     <sidebar-layout>
         <div class="space-y-6">
-            <common-page-header
-                :title="newsletterTemplate.name"
-                subtitle="Newsletter template preview"
-                :icon="Mail"
-                variant="primary"
-            >
+            <common-page-header :title="newsletterTemplate.name" subtitle="Newsletter template preview" :icon="Mail" variant="primary">
                 <template #actions>
                     <div class="flex space-x-2">
                         <ui-button label="Delete" variant="destructive" size="sm" :prefix-icon="Trash2" @click="handleDelete" />
@@ -71,8 +66,7 @@ const handleDelete = () => {
             </common-page-header>
 
             <!-- Template Analytics (for sent templates) -->
-            <div v-if="newsletterTemplate.status === 'sent' && newsletterTemplate.recipients_count > 0" 
-                 class="grid grid-cols-1 gap-4 sm:grid-cols-4">
+            <div v-if="newsletterTemplate.status === 'sent' && newsletterTemplate.recipients_count > 0" class="grid grid-cols-1 gap-4 sm:grid-cols-4">
                 <div class="rounded-lg border bg-white p-4 shadow-sm">
                     <div class="flex items-center">
                         <Users class="h-8 w-8 text-blue-600" />
@@ -93,7 +87,7 @@ const handleDelete = () => {
                 </div>
                 <div class="rounded-lg border bg-white p-4 shadow-sm">
                     <div class="flex items-center">
-                        <div class="h-8 w-8 rounded-full bg-green-100 flex items-center justify-center">
+                        <div class="flex h-8 w-8 items-center justify-center rounded-full bg-green-100">
                             <span class="text-sm font-medium text-green-800">{{ getEngagementRate() }}%</span>
                         </div>
                         <div class="ml-4">
@@ -104,7 +98,7 @@ const handleDelete = () => {
                 </div>
                 <div class="rounded-lg border bg-white p-4 shadow-sm">
                     <div class="flex items-center">
-                        <div class="h-8 w-8 rounded-full bg-blue-100 flex items-center justify-center">
+                        <div class="flex h-8 w-8 items-center justify-center rounded-full bg-blue-100">
                             <span class="text-sm font-medium text-blue-800">{{ getClickRate() }}%</span>
                         </div>
                         <div class="ml-4">
@@ -119,9 +113,9 @@ const handleDelete = () => {
             <div class="rounded-lg border bg-gray-50 p-6 shadow-sm">
                 <div class="mx-auto max-w-2xl">
                     <!-- Email Header -->
-                    <header class="mb-8 text-center border-b border-gray-200 pb-6">
+                    <header class="mb-8 border-b border-gray-200 pb-6 text-center">
                         <div class="mb-4">
-                            <h1 class="text-2xl font-bold text-gray-900 mb-2">
+                            <h1 class="mb-2 text-2xl font-bold text-gray-900">
                                 {{ newsletterTemplate.name }}
                             </h1>
                             <div class="flex items-center justify-center space-x-4 text-sm text-gray-500">
@@ -129,7 +123,7 @@ const handleDelete = () => {
                                     <Calendar class="mr-1 h-4 w-4" />
                                     Created {{ formatDate(newsletterTemplate.created_at) }}
                                 </div>
-                                <span :class="['px-2 py-1 rounded-full text-xs font-medium', getStatusColor(newsletterTemplate.status)]">
+                                <span :class="['rounded-full px-2 py-1 text-xs font-medium', getStatusColor(newsletterTemplate.status)]">
                                     {{ newsletterTemplate.status }}
                                 </span>
                             </div>
@@ -137,9 +131,9 @@ const handleDelete = () => {
                     </header>
 
                     <!-- Email Preview -->
-                    <div class="rounded-lg bg-white shadow-lg overflow-hidden">
+                    <div class="overflow-hidden rounded-lg bg-white shadow-lg">
                         <!-- Email Client Header Simulation -->
-                        <div class="bg-gray-100 px-4 py-3 border-b">
+                        <div class="border-b bg-gray-100 px-4 py-3">
                             <div class="flex items-center space-x-2 text-sm">
                                 <Mail class="h-4 w-4 text-gray-600" />
                                 <span class="font-medium text-gray-900">Subject:</span>
@@ -160,7 +154,7 @@ const handleDelete = () => {
 
                     <!-- Template Details -->
                     <footer class="mt-8 text-center">
-                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 text-sm text-gray-600">
+                        <div class="grid grid-cols-1 gap-4 text-sm text-gray-600 sm:grid-cols-2">
                             <div v-if="newsletterTemplate.sent_at" class="flex items-center justify-center">
                                 <Send class="mr-1 h-4 w-4" />
                                 Sent {{ formatDate(newsletterTemplate.sent_at) }}

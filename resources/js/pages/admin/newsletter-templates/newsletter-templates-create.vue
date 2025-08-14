@@ -40,20 +40,9 @@ const handleCancel = () => {
 
     <sidebar-layout>
         <div class="space-y-6">
-            <common-page-header 
-                title="Create Newsletter Template" 
-                subtitle="Design and create a new email template" 
-                :icon="Mail" 
-                variant="primary"
-            >
+            <common-page-header title="Create Newsletter Template" subtitle="Design and create a new email template" :icon="Mail" variant="primary">
                 <template #actions>
-                    <ui-button 
-                        label="Cancel" 
-                        variant="outline" 
-                        size="sm" 
-                        :prefix-icon="ArrowLeft" 
-                        @click="handleCancel" 
-                    />
+                    <ui-button label="Cancel" variant="outline" size="sm" :prefix-icon="ArrowLeft" @click="handleCancel" />
                 </template>
             </common-page-header>
 

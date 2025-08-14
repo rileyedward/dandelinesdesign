@@ -38,5 +38,4 @@ class BlogPostController extends BaseController
             'blogPost' => $blogPost,
         ]);
     }
-
 }

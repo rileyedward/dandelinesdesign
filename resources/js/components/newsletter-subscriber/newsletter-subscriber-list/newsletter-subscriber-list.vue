@@ -48,10 +48,10 @@ const handleSubscriberUpdated = () => {
                         <div v-if="activeSubscribers.length === 0" class="py-8 text-center text-gray-500">No active subscribers</div>
 
                         <div v-else class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                            <div 
-                                v-for="subscriber in activeSubscribers" 
-                                :key="subscriber.id" 
-                                class="cursor-pointer" 
+                            <div
+                                v-for="subscriber in activeSubscribers"
+                                :key="subscriber.id"
+                                class="cursor-pointer"
                                 @click="handleSubscriberClick(subscriber)"
                             >
                                 <newsletter-subscriber-banner :subscriber="subscriber" />
@@ -63,10 +63,10 @@ const handleSubscriberUpdated = () => {
                         <div v-if="inactiveSubscribers.length === 0" class="py-8 text-center text-gray-500">No inactive subscribers</div>
 
                         <div v-else class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                            <div 
-                                v-for="subscriber in inactiveSubscribers" 
-                                :key="subscriber.id" 
-                                class="cursor-pointer" 
+                            <div
+                                v-for="subscriber in inactiveSubscribers"
+                                :key="subscriber.id"
+                                class="cursor-pointer"
                                 @click="handleSubscriberClick(subscriber)"
                             >
                                 <newsletter-subscriber-banner :subscriber="subscriber" />
@@ -78,10 +78,10 @@ const handleSubscriberUpdated = () => {
                         <div v-if="unsubscribedSubscribers.length === 0" class="py-8 text-center text-gray-500">No unsubscribed subscribers</div>
 
                         <div v-else class="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-                            <div 
-                                v-for="subscriber in unsubscribedSubscribers" 
-                                :key="subscriber.id" 
-                                class="cursor-pointer" 
+                            <div
+                                v-for="subscriber in unsubscribedSubscribers"
+                                :key="subscriber.id"
+                                class="cursor-pointer"
                                 @click="handleSubscriberClick(subscriber)"
                             >
                                 <newsletter-subscriber-banner :subscriber="subscriber" />
@@ -93,11 +93,11 @@ const handleSubscriberUpdated = () => {
         </div>
 
         <!-- Subscriber Modal -->
-        <newsletter-subscriber-modal 
-            v-if="selectedSubscriber" 
-            v-model:show="showModal" 
-            :subscriber="selectedSubscriber" 
-            @updated="handleSubscriberUpdated" 
+        <newsletter-subscriber-modal
+            v-if="selectedSubscriber"
+            v-model:show="showModal"
+            :subscriber="selectedSubscriber"
+            @updated="handleSubscriberUpdated"
         />
     </div>
 </template>

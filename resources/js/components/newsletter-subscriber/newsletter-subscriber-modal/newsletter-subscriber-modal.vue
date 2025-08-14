@@ -128,52 +128,24 @@ const getStatusColor = (status: string) => {
         <!-- Edit Form -->
         <form @submit.prevent="handleSubmit" class="space-y-4">
             <div class="grid grid-cols-2 gap-4">
-                <ui-input
-                    v-model="form.first_name"
-                    label="First Name"
-                    placeholder="Enter first name"
-                    :error="form.errors.first_name"
-                />
-                <ui-input
-                    v-model="form.last_name"
-                    label="Last Name"
-                    placeholder="Enter last name"
-                    :error="form.errors.last_name"
-                />
+                <ui-input v-model="form.first_name" label="First Name" placeholder="Enter first name" :error="form.errors.first_name" />
+                <ui-input v-model="form.last_name" label="Last Name" placeholder="Enter last name" :error="form.errors.last_name" />
             </div>
 
-            <ui-input
-                v-model="form.email"
-                label="Email Address"
-                type="email"
-                placeholder="Enter email address"
-                required
-                :error="form.errors.email"
-            />
+            <ui-input v-model="form.email" label="Email Address" type="email" placeholder="Enter email address" required :error="form.errors.email" />
 
             <div class="grid grid-cols-2 gap-4">
-                <ui-select
-                    v-model="form.status"
-                    label="Status"
-                    :options="statusOptions"
-                    required
-                    :error="form.errors.status"
-                />
-                <ui-input
-                    v-model="form.source"
-                    label="Source"
-                    placeholder="e.g., website, popup"
-                    :error="form.errors.source"
-                />
+                <ui-select v-model="form.status" label="Status" :options="statusOptions" required :error="form.errors.status" />
+                <ui-input v-model="form.source" label="Source" placeholder="e.g., website, popup" :error="form.errors.source" />
             </div>
 
             <!-- Tags Display -->
             <div v-if="subscriber.tags && subscriber.tags.length > 0">
-                <label class="block text-sm font-medium text-gray-700 mb-2">Tags</label>
+                <label class="mb-2 block text-sm font-medium text-gray-700">Tags</label>
                 <div class="flex flex-wrap gap-2">
-                    <span 
-                        v-for="tag in subscriber.tags" 
-                        :key="tag" 
+                    <span
+                        v-for="tag in subscriber.tags"
+                        :key="tag"
                         class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-sm font-medium text-blue-700"
                     >
                         {{ tag }}
@@ -183,11 +155,11 @@ const getStatusColor = (status: string) => {
 
             <!-- Preferences Display -->
             <div v-if="subscriber.preferences && subscriber.preferences.length > 0">
-                <label class="block text-sm font-medium text-gray-700 mb-2">Preferences</label>
+                <label class="mb-2 block text-sm font-medium text-gray-700">Preferences</label>
                 <div class="flex flex-wrap gap-2">
-                    <span 
-                        v-for="preference in subscriber.preferences" 
-                        :key="preference" 
+                    <span
+                        v-for="preference in subscriber.preferences"
+                        :key="preference"
                         class="inline-flex items-center rounded-md bg-green-50 px-2 py-1 text-sm font-medium text-green-700"
                     >
                         {{ preference }}
@@ -197,32 +169,11 @@ const getStatusColor = (status: string) => {
 
             <!-- Action Buttons -->
             <div class="flex justify-between pt-4">
-                <ui-button 
-                    type="button"
-                    variant="destructive" 
-                    @click="handleDelete"
-                    :disabled="form.processing"
-                >
-                    Delete Subscriber
-                </ui-button>
-                
+                <ui-button type="button" variant="destructive" @click="handleDelete" :disabled="form.processing"> Delete Subscriber </ui-button>
+
                 <div class="flex space-x-3">
-                    <ui-button 
-                        type="button"
-                        variant="secondary" 
-                        @click="handleClose"
-                        :disabled="form.processing"
-                    >
-                        Cancel
-                    </ui-button>
-                    <ui-button 
-                        type="submit"
-                        variant="primary"
-                        :disabled="form.processing"
-                        :loading="form.processing"
-                    >
-                        Save Changes
-                    </ui-button>
+                    <ui-button type="button" variant="secondary" @click="handleClose" :disabled="form.processing"> Cancel </ui-button>
+                    <ui-button type="submit" variant="primary" :disabled="form.processing" :loading="form.processing"> Save Changes </ui-button>
                 </div>
             </div>
         </form>

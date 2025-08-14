@@ -2,8 +2,8 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\BlogController;
-use App\Http\Controllers\NewsletterSubscriberController;
 use App\Http\Controllers\ContactMessageController;
+use App\Http\Controllers\NewsletterSubscriberController;
 use App\Http\Controllers\QuoteRequestController;
 use App\Http\Controllers\StoreController;
 use Illuminate\Support\Facades\Route;

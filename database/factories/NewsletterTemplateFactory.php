@@ -18,9 +18,9 @@ class NewsletterTemplateFactory extends Factory
     {
         $status = $this->faker->randomElement(['draft', 'scheduled', 'sent']);
         $createdAt = $this->faker->dateTimeBetween('-6 months', 'now');
-        
+
         return [
-            'name' => $this->faker->words(3, true) . ' Newsletter',
+            'name' => $this->faker->words(3, true).' Newsletter',
             'subject' => $this->faker->sentence(6, true),
             'content' => $this->faker->randomHtml(3, 6),
             'preview_text' => $this->faker->optional(0.7)->sentence(12),

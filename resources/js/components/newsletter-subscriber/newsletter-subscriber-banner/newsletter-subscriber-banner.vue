@@ -43,8 +43,8 @@ const getDisplayName = () => {
     <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-md transition-all duration-300 hover:border-blue-300 hover:shadow-lg">
         <div class="mb-4 flex items-start justify-between">
             <div class="min-w-0 flex-1">
-                <h3 class="text-lg font-semibold text-gray-900 truncate">{{ getDisplayName() }}</h3>
-                <p class="flex items-center text-sm text-gray-600 truncate">
+                <h3 class="truncate text-lg font-semibold text-gray-900">{{ getDisplayName() }}</h3>
+                <p class="flex items-center truncate text-sm text-gray-600">
                     <Mail class="mr-1 h-3 w-3 flex-shrink-0" />
                     {{ subscriber.email }}
                 </p>
@@ -69,16 +69,14 @@ const getDisplayName = () => {
         <!-- Tags Section - Always present to maintain height -->
         <div class="mb-3 h-6">
             <div v-if="subscriber.tags && subscriber.tags.length > 0" class="flex flex-wrap gap-1">
-                <span 
-                    v-for="tag in subscriber.tags.slice(0, 3)" 
-                    :key="tag" 
+                <span
+                    v-for="tag in subscriber.tags.slice(0, 3)"
+                    :key="tag"
                     class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700"
                 >
                     {{ tag }}
                 </span>
-                <span v-if="subscriber.tags.length > 3" class="text-xs text-gray-500">
-                    +{{ subscriber.tags.length - 3 }} more
-                </span>
+                <span v-if="subscriber.tags.length > 3" class="text-xs text-gray-500"> +{{ subscriber.tags.length - 3 }} more </span>
             </div>
             <div v-else class="flex items-center">
                 <span class="text-xs text-gray-400">No tags assigned</span>

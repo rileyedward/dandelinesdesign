@@ -27,7 +27,7 @@ return new class extends Migration
             $table->json('metadata')->nullable(); // Additional template settings
             $table->timestamps();
             $table->softDeletes();
-            
+
             $table->index('status');
             $table->index('scheduled_at');
             $table->index('sent_at');

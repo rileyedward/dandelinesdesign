@@ -18,7 +18,7 @@ class NewsletterSubscriberFactory extends Factory
     {
         $subscribedAt = $this->faker->dateTimeBetween('-2 years', 'now');
         $status = $this->faker->randomElement(['active', 'inactive', 'unsubscribed']);
-        
+
         return [
             'email' => $this->faker->unique()->safeEmail(),
             'first_name' => $this->faker->optional(0.8)->firstName(),
