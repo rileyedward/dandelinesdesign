@@ -21,8 +21,8 @@ const config: SidebarLayoutConfig = {
             icon: Users,
             children: [
                 { label: 'Leads', route: '/admin/leads', icon: UserCheck },
-                { label: 'Contact Messages', route: '/admin/messages', icon: Mail },
-                { label: 'Quote Requests', route: '/admin/quotes', icon: MessageSquare },
+                { label: 'Messages', route: '/admin/messages', icon: Mail },
+                { label: 'Requests', route: '/admin/quotes', icon: MessageSquare },
             ],
         },
         {

@@ -21,7 +21,8 @@ class AuthLoginController extends Controller
 
         $request->session()->regenerate();
 
-        return to_route('admin.dashboard.index');
+        // TODO: Redirect to admin dashboard after production launch
+        return to_route('home');
     }
 
     public function destroy(Request $request): RedirectResponse

@@ -66,7 +66,6 @@ const handleCancel = () => {
                             placeholder="Enter blog post title"
                             :error="form.errors.title"
                             required
-                            @input="handleTitleChange"
                         />
                     </div>
 
