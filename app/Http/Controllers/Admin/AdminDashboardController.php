@@ -28,7 +28,7 @@ class AdminDashboardController extends Controller
         ];
 
         return inertia('admin/admin-dashboard', [
-            'metrics' => $metrics
+            'metrics' => $metrics,
         ]);
     }
 }
