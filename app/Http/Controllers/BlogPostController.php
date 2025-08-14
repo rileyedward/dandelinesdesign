@@ -25,11 +25,25 @@ class BlogPostController extends BaseController
         ]);
     }
 
+    public function create(Request $request): Response
+    {
+        return inertia('admin/blog-posts/blog-posts-create');
+    }
+
     public function show(Request $request, int $id): Response
     {
         $blogPost = BlogPost::findOrFail($id);
 
         return inertia('admin/blog-posts/blog-posts-show', [
+            'blogPost' => $blogPost,
+        ]);
+    }
+
+    public function edit(Request $request, int $id): Response
+    {
+        $blogPost = BlogPost::findOrFail($id);
+
+        return inertia('admin/blog-posts/blog-posts-edit', [
             'blogPost' => $blogPost,
         ]);
     }

@@ -1,13 +1,18 @@
 <script setup lang="ts">
 import CommonPageHeader from '@/components/common/page-header/common-page-header.vue';
 import SidebarLayout from '@/layouts/sidebar/sidebar-layout.vue';
+import UiButton from '@/components/ui/forms/button/ui-button.vue';
 import type { BlogPost } from '@/types/blog';
-import { Head } from '@inertiajs/vue3';
-import { Calendar, Eye, FileText } from 'lucide-vue-next';
+import { Head, router } from '@inertiajs/vue3';
+import { Calendar, Eye, FileText, Edit } from 'lucide-vue-next';
 
-defineProps<{
+const props = defineProps<{
     blogPost: BlogPost;
 }>();
+
+const handleEdit = () => {
+    router.visit(route('admin.blog.edit', props.blogPost.id));
+};
 </script>
 
 <template>
@@ -15,7 +20,17 @@ defineProps<{
 
     <sidebar-layout>
         <div class="space-y-6">
-            <common-page-header :title="blogPost.title" subtitle="Blog post details" :icon="FileText" variant="primary" />
+            <common-page-header :title="blogPost.title" subtitle="Blog post details" :icon="FileText" variant="primary">
+                <template #actions>
+                    <ui-button 
+                        label="Edit Post" 
+                        variant="primary" 
+                        size="sm" 
+                        :prefix-icon="Edit" 
+                        @click="handleEdit" 
+                    />
+                </template>
+            </common-page-header>
 
             <!-- Blog Post Content -->
             <div class="rounded-lg border bg-white p-6 shadow-sm">
@@ -44,9 +59,7 @@ defineProps<{
                     <!-- Content -->
                     <div>
                         <label class="mb-2 block text-sm font-medium text-gray-700">Content</label>
-                        <div class="prose max-w-none rounded-lg bg-gray-50 p-4">
-                            {{ blogPost.content }}
-                        </div>
+                        <div class="prose max-w-none rounded-lg bg-gray-50 p-4" v-html="blogPost.content"></div>
                     </div>
                 </div>
             </div>
