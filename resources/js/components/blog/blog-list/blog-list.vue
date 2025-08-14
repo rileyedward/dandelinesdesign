@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import BlogBanner from '@/components/blog/blog-banner/blog-banner.vue';
-import type { BlogPost } from '@/types/blog';
 import type { BlogListProps as Props } from './blog-list';
 
 const props = withDefaults(defineProps<Props>(), {
@@ -21,12 +20,7 @@ const props = withDefaults(defineProps<Props>(), {
         </div>
 
         <div v-else class="grid grid-cols-1 gap-6">
-            <blog-banner 
-                v-for="post in blogPosts" 
-                :key="post.id" 
-                :post="post" 
-                :show-status="true"
-            />
+            <blog-banner v-for="post in blogPosts" :key="post.id" :post="post" :show-status="true" />
         </div>
     </div>
 </template>

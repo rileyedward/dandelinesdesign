@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import CommonPageHeader from '@/components/common/page-header/common-page-header.vue';
-import SidebarLayout from '@/layouts/sidebar/sidebar-layout.vue';
 import UiButton from '@/components/ui/forms/button/ui-button.vue';
+import UiCheckbox from '@/components/ui/forms/checkbox/ui-checkbox.vue';
 import UiInput from '@/components/ui/forms/input/ui-input.vue';
 import UiRichTextEditor from '@/components/ui/forms/rich-text-editor/ui-rich-text-editor.vue';
-import UiCheckbox from '@/components/ui/forms/checkbox/ui-checkbox.vue';
+import SidebarLayout from '@/layouts/sidebar/sidebar-layout.vue';
 import type { BlogPost } from '@/types/blog';
 import { Head, useForm } from '@inertiajs/vue3';
-import { FileText, Save, ArrowLeft, Eye, Trash2 } from 'lucide-vue-next';
-import { ref, computed } from 'vue';
+import { ArrowLeft, Eye, FileText, Save, Trash2 } from 'lucide-vue-next';
+import { computed, ref } from 'vue';
 
 const props = defineProps<{
     blogPost: BlogPost;
@@ -69,35 +69,23 @@ const handleCancel = () => {
 
     <sidebar-layout>
         <div class="space-y-6">
-            <common-page-header 
-                :title="`Edit: ${blogPost.title}`" 
-                subtitle="Update blog post content and settings" 
-                :icon="FileText" 
+            <common-page-header
+                :title="`Edit: ${blogPost.title}`"
+                subtitle="Update blog post content and settings"
+                :icon="FileText"
                 variant="primary"
             >
                 <template #actions>
                     <div class="flex space-x-2">
-                        <ui-button 
-                            label="Delete" 
-                            variant="destructive" 
-                            size="sm" 
-                            :prefix-icon="Trash2" 
-                            @click="handleDelete" 
-                        />
-                        <ui-button 
-                            label="Cancel" 
-                            variant="outline" 
-                            size="sm" 
-                            :prefix-icon="ArrowLeft" 
-                            @click="handleCancel" 
-                        />
-                        <ui-button 
+                        <ui-button label="Delete" variant="destructive" size="sm" :prefix-icon="Trash2" @click="handleDelete" />
+                        <ui-button label="Cancel" variant="outline" size="sm" :prefix-icon="ArrowLeft" @click="handleCancel" />
+                        <ui-button
                             v-if="form.content"
-                            :label="showPreview ? 'Edit' : 'Preview'" 
-                            variant="secondary" 
-                            size="sm" 
-                            :prefix-icon="Eye" 
-                            @click="showPreview = !showPreview" 
+                            :label="showPreview ? 'Edit' : 'Preview'"
+                            variant="secondary"
+                            size="sm"
+                            :prefix-icon="Eye"
+                            @click="showPreview = !showPreview"
                         />
                     </div>
                 </template>
@@ -145,11 +133,7 @@ const handleCancel = () => {
 
                         <!-- Published Status -->
                         <div>
-                            <ui-checkbox
-                                v-model="form.is_published"
-                                label="Published"
-                                help="Toggle to publish or unpublish this post"
-                            />
+                            <ui-checkbox v-model="form.is_published" label="Published" help="Toggle to publish or unpublish this post" />
                         </div>
 
                         <!-- Submit Button -->
@@ -183,8 +167,8 @@ const handleCancel = () => {
                                 Slug: <code class="rounded bg-gray-100 px-1 text-xs">{{ form.slug }}</code>
                             </div>
                             <div class="mt-1 text-sm text-gray-500">
-                                Created: {{ new Date(blogPost.created_at).toLocaleDateString() }}
-                                | Updated: {{ new Date(blogPost.updated_at).toLocaleDateString() }}
+                                Created: {{ new Date(blogPost.created_at).toLocaleDateString() }} | Updated:
+                                {{ new Date(blogPost.updated_at).toLocaleDateString() }}
                             </div>
                         </div>
 

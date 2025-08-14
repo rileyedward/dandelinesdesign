@@ -1,10 +1,10 @@
 <script setup lang="ts">
 import CommonPageHeader from '@/components/common/page-header/common-page-header.vue';
-import SidebarLayout from '@/layouts/sidebar/sidebar-layout.vue';
 import UiButton from '@/components/ui/forms/button/ui-button.vue';
+import SidebarLayout from '@/layouts/sidebar/sidebar-layout.vue';
 import type { BlogPost } from '@/types/blog';
 import { Head, router } from '@inertiajs/vue3';
-import { Calendar, Eye, FileText, Edit } from 'lucide-vue-next';
+import { Calendar, Edit, Eye, FileText } from 'lucide-vue-next';
 
 const props = defineProps<{
     blogPost: BlogPost;
@@ -22,13 +22,7 @@ const handleEdit = () => {
         <div class="space-y-6">
             <common-page-header :title="blogPost.title" subtitle="Blog post details" :icon="FileText" variant="primary">
                 <template #actions>
-                    <ui-button 
-                        label="Edit Post" 
-                        variant="primary" 
-                        size="sm" 
-                        :prefix-icon="Edit" 
-                        @click="handleEdit" 
-                    />
+                    <ui-button label="Edit Post" variant="primary" size="sm" :prefix-icon="Edit" @click="handleEdit" />
                 </template>
             </common-page-header>
 

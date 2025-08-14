@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import UiButton from '@/components/ui/forms/button/ui-button.vue';
-import { Calendar, Edit, Eye, FileText } from 'lucide-vue-next';
 import { router } from '@inertiajs/vue3';
+import { Calendar, Edit, Eye, FileText } from 'lucide-vue-next';
 import type { BlogBannerProps as Props } from './blog-banner';
 
 const { post } = withDefaults(defineProps<Props>(), {
@@ -17,9 +17,7 @@ const formatDate = (dateString: string) => {
 };
 
 const getStatusClasses = (isPublished: boolean) => {
-    return isPublished 
-        ? 'bg-green-100 text-green-800' 
-        : 'bg-yellow-100 text-yellow-800';
+    return isPublished ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800';
 };
 
 const getStatusLabel = (isPublished: boolean) => {
@@ -46,10 +44,10 @@ const handleEdit = () => {
     <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-md transition-all duration-300 hover:border-blue-300 hover:shadow-lg">
         <div class="mb-4 flex items-start justify-between">
             <div class="flex-1">
-                <h3 class="text-lg font-semibold text-gray-900 mb-1">{{ post.title }}</h3>
-                <p class="text-sm text-gray-600 flex items-center">
+                <h3 class="mb-1 text-lg font-semibold text-gray-900">{{ post.title }}</h3>
+                <p class="flex items-center text-sm text-gray-600">
                     <FileText class="mr-1 h-3 w-3" />
-                    Slug: <code class="ml-1 text-xs bg-gray-100 px-1 rounded">{{ post.slug }}</code>
+                    Slug: <code class="ml-1 rounded bg-gray-100 px-1 text-xs">{{ post.slug }}</code>
                 </p>
             </div>
             <div class="flex items-center space-x-2">
@@ -67,26 +65,12 @@ const handleEdit = () => {
             <div class="flex items-center text-sm text-gray-500">
                 <Calendar class="mr-1 h-4 w-4" />
                 Created {{ formatDate(post.created_at) }}
-                <span v-if="post.updated_at !== post.created_at" class="ml-2">
-                    • Updated {{ formatDate(post.updated_at) }}
-                </span>
+                <span v-if="post.updated_at !== post.created_at" class="ml-2"> • Updated {{ formatDate(post.updated_at) }} </span>
             </div>
-            
+
             <div class="flex space-x-2">
-                <ui-button
-                    label="View"
-                    variant="ghost"
-                    size="xs"
-                    :prefix-icon="Eye"
-                    @click="handleView"
-                />
-                <ui-button
-                    label="Edit"
-                    variant="outline"
-                    size="xs"
-                    :prefix-icon="Edit"
-                    @click="handleEdit"
-                />
+                <ui-button label="View" variant="ghost" size="xs" :prefix-icon="Eye" @click="handleView" />
+                <ui-button label="Edit" variant="outline" size="xs" :prefix-icon="Edit" @click="handleEdit" />
             </div>
         </div>
     </div>
