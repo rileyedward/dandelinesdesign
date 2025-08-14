@@ -19,7 +19,6 @@ import {
     Users
 } from 'lucide-vue-next';
 
-// Props with real data from the controller
 defineProps<{
     metrics: {
         newLeads: number;
@@ -38,16 +37,7 @@ defineProps<{
 
     <sidebar-layout>
         <div class="space-y-8">
-            <common-page-header title="Admin Dashboard" subtitle="Welcome back to your business overview" :icon="Home" variant="primary">
-                <template #actions>
-                    <Link href="#notifications">
-                        <ui-card hover clickable class="flex items-center space-x-2 px-3 py-2">
-                            <Bell class="h-5 w-5 text-purple-500" />
-                            <span class="text-sm font-medium">Notifications</span>
-                        </ui-card>
-                    </Link>
-                </template>
-            </common-page-header>
+            <common-page-header title="Admin Dashboard" subtitle="Welcome back to your business overview" :icon="Home" variant="primary" />
 
             <!-- Key Metrics Section -->
             <section>
