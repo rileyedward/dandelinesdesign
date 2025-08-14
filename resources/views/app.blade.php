@@ -17,14 +17,10 @@
         <!-- Tiny MCE -->
         <script src="https://cdn.tiny.cloud/1/{{ config('services.tinymce.api_key') }}/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
 
-        <!-- PWA Manifest -->
-        <link rel="manifest" href="/manifest.json">
-
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Antic+Didone&display=swap" rel="stylesheet">
-
 
         <!-- Inertia -->
         @routes
@@ -33,16 +29,6 @@
     </head>
     <body class="font-sans antialiased">
         @inertia
-
-        {{-- Service Worker --}}
-        <script>
-            if ('serviceWorker' in navigator) {
-                navigator.serviceWorker.register('/service-worker.js')
-                    .then(() => console.log("Service Worker Registered!"))
-                    .catch((error) => console.error("Service Worker Registration Failed:", error));
-
-            }
-        </script>
 
         {{-- Tiny MCE --}}
         <script>
