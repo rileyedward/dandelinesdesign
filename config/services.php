@@ -35,4 +35,8 @@ return [
         ],
     ],
 
+    'tinymce' => [
+        'api_key' => env('TINY_MCE_API_KEY'),
+    ],
+
 ];

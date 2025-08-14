@@ -28,7 +28,6 @@ const emit = defineEmits<{
 }>();
 
 const editorConfig = computed(() => ({
-    apiKey: import.meta.env.VITE_TINYMCE_API_KEY,
     height: props.height,
     menubar: false,
     plugins: [
@@ -54,14 +53,14 @@ const handleEditorChange = (content: string) => {
 
 <template>
     <div class="space-y-2">
-        <label 
-            v-if="label" 
+        <label
+            v-if="label"
             class="block text-sm font-medium text-gray-700"
             :class="{ 'after:content-[\' *\'] after:text-red-500': required }"
         >
             {{ label }}
         </label>
-        
+
         <div class="relative">
             <Editor
                 :model-value="modelValue"
@@ -75,11 +74,11 @@ const handleEditorChange = (content: string) => {
                 ]"
             />
         </div>
-        
+
         <p v-if="help && !error" class="text-sm text-gray-600">
             {{ help }}
         </p>
-        
+
         <p v-if="error" class="text-sm text-red-600">
             {{ error }}
         </p>

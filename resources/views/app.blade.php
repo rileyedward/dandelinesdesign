@@ -13,6 +13,9 @@
         <link rel="icon" href="/favicon.svg" type="image/svg+xml">
         <link rel="apple-touch-icon" href="/apple-touch-icon.png">
 
+        <!-- Tiny MCE -->
+        <script src="https://cdn.tiny.cloud/1/{{ config('services.tinymce.api_key') }}/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
+
         <!-- PWA Manifest -->
         <link rel="manifest" href="/manifest.json">
 
@@ -20,9 +23,6 @@
         <link rel="preconnect" href="https://fonts.googleapis.com">
         <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
         <link href="https://fonts.googleapis.com/css2?family=Antic+Didone&display=swap" rel="stylesheet">
-
-        <!-- Tiny MCE -->
-        <script src="https://cdn.tiny.cloud/1/yoguyxw83kuiwqi06zioug3ym9xc33cxng6xsmwf3k7t941s/tinymce/8/tinymce.min.js" referrerpolicy="origin" crossorigin="anonymous"></script>
 
 
         <!-- Inertia -->
@@ -35,7 +35,7 @@
 
         {{-- Service Worker --}}
         <script>
-            if ('serviceWorker' === in navigator) {
+            if ('serviceWorker' in navigator) {
                 navigator.serviceWorker.register('/service-worker.js')
                     .then(() => console.log("Service Worker Registered!"))
                     .catch((error) => console.error("Service Worker Registration Failed:", error));
@@ -46,7 +46,7 @@
         {{-- Tiny MCE --}}
         <script>
             tinymce.init({
-                selector: 'textarea',
+                selector: '#rich-text-editor',
                 plugins: [
                     // Core editing features
                     'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
