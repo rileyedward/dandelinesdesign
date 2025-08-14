@@ -12,7 +12,6 @@ class TestimonialRequest extends FormRequest
             'name' => ['required', 'string'],
             'title' => ['nullable', 'string'],
             'quote' => ['required', 'string'],
-            'rating' => ['nullable', 'integer', 'min:1', 'max:5'],
             'is_featured' => ['boolean'],
             'is_active' => ['boolean'],
         ];

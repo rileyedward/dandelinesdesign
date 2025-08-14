@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Contracts\LeadServiceInterface;
 use App\Http\Requests\LeadRequest;
 use App\Models\Lead;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
 use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
@@ -17,7 +18,18 @@ class LeadController extends BaseController
 
     protected ?string $requestClass = LeadRequest::class;
 
-    public function store(): \Illuminate\Http\RedirectResponse
+    public function index(Request $request): Response
+    {
+        $leads = Lead::query()
+            ->orderBy('updated_at', 'desc')
+            ->get();
+
+        return inertia('admin/leads/leads-index', [
+            'leads' => $leads,
+        ]);
+    }
+
+    public function store(): RedirectResponse
     {
         if (! $this->requestClass) {
             throw new MethodNotAllowedHttpException([], 'Method not allowed');
@@ -32,18 +44,9 @@ class LeadController extends BaseController
         return to_route('admin.leads.show', ['id' => $lead->id]);
     }
 
-    public function index(Request $request): Response
-    {
-        $leads = Lead::query()->get();
-
-        return inertia('admin/leads/leads-index', [
-            'leads' => $leads,
-        ]);
-    }
-
     public function show(Request $request, int $id): Response
     {
-        $lead = Lead::findOrFail($id);
+        $lead = Lead::query()->findOrFail($id);
 
         return inertia('admin/leads/leads-show', [
             'lead' => $lead,

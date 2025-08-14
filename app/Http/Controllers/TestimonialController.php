@@ -18,7 +18,9 @@ class TestimonialController extends BaseController
 
     public function index(Request $request): Response
     {
-        $testimonials = Testimonial::query()->get();
+        $testimonials = Testimonial::query()
+            ->orderBy('updated_at', 'desc')
+            ->get();
 
         return inertia('admin/testimonials/testimonials-index', [
             'testimonials' => $testimonials,

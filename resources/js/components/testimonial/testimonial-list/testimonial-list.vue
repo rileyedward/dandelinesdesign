@@ -62,13 +62,6 @@ const handleTestimonialUpdated = () => {
                         <Calendar class="mr-1 h-4 w-4" />
                         {{ formatDate(testimonial.created_at) }}
                     </div>
-                    <div class="flex items-center">
-                        <template v-if="testimonial.rating">
-                            <div class="flex">
-                                <Star v-for="i in testimonial.rating" :key="i" class="h-4 w-4 fill-current text-yellow-500" />
-                            </div>
-                        </template>
-                    </div>
                 </div>
             </div>
         </div>

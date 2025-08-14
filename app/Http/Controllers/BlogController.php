@@ -12,7 +12,7 @@ class BlogController extends Controller
     {
         $blogPosts = BlogPost::query()
             ->where('is_published', true)
-            ->orderBy('created_at', 'desc')
+            ->orderBy('updated_at', 'desc')
             ->get();
 
         return inertia('blog/blog-index', [

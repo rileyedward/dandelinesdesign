@@ -4,16 +4,8 @@ namespace Database\Factories;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\NewsletterSubscriber>
- */
 class NewsletterSubscriberFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
     public function definition(): array
     {
         $subscribedAt = $this->faker->dateTimeBetween('-2 years', 'now');
@@ -21,8 +13,7 @@ class NewsletterSubscriberFactory extends Factory
 
         return [
             'email' => $this->faker->unique()->safeEmail(),
-            'first_name' => $this->faker->optional(0.8)->firstName(),
-            'last_name' => $this->faker->optional(0.7)->lastName(),
+            'name' => $this->faker->optional(0.8)->name(),
             'status' => $status,
             'subscribed_at' => $subscribedAt,
             'unsubscribed_at' => $status === 'unsubscribed' ? $this->faker->dateTimeBetween($subscribedAt, 'now') : null,

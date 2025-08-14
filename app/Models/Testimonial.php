@@ -16,13 +16,11 @@ class Testimonial extends Model
         'name',
         'title',
         'quote',
-        'rating',
         'is_featured',
         'is_active',
     ];
 
     protected $casts = [
-        'rating' => 'integer',
         'is_featured' => 'boolean',
         'is_active' => 'boolean',
     ];

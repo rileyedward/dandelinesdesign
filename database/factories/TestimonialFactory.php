@@ -12,7 +12,6 @@ class TestimonialFactory extends Factory
             'name' => $this->faker->name(),
             'title' => $this->faker->optional(0.7)->jobTitle(),
             'quote' => $this->faker->paragraph(2),
-            'rating' => $this->faker->optional(0.8)->numberBetween(3, 5),
             'is_featured' => $this->faker->boolean(20),
             'is_active' => $this->faker->boolean(90),
         ];

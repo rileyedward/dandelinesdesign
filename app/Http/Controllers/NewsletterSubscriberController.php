@@ -20,15 +20,15 @@ class NewsletterSubscriberController extends BaseController
     {
         $activeSubscribers = NewsletterSubscriber::query()
             ->where('status', 'active')
-            ->orderBy('created_at', 'desc')
+            ->orderBy('updated_at', 'desc')
             ->get();
         $inactiveSubscribers = NewsletterSubscriber::query()
             ->where('status', 'inactive')
-            ->orderBy('created_at', 'desc')
+            ->orderBy('updated_at', 'desc')
             ->get();
         $unsubscribedSubscribers = NewsletterSubscriber::query()
             ->where('status', 'unsubscribed')
-            ->orderBy('created_at', 'desc')
+            ->orderBy('updated_at', 'desc')
             ->get();
 
         return inertia('admin/newsletter-subscribers/newsletter-subscribers-index', [

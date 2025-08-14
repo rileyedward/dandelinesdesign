@@ -13,7 +13,6 @@ return new class extends Migration
             $table->string('name');
             $table->string('title')->nullable();
             $table->text('quote');
-            $table->integer('rating')->nullable();
             $table->boolean('is_featured')->default(false);
             $table->boolean('is_active')->default(true);
             $table->timestamps();

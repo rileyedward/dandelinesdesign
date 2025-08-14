@@ -12,8 +12,7 @@ const defaultDescription = 'Stay updated with our latest designs, events, and cr
 
 const form = useForm({
     email: '',
-    first_name: '',
-    last_name: '',
+    name: '',
     status: 'active',
     source: 'website_subscription',
 });
@@ -55,7 +54,7 @@ const handleSubmit = () => {
                     {{ props.description || defaultDescription }}
                 </p>
 
-                <div v-if="!isSuccess" class="mx-auto max-w-md rounded-xl border border-amber-200/50 bg-white/80 p-8 shadow-xl backdrop-blur-sm">
+                <div v-if="!isSuccess" class="mx-auto max-w-md rounded-xl border border-amber-200/50 bg-amber-100 p-8 shadow-xl backdrop-blur-sm">
                     <form @submit.prevent="handleSubmit" class="space-y-5">
                         <div>
                             <input
@@ -70,17 +69,11 @@ const handleSubmit = () => {
                             </p>
                         </div>
 
-                        <div class="flex flex-col gap-4 sm:flex-row">
+                        <div>
                             <input
-                                v-model="form.first_name"
+                                v-model="form.name"
                                 type="text"
-                                placeholder="First name (optional)"
-                                class="w-full rounded-lg border-0 bg-white/90 px-6 py-4 text-lg text-gray-800 shadow-sm focus:ring-2 focus:ring-amber-300"
-                            />
-                            <input
-                                v-model="form.last_name"
-                                type="text"
-                                placeholder="Last name (optional)"
+                                placeholder="Name (optional)"
                                 class="w-full rounded-lg border-0 bg-white/90 px-6 py-4 text-lg text-gray-800 shadow-sm focus:ring-2 focus:ring-amber-300"
                             />
                         </div>
@@ -88,7 +81,7 @@ const handleSubmit = () => {
                         <button
                             type="submit"
                             :disabled="isSubmitting || !form.email"
-                            class="inline-flex w-full items-center justify-center rounded-lg bg-gradient-to-br from-amber-400 to-orange-500 px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-xl disabled:opacity-70"
+                            class="inline-flex w-full items-center justify-center rounded-lg bg-amber-300 px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-xl disabled:opacity-70"
                         >
                             <svg v-if="isSubmitting" class="mr-3 h-5 w-5 animate-spin" viewBox="0 0 24 24">
                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4" fill="none"></circle>

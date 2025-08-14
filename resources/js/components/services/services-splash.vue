@@ -17,10 +17,12 @@ import CommonBackground from '@/components/common/common-background/common-backg
                 your vision to life. Each service is crafted with attention to detail and a commitment to personal and excellent service.
             </p>
 
-            <div class="mt-6 flex justify-center space-x-2">
-                <div class="h-2 w-2 animate-pulse rounded-full bg-amber-400"></div>
-                <div class="h-2 w-2 animate-pulse rounded-full bg-orange-400" style="animation-delay: 0.2s"></div>
-                <div class="h-2 w-2 animate-pulse rounded-full bg-yellow-400" style="animation-delay: 0.4s"></div>
+            <div class="mt-6 flex justify-center">
+                <img
+                    src="/images/app-logo.png"
+                    alt="Dandelines Design Logo"
+                    class="h-6 w-6 drop-shadow-md transition-transform duration-500 hover:scale-110"
+                />
             </div>
         </div>
     </common-background>

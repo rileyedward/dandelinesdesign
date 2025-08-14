@@ -18,7 +18,9 @@ class NewsletterTemplateController extends BaseController
 
     public function index(Request $request): Response
     {
-        $newsletterTemplates = NewsletterTemplate::query()->orderBy('created_at', 'desc')->get();
+        $newsletterTemplates = NewsletterTemplate::query()
+            ->orderBy('created_at', 'desc')
+            ->get();
 
         return inertia('admin/newsletter-templates/newsletter-templates-index', [
             'newsletterTemplates' => $newsletterTemplates,

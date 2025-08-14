@@ -18,7 +18,9 @@ class BlogPostController extends BaseController
 
     public function index(Request $request): Response
     {
-        $blogPosts = BlogPost::query()->get();
+        $blogPosts = BlogPost::query()
+            ->orderBy('updated_at', 'desc')
+            ->get();
 
         return inertia('admin/blog-posts/blog-posts-index', [
             'blogPosts' => $blogPosts,

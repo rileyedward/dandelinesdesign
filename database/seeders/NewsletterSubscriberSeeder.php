@@ -33,8 +33,7 @@ class NewsletterSubscriberSeeder extends Seeder
         // Create some specific subscribers with known data for testing
         NewsletterSubscriber::create([
             'email' => 'test@example.com',
-            'first_name' => 'Test',
-            'last_name' => 'User',
+            'name' => 'Test',
             'status' => 'active',
             'subscribed_at' => now()->subDays(30),
             'source' => 'website',
@@ -44,8 +43,7 @@ class NewsletterSubscriberSeeder extends Seeder
 
         NewsletterSubscriber::create([
             'email' => 'demo@dandeline.com',
-            'first_name' => 'Demo',
-            'last_name' => 'Subscriber',
+            'name' => 'Demo',
             'status' => 'active',
             'subscribed_at' => now()->subDays(5),
             'source' => 'popup',
@@ -55,8 +53,7 @@ class NewsletterSubscriberSeeder extends Seeder
 
         NewsletterSubscriber::create([
             'email' => 'unsubscribed@example.com',
-            'first_name' => 'Former',
-            'last_name' => 'Subscriber',
+            'name' => 'Former',
             'status' => 'unsubscribed',
             'subscribed_at' => now()->subDays(90),
             'unsubscribed_at' => now()->subDays(10),

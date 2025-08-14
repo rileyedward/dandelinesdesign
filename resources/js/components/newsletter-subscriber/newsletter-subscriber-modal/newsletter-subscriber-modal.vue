@@ -19,8 +19,7 @@ const emit = defineEmits<{
 
 const form = useForm({
     email: props.subscriber?.email || '',
-    first_name: props.subscriber?.first_name || '',
-    last_name: props.subscriber?.last_name || '',
+    name: props.subscriber?.name || '',
     status: props.subscriber?.status || 'active',
     source: props.subscriber?.source || '',
     tags: props.subscriber?.tags || [],
@@ -66,17 +65,6 @@ const handleDelete = () => {
     }
 };
 
-const getDisplayName = () => {
-    if (props.subscriber.first_name && props.subscriber.last_name) {
-        return `${props.subscriber.first_name} ${props.subscriber.last_name}`;
-    } else if (props.subscriber.first_name) {
-        return props.subscriber.first_name;
-    } else if (props.subscriber.last_name) {
-        return props.subscriber.last_name;
-    }
-    return props.subscriber.email;
-};
-
 const getStatusColor = (status: string) => {
     switch (status) {
         case 'active':
@@ -103,7 +91,7 @@ const getStatusColor = (status: string) => {
         <div class="mb-6 border-b border-gray-200 pb-4">
             <div class="flex items-start justify-between">
                 <div>
-                    <h3 class="text-xl font-semibold text-gray-900">{{ getDisplayName() }}</h3>
+                    <h3 class="text-xl font-semibold text-gray-900">{{ subscriber.name }}</h3>
                     <p class="flex items-center text-sm text-gray-600">
                         <Mail class="mr-1 h-3 w-3" />
                         {{ subscriber.email }}
@@ -127,9 +115,8 @@ const getStatusColor = (status: string) => {
 
         <!-- Edit Form -->
         <form @submit.prevent="handleSubmit" class="space-y-4">
-            <div class="grid grid-cols-2 gap-4">
-                <ui-input v-model="form.first_name" label="First Name" placeholder="Enter first name" :error="form.errors.first_name" />
-                <ui-input v-model="form.last_name" label="Last Name" placeholder="Enter last name" :error="form.errors.last_name" />
+            <div>
+                <ui-input v-model="form.name" label="First Name" placeholder="Enter name" :error="form.errors.name" />
             </div>
 
             <ui-input v-model="form.email" label="Email Address" type="email" placeholder="Enter email address" required :error="form.errors.email" />

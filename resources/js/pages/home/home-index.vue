@@ -15,13 +15,13 @@ onMounted(() => {
 <template>
     <navbar-layout>
         <div
-            class="relative flex min-h-screen flex-col items-center justify-center overflow-hidden bg-gradient-to-br from-slate-50 via-stone-50 to-rose-50"
+            class="relative flex min-h-screen flex-col overflow-hidden mt-16"
         >
             <div class="absolute inset-0 overflow-hidden">
-                <div class="absolute -top-20 -left-20 h-96 w-96 rounded-full bg-gradient-to-br from-rose-200/30 to-pink-300/20 blur-3xl"></div>
-                <div class="absolute -right-20 -bottom-20 h-96 w-96 rounded-full bg-gradient-to-br from-amber-200/30 to-orange-300/20 blur-3xl"></div>
+                <div class="absolute -top-20 -left-20 h-96 w-96 rounded-full"></div>
+                <div class="absolute -right-20 -bottom-20 h-96 w-96 rounded-full"></div>
                 <div
-                    class="absolute top-1/3 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full bg-gradient-to-br from-purple-200/20 to-pink-200/20 blur-2xl"
+                    class="absolute top-1/3 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full"
                 ></div>
             </div>
 
@@ -61,12 +61,12 @@ onMounted(() => {
                     enter-to-class="opacity-100 transform translate-y-0"
                 >
                     <div v-if="isLoaded" class="mb-8">
-                        <div class="mx-auto mb-6 h-1 w-24 rounded-full bg-gradient-to-r from-rose-400 to-pink-500"></div>
+                        <div class="mx-auto mb-6 h-0.5 w-24 rounded-full bg-gray-500"></div>
                         <p class="text-2xl font-medium text-gray-700 lg:text-3xl">
                             <span class="mx-2 inline-block">Artist</span>
-                            <span class="text-rose-400">•</span>
+                            <span class="text-gray-700">•</span>
                             <span class="mx-2 inline-block">Event Planning</span>
-                            <span class="text-pink-400">•</span>
+                            <span class="text-gray-700">•</span>
                             <span class="mx-2 inline-block">Design</span>
                         </p>
                     </div>
@@ -80,7 +80,7 @@ onMounted(() => {
                     <div v-if="isLoaded" class="space-y-4">
                         <a
                             href="/contact"
-                            class="inline-flex items-center rounded-full bg-gradient-to-r from-rose-500 to-pink-600 px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:scale-105 hover:from-rose-600 hover:to-pink-700 hover:shadow-2xl"
+                            class="inline-flex items-center rounded-full bg-gray-500 px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:scale-105 hover:shadow-2xl"
                         >
                             <svg class="mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path

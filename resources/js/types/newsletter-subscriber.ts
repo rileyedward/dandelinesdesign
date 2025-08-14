@@ -1,8 +1,7 @@
 export interface NewsletterSubscriber {
     id: number;
     email: string;
-    first_name?: string;
-    last_name?: string;
+    name?: string;
     status: 'active' | 'inactive' | 'unsubscribed';
     subscribed_at?: string;
     unsubscribed_at?: string;

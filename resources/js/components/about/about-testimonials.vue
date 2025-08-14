@@ -18,26 +18,6 @@ const rotateTestimonial = () => {
     currentTestimonial.value = props.testimonials[currentIndex.value];
 };
 
-const renderStars = (rating: number) => {
-    const stars = [];
-    const fullStars = Math.floor(rating);
-    const hasHalfStar = rating % 1 !== 0;
-
-    for (let i = 0; i < fullStars; i++) {
-        stars.push('★');
-    }
-
-    if (hasHalfStar) {
-        stars.push('☆');
-    }
-
-    while (stars.length < 5) {
-        stars.push('☆');
-    }
-
-    return stars;
-};
-
 const goToTestimonial = (index: number) => {
     currentIndex.value = index;
     currentTestimonial.value = props.testimonials[index];
@@ -83,19 +63,6 @@ onBeforeUnmount(() => {
 
                         <div class="text-center transition-all duration-700">
                             <p class="mb-8 text-xl leading-relaxed text-gray-800 md:text-2xl">"{{ currentTestimonial.quote }}"</p>
-
-                            <div class="mb-4 flex justify-center">
-                                <div v-if="currentTestimonial.rating" class="flex items-center space-x-1">
-                                    <span
-                                        v-for="(star, index) in renderStars(currentTestimonial.rating)"
-                                        :key="index"
-                                        class="text-2xl"
-                                        :class="star === '★' ? 'text-amber-400' : 'text-gray-300'"
-                                    >
-                                        {{ star }}
-                                    </span>
-                                </div>
-                            </div>
 
                             <div class="text-center">
                                 <p class="text-xl font-semibold text-gray-900">{{ currentTestimonial.name }}</p>

@@ -18,7 +18,6 @@ const form = useForm({
     name: props.testimonial?.name || '',
     title: props.testimonial?.title || '',
     quote: props.testimonial?.quote || '',
-    rating: props.testimonial?.rating || 5,
     is_featured: props.testimonial?.is_featured || false,
     is_active: props.testimonial?.is_active || true,
 });
@@ -27,7 +26,6 @@ const handleSubmit = (testimonial: any) => {
     form.name = testimonial.name;
     form.title = testimonial.title;
     form.quote = testimonial.quote;
-    form.rating = testimonial.rating;
     form.is_featured = testimonial.is_featured;
     form.is_active = testimonial.is_active;
 
