@@ -25,7 +25,7 @@ class CreateAdminUser extends Command
                 'password' => Hash::make($password),
             ]);
 
-            $this->info("Admin user created successfully!");
+            $this->info('Admin user created successfully!');
             $this->info("Name: {$user->name}");
             $this->info("Email: {$user->email}");
         } catch (\Exception $e) {
