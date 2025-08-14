@@ -48,20 +48,25 @@ class ImageService extends BaseService implements ImageServiceInterface
 
     private function getStorageDisk(): string
     {
+        if (env('LARAVEL_CLOUD_DISK_CONFIG')) {
+            return config('filesystems.default', 'local');
+        }
+
         return config('app.env') === 'production' ? 'cloud' : 'public';
     }
 
     private function getPublicDisk(): string
     {
+        if (env('LARAVEL_CLOUD_DISK_CONFIG')) {
+            return config('filesystems.default', 'local');
+        }
+
         return config('app.env') === 'production' ? 'cloud' : 'public';
     }
 
     private function generateImageUrl(string $path, string $storageDisk, string $publicDisk): string
     {
-        if (config('app.env') === 'production') {
-            return Storage::disk($publicDisk)->url($path);
-        }
-
+        // For Laravel Cloud and production, use the configured disk
         return Storage::disk($publicDisk)->url($path);
     }
 }

@@ -8,7 +8,14 @@ For local development, images are stored in the `public` disk and served via the
 
 ## Production/AWS S3 Setup
 
-To configure AWS S3 storage for production:
+### Laravel Cloud
+If you're using Laravel Cloud, S3 is automatically configured:
+- The `LARAVEL_CLOUD_DISK_CONFIG` environment variable indicates Laravel Cloud is managing storage
+- AWS credentials and bucket configuration are handled automatically
+- No manual environment variable setup needed
+
+### Other Production Environments
+To configure AWS S3 storage for other production environments:
 
 1. **Set Environment Variables:**
    ```bash
@@ -40,8 +47,9 @@ To configure AWS S3 storage for production:
 ## How It Works
 
 - **Development:** `APP_ENV=local` → Uses `public` disk (local storage)
-- **Production:** `APP_ENV=production` → Uses `cloud` disk (AWS S3)
-- The ImageService automatically switches between storage methods based on environment
+- **Laravel Cloud:** `LARAVEL_CLOUD_DISK_CONFIG` present → Uses Laravel Cloud's managed S3 configuration
+- **Other Production:** `APP_ENV=production` → Uses `cloud` disk (manually configured AWS S3)
+- The ImageService automatically detects the environment and switches storage methods
 - URLs are generated appropriately for each storage type
 
 ## Required AWS Permissions
