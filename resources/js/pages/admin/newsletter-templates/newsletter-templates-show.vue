@@ -1,35 +1,16 @@
 <script setup lang="ts">
 import CommonPageHeader from '@/components/common/page-header/common-page-header.vue';
 import UiButton from '@/components/ui/forms/button/ui-button.vue';
-import UiInput from '@/components/ui/forms/input/ui-input.vue';
-import UiRichTextEditor from '@/components/ui/forms/rich-text-editor/ui-rich-text-editor.vue';
-import UiSelect from '@/components/ui/forms/select/ui-select.vue';
-import UiTextarea from '@/components/ui/forms/textarea/ui-textarea.vue';
 import SidebarLayout from '@/layouts/sidebar/sidebar-layout.vue';
 import type { NewsletterTemplate } from '@/types/newsletter-template';
 import { Head, useForm } from '@inertiajs/vue3';
-import { Calendar, Edit, Eye, Mail, Save, Send, Trash2, Users } from 'lucide-vue-next';
-import { ref } from 'vue';
+import { Calendar, Eye, Mail, Send, Trash2, Users } from 'lucide-vue-next';
 
 const props = defineProps<{
     newsletterTemplate: NewsletterTemplate;
 }>();
 
-const isEditing = ref(false);
-
-const form = useForm({
-    name: props.newsletterTemplate.name,
-    subject: props.newsletterTemplate.subject,
-    content: props.newsletterTemplate.content,
-    preview_text: props.newsletterTemplate.preview_text || '',
-    status: props.newsletterTemplate.status,
-});
-
-const statusOptions = [
-    { label: 'Draft', value: 'draft' },
-    { label: 'Scheduled', value: 'scheduled' },
-    { label: 'Sent', value: 'sent' },
-];
+const form = useForm({});
 
 const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
@@ -64,18 +45,6 @@ const getClickRate = () => {
     return Math.round((props.newsletterTemplate.clicks_count / props.newsletterTemplate.recipients_count) * 100);
 };
 
-const toggleEdit = () => {
-    isEditing.value = !isEditing.value;
-};
-
-const handleSubmit = () => {
-    form.patch(route('admin.newsletter.templates.update', props.newsletterTemplate.id), {
-        onSuccess: () => {
-            isEditing.value = false;
-        },
-    });
-};
-
 const handleDelete = () => {
     if (confirm('Are you sure you want to delete this newsletter template? This action cannot be undone.')) {
         form.delete(route('admin.newsletter.templates.destroy', props.newsletterTemplate.id));
@@ -89,22 +58,20 @@ const handleDelete = () => {
     <sidebar-layout>
         <div class="space-y-6">
             <common-page-header
-                :title="isEditing ? `Edit: ${newsletterTemplate.name}` : newsletterTemplate.name"
-                :subtitle="isEditing ? 'Update template content and settings' : 'Newsletter template preview'"
+                :title="newsletterTemplate.name"
+                subtitle="Newsletter template preview"
                 :icon="Mail"
                 variant="primary"
             >
                 <template #actions>
                     <div class="flex space-x-2">
-                        <ui-button v-if="!isEditing" label="Edit Template" variant="primary" size="sm" :prefix-icon="Edit" @click="toggleEdit" />
-                        <ui-button v-if="isEditing" label="Delete" variant="destructive" size="sm" :prefix-icon="Trash2" @click="handleDelete" />
-                        <ui-button v-if="isEditing" label="Preview" variant="secondary" size="sm" :prefix-icon="Eye" @click="toggleEdit" />
+                        <ui-button label="Delete" variant="destructive" size="sm" :prefix-icon="Trash2" @click="handleDelete" />
                     </div>
                 </template>
             </common-page-header>
 
             <!-- Template Analytics (for sent templates) -->
-            <div v-if="!isEditing && newsletterTemplate.status === 'sent' && newsletterTemplate.recipients_count > 0" 
+            <div v-if="newsletterTemplate.status === 'sent' && newsletterTemplate.recipients_count > 0" 
                  class="grid grid-cols-1 gap-4 sm:grid-cols-4">
                 <div class="rounded-lg border bg-white p-4 shadow-sm">
                     <div class="flex items-center">
@@ -148,81 +115,8 @@ const handleDelete = () => {
                 </div>
             </div>
 
-            <!-- Edit Form -->
-            <div v-if="isEditing" class="rounded-lg border bg-white p-6 shadow-sm">
-                <form @submit.prevent="handleSubmit" class="space-y-6">
-                    <!-- Template Name -->
-                    <div>
-                        <ui-input
-                            v-model="form.name"
-                            label="Template Name"
-                            placeholder="Enter template name"
-                            :error="form.errors.name"
-                            required
-                        />
-                    </div>
-
-                    <!-- Email Subject -->
-                    <div>
-                        <ui-input
-                            v-model="form.subject"
-                            label="Email Subject"
-                            placeholder="Enter email subject line"
-                            :error="form.errors.subject"
-                            required
-                        />
-                    </div>
-
-                    <!-- Preview Text -->
-                    <div>
-                        <ui-textarea
-                            v-model="form.preview_text"
-                            label="Preview Text"
-                            placeholder="Enter preview text (optional)"
-                            :error="form.errors.preview_text"
-                            :rows="2"
-                        />
-                    </div>
-
-                    <!-- Email Content -->
-                    <div>
-                        <ui-rich-text-editor
-                            v-model="form.content"
-                            label="Email Content"
-                            placeholder="Design your email content here..."
-                            :error="form.errors.content"
-                            :height="500"
-                            required
-                        />
-                    </div>
-
-                    <!-- Status -->
-                    <div>
-                        <ui-select
-                            v-model="form.status"
-                            label="Status"
-                            :options="statusOptions"
-                            :error="form.errors.status"
-                            required
-                        />
-                    </div>
-
-                    <!-- Submit Button -->
-                    <div class="flex justify-end">
-                        <ui-button
-                            type="submit"
-                            label="Update Template"
-                            variant="primary"
-                            :prefix-icon="Save"
-                            :loading="form.processing"
-                            :disabled="!form.name || !form.subject || !form.content"
-                        />
-                    </div>
-                </form>
-            </div>
-
-            <!-- Email Preview Mode -->
-            <div v-else class="rounded-lg border bg-gray-50 p-6 shadow-sm">
+            <!-- Email Preview -->
+            <div class="rounded-lg border bg-gray-50 p-6 shadow-sm">
                 <div class="mx-auto max-w-2xl">
                     <!-- Email Header -->
                     <header class="mb-8 text-center border-b border-gray-200 pb-6">

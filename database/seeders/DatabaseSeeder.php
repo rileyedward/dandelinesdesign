@@ -25,6 +25,8 @@ class DatabaseSeeder extends Seeder
             CategorySeeder::class,
             ProductSeeder::class,
             NotificationSeeder::class,
+            NewsletterSubscriberSeeder::class,
+            NewsletterTemplateSeeder::class,
         ]);
     }
 }

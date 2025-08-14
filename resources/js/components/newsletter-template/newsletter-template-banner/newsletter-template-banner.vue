@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import UiButton from '@/components/ui/forms/button/ui-button.vue';
 import { router } from '@inertiajs/vue3';
-import { Calendar, Edit, Eye, Mail, Send, Users } from 'lucide-vue-next';
+import { Calendar, Eye, Mail, Send, Users } from 'lucide-vue-next';
 import type { NewsletterTemplateBannerProps as Props } from './newsletter-template-banner';
 
 const { template } = withDefaults(defineProps<Props>(), {
@@ -50,10 +50,6 @@ const truncateContent = (content: string, maxLength: number = 150) => {
 };
 
 const handleView = () => {
-    router.visit(route('admin.newsletter.templates.show', template.id));
-};
-
-const handleEdit = () => {
     router.visit(route('admin.newsletter.templates.show', template.id));
 };
 
@@ -138,7 +134,6 @@ const getEngagementRate = () => {
 
             <div class="flex space-x-2">
                 <ui-button label="View" variant="ghost" size="xs" :prefix-icon="Eye" @click="handleView" />
-                <ui-button label="Edit" variant="outline" size="xs" :prefix-icon="Edit" @click="handleEdit" />
             </div>
         </div>
     </div>

@@ -54,15 +54,21 @@ const getDisplayName = () => {
             </div>
         </div>
 
-        <div v-if="subscriber.source" class="mb-3">
-            <div class="flex items-center text-sm text-gray-600">
+        <!-- Source Section - Always present to maintain height -->
+        <div class="mb-3 h-5">
+            <div v-if="subscriber.source" class="flex items-center text-sm text-gray-600">
                 <Tag class="mr-1 h-3 w-3" />
                 Source: {{ subscriber.source }}
             </div>
+            <div v-else class="flex items-center text-sm text-gray-400">
+                <Tag class="mr-1 h-3 w-3" />
+                No source specified
+            </div>
         </div>
 
-        <div v-if="subscriber.tags && subscriber.tags.length > 0" class="mb-3">
-            <div class="flex flex-wrap gap-1">
+        <!-- Tags Section - Always present to maintain height -->
+        <div class="mb-3 h-6">
+            <div v-if="subscriber.tags && subscriber.tags.length > 0" class="flex flex-wrap gap-1">
                 <span 
                     v-for="tag in subscriber.tags.slice(0, 3)" 
                     :key="tag" 
@@ -73,6 +79,9 @@ const getDisplayName = () => {
                 <span v-if="subscriber.tags.length > 3" class="text-xs text-gray-500">
                     +{{ subscriber.tags.length - 3 }} more
                 </span>
+            </div>
+            <div v-else class="flex items-center">
+                <span class="text-xs text-gray-400">No tags assigned</span>
             </div>
         </div>
 

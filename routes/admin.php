@@ -118,7 +118,6 @@ Route::middleware('auth')
                 Route::get('/', 'index')->name('index');
                 Route::post('/', 'store')->name('store');
                 Route::get('/{id}', 'show')->name('show');
-                Route::patch('/{id}', 'update')->name('update');
                 Route::delete('/{id}', 'destroy')->name('destroy');
             });
     });
