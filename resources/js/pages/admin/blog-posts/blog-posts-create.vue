@@ -60,13 +60,7 @@ const handleCancel = () => {
                 <form @submit.prevent="handleSubmit" class="space-y-6">
                     <!-- Title -->
                     <div>
-                        <ui-input
-                            v-model="form.title"
-                            label="Title"
-                            placeholder="Enter blog post title"
-                            :error="form.errors.title"
-                            required
-                        />
+                        <ui-input v-model="form.title" label="Title" placeholder="Enter blog post title" :error="form.errors.title" required />
                     </div>
 
                     <!-- Slug -->
