@@ -86,10 +86,10 @@ const currentYear = new Date().getFullYear();
                         </li>
                     </ul>
                     <a
-                        href="/auth/login"
+                        :href="route('admin.dashboard.index')"
                         class="mt-6 inline-flex items-center justify-center rounded-full bg-gradient-to-r from-gray-700 to-black px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:scale-105 hover:shadow-lg hover:from-gray-800 hover:to-black"
                     >
-                        Admin Login
+                        Admin
                     </a>
                 </div>
             </div>
