@@ -39,12 +39,4 @@ class BlogPostController extends BaseController
         ]);
     }
 
-    public function edit(Request $request, int $id): Response
-    {
-        $blogPost = BlogPost::findOrFail($id);
-
-        return inertia('admin/blog-posts/blog-posts-edit', [
-            'blogPost' => $blogPost,
-        ]);
-    }
 }

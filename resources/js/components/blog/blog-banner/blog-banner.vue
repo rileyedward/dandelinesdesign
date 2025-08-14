@@ -36,7 +36,7 @@ const handleView = () => {
 };
 
 const handleEdit = () => {
-    router.visit(route('admin.blog.edit', post.id));
+    router.visit(route('admin.blog.show', post.id));
 };
 </script>
 

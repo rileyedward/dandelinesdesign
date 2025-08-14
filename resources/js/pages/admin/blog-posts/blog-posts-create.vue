@@ -16,8 +16,6 @@ const form = useForm({
     is_published: false,
 });
 
-const showPreview = ref(false);
-
 const generateSlug = (title: string) => {
     return title
         .toLowerCase()
@@ -33,10 +31,6 @@ const handleTitleChange = (value: string) => {
         form.slug = generateSlug(value);
     }
 };
-
-const renderedContent = computed(() => {
-    return form.content;
-});
 
 const handleSubmit = () => {
     form.post(route('admin.blog.store'), {
@@ -58,23 +52,12 @@ const handleCancel = () => {
         <div class="space-y-6">
             <common-page-header title="Create Blog Post" subtitle="Write and publish a new blog post" :icon="FileText" variant="primary">
                 <template #actions>
-                    <div class="flex space-x-2">
-                        <ui-button label="Cancel" variant="outline" size="sm" :prefix-icon="ArrowLeft" @click="handleCancel" />
-                        <ui-button
-                            v-if="form.content"
-                            :label="showPreview ? 'Edit' : 'Preview'"
-                            variant="secondary"
-                            size="sm"
-                            :prefix-icon="Eye"
-                            @click="showPreview = !showPreview"
-                        />
-                    </div>
+                    <ui-button label="Cancel" variant="outline" size="sm" :prefix-icon="ArrowLeft" @click="handleCancel" />
                 </template>
             </common-page-header>
 
-            <div class="grid grid-cols-1 gap-6">
-                <!-- Form -->
-                <div v-if="!showPreview" class="rounded-lg border bg-white p-6 shadow-sm">
+            <!-- Form -->
+            <div class="rounded-lg border bg-white p-6 shadow-sm">
                     <form @submit.prevent="handleSubmit" class="space-y-6">
                         <!-- Title -->
                         <div>
@@ -134,33 +117,6 @@ const handleCancel = () => {
                         </div>
                     </form>
                 </div>
-
-                <!-- Preview -->
-                <div v-else class="rounded-lg border bg-white p-6 shadow-sm">
-                    <div class="space-y-6">
-                        <!-- Meta Information -->
-                        <div class="border-b pb-4">
-                            <h1 class="text-3xl font-bold text-gray-900">{{ form.title || 'Untitled Post' }}</h1>
-                            <div class="mt-2 text-sm text-gray-500">
-                                <span class="inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium">
-                                    <span :class="form.is_published ? 'bg-green-100 text-green-800' : 'bg-yellow-100 text-yellow-800'">
-                                        {{ form.is_published ? 'Published' : 'Draft' }}
-                                    </span>
-                                </span>
-                            </div>
-                            <div class="mt-1 text-sm text-gray-500">
-                                Slug: <code class="rounded bg-gray-100 px-1 text-xs">{{ form.slug || 'auto-generated' }}</code>
-                            </div>
-                        </div>
-
-                        <!-- Content Preview -->
-                        <div class="prose max-w-none">
-                            <div v-if="form.content" v-html="renderedContent"></div>
-                            <p v-else class="text-gray-500 italic">No content to preview</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </sidebar-layout>
 </template>
