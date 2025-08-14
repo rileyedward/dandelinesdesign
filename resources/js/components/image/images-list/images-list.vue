@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import type { ImageData } from '@/components/ui/forms/image-upload/ui-image-upload';
+import { usePage } from '@inertiajs/vue3';
 import { Calendar, Copy, Download, Eye, FileText, Trash2 } from 'lucide-vue-next';
 import { computed, ref } from 'vue';
 
@@ -40,10 +41,14 @@ const deleteImage = async (image: ImageData) => {
     }
 
     try {
+        const page = usePage();
+        const csrfToken = page.props.csrf_token || document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+
         const response = await fetch(`/admin/images/${image.id}`, {
             method: 'DELETE',
             headers: {
-                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '',
+                'X-CSRF-TOKEN': csrfToken,
+                Accept: 'application/json',
             },
         });
 
@@ -57,25 +62,6 @@ const deleteImage = async (image: ImageData) => {
     } catch (error) {
         alert('Failed to delete image: ' + (error instanceof Error ? error.message : 'Unknown error'));
     }
-};
-
-const copyImageUrl = async (image: ImageData) => {
-    try {
-        await navigator.clipboard.writeText(image.url);
-        // You could add a toast notification here
-        console.log('Image URL copied to clipboard');
-    } catch (error) {
-        console.error('Failed to copy URL:', error);
-    }
-};
-
-const downloadImage = (image: ImageData) => {
-    const link = document.createElement('a');
-    link.href = image.url;
-    link.download = image.original_filename;
-    document.body.appendChild(link);
-    link.click();
-    document.body.removeChild(link);
 };
 
 const viewImage = (image: ImageData) => {
@@ -153,20 +139,6 @@ const sortedImages = computed(() => {
                             title="View Image"
                         >
                             <Eye class="h-4 w-4 text-gray-700" />
-                        </button>
-                        <button
-                            @click.stop="copyImageUrl(image)"
-                            class="rounded-full bg-white p-2 shadow-lg transition-colors hover:bg-gray-50"
-                            title="Copy URL"
-                        >
-                            <Copy class="h-4 w-4 text-gray-700" />
-                        </button>
-                        <button
-                            @click.stop="downloadImage(image)"
-                            class="rounded-full bg-white p-2 shadow-lg transition-colors hover:bg-gray-50"
-                            title="Download"
-                        >
-                            <Download class="h-4 w-4 text-gray-700" />
                         </button>
                         <button
                             @click.stop="deleteImage(image)"

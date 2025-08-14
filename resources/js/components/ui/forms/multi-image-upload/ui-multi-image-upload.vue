@@ -2,6 +2,7 @@
 import { computed, ref, watch } from 'vue';
 import type { UiMultiImageUploadProps as Props, UiMultiImageUploadEmits as Emits, ImageData } from './ui-multi-image-upload';
 import { Upload, X, Loader2, GripVertical, Plus } from 'lucide-vue-next';
+import { usePage } from '@inertiajs/vue3';
 
 const props = withDefaults(defineProps<Props>(), {
   maxSize: 10 * 1024 * 1024, // 10MB
@@ -126,11 +127,16 @@ const uploadFile = async (file: File) => {
     const formData = new FormData();
     formData.append('image', file);
     
+    // Get CSRF token from Inertia page props
+    const page = usePage();
+    const csrfToken = page.props.csrf_token || document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+    
     const response = await fetch(props.uploadUrl, {
       method: 'POST',
       body: formData,
       headers: {
-        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '',
+        'X-CSRF-TOKEN': csrfToken,
+        'Accept': 'application/json',
       },
     });
 

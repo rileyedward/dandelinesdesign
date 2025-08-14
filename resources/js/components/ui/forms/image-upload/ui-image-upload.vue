@@ -2,7 +2,7 @@
 import { computed, ref, watch } from 'vue';
 import type { UiImageUploadProps as Props, UiImageUploadEmits as Emits, ImageData } from './ui-image-upload';
 import { Upload, X, Image as ImageIcon, Loader2 } from 'lucide-vue-next';
-import { router } from '@inertiajs/vue3';
+import { usePage } from '@inertiajs/vue3';
 
 const props = withDefaults(defineProps<Props>(), {
   multiple: false,
@@ -151,11 +151,16 @@ const uploadFile = async (file: File) => {
     const formData = new FormData();
     formData.append('image', file);
     
+    // Get CSRF token from Inertia page props
+    const page = usePage();
+    const csrfToken = page.props.csrf_token || document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+    
     const response = await fetch(props.uploadUrl, {
       method: 'POST',
       body: formData,
       headers: {
-        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '',
+        'X-CSRF-TOKEN': csrfToken,
+        'Accept': 'application/json',
       },
     });
 

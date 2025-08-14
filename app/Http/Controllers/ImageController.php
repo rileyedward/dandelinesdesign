@@ -51,7 +51,9 @@ class ImageController extends Controller
     public function destroy(string $id): JsonResponse
     {
         try {
-            $this->imageService->delete($id);
+            $model = $this->imageService->getById($id);
+
+            $this->imageService->delete($model);
 
             return response()->json([
                 'success' => true,

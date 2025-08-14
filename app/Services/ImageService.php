@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Contracts\ImageRepositoryInterface;
 use App\Contracts\ImageServiceInterface;
+use App\Models\Image;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
@@ -24,7 +25,13 @@ class ImageService extends BaseService implements ImageServiceInterface
         $filename = Str::uuid().'.'.$file->getClientOriginalExtension();
         $path = 'images/'.$filename;
 
-        Storage::disk('public')->put($path, file_get_contents($file));
+        $image = Storage::disk('public')->put($path, $file);
+
+        logger("here here here");
+
+        logger($image);
+
+        logger(Image::query()->get());
 
         $imageData = [
             'filename' => $filename,

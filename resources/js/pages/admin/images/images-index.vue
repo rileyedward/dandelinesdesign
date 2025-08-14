@@ -134,11 +134,11 @@ const closeUploadModal = () => {
 
             <!-- Images List -->
             <div class="rounded-lg bg-white shadow">
-                <ImagesList :images="imagesList" @image-deleted="handleImageDeleted" />
+                <images-list :images="imagesList" @image-deleted="handleImageDeleted" />
             </div>
         </div>
 
         <!-- Upload Modal -->
-        <ImageUploadModal :show="showUploadModal" @close="closeUploadModal" @image-uploaded="handleImageUploaded" />
+        <image-upload-modal :show="showUploadModal" @close="closeUploadModal" @image-uploaded="handleImageUploaded" />
     </SidebarLayout>
 </template>

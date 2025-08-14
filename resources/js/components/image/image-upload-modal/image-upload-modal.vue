@@ -20,7 +20,6 @@ const uploadedImages = ref<ImageData[]>([]);
 const errorMessage = ref<string>('');
 const successMessage = ref<string>('');
 
-// Reset state when modal opens/closes
 watch(
     () => props.show,
     (newShow) => {
@@ -42,7 +41,6 @@ const handleUploadSuccess = (image: ImageData) => {
     successMessage.value = `Successfully uploaded "${image.original_filename}"`;
     errorMessage.value = '';
 
-    // Clear success message after 3 seconds
     setTimeout(() => {
         successMessage.value = '';
     }, 3000);
@@ -146,7 +144,7 @@ const closeModal = () => {
 
                 <!-- Upload Component -->
                 <div class="mb-6">
-                    <UiMultiImageUpload
+                    <ui-multi-image-upload
                         v-model="uploadedImages"
                         :max-files="20"
                         :max-size="10 * 1024 * 1024"
