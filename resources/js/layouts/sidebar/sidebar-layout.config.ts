@@ -30,7 +30,7 @@ export interface SidebarLayoutConfig {
 const config: SidebarLayoutConfig = {
     title: 'Dandeline Designs',
     sidebarItems: [
-        { label: 'Dashboard', route: '/admin/dashboard', icon: Home },
+        { label: 'Dashboard', route: '/admin', icon: Home },
         {
             label: 'Customer Relations',
             icon: Users,
