@@ -24,13 +24,18 @@ class ImageService extends BaseService implements ImageServiceInterface
         $filename = Str::uuid().'.'.$file->getClientOriginalExtension();
         $path = 'images/'.$filename;
 
-        Storage::disk('local')->put($path, $file);
+        $storageDisk = $this->getStorageDisk();
+        $publicDisk = $this->getPublicDisk();
+
+        Storage::disk($storageDisk)->put($path, file_get_contents($file));
+
+        $url = $this->generateImageUrl($path, $storageDisk, $publicDisk);
 
         $imageData = [
             'filename' => $filename,
             'original_filename' => $file->getClientOriginalName(),
             'path' => $path,
-            'url' => Storage::disk('public')->url($path),
+            'url' => $url,
             'mime_type' => $file->getMimeType(),
             'size' => $file->getSize(),
             'alt_text' => $altText,
@@ -39,5 +44,24 @@ class ImageService extends BaseService implements ImageServiceInterface
         $image = $this->repository->store($imageData);
 
         return $image->toArray();
+    }
+
+    private function getStorageDisk(): string
+    {
+        return config('app.env') === 'production' ? 'cloud' : 'public';
+    }
+
+    private function getPublicDisk(): string
+    {
+        return config('app.env') === 'production' ? 'cloud' : 'public';
+    }
+
+    private function generateImageUrl(string $path, string $storageDisk, string $publicDisk): string
+    {
+        if (config('app.env') === 'production') {
+            return Storage::disk($publicDisk)->url($path);
+        }
+
+        return Storage::disk($publicDisk)->url($path);
     }
 }
