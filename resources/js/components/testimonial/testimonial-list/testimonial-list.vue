@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import TestimonialUpdateModal from '@/components/testimonial/testimonial-update-modal/testimonial-update-modal.vue';
 import type { Testimonial } from '@/types/testimonial';
-import { Calendar, Star } from 'lucide-vue-next';
+import { Calendar } from 'lucide-vue-next';
 import { ref } from 'vue';
 import type { TestimonialListProps as Props } from './testimonial-list';
 

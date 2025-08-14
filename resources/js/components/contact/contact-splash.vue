@@ -55,11 +55,7 @@ const scrollToContactForm = () => {
                     @click="scrollToContactForm"
                     class="inline-flex items-center rounded-full bg-gradient-to-r from-emerald-500 to-teal-600 px-6 py-3 text-sm font-semibold text-white transition-all duration-300 hover:scale-105 hover:from-emerald-600 hover:to-teal-700 hover:shadow-lg"
                 >
-                    <img
-                        src="/images/app-logo.png"
-                        alt="Dandelines Design Logo"
-                        class="mr-2 h-5 w-5 drop-shadow-md"
-                    />
+                    <img src="/images/app-logo.png" alt="Dandelines Design Logo" class="mr-2 h-5 w-5 drop-shadow-md" />
                     Contact Me!
                 </button>
             </div>

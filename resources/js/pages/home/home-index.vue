@@ -14,15 +14,11 @@ onMounted(() => {
 
 <template>
     <navbar-layout>
-        <div
-            class="relative flex min-h-screen flex-col overflow-hidden mt-16"
-        >
+        <div class="relative mt-16 flex min-h-screen flex-col overflow-hidden">
             <div class="absolute inset-0 overflow-hidden">
                 <div class="absolute -top-20 -left-20 h-96 w-96 rounded-full"></div>
                 <div class="absolute -right-20 -bottom-20 h-96 w-96 rounded-full"></div>
-                <div
-                    class="absolute top-1/3 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full"
-                ></div>
+                <div class="absolute top-1/3 left-1/2 h-64 w-64 -translate-x-1/2 rounded-full"></div>
             </div>
 
             <div class="relative z-10 px-6 text-center">
