@@ -14,6 +14,7 @@ class NewsletterSubscriberController extends BaseController
     protected $serviceInterface = NewsletterSubscriberServiceInterface::class;
     protected ?string $requestClass = NewsletterSubscriberRequest::class;
 
+
     public function index(Request $request): Response
     {
         $activeSubscribers = NewsletterSubscriber::query()

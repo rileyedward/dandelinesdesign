@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\BlogController;
+use App\Http\Controllers\NewsletterSubscriberController;
 use App\Http\Controllers\ContactMessageController;
 use App\Http\Controllers\QuoteRequestController;
 use App\Http\Controllers\StoreController;
@@ -27,6 +28,7 @@ Route::get('/store', [StoreController::class, 'index'])->name('store');
 
 Route::post('/contact', [ContactMessageController::class, 'store'])->name('contact.store');
 Route::post('/quote', [QuoteRequestController::class, 'store'])->name('quote.store');
+Route::post('/newsletter', [NewsletterSubscriberController::class, 'store'])->name('newsletter.store');
 
 require __DIR__.'/auth.php';
 require __DIR__.'/admin.php';

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import NavbarLayout from '@/layouts/navbar/navbar-layout.vue';
+import NewsletterSubscription from '@/components/newsletter/newsletter-subscription.vue';
 import { onMounted, ref } from 'vue';
 
 const isLoaded = ref<boolean>(false);
@@ -220,48 +221,9 @@ onMounted(() => {
             </div>
         </div>
 
-        <div class="bg-gradient-to-r from-rose-500 to-pink-600 py-20">
-            <div class="container mx-auto px-6 text-center">
-                <div class="mx-auto max-w-3xl">
-                    <h2 class="mb-6 text-4xl font-bold text-white">Ready to Bring Your Vision to Life?</h2>
-                    <p class="mb-8 text-xl text-rose-100">
-                        Let's collaborate to create something truly special. Whether it's an unforgettable event, stunning floral arrangements, or
-                        custom artwork, your creative journey starts here.
-                    </p>
-
-                    <div class="flex flex-col gap-4 sm:flex-row sm:justify-center">
-                        <a
-                            href="/contact"
-                            class="inline-flex items-center rounded-full bg-white px-8 py-4 text-lg font-bold text-rose-600 transition-all duration-300 hover:scale-105 hover:bg-rose-50 hover:shadow-xl"
-                        >
-                            <svg class="mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"
-                                />
-                            </svg>
-                            Start Your Project
-                        </a>
-
-                        <a
-                            href="/services"
-                            class="inline-flex items-center rounded-full border-2 border-white px-8 py-4 text-lg font-bold text-white transition-all duration-300 hover:scale-105 hover:bg-white hover:text-rose-600"
-                        >
-                            <svg class="mr-3 h-5 w-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path
-                                    stroke-linecap="round"
-                                    stroke-linejoin="round"
-                                    stroke-width="2"
-                                    d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"
-                                />
-                            </svg>
-                            Explore Services
-                        </a>
-                    </div>
-                </div>
-            </div>
-        </div>
+        <newsletter-subscription
+            title="Join Our Creative Community"
+            description="Subscribe to our newsletter for design inspiration, event planning tips, and updates on our latest projects. Be the first to know about special offers and creative insights."
+        />
     </navbar-layout>
 </template>
