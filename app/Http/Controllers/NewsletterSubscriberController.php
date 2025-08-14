@@ -16,7 +16,23 @@ class NewsletterSubscriberController extends BaseController
 
     public function index(Request $request): Response
     {
-        // TODO: Implement frontend index view for newsletter subscribers
-        return inertia(null);
+        $activeSubscribers = NewsletterSubscriber::query()
+            ->where('status', 'active')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        $inactiveSubscribers = NewsletterSubscriber::query()
+            ->where('status', 'inactive')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        $unsubscribedSubscribers = NewsletterSubscriber::query()
+            ->where('status', 'unsubscribed')
+            ->orderBy('created_at', 'desc')
+            ->get();
+
+        return inertia('admin/newsletter-subscribers/newsletter-subscribers-index', [
+            'activeSubscribers' => $activeSubscribers,
+            'inactiveSubscribers' => $inactiveSubscribers,
+            'unsubscribedSubscribers' => $unsubscribedSubscribers,
+        ]);
     }
 }

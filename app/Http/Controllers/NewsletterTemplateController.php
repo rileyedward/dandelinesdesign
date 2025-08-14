@@ -16,7 +16,24 @@ class NewsletterTemplateController extends BaseController
 
     public function index(Request $request): Response
     {
-        // TODO: Implement frontend index view for newsletter templates
-        return inertia(null);
+        $newsletterTemplates = NewsletterTemplate::query()->orderBy('created_at', 'desc')->get();
+
+        return inertia('admin/newsletter-templates/newsletter-templates-index', [
+            'newsletterTemplates' => $newsletterTemplates,
+        ]);
+    }
+
+    public function create(Request $request): Response
+    {
+        return inertia('admin/newsletter-templates/newsletter-templates-create');
+    }
+
+    public function show(Request $request, int $id): Response
+    {
+        $newsletterTemplate = NewsletterTemplate::findOrFail($id);
+
+        return inertia('admin/newsletter-templates/newsletter-templates-show', [
+            'newsletterTemplate' => $newsletterTemplate,
+        ]);
     }
 }
