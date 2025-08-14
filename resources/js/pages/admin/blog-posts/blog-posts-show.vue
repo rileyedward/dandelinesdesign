@@ -1,14 +1,14 @@
 <script setup lang="ts">
 import CommonPageHeader from '@/components/common/page-header/common-page-header.vue';
 import UiButton from '@/components/ui/forms/button/ui-button.vue';
+import UiCheckbox from '@/components/ui/forms/checkbox/ui-checkbox.vue';
 import UiInput from '@/components/ui/forms/input/ui-input.vue';
 import UiRichTextEditor from '@/components/ui/forms/rich-text-editor/ui-rich-text-editor.vue';
-import UiCheckbox from '@/components/ui/forms/checkbox/ui-checkbox.vue';
 import SidebarLayout from '@/layouts/sidebar/sidebar-layout.vue';
 import type { BlogPost } from '@/types/blog';
 import { Head, useForm } from '@inertiajs/vue3';
 import { Calendar, Edit, Eye, FileText, Save, Trash2 } from 'lucide-vue-next';
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 
 const props = defineProps<{
     blogPost: BlogPost;
@@ -73,38 +73,17 @@ const handleDelete = () => {
 
     <sidebar-layout>
         <div class="space-y-6">
-            <common-page-header 
-                :title="isEditing ? `Edit: ${blogPost.title}` : blogPost.title" 
-                :subtitle="isEditing ? 'Update blog post content and settings' : 'Blog post preview'" 
-                :icon="FileText" 
+            <common-page-header
+                :title="isEditing ? `Edit: ${blogPost.title}` : blogPost.title"
+                :subtitle="isEditing ? 'Update blog post content and settings' : 'Blog post preview'"
+                :icon="FileText"
                 variant="primary"
             >
                 <template #actions>
                     <div class="flex space-x-2">
-                        <ui-button 
-                            v-if="!isEditing"
-                            label="Edit Post" 
-                            variant="primary" 
-                            size="sm" 
-                            :prefix-icon="Edit" 
-                            @click="toggleEdit" 
-                        />
-                        <ui-button 
-                            v-if="isEditing"
-                            label="Delete" 
-                            variant="destructive" 
-                            size="sm" 
-                            :prefix-icon="Trash2" 
-                            @click="handleDelete" 
-                        />
-                        <ui-button 
-                            v-if="isEditing"
-                            label="View Post" 
-                            variant="secondary" 
-                            size="sm" 
-                            :prefix-icon="Eye" 
-                            @click="toggleEdit" 
-                        />
+                        <ui-button v-if="!isEditing" label="Edit Post" variant="primary" size="sm" :prefix-icon="Edit" @click="toggleEdit" />
+                        <ui-button v-if="isEditing" label="Delete" variant="destructive" size="sm" :prefix-icon="Trash2" @click="handleDelete" />
+                        <ui-button v-if="isEditing" label="View Post" variant="secondary" size="sm" :prefix-icon="Eye" @click="toggleEdit" />
                     </div>
                 </template>
             </common-page-header>
@@ -150,11 +129,7 @@ const handleDelete = () => {
 
                     <!-- Published Status -->
                     <div>
-                        <ui-checkbox
-                            v-model="form.is_published"
-                            label="Published"
-                            help="Toggle to publish or unpublish this post"
-                        />
+                        <ui-checkbox v-model="form.is_published" label="Published" help="Toggle to publish or unpublish this post" />
                     </div>
 
                     <!-- Submit Button -->
@@ -173,7 +148,7 @@ const handleDelete = () => {
 
             <!-- Preview Mode - Customer-facing style (Default View) -->
             <div v-else class="rounded-lg border bg-gray-50 p-6 shadow-sm">
-                <div class="max-w-4xl mx-auto">
+                <div class="mx-auto max-w-4xl">
                     <!-- Article Header -->
                     <header class="mb-8 text-center">
                         <div class="mb-4">
@@ -209,9 +184,7 @@ const handleDelete = () => {
                         <div class="mx-auto inline-flex w-full max-w-md items-center justify-center border-t border-gray-200 py-6">
                             <div class="text-sm text-gray-500">
                                 Published on {{ formatDate(blogPost.created_at) }}
-                                <span v-if="blogPost.updated_at !== blogPost.created_at">
-                                    • Updated {{ formatDate(blogPost.updated_at) }}
-                                </span>
+                                <span v-if="blogPost.updated_at !== blogPost.created_at"> • Updated {{ formatDate(blogPost.updated_at) }} </span>
                             </div>
                         </div>
                     </footer>
@@ -298,7 +271,7 @@ const handleDelete = () => {
     color: #374151;
     border-left-width: 0.25rem;
     border-left-color: #d1d5db;
-    quotes: "\201C""\201D""\2018""\2019";
+    quotes: '\201C' '\201D' '\2018' '\2019';
     margin-top: 1.6rem;
     margin-bottom: 1.6rem;
     padding-left: 1rem;

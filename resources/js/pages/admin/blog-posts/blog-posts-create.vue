@@ -6,8 +6,7 @@ import UiInput from '@/components/ui/forms/input/ui-input.vue';
 import UiRichTextEditor from '@/components/ui/forms/rich-text-editor/ui-rich-text-editor.vue';
 import SidebarLayout from '@/layouts/sidebar/sidebar-layout.vue';
 import { Head, useForm } from '@inertiajs/vue3';
-import { ArrowLeft, Eye, FileText, Save } from 'lucide-vue-next';
-import { computed, ref } from 'vue';
+import { ArrowLeft, FileText, Save } from 'lucide-vue-next';
 
 const form = useForm({
     title: '',
@@ -58,65 +57,61 @@ const handleCancel = () => {
 
             <!-- Form -->
             <div class="rounded-lg border bg-white p-6 shadow-sm">
-                    <form @submit.prevent="handleSubmit" class="space-y-6">
-                        <!-- Title -->
-                        <div>
-                            <ui-input
-                                v-model="form.title"
-                                label="Title"
-                                placeholder="Enter blog post title"
-                                :error="form.errors.title"
-                                required
-                                @input="handleTitleChange"
-                            />
-                        </div>
+                <form @submit.prevent="handleSubmit" class="space-y-6">
+                    <!-- Title -->
+                    <div>
+                        <ui-input
+                            v-model="form.title"
+                            label="Title"
+                            placeholder="Enter blog post title"
+                            :error="form.errors.title"
+                            required
+                            @input="handleTitleChange"
+                        />
+                    </div>
 
-                        <!-- Slug -->
-                        <div>
-                            <ui-input
-                                v-model="form.slug"
-                                label="Slug"
-                                placeholder="auto-generated-from-title"
-                                :error="form.errors.slug"
-                                help="URL-friendly version of the title. Leave blank to auto-generate."
-                            />
-                        </div>
+                    <!-- Slug -->
+                    <div>
+                        <ui-input
+                            v-model="form.slug"
+                            label="Slug"
+                            placeholder="auto-generated-from-title"
+                            :error="form.errors.slug"
+                            help="URL-friendly version of the title. Leave blank to auto-generate."
+                        />
+                    </div>
 
-                        <!-- Content -->
-                        <div>
-                            <ui-rich-text-editor
-                                v-model="form.content"
-                                label="Content"
-                                placeholder="Write your blog post content here..."
-                                :error="form.errors.content"
-                                :height="500"
-                                required
-                                help="Use the rich text editor to format your content with headings, lists, links, and more."
-                            />
-                        </div>
+                    <!-- Content -->
+                    <div>
+                        <ui-rich-text-editor
+                            v-model="form.content"
+                            label="Content"
+                            placeholder="Write your blog post content here..."
+                            :error="form.errors.content"
+                            :height="500"
+                            required
+                            help="Use the rich text editor to format your content with headings, lists, links, and more."
+                        />
+                    </div>
 
-                        <!-- Published Status -->
-                        <div>
-                            <ui-checkbox
-                                v-model="form.is_published"
-                                label="Publish immediately"
-                                help="If unchecked, the post will be saved as a draft"
-                            />
-                        </div>
+                    <!-- Published Status -->
+                    <div>
+                        <ui-checkbox v-model="form.is_published" label="Publish immediately" help="If unchecked, the post will be saved as a draft" />
+                    </div>
 
-                        <!-- Submit Button -->
-                        <div class="flex justify-end">
-                            <ui-button
-                                type="submit"
-                                :label="form.is_published ? 'Publish Post' : 'Save Draft'"
-                                variant="primary"
-                                :prefix-icon="Save"
-                                :loading="form.processing"
-                                :disabled="!form.title || !form.content"
-                            />
-                        </div>
-                    </form>
-                </div>
+                    <!-- Submit Button -->
+                    <div class="flex justify-end">
+                        <ui-button
+                            type="submit"
+                            :label="form.is_published ? 'Publish Post' : 'Save Draft'"
+                            variant="primary"
+                            :prefix-icon="Save"
+                            :loading="form.processing"
+                            :disabled="!form.title || !form.content"
+                        />
+                    </div>
+                </form>
+            </div>
         </div>
     </sidebar-layout>
 </template>
