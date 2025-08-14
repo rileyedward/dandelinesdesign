@@ -26,6 +26,18 @@ class ImageController extends Controller
         ]);
     }
 
+    public function list(): JsonResponse
+    {
+        $images = Image::query()
+            ->orderBy('updated_at', 'desc')
+            ->get(['id', 'filename', 'original_filename', 'url', 'alt_text']);
+
+        return response()->json([
+            'success' => true,
+            'data' => $images,
+        ]);
+    }
+
     public function store(ImageRequest $request): JsonResponse
     {
         try {

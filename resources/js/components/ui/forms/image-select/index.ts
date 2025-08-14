@@ -1,0 +1,1 @@
+export { default as UiImageSelect } from './ui-image-select.vue';

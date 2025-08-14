@@ -20,6 +20,7 @@ class BlogPostRequest extends FormRequest
                 Rule::unique('blog_posts', 'slug')->ignore($isUpdate ? $blogPostId : null),
             ],
             'content' => ['required', 'string'],
+            'image_url' => ['nullable', 'string', 'url'],
             'is_published' => ['boolean'],
         ];
     }

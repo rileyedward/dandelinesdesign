@@ -16,6 +16,7 @@ class BlogPost extends Model
         'title',
         'slug',
         'content',
+        'image_url',
         'is_published',
     ];
 

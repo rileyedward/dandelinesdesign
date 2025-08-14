@@ -158,9 +158,7 @@ const closeModal = () => {
                 <div v-if="uploadedImage" class="mb-6 rounded-lg bg-gray-50 p-4">
                     <div class="flex items-center justify-between text-sm">
                         <span class="text-gray-600">Image uploaded: {{ uploadedImage.original_filename }}</span>
-                        <span class="text-gray-600">
-                            Size: {{ Math.round((uploadedImage.size / 1024 / 1024) * 100) / 100 }} MB
-                        </span>
+                        <span class="text-gray-600"> Size: {{ Math.round((uploadedImage.size / 1024 / 1024) * 100) / 100 }} MB </span>
                     </div>
                 </div>
 

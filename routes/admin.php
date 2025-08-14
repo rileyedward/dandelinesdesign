@@ -128,6 +128,7 @@ Route::middleware('auth')
             ->name('images.')
             ->group(function () {
                 Route::get('/', 'index')->name('index');
+                Route::get('/list', 'list')->name('list');
                 Route::post('/', 'store')->name('store');
                 Route::delete('/{id}', 'destroy')->name('destroy');
             });
