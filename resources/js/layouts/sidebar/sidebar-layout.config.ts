@@ -37,7 +37,7 @@ const config: SidebarLayoutConfig = {
             children: [
                 { label: 'Leads', route: '/admin/leads', icon: UserCheck },
                 { label: 'Messages', route: '/admin/messages', icon: Mail },
-                { label: 'Requests', route: '/admin/quotes', icon: MessageSquare },
+                { label: 'Quotes', route: '/admin/quotes', icon: MessageSquare },
             ],
         },
         {
