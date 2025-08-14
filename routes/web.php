@@ -22,6 +22,7 @@ Route::get('/contact', function () {
 })->name('contact.index');
 
 Route::get('/blog', [BlogController::class, 'index'])->name('blog');
+Route::get('/blog/{slug}', [BlogController::class, 'show'])->name('blog.show');
 Route::get('/store', [StoreController::class, 'index'])->name('store');
 
 Route::post('/contact', [ContactMessageController::class, 'store'])->name('contact.store');
