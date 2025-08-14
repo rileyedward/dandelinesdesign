@@ -213,7 +213,6 @@ const sidebarClasses = computed(() => {
               >
                 <user class="mr-3 flex-shrink-0 h-6 w-6" />
                 <span class="flex-1">{{ profileMenu.userName }}</span>
-                <chevron-up class="flex-shrink-0 h-5 w-5" />
               </div>
             </ui-dropdown-menu>
           </div>
@@ -318,7 +317,6 @@ const sidebarClasses = computed(() => {
               >
                 <user class="mr-3 flex-shrink-0 h-5 w-5" />
                 <span class="flex-1">{{ profileMenu.userName }}</span>
-                <chevron-up class="flex-shrink-0 h-4 w-4" />
               </div>
             </ui-dropdown-menu>
           </div>

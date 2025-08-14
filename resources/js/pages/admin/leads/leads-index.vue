@@ -8,7 +8,12 @@ import { Head } from '@inertiajs/vue3';
 import { UserCheck } from 'lucide-vue-next';
 
 defineProps<{
-    leads: Lead[];
+    newLeads: Lead[];
+    contactedLeads: Lead[];
+    qualifiedLeads: Lead[];
+    proposalLeads: Lead[];
+    wonLeads: Lead[];
+    lostLeads: Lead[];
 }>();
 
 const handleLeadCreated = () => {
@@ -27,7 +32,14 @@ const handleLeadCreated = () => {
                 </template>
             </common-page-header>
 
-            <lead-list :leads="leads" />
+            <lead-list
+                :new-leads="newLeads"
+                :contacted-leads="contactedLeads"
+                :qualified-leads="qualifiedLeads"
+                :proposal-leads="proposalLeads"
+                :won-leads="wonLeads"
+                :lost-leads="lostLeads"
+            />
         </div>
     </sidebar-layout>
 </template>

@@ -20,12 +20,38 @@ class LeadController extends BaseController
 
     public function index(Request $request): Response
     {
-        $leads = Lead::query()
-            ->orderBy('updated_at', 'desc')
+        $newLeads = Lead::query()
+            ->where('status', 'new')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        $contactedLeads = Lead::query()
+            ->where('status', 'contacted')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        $qualifiedLeads = Lead::query()
+            ->where('status', 'qualified')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        $proposalLeads = Lead::query()
+            ->where('status', 'proposal')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        $wonLeads = Lead::query()
+            ->where('status', 'won')
+            ->orderBy('created_at', 'desc')
+            ->get();
+        $lostLeads = Lead::query()
+            ->where('status', 'lost')
+            ->orderBy('created_at', 'desc')
             ->get();
 
         return inertia('admin/leads/leads-index', [
-            'leads' => $leads,
+            'newLeads' => $newLeads,
+            'contactedLeads' => $contactedLeads,
+            'qualifiedLeads' => $qualifiedLeads,
+            'proposalLeads' => $proposalLeads,
+            'wonLeads' => $wonLeads,
+            'lostLeads' => $lostLeads,
         ]);
     }
 
