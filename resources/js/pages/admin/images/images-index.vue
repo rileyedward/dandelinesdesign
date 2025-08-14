@@ -46,7 +46,7 @@ const closeUploadModal = () => {
                     <p class="mt-1 text-sm text-gray-600">Manage your image library for use across your website</p>
                 </div>
                 <div class="mt-4 sm:mt-0">
-                    <UiButton label="Add Image" :prefix-icon="Plus" @click="openUploadModal" class="inline-flex items-center" />
+                    <UiButton label="New" :prefix-icon="Plus" @click="openUploadModal" class="inline-flex items-center" />
                 </div>
             </div>
 

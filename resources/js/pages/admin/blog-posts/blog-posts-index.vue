@@ -23,7 +23,7 @@ const handleCreateBlogPost = () => {
         <div class="space-y-6">
             <common-page-header title="Blog Posts" subtitle="Manage your blog content" :icon="FileText" variant="primary">
                 <template #actions>
-                    <ui-button label="Create Blog Post" variant="primary" size="sm" :prefix-icon="Plus" @click="handleCreateBlogPost" />
+                    <ui-button label="New" variant="primary" size="sm" :prefix-icon="Plus" @click="handleCreateBlogPost" />
                 </template>
             </common-page-header>
 

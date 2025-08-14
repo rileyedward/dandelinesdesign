@@ -166,7 +166,7 @@ const copyPhone = async () => {
 
         <!-- Lead Generation -->
         <div class="mt-4 mb-6 border-t pt-4">
-            <h4 class="mb-2 text-sm font-medium text-gray-900">Lead Generation</h4>
+            <h4 class="mb-2 text-sm font-medium text-gray-900">Actions:</h4>
             <generate-lead-button
                 :name="message.name"
                 :email="message.email"
@@ -182,10 +182,9 @@ const copyPhone = async () => {
 
         <!-- Action Buttons -->
         <div class="flex justify-end space-x-3">
-            <ui-button :variant="message.is_read ? 'primary' : 'secondary'" @click="toggleReadStatus">
+            <ui-button variant="primary" @click="toggleReadStatus">
                 {{ message.is_read ? 'Mark as Unread' : 'Mark as Read' }}
             </ui-button>
-            <ui-button variant="secondary" @click="handleClose"> Close </ui-button>
         </div>
     </ui-modal>
 </template>

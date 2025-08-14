@@ -23,7 +23,7 @@ const handleCreateTemplate = () => {
         <div class="space-y-6">
             <common-page-header title="Newsletter Templates" subtitle="Manage your email templates" :icon="Mail" variant="primary">
                 <template #actions>
-                    <ui-button label="Create Template" variant="primary" size="sm" :prefix-icon="Plus" @click="handleCreateTemplate" />
+                    <ui-button label="New" variant="primary" size="sm" :prefix-icon="Plus" @click="handleCreateTemplate" />
                 </template>
             </common-page-header>
 

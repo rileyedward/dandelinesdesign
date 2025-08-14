@@ -11,7 +11,6 @@ import { ArrowLeft, FileText, Save } from 'lucide-vue-next';
 
 const form = useForm({
     title: '',
-    slug: '',
     content: '',
     image_url: '',
     is_published: false,
@@ -26,17 +25,9 @@ const generateSlug = (title: string) => {
         .trim('-');
 };
 
-const handleTitleChange = (value: string) => {
-    form.title = value;
-    if (!form.slug || form.slug === generateSlug(form.title)) {
-        form.slug = generateSlug(value);
-    }
-};
-
 const handleSubmit = () => {
     form.post(route('admin.blog.store'), {
         onSuccess: () => {
-            // Redirect will happen automatically
         },
     });
 };
@@ -63,17 +54,6 @@ const handleCancel = () => {
                     <!-- Title -->
                     <div>
                         <ui-input v-model="form.title" label="Title" placeholder="Enter blog post title" :error="form.errors.title" required />
-                    </div>
-
-                    <!-- Slug -->
-                    <div>
-                        <ui-input
-                            v-model="form.slug"
-                            label="Slug"
-                            placeholder="auto-generated-from-title"
-                            :error="form.errors.slug"
-                            help="URL-friendly version of the title. Leave blank to auto-generate."
-                        />
                     </div>
 
                     <!-- Image -->

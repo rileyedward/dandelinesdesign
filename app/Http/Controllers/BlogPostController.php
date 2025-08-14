@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use App\Contracts\BlogPostServiceInterface;
 use App\Http\Requests\BlogPostRequest;
 use App\Models\BlogPost;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 class BlogPostController extends BaseController
 {
@@ -30,6 +32,24 @@ class BlogPostController extends BaseController
     public function create(Request $request): Response
     {
         return inertia('admin/blog-posts/blog-posts-create');
+    }
+
+    public function store(): RedirectResponse
+    {
+        if (! $this->requestClass) {
+            throw new MethodNotAllowedHttpException([], 'Method not allowed');
+        }
+
+        $request = app($this->requestClass);
+        $validatedData = $request->validated();
+
+        // TODO: Uncomment once authorization policy structure is setup...
+        // $this->authorize('store', $this->modelClass);
+
+        $storeData = $this->filterInputData($validatedData);
+        $blogPost = $this->service->store($storeData);
+
+        return to_route('admin.blog.show', $blogPost->id);
     }
 
     public function show(Request $request, int $id): Response

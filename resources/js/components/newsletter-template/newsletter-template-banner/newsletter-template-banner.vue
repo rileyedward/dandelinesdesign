@@ -60,7 +60,10 @@ const getEngagementRate = () => {
 </script>
 
 <template>
-    <div class="rounded-lg border border-gray-200 bg-white p-6 shadow-md transition-all duration-300 hover:border-blue-300 hover:shadow-lg">
+    <div
+        class="rounded-lg border border-gray-200 bg-white p-6 shadow-md transition-all duration-300 hover:border-blue-300 hover:shadow-lg cursor-pointer"
+        @click="handleView"
+    >
         <div class="mb-4 flex items-start justify-between">
             <div class="flex-1">
                 <h3 class="mb-1 text-lg font-semibold text-gray-900">{{ template.name }}</h3>
@@ -126,10 +129,6 @@ const getEngagementRate = () => {
                     <Calendar class="mr-1 h-3 w-3" />
                     Scheduled {{ formatDate(template.scheduled_at) }}
                 </span>
-            </div>
-
-            <div class="flex space-x-2">
-                <ui-button label="View" variant="ghost" size="xs" :prefix-icon="Eye" @click="handleView" />
             </div>
         </div>
     </div>

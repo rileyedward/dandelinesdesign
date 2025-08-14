@@ -14,11 +14,6 @@ class BlogPostRequest extends FormRequest
 
         return [
             'title' => ['required', 'string'],
-            'slug' => [
-                'required',
-                'string',
-                Rule::unique('blog_posts', 'slug')->ignore($isUpdate ? $blogPostId : null),
-            ],
             'content' => ['required', 'string'],
             'image_url' => ['nullable', 'string', 'url'],
             'is_published' => ['boolean'],

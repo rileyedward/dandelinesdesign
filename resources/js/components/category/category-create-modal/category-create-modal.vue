@@ -39,7 +39,7 @@ const handleSubmit = (category: any) => {
 
 <template>
     <div>
-        <ui-button label="Add Category" variant="primary" size="sm" :prefix-icon="Plus" @click="showModal = true" />
+        <ui-button label="New" variant="primary" size="sm" :prefix-icon="Plus" @click="showModal = true" />
 
         <ui-modal
             :show="showModal"

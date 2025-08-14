@@ -159,8 +159,8 @@ const getStatusColor = (status: string) => {
                 <ui-button type="button" variant="destructive" @click="handleDelete" :disabled="form.processing"> Delete Subscriber </ui-button>
 
                 <div class="flex space-x-3">
-                    <ui-button type="button" variant="secondary" @click="handleClose" :disabled="form.processing"> Cancel </ui-button>
-                    <ui-button type="submit" variant="primary" :disabled="form.processing" :loading="form.processing"> Save Changes </ui-button>
+                    <ui-button label="Cancel" type="button" variant="secondary" @click="handleClose" :disabled="form.processing" />
+                    <ui-button label="Save" type="submit" variant="primary" :disabled="form.processing" :loading="form.processing" />
                 </div>
             </div>
         </form>

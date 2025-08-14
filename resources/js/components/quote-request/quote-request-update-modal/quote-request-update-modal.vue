@@ -27,8 +27,6 @@ ${quoteRequest.notes ? `Notes: ${quoteRequest.notes}` : ''}`;
 };
 
 const handleLeadGenerated = () => {
-    // The redirect will be handled by the backend
-    // We can close the modal
     emit('update:show', false);
 };
 
@@ -95,32 +93,5 @@ const handleDelete = () => {
             @cancel="handleCancel"
             @delete="handleDelete"
         />
-
-        <template #footer>
-            <div class="flex justify-between">
-                <generate-lead-button
-                    :name="quoteRequest.name"
-                    :email="quoteRequest.email"
-                    :phone_number="quoteRequest.phone_number"
-                    :source="'website'"
-                    :notes="generateQuoteRequestNotes(quoteRequest)"
-                    @lead-generated="handleLeadGenerated"
-                    @error="handleError"
-                />
-
-                <div class="flex gap-2">
-                    <ui-button label="Cancel" type="button" variant="secondary" :disabled="form.processing" @click="handleCancel" />
-                    <ui-button
-                        type="submit"
-                        variant="primary"
-                        :loading="form.processing"
-                        :disabled="form.processing"
-                        @click="handleSubmit(quoteRequest)"
-                    >
-                        Update
-                    </ui-button>
-                </div>
-            </div>
-        </template>
     </ui-modal>
 </template>
