@@ -5,6 +5,8 @@ use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactMessageController;
 use App\Http\Controllers\LeadController;
+use App\Http\Controllers\NewsletterSubscriberController;
+use App\Http\Controllers\NewsletterTemplateController;
 use App\Http\Controllers\NotificationController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\QuoteRequestController;
@@ -96,6 +98,27 @@ Route::middleware('auth')
                 Route::get('/unread', 'getUnread')->name('unread');
                 Route::patch('/{id}/read', 'markAsRead')->name('read');
                 Route::patch('/read-all', 'markAllAsRead')->name('read-all');
+                Route::delete('/{id}', 'destroy')->name('destroy');
+            });
+
+        Route::controller(NewsletterSubscriberController::class)
+            ->prefix('newsletter/subscribers')
+            ->name('newsletter.subscribers.')
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::post('/', 'store')->name('store');
+                Route::patch('/{id}', 'update')->name('update');
+                Route::delete('/{id}', 'destroy')->name('destroy');
+            });
+
+        Route::controller(NewsletterTemplateController::class)
+            ->prefix('newsletter/templates')
+            ->name('newsletter.templates.')
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::post('/', 'store')->name('store');
+                Route::get('/{id}', 'show')->name('show');
+                Route::patch('/{id}', 'update')->name('update');
                 Route::delete('/{id}', 'destroy')->name('destroy');
             });
     });
