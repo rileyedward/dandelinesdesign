@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { router } from '@inertiajs/vue3';
-import { Calendar, ArrowLeft } from 'lucide-vue-next';
+import { ArrowLeft, Calendar } from 'lucide-vue-next';
 import type { BlogContentProps as Props } from './blog-content';
 
 const props = defineProps<Props>();
@@ -19,12 +19,12 @@ const handleBackToBlog = () => {
 </script>
 
 <template>
-    <article class="max-w-4xl mx-auto">
+    <article class="mx-auto max-w-4xl">
         <!-- Back Button -->
         <div class="mb-8">
-            <button 
+            <button
                 @click="handleBackToBlog"
-                class="inline-flex items-center text-sm font-medium text-gray-600 hover:text-blue-600 transition-colors duration-200"
+                class="inline-flex items-center text-sm font-medium text-gray-600 transition-colors duration-200 hover:text-blue-600"
             >
                 <ArrowLeft class="mr-2 h-4 w-4" />
                 Back to Blog
@@ -34,18 +34,18 @@ const handleBackToBlog = () => {
         <!-- Article Header -->
         <header class="mb-8 text-center">
             <div class="mb-4">
-                <div class="inline-flex items-center text-sm text-gray-500 mb-4">
+                <div class="mb-4 inline-flex items-center text-sm text-gray-500">
                     <Calendar class="mr-2 h-4 w-4" />
                     {{ formatDate(post.created_at) }}
                 </div>
-                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">
+                <h1 class="text-4xl leading-tight font-bold text-gray-900 md:text-5xl">
                     {{ post.title }}
                 </h1>
             </div>
         </header>
 
         <!-- Article Content -->
-        <div class="bg-white rounded-2xl shadow-lg p-8 md:p-12">
+        <div class="rounded-2xl bg-white p-8 shadow-lg md:p-12">
             <div class="prose prose-lg prose-blue max-w-none">
                 <div v-html="post.content"></div>
             </div>
@@ -53,20 +53,18 @@ const handleBackToBlog = () => {
 
         <!-- Article Footer -->
         <footer class="mt-12 text-center">
-            <div class="inline-flex items-center justify-center w-full max-w-md mx-auto py-6 border-t border-gray-200">
+            <div class="mx-auto inline-flex w-full max-w-md items-center justify-center border-t border-gray-200 py-6">
                 <div class="text-sm text-gray-500">
                     Published on {{ formatDate(post.created_at) }}
-                    <span v-if="post.updated_at !== post.created_at">
-                        • Updated {{ formatDate(post.updated_at) }}
-                    </span>
+                    <span v-if="post.updated_at !== post.created_at"> • Updated {{ formatDate(post.updated_at) }} </span>
                 </div>
             </div>
-            
+
             <!-- Back to Blog Button -->
             <div class="mt-6">
-                <button 
+                <button
                     @click="handleBackToBlog"
-                    class="inline-flex items-center px-6 py-3 bg-blue-600 text-white font-medium rounded-lg hover:bg-blue-700 transition-colors duration-200"
+                    class="inline-flex items-center rounded-lg bg-blue-600 px-6 py-3 font-medium text-white transition-colors duration-200 hover:bg-blue-700"
                 >
                     <ArrowLeft class="mr-2 h-4 w-4" />
                     Back to All Posts
@@ -153,7 +151,7 @@ const handleBackToBlog = () => {
     color: #374151;
     border-left-width: 0.25rem;
     border-left-color: #d1d5db;
-    quotes: "\201C""\201D""\2018""\2019";
+    quotes: '\201C' '\201D' '\2018' '\2019';
     margin-top: 1.6rem;
     margin-bottom: 1.6rem;
     padding-left: 1rem;

@@ -11,11 +11,11 @@ const props = defineProps<{
 
 <template>
     <Head :title="`${blogPost.title} - Dandelines Design Blog`" />
-    
+
     <navbar-layout>
         <!-- Blog Post Content -->
-        <section class="py-16 bg-gray-50 min-h-screen">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <section class="min-h-screen bg-gray-50 py-16">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
                 <blog-content :post="blogPost" />
             </div>
         </section>
