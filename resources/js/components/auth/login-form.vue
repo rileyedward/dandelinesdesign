@@ -2,13 +2,24 @@
 import UiButton from '@/components/ui/forms/button/ui-button.vue';
 import UiCheckbox from '@/components/ui/forms/checkbox/ui-checkbox.vue';
 import UiInput from '@/components/ui/forms/input/ui-input.vue';
-import { useForm } from '@inertiajs/vue3';
+import { useForm, usePage } from '@inertiajs/vue3';
 import { Lock, Mail } from 'lucide-vue-next';
+import { onMounted } from 'vue';
+
+const page = usePage();
+const isLocalDevelopment = page.props?.env === 'local';
 
 const form = useForm({
     email: '',
     password: '',
     remember: false,
+});
+
+onMounted(() => {
+    if (isLocalDevelopment) {
+        form.email = 'admin@dandelinesdesign.com';
+        form.password = 'password';
+    }
 });
 
 const handleSubmit = () => {
