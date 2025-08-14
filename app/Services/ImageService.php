@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Contracts\ImageRepositoryInterface;
 use App\Contracts\ImageServiceInterface;
-use App\Models\Image;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;

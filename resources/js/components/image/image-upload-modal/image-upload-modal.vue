@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import type { ImageData } from '@/components/ui/forms/image-upload/ui-image-upload';
-import UiMultiImageUpload from '@/components/ui/forms/multi-image-upload/ui-multi-image-upload.vue';
+import UiImageUpload from '@/components/ui/forms/image-upload/ui-image-upload.vue';
 import { X } from 'lucide-vue-next';
 import { ref, watch } from 'vue';
 
@@ -16,7 +16,7 @@ interface Emits {
 const props = defineProps<Props>();
 const emit = defineEmits<Emits>();
 
-const uploadedImages = ref<ImageData[]>([]);
+const uploadedImage = ref<ImageData | undefined>(undefined);
 const errorMessage = ref<string>('');
 const successMessage = ref<string>('');
 
@@ -24,7 +24,7 @@ watch(
     () => props.show,
     (newShow) => {
         if (newShow) {
-            uploadedImages.value = [];
+            uploadedImage.value = undefined;
             errorMessage.value = '';
             successMessage.value = '';
         }
@@ -36,7 +36,7 @@ const handleClose = () => {
 };
 
 const handleUploadSuccess = (image: ImageData) => {
-    uploadedImages.value.push(image);
+    uploadedImage.value = image;
     emit('image-uploaded', image);
     successMessage.value = `Successfully uploaded "${image.original_filename}"`;
     errorMessage.value = '';
@@ -57,16 +57,12 @@ const handleError = (error: string) => {
 };
 
 const handleImageRemove = (image: ImageData) => {
-    uploadedImages.value = uploadedImages.value.filter((img) => img.id !== image.id);
+    uploadedImage.value = undefined;
 };
 
 const closeModal = () => {
-    if (uploadedImages.value.length > 0) {
-        const message =
-            uploadedImages.value.length === 1 ? `Successfully uploaded 1 image` : `Successfully uploaded ${uploadedImages.value.length} images`;
-
-        // You could show a toast notification here instead
-        console.log(message);
+    if (uploadedImage.value) {
+        console.log(`Successfully uploaded image: ${uploadedImage.value.original_filename}`);
     }
 
     handleClose();
@@ -90,8 +86,8 @@ const closeModal = () => {
                 <!-- Header -->
                 <div class="mb-6 flex items-center justify-between">
                     <div>
-                        <h3 class="text-lg font-medium text-gray-900" id="modal-title">Upload Images</h3>
-                        <p class="mt-1 text-sm text-gray-500">Add new images to your library. You can upload multiple images at once.</p>
+                        <h3 class="text-lg font-medium text-gray-900" id="modal-title">Upload Image</h3>
+                        <p class="mt-1 text-sm text-gray-500">Add a new image to your library.</p>
                     </div>
                     <button
                         @click="closeModal"
@@ -144,13 +140,13 @@ const closeModal = () => {
 
                 <!-- Upload Component -->
                 <div class="mb-6">
-                    <ui-multi-image-upload
-                        v-model="uploadedImages"
-                        :max-files="20"
+                    <ui-image-upload
+                        v-model="uploadedImage"
+                        :multiple="false"
                         :max-size="10 * 1024 * 1024"
-                        placeholder="Drop images here or click to select"
-                        button-text="Select Images"
-                        helper-text="Support: JPEG, PNG, GIF, WebP. Max size: 10MB per image."
+                        placeholder="Drop an image here or click to select"
+                        button-text="Select Image"
+                        helper-text="Support: JPEG, PNG, GIF, WebP. Max size: 10MB."
                         @upload-success="handleUploadSuccess"
                         @upload-error="handleUploadError"
                         @error="handleError"
@@ -159,11 +155,11 @@ const closeModal = () => {
                 </div>
 
                 <!-- Upload Stats -->
-                <div v-if="uploadedImages.length > 0" class="mb-6 rounded-lg bg-gray-50 p-4">
+                <div v-if="uploadedImage" class="mb-6 rounded-lg bg-gray-50 p-4">
                     <div class="flex items-center justify-between text-sm">
-                        <span class="text-gray-600"> {{ uploadedImages.length }} image{{ uploadedImages.length !== 1 ? 's' : '' }} uploaded </span>
+                        <span class="text-gray-600">Image uploaded: {{ uploadedImage.original_filename }}</span>
                         <span class="text-gray-600">
-                            Total size: {{ Math.round((uploadedImages.reduce((total, img) => total + img.size, 0) / 1024 / 1024) * 100) / 100 }} MB
+                            Size: {{ Math.round((uploadedImage.size / 1024 / 1024) * 100) / 100 }} MB
                         </span>
                     </div>
                 </div>
@@ -175,7 +171,7 @@ const closeModal = () => {
                         type="button"
                         class="inline-flex justify-center rounded-md border border-gray-300 bg-white px-4 py-2 text-sm font-medium text-gray-700 shadow-sm hover:bg-gray-50 focus:ring-2 focus:ring-purple-500 focus:ring-offset-2 focus:outline-none"
                     >
-                        {{ uploadedImages.length > 0 ? 'Done' : 'Cancel' }}
+                        {{ uploadedImage ? 'Done' : 'Cancel' }}
                     </button>
                 </div>
             </div>
