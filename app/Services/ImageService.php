@@ -25,13 +25,7 @@ class ImageService extends BaseService implements ImageServiceInterface
         $filename = Str::uuid().'.'.$file->getClientOriginalExtension();
         $path = 'images/'.$filename;
 
-        $image = Storage::disk('public')->put($path, $file);
-
-        logger("here here here");
-
-        logger($image);
-
-        logger(Image::query()->get());
+        Storage::disk('local')->put($path, $file);
 
         $imageData = [
             'filename' => $filename,
