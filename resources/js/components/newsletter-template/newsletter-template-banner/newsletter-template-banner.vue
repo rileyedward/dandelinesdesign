@@ -1,7 +1,6 @@
 <script setup lang="ts">
-import UiButton from '@/components/ui/forms/button/ui-button.vue';
 import { router } from '@inertiajs/vue3';
-import { Calendar, Eye, Mail, Send, Users } from 'lucide-vue-next';
+import { Calendar, Mail, Send, Users } from 'lucide-vue-next';
 import type { NewsletterTemplateBannerProps as Props } from './newsletter-template-banner';
 
 const { template } = withDefaults(defineProps<Props>(), {
@@ -61,7 +60,7 @@ const getEngagementRate = () => {
 
 <template>
     <div
-        class="rounded-lg border border-gray-200 bg-white p-6 shadow-md transition-all duration-300 hover:border-blue-300 hover:shadow-lg cursor-pointer"
+        class="cursor-pointer rounded-lg border border-gray-200 bg-white p-6 shadow-md transition-all duration-300 hover:border-blue-300 hover:shadow-lg"
         @click="handleView"
     >
         <div class="mb-4 flex items-start justify-between">

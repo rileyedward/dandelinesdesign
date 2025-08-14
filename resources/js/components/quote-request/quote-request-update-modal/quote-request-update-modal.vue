@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import GenerateLeadButton from '@/components/lead/generate-lead-button/generate-lead-button.vue';
 import QuoteRequestForm from '@/components/quote-request/quote-request-form/quote-request-form.vue';
 import UiModal from '@/components/ui/feedback/modal/ui-modal.vue';
 import type { QuoteRequest } from '@/types/quote-request';

@@ -27,8 +27,7 @@ const generateSlug = (title: string) => {
 
 const handleSubmit = () => {
     form.post(route('admin.blog.store'), {
-        onSuccess: () => {
-        },
+        onSuccess: () => {},
     });
 };
 

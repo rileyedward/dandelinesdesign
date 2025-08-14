@@ -187,14 +187,7 @@ const handleDelete = () => {
         </div>
 
         <div class="flex justify-end space-x-3">
-            <ui-button
-                v-if="isEditing"
-                type="button"
-                variant="danger"
-                :prefix-icon="Trash2"
-                :disabled="processing"
-                @click="handleDelete"
-            />
+            <ui-button v-if="isEditing" type="button" variant="danger" :prefix-icon="Trash2" :disabled="processing" @click="handleDelete" />
             <div class="flex-1"></div>
             <ui-button label="Cancel" type="button" variant="secondary" :disabled="processing" @click="handleCancel" />
             <ui-button label="Save" type="submit" variant="primary" :loading="processing" :disabled="processing"></ui-button>
