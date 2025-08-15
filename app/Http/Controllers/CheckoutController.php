@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CheckoutRequest;
 use App\Models\Price;
 use App\Models\Product;
 use Illuminate\Http\Request;
@@ -9,13 +10,21 @@ use Laravel\Cashier\Checkout;
 
 class CheckoutController extends Controller
 {
-    public function __invoke(Request $request): Checkout
+    public function __invoke(CheckoutRequest $request): Checkout
     {
-        $priceIds = Price::all()->pluck('stripe_price_id');
+        $validated = $request->validated();
 
-        return Checkout::guest()->create([
-            $priceIds[0] => 1,
-            $priceIds[1] => 1,
+        $lineItems = [];
+        foreach ($validated['items'] as $item) {
+            $lineItems[$item['price_id']] = $item['quantity'];
+        }
+
+        $checkout = Checkout::guest()->create($lineItems, [
+            // TODO: Uncomment once we have this in there.
+            // 'success_url' => route('checkout.succees'),
+            // 'cancel_url' => route('checkout.cancel'),
         ]);
+
+        return $checkout;
     }
 }

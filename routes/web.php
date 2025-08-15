@@ -34,6 +34,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/newsletter', [NewsletterSubscriberController::class, 'store'])->name('newsletter.store');
 
     Route::get('/checkout', CheckoutController::class)->name('checkout');
+
+    // These routes are commented out as per requirements, but will be needed in the future
+    // Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
+    // Route::get('/checkout/cancel', [CheckoutController::class, 'cancel'])->name('checkout.cancel');
 });
 
 require __DIR__.'/auth.php';
