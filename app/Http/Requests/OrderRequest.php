@@ -40,9 +40,6 @@ class OrderRequest extends FormRequest
         ];
     }
 
-    /**
-     * Get custom error messages for validation rules.
-     */
     public function messages(): array
     {
         return [
@@ -61,7 +58,7 @@ class OrderRequest extends FormRequest
             'shipping_country.required' => 'Shipping country is required.',
         ];
     }
-    
+
     public function attributes(): array
     {
         return [
