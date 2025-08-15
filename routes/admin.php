@@ -86,6 +86,7 @@ Route::middleware('auth')
             ->name('products.')
             ->group(function () {
                 Route::get('/', 'index')->name('index');
+                Route::post('/import-stripe', 'importFromStripe')->name('import-stripe');
                 Route::get('/{id}', 'show')->name('show');
                 Route::patch('/{id}', 'update')->name('update');
                 Route::delete('/{id}', 'destroy')->name('destroy');
