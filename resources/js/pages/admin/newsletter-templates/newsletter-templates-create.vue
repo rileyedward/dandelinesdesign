@@ -23,11 +23,7 @@ const statusOptions = [
 ];
 
 const handleSubmit = () => {
-    form.post(route('admin.newsletter.templates.store'), {
-        onSuccess: () => {
-            // Redirect will happen automatically
-        },
-    });
+    form.post(route('admin.newsletter.templates.store'));
 };
 
 const handleCancel = () => {

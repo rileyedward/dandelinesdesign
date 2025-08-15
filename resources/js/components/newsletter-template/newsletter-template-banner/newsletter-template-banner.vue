@@ -41,20 +41,8 @@ const getStatusLabel = (status: string) => {
     }
 };
 
-const truncateContent = (content: string, maxLength: number = 150) => {
-    // Strip HTML tags for display
-    const strippedContent = content.replace(/<[^>]*>/g, '');
-    if (strippedContent.length <= maxLength) return strippedContent;
-    return strippedContent.substring(0, maxLength) + '...';
-};
-
 const handleView = () => {
     router.visit(route('admin.newsletter.templates.show', template.id));
-};
-
-const getEngagementRate = () => {
-    if (template.recipients_count === 0) return 0;
-    return Math.round((template.opens_count / template.recipients_count) * 100);
 };
 </script>
 
@@ -78,11 +66,6 @@ const getEngagementRate = () => {
             </div>
         </div>
 
-        <div class="mb-4">
-            <p v-if="template.preview_text" class="mb-2 text-sm text-gray-600 italic">"{{ template.preview_text }}"</p>
-            <p class="text-gray-700">{{ truncateContent(template.content) }}</p>
-        </div>
-
         <!-- Analytics for sent templates -->
         <div v-if="template.status === 'sent' && template.recipients_count > 0" class="mb-4 grid grid-cols-3 gap-4 rounded-lg bg-gray-50 p-3">
             <div class="text-center">
@@ -91,28 +74,6 @@ const getEngagementRate = () => {
                     Recipients
                 </div>
                 <div class="font-semibold text-gray-900">{{ template.recipients_count.toLocaleString() }}</div>
-            </div>
-            <div class="text-center">
-                <div class="text-sm text-gray-600">Opens</div>
-                <div class="font-semibold text-gray-900">{{ template.opens_count.toLocaleString() }}</div>
-            </div>
-            <div class="text-center">
-                <div class="text-sm text-gray-600">Open Rate</div>
-                <div class="font-semibold text-gray-900">{{ getEngagementRate() }}%</div>
-            </div>
-        </div>
-
-        <!-- Tags -->
-        <div v-if="template.tags && template.tags.length > 0" class="mb-4">
-            <div class="flex flex-wrap gap-1">
-                <span
-                    v-for="tag in template.tags.slice(0, 3)"
-                    :key="tag"
-                    class="inline-flex items-center rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700"
-                >
-                    {{ tag }}
-                </span>
-                <span v-if="template.tags.length > 3" class="text-xs text-gray-500"> +{{ template.tags.length - 3 }} more </span>
             </div>
         </div>
 
@@ -123,10 +84,6 @@ const getEngagementRate = () => {
                 <span v-if="template.sent_at" class="ml-2 flex items-center">
                     <Send class="mr-1 h-3 w-3" />
                     Sent {{ formatDate(template.sent_at) }}
-                </span>
-                <span v-else-if="template.scheduled_at" class="ml-2 flex items-center">
-                    <Calendar class="mr-1 h-3 w-3" />
-                    Scheduled {{ formatDate(template.scheduled_at) }}
                 </span>
             </div>
         </div>

@@ -16,24 +16,13 @@ class NewsletterTemplate extends Model
         'name',
         'subject',
         'content',
-        'preview_text',
         'status',
-        'scheduled_at',
         'sent_at',
         'recipients_count',
-        'opens_count',
-        'clicks_count',
-        'tags',
-        'metadata',
     ];
 
     protected $casts = [
-        'scheduled_at' => 'datetime',
         'sent_at' => 'datetime',
         'recipients_count' => 'integer',
-        'opens_count' => 'integer',
-        'clicks_count' => 'integer',
-        'tags' => 'array',
-        'metadata' => 'array',
     ];
 }
