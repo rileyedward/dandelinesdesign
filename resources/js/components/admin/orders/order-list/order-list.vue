@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import type { Order } from '@/types/order';
 import { router } from '@inertiajs/vue3';
-import { CreditCard, Eye, Package, User } from 'lucide-vue-next';
+import { CreditCard, Package, User } from 'lucide-vue-next';
 
 interface Props {
     orders: Order[];
@@ -92,12 +92,7 @@ const handleViewOrder = (orderId: number) => {
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200 bg-white">
-                    <tr
-                        v-for="order in orders"
-                        :key="order.id"
-                        class="hover:bg-gray-50 cursor-pointer"
-                        @click="handleViewOrder(order.id)"
-                    >
+                    <tr v-for="order in orders" :key="order.id" class="cursor-pointer hover:bg-gray-50" @click="handleViewOrder(order.id)">
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="flex items-center">
                                 <div class="flex-shrink-0">

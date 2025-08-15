@@ -2,7 +2,7 @@
 import UiCard from '@/components/ui/layout/card/ui-card.vue';
 import type { LineItem } from '@/types/order';
 import { router } from '@inertiajs/vue3';
-import { Image, Package, ExternalLink } from 'lucide-vue-next';
+import { ExternalLink, Image, Package } from 'lucide-vue-next';
 
 interface Props {
     lineItems: LineItem[];
@@ -54,10 +54,10 @@ const hasProductLink = (item: LineItem) => {
             <div v-for="item in lineItems" :key="item.id" class="flex items-start space-x-4 border-b border-gray-200 pb-6 last:border-b-0 last:pb-0">
                 <!-- Product Image -->
                 <div class="flex-shrink-0">
-                    <div 
+                    <div
                         :class="[
                             'h-16 w-16 overflow-hidden rounded-lg border border-gray-200',
-                            hasProductLink(item) ? 'cursor-pointer hover:ring-2 hover:ring-blue-500 hover:ring-offset-1 transition-all' : ''
+                            hasProductLink(item) ? 'cursor-pointer transition-all hover:ring-2 hover:ring-blue-500 hover:ring-offset-1' : '',
                         ]"
                         @click="hasProductLink(item) ? handleProductClick(item) : null"
                     >
@@ -78,20 +78,18 @@ const hasProductLink = (item: LineItem) => {
                     <div class="flex justify-between">
                         <div class="flex-1">
                             <div class="flex items-center gap-2">
-                                <h4 
+                                <h4
                                     :class="[
                                         'text-sm font-medium',
-                                        hasProductLink(item) 
-                                            ? 'text-blue-600 hover:text-blue-800 cursor-pointer hover:underline' 
-                                            : 'text-gray-900'
+                                        hasProductLink(item) ? 'cursor-pointer text-blue-600 hover:text-blue-800 hover:underline' : 'text-gray-900',
                                     ]"
                                     @click="hasProductLink(item) ? handleProductClick(item) : null"
                                 >
                                     {{ getProductName(item) }}
                                 </h4>
-                                <ExternalLink 
-                                    v-if="hasProductLink(item)" 
-                                    class="h-3 w-3 text-blue-500 cursor-pointer" 
+                                <ExternalLink
+                                    v-if="hasProductLink(item)"
+                                    class="h-3 w-3 cursor-pointer text-blue-500"
                                     @click="handleProductClick(item)"
                                 />
                             </div>

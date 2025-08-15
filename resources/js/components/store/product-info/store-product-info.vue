@@ -170,8 +170,8 @@ const handleAddToCart = () => {
                                 <MinusIcon class="h-4 w-4" />
                             </button>
                             <span class="w-12 text-center text-xl font-medium">{{ quantity }}</span>
-                            <button 
-                                @click="increaseQuantity" 
+                            <button
+                                @click="increaseQuantity"
                                 :disabled="quantity >= maxQuantity"
                                 class="rounded-lg border border-gray-300 p-2 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
                             >
@@ -180,11 +180,11 @@ const handleAddToCart = () => {
                         </div>
                         <p class="text-sm text-gray-500">Maximum {{ maxQuantity }} available</p>
                     </div>
-                    
+
                     <!-- Single Item Message -->
                     <div v-else-if="!isOutOfStock && product.stock_quantity === 1" class="space-y-4">
-                        <div class="rounded-lg bg-blue-50 border border-blue-200 p-4">
-                            <p class="text-sm text-blue-800 font-medium">Limited Edition - Only 1 available</p>
+                        <div class="rounded-lg border border-blue-200 bg-blue-50 p-4">
+                            <p class="text-sm font-medium text-blue-800">Limited Edition - Only 1 available</p>
                         </div>
                     </div>
 
@@ -199,12 +199,12 @@ const handleAddToCart = () => {
                     </div>
 
                     <!-- Add to Cart Button -->
-                    <UiButton 
-                        @click="handleAddToCart" 
-                        :disabled="!selectedPrice || isOutOfStock" 
-                        variant="primary" 
-                        size="lg" 
-                        class="w-full" 
+                    <UiButton
+                        @click="handleAddToCart"
+                        :disabled="!selectedPrice || isOutOfStock"
+                        variant="primary"
+                        size="lg"
+                        class="w-full"
                         :icon="ShoppingCartIcon"
                     >
                         {{ isOutOfStock ? 'Out of Stock' : 'Add to Cart' }}

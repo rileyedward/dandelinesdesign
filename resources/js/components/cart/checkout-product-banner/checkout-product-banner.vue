@@ -67,9 +67,7 @@ const itemTotal = () => {
             <p v-if="item.price.nickname" class="text-xs text-gray-500">
                 {{ item.price.nickname }}
             </p>
-            <p v-if="item.product.stock_quantity <= 2" class="text-xs text-amber-600">
-                Only {{ item.product.stock_quantity }} available
-            </p>
+            <p v-if="item.product.stock_quantity <= 2" class="text-xs text-amber-600">Only {{ item.product.stock_quantity }} available</p>
         </div>
 
         <!-- Quantity Controls -->
