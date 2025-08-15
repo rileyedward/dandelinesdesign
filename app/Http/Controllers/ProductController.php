@@ -47,7 +47,7 @@ class ProductController extends BaseController
                 'prices' => function ($query) {
                     $query->where('active', true)->orderBy('unit_amount');
                 },
-                'orderProducts.order',
+                'lineItems.order',
             ])
             ->findOrFail($id);
 

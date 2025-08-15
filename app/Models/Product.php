@@ -63,14 +63,14 @@ class Product extends Model
         return $this->activePrices()->first();
     }
 
-    public function orderProducts(): HasMany
+    public function lineItems(): HasMany
     {
-        return $this->hasMany(OrderProduct::class);
+        return $this->hasMany(LineItem::class);
     }
 
     public function orders(): BelongsToMany
     {
-        return $this->belongsToMany(Order::class, 'order_products')
+        return $this->belongsToMany(Order::class, 'line_items')
             ->withPivot([
                 'quantity',
                 'unit_price',
@@ -106,17 +106,17 @@ class Product extends Model
 
     public function getTotalOrdersAttribute(): int
     {
-        return $this->orderProducts()->distinct('order_id')->count('order_id');
+        return $this->lineItems()->distinct('order_id')->count('order_id');
     }
 
     public function getTotalQuantitySoldAttribute(): int
     {
-        return $this->orderProducts()->sum('quantity');
+        return $this->orderLineItems()->sum('quantity');
     }
 
     public function getTotalRevenueAttribute(): float
     {
-        return $this->orderProducts()->get()->sum('line_total');
+        return $this->orderLineItems()->get()->sum('line_total');
     }
 
     // Scopes
