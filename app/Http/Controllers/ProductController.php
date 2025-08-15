@@ -82,7 +82,6 @@ class ProductController extends BaseController
     public function importFromStripe(Request $request): RedirectResponse
     {
         $limit = $request->input('limit', 50);
-        $force = $request->boolean('force', false);
 
         try {
             $stripe = new StripeClient(config('cashier.secret'));
@@ -92,27 +91,35 @@ class ProductController extends BaseController
                 'active' => true,
             ]);
 
-            $importedCount = 0;
-            $skippedCount = 0;
+            $createdCount = 0;
+            $updatedCount = 0;
+            $errorCount = 0;
 
             foreach ($stripeProducts->data as $stripeProduct) {
                 $existingProduct = Product::where('stripe_product_id', $stripeProduct->id)->first();
-
-                if ($existingProduct && ! $force) {
-                    $skippedCount++;
-
-                    continue;
-                }
-
+                
                 $product = $this->importProduct($stripeProduct);
 
                 if ($product) {
+                    if ($existingProduct) {
+                        $updatedCount++;
+                    } else {
+                        $createdCount++;
+                    }
+                    
+                    // Always update/sync prices for the product
                     $this->importPricesForProduct($stripe, $stripeProduct->id, $product);
-                    $importedCount++;
+                } else {
+                    $errorCount++;
                 }
             }
 
-            return back()->with('success', "Import completed: {$importedCount} products imported, {$skippedCount} skipped");
+            $message = "Import completed: {$createdCount} products created, {$updatedCount} products updated";
+            if ($errorCount > 0) {
+                $message .= ", {$errorCount} errors";
+            }
+
+            return back()->with('success', $message);
 
         } catch (\Exception $e) {
             return back()->with('error', 'Import failed: '.$e->getMessage());
@@ -132,11 +139,30 @@ class ProductController extends BaseController
                 ]
             );
 
+            // Generate unique slug for the product
+            $baseSlug = \Str::slug($stripeProduct->name);
+            $slug = $baseSlug;
+            $counter = 1;
+            
+            // Check if we're updating an existing product
+            $existingProduct = Product::where('stripe_product_id', $stripeProduct->id)->first();
+            
+            // Only check for slug conflicts if this is a new product or slug has changed
+            if (!$existingProduct || $existingProduct->slug !== $baseSlug) {
+                while (Product::where('slug', $slug)
+                    ->when($existingProduct, fn($query) => $query->where('id', '!=', $existingProduct->id))
+                    ->exists()) {
+                    $slug = $baseSlug . '-' . $counter;
+                    $counter++;
+                }
+            } else {
+                $slug = $existingProduct->slug; // Keep existing slug
+            }
+
             $productData = [
                 'stripe_product_id' => $stripeProduct->id,
-                'category_id' => $defaultCategory->id,
                 'name' => $stripeProduct->name,
-                'slug' => \Str::slug($stripeProduct->name),
+                'slug' => $slug,
                 'description' => $stripeProduct->description ?? '',
                 'image_url' => $stripeProduct->images[0] ?? null,
                 'images' => ! empty($stripeProduct->images) ? $stripeProduct->images : null,
@@ -148,8 +174,13 @@ class ProductController extends BaseController
                 'metadata' => $stripeProduct->metadata->toArray() ?? null,
                 'unit_label' => $stripeProduct->unit_label ?? null,
                 'is_active' => $stripeProduct->active ?? true,
-                'is_featured' => false,
             ];
+
+            // Only set category for new products, preserve existing category for updates
+            if (!$existingProduct) {
+                $productData['category_id'] = $defaultCategory->id;
+                $productData['is_featured'] = false;
+            }
 
             return Product::query()->updateOrCreate(
                 ['stripe_product_id' => $stripeProduct->id],
@@ -157,6 +188,10 @@ class ProductController extends BaseController
             );
 
         } catch (\Exception $e) {
+            \Log::error('Failed to import/update product from Stripe', [
+                'stripe_product_id' => $stripeProduct->id,
+                'error' => $e->getMessage()
+            ]);
             return null;
         }
     }
@@ -194,6 +229,8 @@ class ProductController extends BaseController
                 'limit' => 100,
             ]);
 
+            $importedPriceIds = [];
+
             foreach ($stripePrices->data as $stripePrice) {
                 $priceData = [
                     'stripe_price_id' => $stripePrice->id,
@@ -212,14 +249,31 @@ class ProductController extends BaseController
                     'stripe_created_at' => \Carbon\Carbon::createFromTimestamp($stripePrice->created),
                 ];
 
-                Price::query()->updateOrCreate(
+                $price = Price::query()->updateOrCreate(
                     ['stripe_price_id' => $stripePrice->id],
                     $priceData
                 );
+
+                $importedPriceIds[] = $price->id;
+
+                // Set the first active price as current if no current price exists
+                if ($stripePrice->active && !$product->prices()->where('is_current', true)->exists()) {
+                    $price->update(['is_current' => true]);
+                }
             }
 
+            // Deactivate local prices that no longer exist in Stripe
+            Price::where('product_id', $product->id)
+                ->whereNotIn('id', $importedPriceIds)
+                ->whereNotNull('stripe_price_id')
+                ->update(['active' => false]);
+
         } catch (\Exception $e) {
-            // Silently fail for individual price imports
+            \Log::error('Failed to import prices for product', [
+                'product_id' => $product->id,
+                'stripe_product_id' => $stripeProductId,
+                'error' => $e->getMessage()
+            ]);
         }
     }
 }
