@@ -5,6 +5,7 @@ use App\Http\Controllers\BlogController;
 use App\Http\Controllers\ContactMessageController;
 use App\Http\Controllers\NewsletterSubscriberController;
 use App\Http\Controllers\QuoteRequestController;
+use App\Http\Controllers\CheckoutController;
 use App\Http\Controllers\StoreController;
 use Illuminate\Support\Facades\Route;
 
@@ -31,6 +32,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/contact', [ContactMessageController::class, 'store'])->name('contact.store');
     Route::post('/quote', [QuoteRequestController::class, 'store'])->name('quote.store');
     Route::post('/newsletter', [NewsletterSubscriberController::class, 'store'])->name('newsletter.store');
+
+    Route::get('/checkout', CheckoutController::class)->name('checkout');
 });
 
 require __DIR__.'/auth.php';
