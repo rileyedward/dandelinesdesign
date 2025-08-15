@@ -94,10 +94,7 @@ defineExpose({
         </div>
 
         <!-- Confirmation Dialog -->
-        <div
-            v-if="showConfirmDialog"
-            class="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
-        >
+        <div v-if="showConfirmDialog" class="bg-opacity-50 fixed inset-0 z-50 flex items-center justify-center bg-black">
             <div class="mx-4 w-full max-w-md rounded-lg bg-white p-6 shadow-xl">
                 <div class="flex items-start space-x-3">
                     <div class="flex h-10 w-10 items-center justify-center rounded-full bg-red-100">
@@ -106,7 +103,8 @@ defineExpose({
                     <div class="flex-1">
                         <h3 class="text-lg font-semibold text-gray-900">Confirm Newsletter Send</h3>
                         <p class="mt-2 text-sm text-gray-600">
-                            Are you absolutely sure you want to send this newsletter? This will immediately deliver the email to all subscribers and cannot be undone.
+                            Are you absolutely sure you want to send this newsletter? This will immediately deliver the email to all subscribers and
+                            cannot be undone.
                         </p>
                         <div class="mt-4 rounded-md bg-yellow-50 p-3">
                             <div class="flex">
@@ -124,12 +122,7 @@ defineExpose({
                     </div>
                 </div>
                 <div class="mt-6 flex space-x-3">
-                    <ui-button
-                        label="Cancel"
-                        variant="outline"
-                        class="flex-1"
-                        @click="closeConfirmDialog"
-                    />
+                    <ui-button label="Cancel" variant="outline" class="flex-1" @click="closeConfirmDialog" />
                     <ui-button
                         label="Yes, Send Newsletter"
                         variant="destructive"
@@ -143,22 +136,14 @@ defineExpose({
         </div>
 
         <!-- Success Message -->
-        <div
-            v-if="isSuccessVisible"
-            class="fixed bottom-4 right-4 z-50 max-w-sm rounded-lg bg-green-50 p-4 shadow-lg ring-1 ring-green-200"
-        >
+        <div v-if="isSuccessVisible" class="fixed right-4 bottom-4 z-50 max-w-sm rounded-lg bg-green-50 p-4 shadow-lg ring-1 ring-green-200">
             <div class="flex items-start space-x-3">
                 <CheckCircle class="h-5 w-5 text-green-600" />
                 <div class="flex-1">
                     <h4 class="text-sm font-semibold text-green-800">Newsletter Sent Successfully!</h4>
-                    <p class="mt-1 text-sm text-green-700">
-                        Your newsletter "{{ newsletterTemplate.name }}" has been sent to all subscribers.
-                    </p>
+                    <p class="mt-1 text-sm text-green-700">Your newsletter "{{ newsletterTemplate.name }}" has been sent to all subscribers.</p>
                 </div>
-                <button
-                    @click="isSuccessVisible = false"
-                    class="text-green-400 hover:text-green-600"
-                >
+                <button @click="isSuccessVisible = false" class="text-green-400 hover:text-green-600">
                     <X class="h-4 w-4" />
                 </button>
             </div>

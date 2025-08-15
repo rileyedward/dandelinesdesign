@@ -15,8 +15,8 @@ const props = defineProps<{
 }>();
 
 // Handle both new and legacy prop structures
-const draftTemplates = props.draftTemplates || props.newsletterTemplates?.filter(t => t.status === 'draft') || [];
-const sentTemplates = props.sentTemplates || props.newsletterTemplates?.filter(t => t.status === 'sent') || [];
+const draftTemplates = props.draftTemplates || props.newsletterTemplates?.filter((t) => t.status === 'draft') || [];
+const sentTemplates = props.sentTemplates || props.newsletterTemplates?.filter((t) => t.status === 'sent') || [];
 
 const handleCreateTemplate = () => {
     window.location.href = route('admin.newsletter.templates.create');

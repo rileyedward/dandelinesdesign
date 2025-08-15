@@ -109,13 +109,7 @@ const handleDelete = () => {
             </common-page-header>
 
             <!-- Edit Form -->
-            <newsletter-template-form
-                v-if="isEditing"
-                :form="form"
-                submit-label="Update Template"
-                :is-editing="true"
-                @submit="handleSubmit"
-            />
+            <newsletter-template-form v-if="isEditing" :form="form" submit-label="Update Template" :is-editing="true" @submit="handleSubmit" />
 
             <!-- Send Newsletter Component -->
             <newsletter-template-send

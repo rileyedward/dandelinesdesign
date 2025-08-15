@@ -40,12 +40,7 @@ const handleTemplateClick = (template: NewsletterTemplate) => {
                         <div v-if="!draftTemplates || draftTemplates.length === 0" class="py-8 text-center text-gray-500">No draft templates</div>
 
                         <div v-else class="grid grid-cols-1 gap-6">
-                            <div
-                                v-for="template in draftTemplates"
-                                :key="template.id"
-                                class="cursor-pointer"
-                                @click="handleTemplateClick(template)"
-                            >
+                            <div v-for="template in draftTemplates" :key="template.id" class="cursor-pointer" @click="handleTemplateClick(template)">
                                 <newsletter-template-banner :template="template" :show-status="true" />
                             </div>
                         </div>
@@ -55,12 +50,7 @@ const handleTemplateClick = (template: NewsletterTemplate) => {
                         <div v-if="!sentTemplates || sentTemplates.length === 0" class="py-8 text-center text-gray-500">No sent templates</div>
 
                         <div v-else class="grid grid-cols-1 gap-6">
-                            <div
-                                v-for="template in sentTemplates"
-                                :key="template.id"
-                                class="cursor-pointer"
-                                @click="handleTemplateClick(template)"
-                            >
+                            <div v-for="template in sentTemplates" :key="template.id" class="cursor-pointer" @click="handleTemplateClick(template)">
                                 <newsletter-template-banner :template="template" :show-status="true" />
                             </div>
                         </div>

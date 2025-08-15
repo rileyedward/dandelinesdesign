@@ -34,11 +34,7 @@ const handleCancel = () => {
             </common-page-header>
 
             <!-- Form -->
-            <newsletter-template-form
-                :form="form"
-                submit-label="Save Template"
-                @submit="handleSubmit"
-            />
+            <newsletter-template-form :form="form" submit-label="Save Template" @submit="handleSubmit" />
         </div>
     </sidebar-layout>
 </template>

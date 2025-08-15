@@ -3,7 +3,6 @@ import UiButton from '@/components/ui/forms/button/ui-button.vue';
 import UiInput from '@/components/ui/forms/input/ui-input.vue';
 import UiRichTextEditor from '@/components/ui/forms/rich-text-editor/ui-rich-text-editor.vue';
 import UiTextarea from '@/components/ui/forms/textarea/ui-textarea.vue';
-import type { NewsletterTemplate } from '@/types/newsletter-template';
 import type { InertiaForm } from '@inertiajs/vue3';
 import { Calendar, Edit, Eye, Mail, Save } from 'lucide-vue-next';
 import { ref } from 'vue';
@@ -144,9 +143,7 @@ const formatDate = (dateString: string) => {
                                 <Calendar class="mr-1 h-4 w-4" />
                                 {{ formatDate(new Date().toISOString()) }}
                             </div>
-                            <span class="rounded-full bg-yellow-100 px-2 py-1 text-xs font-medium text-yellow-800">
-                                Draft
-                            </span>
+                            <span class="rounded-full bg-yellow-100 px-2 py-1 text-xs font-medium text-yellow-800"> Draft </span>
                         </div>
                     </div>
                 </header>

@@ -49,7 +49,7 @@ class NewsletterTemplateController extends BaseController
         $storeData = $this->filterInputData($validatedData);
         $newsletterTemplate = $this->service->store($storeData);
 
-        return to_route('admin.newsletter.templates.show', $newsletterTemplate->id);;
+        return to_route('admin.newsletter.templates.show', $newsletterTemplate->id);
     }
 
     public function show(Request $request, int $id): Response
