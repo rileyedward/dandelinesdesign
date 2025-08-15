@@ -31,7 +31,7 @@ class OrderRequest extends FormRequest
                 'exists:products,id',
                 function ($attribute, $value, $fail) {
                     $product = \App\Models\Product::find($value);
-                    if ($product && !$product->is_active) {
+                    if ($product && ! $product->is_active) {
                         $fail('The selected product is no longer available.');
                     }
                 },

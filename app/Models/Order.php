@@ -62,7 +62,7 @@ class Order extends Model
         return $this->belongsToMany(Product::class, 'order_products')
             ->withPivot([
                 'quantity',
-                'unit_price'
+                'unit_price',
             ])
             ->withTimestamps();
     }
@@ -81,7 +81,7 @@ class Order extends Model
     public static function generateOrderNumber(): string
     {
         do {
-            $orderNumber = 'ORD-' . strtoupper(uniqid());
+            $orderNumber = 'ORD-'.strtoupper(uniqid());
         } while (self::where('order_number', $orderNumber)->exists());
 
         return $orderNumber;

@@ -6,9 +6,7 @@ use App\Models\Category;
 use App\Models\Price;
 use App\Models\Product;
 use Illuminate\Console\Command;
-use Laravel\Cashier\Cashier;
 use Stripe\Product as StripeProduct;
-use Stripe\Price as StripePrice;
 use Stripe\StripeClient;
 
 class ImportStripeProducts extends Command
@@ -48,14 +46,16 @@ class ImportStripeProducts extends Command
             foreach ($stripeProducts->data as $stripeProduct) {
                 $existingProduct = Product::where('stripe_product_id', $stripeProduct->id)->first();
 
-                if ($existingProduct && !$force) {
+                if ($existingProduct && ! $force) {
                     $this->line("Skipping existing product: {$stripeProduct->name}");
                     $skippedCount++;
+
                     continue;
                 }
 
                 if ($dryRun) {
                     $this->line("[DRY RUN] Would import: {$stripeProduct->name}");
+
                     continue;
                 }
 
@@ -70,14 +70,15 @@ class ImportStripeProducts extends Command
                 }
             }
 
-            if (!$dryRun) {
+            if (! $dryRun) {
                 $this->info("Import completed: {$importedCount} imported, {$skippedCount} skipped");
             } else {
                 $this->info("Dry run completed: {$stripeProducts->count()} products would be processed");
             }
 
         } catch (\Exception $e) {
-            $this->error("Import failed: " . $e->getMessage());
+            $this->error('Import failed: '.$e->getMessage());
+
             return Command::FAILURE;
         }
 
@@ -93,7 +94,7 @@ class ImportStripeProducts extends Command
                     'name' => 'Imported from Stripe',
                     'description' => 'Products imported from Stripe catalog',
                     'is_active' => true,
-                    'sort_order' => 0
+                    'sort_order' => 0,
                 ]
             );
 
@@ -104,7 +105,7 @@ class ImportStripeProducts extends Command
                 'slug' => \Str::slug($stripeProduct->name),
                 'description' => $stripeProduct->description ?? '',
                 'image_url' => $stripeProduct->images[0] ?? null,
-                'images' => !empty($stripeProduct->images) ? $stripeProduct->images : null,
+                'images' => ! empty($stripeProduct->images) ? $stripeProduct->images : null,
                 'package_dimensions' => $stripeProduct->package_dimensions ?
                     "{$stripeProduct->package_dimensions->length}x{$stripeProduct->package_dimensions->width}x{$stripeProduct->package_dimensions->height}" : null,
                 'weight' => $stripeProduct->package_dimensions->weight ?? null,
@@ -122,7 +123,8 @@ class ImportStripeProducts extends Command
             );
 
         } catch (\Exception $e) {
-            $this->error("Error importing product {$stripeProduct->name}: " . $e->getMessage());
+            $this->error("Error importing product {$stripeProduct->name}: ".$e->getMessage());
+
             return null;
         }
     }
@@ -158,12 +160,12 @@ class ImportStripeProducts extends Command
                     $priceData
                 );
 
-                $displayPrice = $stripePrice->nickname ?: ('$' . number_format($stripePrice->unit_amount / 100, 2));
+                $displayPrice = $stripePrice->nickname ?: ('$'.number_format($stripePrice->unit_amount / 100, 2));
                 $this->line("  - Imported price: {$displayPrice}");
             }
 
         } catch (\Exception $e) {
-            $this->error("Error importing prices for product {$product->name}: " . $e->getMessage());
+            $this->error("Error importing prices for product {$product->name}: ".$e->getMessage());
         }
     }
 }

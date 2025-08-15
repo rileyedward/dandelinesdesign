@@ -18,7 +18,7 @@ class OrderFactory extends Factory
         $totalAmount = $subtotal + $taxAmount + $shippingCost;
 
         return [
-            'order_number' => 'ORD-' . strtoupper($this->faker->unique()->bothify('??######')),
+            'order_number' => 'ORD-'.strtoupper($this->faker->unique()->bothify('??######')),
             'status' => $this->faker->randomElement(['pending', 'processing', 'shipped', 'delivered', 'cancelled']),
             'subtotal' => $subtotal,
             'tax_amount' => $taxAmount,

@@ -29,7 +29,15 @@ class ProductController extends BaseController
 
     public function show(Request $request, int $id): Response
     {
-        $product = Product::findOrFail($id);
+        $product = Product::query()
+            ->with([
+                'category',
+                'prices' => function ($query) {
+                    $query->where('active', true)->orderBy('unit_amount');
+                },
+                'orderProducts.order',
+            ])
+            ->findOrFail($id);
 
         return inertia('admin/products/products-show', [
             'product' => $product,

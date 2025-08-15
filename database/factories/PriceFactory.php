@@ -16,12 +16,12 @@ class PriceFactory extends Factory
             $recurring = [
                 'interval' => $this->faker->randomElement(['day', 'week', 'month', 'year']),
                 'interval_count' => $this->faker->numberBetween(1, 12),
-                'usage_type' => $this->faker->randomElement(['licensed', 'metered'])
+                'usage_type' => $this->faker->randomElement(['licensed', 'metered']),
             ];
         }
 
         return [
-            'stripe_price_id' => 'price_' . $this->faker->unique()->randomNumber(8),
+            'stripe_price_id' => 'price_'.$this->faker->unique()->randomNumber(8),
             'active' => $this->faker->boolean(90), // 90% chance of being active
             'currency' => $this->faker->randomElement(['USD', 'EUR', 'GBP']),
             'type' => $type,
@@ -35,7 +35,7 @@ class PriceFactory extends Factory
             'metadata' => $this->faker->optional(0.2)->randomElements([
                 'priority' => $this->faker->randomElement(['high', 'medium', 'low']),
                 'category' => $this->faker->randomElement(['standard', 'premium', 'discount']),
-                'seasonal' => $this->faker->boolean()
+                'seasonal' => $this->faker->boolean(),
             ], null, true),
             'stripe_created_at' => $this->faker->dateTimeBetween('-1 year', 'now'),
         ];

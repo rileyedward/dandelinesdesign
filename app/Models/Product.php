@@ -58,7 +58,7 @@ class Product extends Model
         return $this->hasMany(Price::class)->where('active', true);
     }
 
-    public function defaultPrice(): Price|null
+    public function defaultPrice(): ?Price
     {
         return $this->activePrices()->first();
     }
@@ -73,7 +73,7 @@ class Product extends Model
         return $this->belongsToMany(Order::class, 'order_products')
             ->withPivot([
                 'quantity',
-                'unit_price'
+                'unit_price',
             ])
             ->withTimestamps();
     }
@@ -82,14 +82,16 @@ class Product extends Model
     public function getFormattedPriceAttribute(): string
     {
         $defaultPrice = $this->defaultPrice();
+
         return $defaultPrice ? $defaultPrice->formatted_price : 'N/A';
     }
 
-    public function getPrimaryImageAttribute(): string|null
+    public function getPrimaryImageAttribute(): ?string
     {
         if ($this->images && is_array($this->images) && count($this->images) > 0) {
             return $this->images[0];
         }
+
         return $this->image_url;
     }
 
@@ -138,7 +140,7 @@ class Product extends Model
     {
         return $query->whereHas('prices', function ($priceQuery) use ($minPrice, $maxPrice) {
             $priceQuery->where('active', true)
-                      ->whereBetween('unit_amount', [$minPrice, $maxPrice]);
+                ->whereBetween('unit_amount', [$minPrice, $maxPrice]);
         });
     }
 

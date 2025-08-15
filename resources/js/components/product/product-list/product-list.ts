@@ -9,6 +9,4 @@ export interface ProductListProps {
 
 export interface ProductListEmits {
     view: [product: Product];
-    edit: [product: Product];
-    create: [];
 }

@@ -22,13 +22,13 @@ return new class extends Migration
             $table->string('tax_code')->nullable()->after('shippable'); // Stripe tax code
             $table->json('metadata')->nullable()->after('tax_code'); // Custom metadata
             $table->string('unit_label')->nullable()->after('metadata'); // Unit of measurement
-            
+
             // Remove the price field since it will be in the prices table
             $table->dropColumn('price');
-            
+
             // Remove stock_quantity as it's not needed for Stripe catalog
             $table->dropColumn('stock_quantity');
-            
+
             // Update indexes
             $table->index('stripe_product_id');
         });
@@ -43,7 +43,7 @@ return new class extends Migration
             // Add back the price and stock_quantity fields
             $table->decimal('price', 8, 2)->after('description');
             $table->integer('stock_quantity')->default(0)->after('is_featured');
-            
+
             // Remove Stripe-specific fields
             $table->dropIndex(['stripe_product_id']);
             $table->dropColumn([
@@ -54,7 +54,7 @@ return new class extends Migration
                 'shippable',
                 'tax_code',
                 'metadata',
-                'unit_label'
+                'unit_label',
             ]);
         });
     }

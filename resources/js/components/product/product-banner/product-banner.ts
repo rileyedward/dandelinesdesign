@@ -1,1 +1,1 @@
-export { default } from './product-banner.vue'
+export { default } from './product-banner.vue';
