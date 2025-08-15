@@ -63,7 +63,7 @@ class OrderRequest extends FormRequest
             'shipping_method' => ['nullable', 'string', 'max:100'],
 
             // Order Status & Tracking (admin updatable)
-            'status' => ['sometimes', 'string', 'in:pending,processing,shipped,delivered,cancelled'],
+            'status' => ['sometimes', 'string', 'in:pending,processing,shipped,delivered,cancelled,refunded'],
             'tracking_number' => ['nullable', 'string', 'max:100'],
             'shipped_at' => ['nullable', 'date'],
             'delivered_at' => ['nullable', 'date'],
