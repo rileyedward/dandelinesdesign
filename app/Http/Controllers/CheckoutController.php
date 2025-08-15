@@ -9,7 +9,7 @@ use Stripe\StripeClient;
 
 class CheckoutController extends Controller
 {
-    public function __invoke(CheckoutRequest $request): Checkout|RedirectResponse
+    public function store(CheckoutRequest $request): Checkout|RedirectResponse
     {
         $validated = $request->validated();
 
@@ -19,7 +19,7 @@ class CheckoutController extends Controller
         }
 
         $checkoutOptions = [
-            'success_url' => route('home'),
+            'success_url' => route('checkout.success'),
             'cancel_url' => route('home'),
             'shipping_address_collection' => ['allowed_countries' => ['US']],
             'phone_number_collection' => ['enabled' => true],
@@ -47,6 +47,11 @@ class CheckoutController extends Controller
 
             return back()->with('error', 'Failed to create checkout session. Please try again.');
         }
+    }
+
+    public function success(): RedirectResponse
+    {
+        return to_route('home');
     }
 
     private function getShippingOptions(): array

@@ -52,17 +52,20 @@ class Order extends Model
         'payment_completed_at' => 'datetime',
     ];
 
-    public function orderProducts(): HasMany
+    public function lineItems(): HasMany
     {
-        return $this->hasMany(OrderProduct::class);
+        return $this->hasMany(LineItem::class);
     }
 
     public function products(): BelongsToMany
     {
-        return $this->belongsToMany(Product::class, 'order_products')
+        return $this->belongsToMany(Product::class, 'line_items')
             ->withPivot([
                 'quantity',
                 'unit_price',
+                'total_price',
+                'product_name',
+                'stripe_price_id',
             ])
             ->withTimestamps();
     }

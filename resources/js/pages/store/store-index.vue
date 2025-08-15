@@ -89,7 +89,7 @@ const handleCheckout = () => {
     // Create a form and submit it to allow proper redirect to Stripe
     const form = document.createElement('form');
     form.method = 'POST';
-    form.action = route('checkout');
+    form.action = route('checkout.store');
 
     // Add CSRF token
     const csrfInput = document.createElement('input');

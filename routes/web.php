@@ -33,11 +33,10 @@ Route::middleware('auth')->group(function () {
     Route::post('/quote', [QuoteRequestController::class, 'store'])->name('quote.store');
     Route::post('/newsletter', [NewsletterSubscriberController::class, 'store'])->name('newsletter.store');
 
-    Route::post('/checkout', CheckoutController::class)->name('checkout');
-
-    // These routes are commented out as per requirements, but will be needed in the future
-    // Route::get('/checkout/success', [CheckoutController::class, 'success'])->name('checkout.success');
-    // Route::get('/checkout/cancel', [CheckoutController::class, 'cancel'])->name('checkout.cancel');
+    Route::controller(CheckoutController::class)->prefix('checkout')->name('checkout.')->group(function () {
+        Route::post('/', 'store')->name('store');
+        Route::get('/success', 'success')->name('success');
+    });
 });
 
 require __DIR__.'/auth.php';
