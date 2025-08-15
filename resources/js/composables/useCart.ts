@@ -15,7 +15,14 @@ export function useCart() {
     };
 
     const addToCart = (product: Product, quantity: number = 1): void => {
-        const price = product.prices?.[0];
+        // First try to find the current price
+        let price = product.prices?.find(price => price.is_current);
+
+        // Fall back to the first price if no current price is set
+        if (!price) {
+            price = product.prices?.[0];
+        }
+
         if (!price) {
             console.error('Product has no price available');
             return;

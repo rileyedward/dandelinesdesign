@@ -24,7 +24,9 @@ class ProductController extends BaseController
     public function index(Request $request): Response
     {
         $products = Product::query()
-            ->with(['category', 'prices'])
+            ->with(['category', 'prices' => function ($query) {
+                $query->orderBy('is_current', 'desc')->orderBy('unit_amount');
+            }])
             ->get();
 
         $categories = Category::query()
@@ -45,7 +47,9 @@ class ProductController extends BaseController
             ->with([
                 'category',
                 'prices' => function ($query) {
-                    $query->where('active', true)->orderBy('unit_amount');
+                    $query->where('active', true)
+                          ->orderBy('is_current', 'desc')
+                          ->orderBy('unit_amount');
                 },
                 'lineItems.order',
             ])

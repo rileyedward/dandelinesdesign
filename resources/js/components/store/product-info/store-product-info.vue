@@ -18,6 +18,11 @@ const emit = defineEmits<Emits>();
 const quantity = ref(1);
 
 const selectedPrice = computed(() => {
+    // First try to find the current price
+    const currentPrice = props.product.prices?.find(price => price.is_current);
+    if (currentPrice) return currentPrice;
+
+    // Fall back to the first price if no current price is set
     return props.product.prices?.[0] || null;
 });
 

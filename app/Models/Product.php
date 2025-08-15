@@ -63,6 +63,11 @@ class Product extends Model
         return $this->activePrices()->first();
     }
 
+    public function currentPrice(): ?Price
+    {
+        return $this->activePrices()->where('is_current', true)->first();
+    }
+
     public function lineItems(): HasMany
     {
         return $this->hasMany(LineItem::class);
@@ -80,8 +85,13 @@ class Product extends Model
 
     public function getFormattedPriceAttribute(): string
     {
-        $defaultPrice = $this->defaultPrice();
+        $currentPrice = $this->currentPrice();
 
+        if ($currentPrice) {
+            return $currentPrice->formatted_price;
+        }
+
+        $defaultPrice = $this->defaultPrice();
         return $defaultPrice ? $defaultPrice->formatted_price : 'N/A';
     }
 

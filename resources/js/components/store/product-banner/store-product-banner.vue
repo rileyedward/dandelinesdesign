@@ -18,8 +18,14 @@ const handleViewProduct = () => {
     emit('view', props.product);
 };
 
-const getLowestPrice = () => {
+const getCurrentPrice = () => {
     if (!props.product.prices?.length) return null;
+
+    // First try to find the current price
+    const currentPrice = props.product.prices.find(price => price.is_current);
+    if (currentPrice) return currentPrice.unit_amount;
+
+    // Fall back to the lowest price if no current price is set
     return Math.min(...props.product.prices.map((price) => price.unit_amount));
 };
 </script>
@@ -58,7 +64,7 @@ const getLowestPrice = () => {
             <!-- Price and Actions -->
             <div class="flex items-center justify-between pt-2">
                 <div class="flex flex-col">
-                    <span v-if="getLowestPrice()" class="text-2xl font-bold text-gray-900"> ${{ getLowestPrice() }} </span>
+                    <span v-if="getCurrentPrice()" class="text-2xl font-bold text-gray-900"> ${{ getCurrentPrice() }} </span>
                     <span v-else class="text-sm text-gray-500"> Price not available </span>
                     <span v-if="product.prices?.length > 1" class="text-xs text-gray-500"> Multiple options available </span>
                 </div>
