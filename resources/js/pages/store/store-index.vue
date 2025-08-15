@@ -1,81 +1,102 @@
 <script setup lang="ts">
+import StoreProductList from '@/components/store/product-list/store-product-list.vue';
+import StoreProductModal from '@/components/store/product-modal/store-product-modal.vue';
 import StoreSplash from '@/components/store/store-splash.vue';
+import type { StoreTabItem } from '@/components/store/store-tabs/store-tabs';
+import StoreTabs from '@/components/store/store-tabs/store-tabs.vue';
 import NavbarLayout from '@/layouts/navbar/navbar-layout.vue';
+import type { Category, Product } from '@/types/product';
 import { Head } from '@inertiajs/vue3';
-import { Bell, Facebook, Instagram, MessageSquareIcon, Sparkles } from 'lucide-vue-next';
+import { Grid, Package, Tag } from 'lucide-vue-next';
+import { computed, ref } from 'vue';
+
+interface Props {
+    products: Product[];
+    categories: Category[];
+}
+
+const props = defineProps<Props>();
+
+const activeTab = ref('all');
+const selectedProduct = ref<Product | null>(null);
+const showProductModal = ref(false);
+
+const tabs = computed((): StoreTabItem[] => {
+    const allTab: StoreTabItem = {
+        label: 'All Products',
+        value: 'all',
+        icon: Grid,
+        count: props.products.length,
+    };
+
+    const categoryTabs: StoreTabItem[] = props.categories
+        .map((category) => ({
+            label: category.name,
+            value: category.id.toString(),
+            icon: Tag,
+            count: props.products.filter((product) => product.category_id === category.id).length,
+        }))
+        .filter((tab) => tab.count > 0); // Only show categories with products
+
+    return [allTab, ...categoryTabs];
+});
+
+const filteredProducts = computed(() => {
+    if (activeTab.value === 'all') {
+        return props.products;
+    }
+
+    const categoryId = parseInt(activeTab.value);
+    return props.products.filter((product) => product.category_id === categoryId);
+});
+
+const handleViewProduct = (product: Product) => {
+    selectedProduct.value = product;
+    showProductModal.value = true;
+};
+
+const handleCloseModal = () => {
+    showProductModal.value = false;
+    selectedProduct.value = null;
+};
+
+const handleAddToCart = (product: Product, quantity: number) => {
+    // TODO: Implement cart functionality
+    console.log('Add to cart:', product, quantity);
+    handleCloseModal();
+};
 </script>
 
 <template>
     <Head title="Store - Dandelines Design" />
 
     <navbar-layout>
-        <!-- Hero Section -->
         <store-splash />
 
-        <!-- Coming Soon Section -->
-        <section class="bg-gradient-to-br from-amber-50 to-orange-50 py-16">
-            <div class="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
-                <!-- Coming Soon Badge -->
-                <div
-                    class="mb-6 inline-flex items-center rounded-full bg-gradient-to-r from-amber-100 to-orange-100 px-4 py-2 text-sm font-medium text-amber-800"
-                >
-                    <Sparkles class="mr-2 h-4 w-4" />
-                    Coming Soon
-                </div>
-
-                <!-- Main Heading -->
-                <h2 class="mb-6 text-4xl font-bold text-gray-900 md:text-5xl">Beautiful Products Are On Their Way</h2>
-
-                <!-- Description -->
-                <p class="mx-auto mb-8 max-w-2xl text-xl leading-relaxed text-gray-600">
-                    We're carefully curating a collection of stunning handcrafted designs, elegant floral arrangements, and exclusive artwork that
-                    will bring beauty to your life and events.
-                </p>
-
-                <!-- Call to Action -->
-                <div class="rounded-2xl border border-amber-200/50 bg-white/80 p-8 shadow-xl backdrop-blur-sm">
-                    <div class="mb-4 flex items-center justify-center">
-                        <Bell class="mr-3 h-8 w-8 text-amber-600" />
-                        <h3 class="text-2xl font-bold text-gray-900">Stay Tuned!</h3>
+        <section class="bg-gray-50 py-16">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="mb-12 text-center">
+                    <div
+                        class="from-primary-100 to-primary-200 text-primary-800 mb-4 inline-flex items-center rounded-full bg-gradient-to-r px-4 py-2 text-sm font-medium"
+                    >
+                        <Package class="mr-2 h-4 w-4" />
+                        Our Collection
                     </div>
-                    <p class="mb-6 text-lg text-gray-600">
-                        Our online store is launching soon with carefully selected products that reflect our commitment to beauty and quality. Be the
-                        first to know when we go live!
+                    <h2 class="mb-4 text-4xl font-bold text-gray-900">Beautiful Products for Every Occasion</h2>
+                    <p class="mx-auto max-w-2xl text-xl text-gray-600">
+                        Discover our carefully curated collection of handcrafted designs, elegant floral arrangements, and exclusive artwork.
                     </p>
-                    <p class="mb-6 font-medium text-amber-600">Follow us on social media for updates on our grand opening:</p>
-
-                    <!-- Social Media Links -->
-                    <div class="flex justify-center space-x-4">
-                        <a
-                            href="https://www.instagram.com/dandelines_design"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-orange-500 text-white transition-all duration-300 hover:scale-110 hover:shadow-lg"
-                            aria-label="Follow us on Instagram"
-                        >
-                            <Instagram class="h-6 w-6" />
-                        </a>
-                        <a
-                            href="https://www.facebook.com/michele.grotenhuis"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-orange-500 text-white transition-all duration-300 hover:scale-110 hover:shadow-lg"
-                            aria-label="Follow us on Facebook"
-                        >
-                            <Facebook class="h-6 w-6" />
-                        </a>
-                        <a
-                            href="https://www.threads.com/@michelegrotenhuis"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            class="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-amber-400 to-orange-500 text-white transition-all duration-300 hover:scale-110 hover:shadow-lg"
-                            aria-label="Follow us on Threads"
-                        >
-                            <MessageSquareIcon class="h-6 w-6" />
-                        </a>
-                    </div>
                 </div>
+
+                <div class="mb-8">
+                    <store-tabs v-model="activeTab" :items="tabs" />
+                </div>
+
+                <store-product-list :products="filteredProducts" @view="handleViewProduct" />
             </div>
         </section>
+
+        <!-- Product Modal -->
+        <StoreProductModal :show="showProductModal" :product="selectedProduct" @close="handleCloseModal" @add-to-cart="handleAddToCart" />
     </navbar-layout>
 </template>
