@@ -8,9 +8,9 @@ class CheckoutSuccessRequest extends FormRequest
 {
     public function rules(): array
     {
-//        return [
-//            'session_id' => 'required|string|starts_with:cs_',
-//        ];
+        //        return [
+        //            'session_id' => 'required|string|starts_with:cs_',
+        //        ];
     }
 
     /**
@@ -20,9 +20,9 @@ class CheckoutSuccessRequest extends FormRequest
      */
     public function messages(): array
     {
-//        return [
-//            'session_id.required' => 'Checkout session ID is required.',
-//            'session_id.starts_with' => 'Invalid checkout session ID format.',
-//        ];
+        //        return [
+        //            'session_id.required' => 'Checkout session ID is required.',
+        //            'session_id.starts_with' => 'Invalid checkout session ID format.',
+        //        ];
     }
 }

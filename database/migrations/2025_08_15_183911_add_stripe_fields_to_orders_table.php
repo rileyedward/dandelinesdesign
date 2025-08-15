@@ -15,7 +15,7 @@ return new class extends Migration
             $table->string('stripe_checkout_session_id')->nullable()->unique()->after('payment_completed_at');
             $table->string('stripe_payment_intent_id')->nullable()->after('stripe_checkout_session_id');
             $table->string('stripe_customer_id')->nullable()->after('stripe_payment_intent_id');
-            
+
             $table->index('stripe_checkout_session_id');
         });
     }
@@ -30,7 +30,7 @@ return new class extends Migration
             $table->dropColumn([
                 'stripe_checkout_session_id',
                 'stripe_payment_intent_id',
-                'stripe_customer_id'
+                'stripe_customer_id',
             ]);
         });
     }

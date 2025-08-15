@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CheckoutRequest;
-use App\Http\Requests\CheckoutSuccessRequest;
 use App\Models\LineItem;
 use App\Models\Order;
 use App\Models\Product;
@@ -24,7 +23,7 @@ class CheckoutController extends Controller
         }
 
         $checkoutOptions = [
-            'success_url' => route('checkout.success') . '?session_id={CHECKOUT_SESSION_ID}',
+            'success_url' => route('checkout.success').'?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url' => route('home'),
             'shipping_address_collection' => ['allowed_countries' => ['US']],
             'phone_number_collection' => ['enabled' => true],
@@ -38,14 +37,14 @@ class CheckoutController extends Controller
         ];
 
         $shippingOptions = $this->getShippingOptions();
-        if (!empty($shippingOptions)) {
+        if (! empty($shippingOptions)) {
             $checkoutOptions['shipping_options'] = $shippingOptions;
         }
 
         try {
             return Checkout::guest()->create($lineItems, $checkoutOptions);
         } catch (\Exception $e) {
-            \Log::error('Checkout creation failed: ' . $e->getMessage(), [
+            \Log::error('Checkout creation failed: '.$e->getMessage(), [
                 'line_items' => $lineItems,
                 'checkout_options' => $checkoutOptions,
             ]);
@@ -58,23 +57,24 @@ class CheckoutController extends Controller
     {
         $sessionId = $request->query('session_id');
 
-        if (!$sessionId) {
+        if (! $sessionId) {
             \Log::error('No session_id provided to checkout success', [
                 'query_params' => $request->query(),
-                'all_params' => $request->all()
+                'all_params' => $request->all(),
             ]);
+
             return redirect()->route('home')->with('error', 'Invalid checkout session.');
         }
 
         try {
             $stripe = new StripeClient(config('cashier.secret'));
             $session = $stripe->checkout->sessions->retrieve($sessionId, [
-                'expand' => ['line_items', 'line_items.data.price.product', 'customer']
+                'expand' => ['line_items', 'line_items.data.price.product', 'customer'],
             ]);
 
             $existingOrder = Order::query()->where('stripe_checkout_session_id', $sessionId)->first();
             if ($existingOrder) {
-                return redirect()->route('home')->with('success', 'Thank you for your order! Order #' . $existingOrder->order_number);
+                return redirect()->route('home')->with('success', 'Thank you for your order! Order #'.$existingOrder->order_number);
             }
 
             $order = Order::query()->create([
@@ -124,10 +124,10 @@ class CheckoutController extends Controller
 
             // TODO: Send order confirmation email to customer
 
-            return redirect()->route('home')->with('success', 'Thank you for your order! Order #' . $order->order_number);
+            return redirect()->route('home')->with('success', 'Thank you for your order! Order #'.$order->order_number);
 
         } catch (\Exception $e) {
-            \Log::error('Order creation failed: ' . $e->getMessage(), [
+            \Log::error('Order creation failed: '.$e->getMessage(), [
                 'session_id' => $sessionId,
                 'error' => $e->getTraceAsString(),
             ]);
@@ -156,7 +156,7 @@ class CheckoutController extends Controller
             return $shippingOptions;
 
         } catch (\Exception $e) {
-            \Log::error('Failed to fetch shipping rates: ' . $e->getMessage());
+            \Log::error('Failed to fetch shipping rates: '.$e->getMessage());
 
             return [];
         }
