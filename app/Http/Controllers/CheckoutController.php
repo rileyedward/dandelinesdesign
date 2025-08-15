@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\CheckoutRequest;
 use Laravel\Cashier\Checkout;
+use Stripe\StripeClient;
 
 class CheckoutController extends Controller
 {
@@ -16,12 +17,45 @@ class CheckoutController extends Controller
             $lineItems[$item['price_id']] = $item['quantity'];
         }
 
-        $checkout = Checkout::guest()->create($lineItems, [
+        $checkoutOptions = [
             // TODO: Uncomment once we have this in there.
-            // 'success_url' => route('checkout.succees'),
+            // 'success_url' => route('checkout.success'),
             // 'cancel_url' => route('checkout.cancel'),
-        ]);
+            'automatic_tax' => ['enabled' => true],
+        ];
 
-        return $checkout;
+        $shippingOptions = $this->getShippingOptions();
+
+        if (! empty($shippingOptions)) {
+            $checkoutOptions['shipping_options'] = $shippingOptions;
+        }
+
+        return Checkout::guest()->create($lineItems, $checkoutOptions);
+    }
+
+    private function getShippingOptions(): array
+    {
+        try {
+            $stripe = new StripeClient(config('cashier.secret'));
+
+            $shippingRates = $stripe->shippingRates->all([
+                'active' => true,
+                'limit' => 10,
+            ]);
+
+            $shippingOptions = [];
+            foreach ($shippingRates->data as $rate) {
+                $shippingOptions[] = [
+                    'shipping_rate' => $rate->id,
+                ];
+            }
+
+            return $shippingOptions;
+
+        } catch (\Exception $e) {
+            \Log::error('Failed to fetch shipping rates: '.$e->getMessage());
+
+            return [];
+        }
     }
 }
