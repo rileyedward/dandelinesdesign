@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import CommonPageHeader from '@/components/common/page-header/common-page-header.vue';
 import ProductList from '@/components/product/product-list/product-list.vue';
+import UiButton from '@/components/ui/forms/button/ui-button.vue';
 import type { TabItem } from '@/components/ui/navigation/tab/ui-tab';
 import UiTab from '@/components/ui/navigation/tab/ui-tab.vue';
-import UiButton from '@/components/ui/forms/button/ui-button.vue';
 import SidebarLayout from '@/layouts/sidebar/sidebar-layout.vue';
 import type { Category, Product } from '@/types/product';
 import { Head, router } from '@inertiajs/vue3';
-import { Grid, Package, Tag, Download } from 'lucide-vue-next';
+import { Download, Grid, Package, Tag } from 'lucide-vue-next';
 import { computed, ref } from 'vue';
 
 interface Props {
@@ -50,14 +50,18 @@ const isImporting = ref(false);
 
 const importFromStripe = () => {
     if (isImporting.value) return;
-    
+
     isImporting.value = true;
-    
-    router.post(route('admin.products.import-stripe'), {}, {
-        onFinish: () => {
-            isImporting.value = false;
-        }
-    });
+
+    router.post(
+        route('admin.products.import-stripe'),
+        {},
+        {
+            onFinish: () => {
+                isImporting.value = false;
+            },
+        },
+    );
 };
 </script>
 
@@ -68,13 +72,7 @@ const importFromStripe = () => {
         <div class="space-y-6">
             <common-page-header title="Products" subtitle="Manage your products" :icon="Package" variant="info">
                 <template #actions>
-                    <ui-button 
-                        @click="importFromStripe" 
-                        :disabled="isImporting"
-                        variant="secondary"
-                        size="sm"
-                        :icon="Download"
-                    >
+                    <ui-button @click="importFromStripe" :disabled="isImporting" variant="secondary" size="sm" :icon="Download">
                         {{ isImporting ? 'Importing...' : 'Import from Stripe' }}
                     </ui-button>
                 </template>

@@ -2,8 +2,8 @@
 
 namespace App\Http\Requests;
 
-use Illuminate\Foundation\Http\FormRequest;
 use App\Models\Price;
+use Illuminate\Foundation\Http\FormRequest;
 
 class CheckoutRequest extends FormRequest
 {
@@ -16,9 +16,9 @@ class CheckoutRequest extends FormRequest
                 'string',
                 function ($attribute, $value, $fail) {
                     $price = Price::where('stripe_price_id', $value)->first();
-                    if (!$price) {
+                    if (! $price) {
                         $fail('The selected price is invalid.');
-                    } elseif (!$price->active) {
+                    } elseif (! $price->active) {
                         $fail('The selected price is no longer available.');
                     }
                 },

@@ -3,9 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CheckoutRequest;
-use App\Models\Price;
-use App\Models\Product;
-use Illuminate\Http\Request;
 use Laravel\Cashier\Checkout;
 
 class CheckoutController extends Controller

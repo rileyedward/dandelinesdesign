@@ -9,7 +9,7 @@ use Laravel\Cashier\Billable;
 
 class User extends Authenticatable
 {
-    use HasFactory, Notifiable, Billable;
+    use Billable, HasFactory, Notifiable;
 
     protected $table = 'users';
 
