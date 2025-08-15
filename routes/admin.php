@@ -100,6 +100,7 @@ Route::middleware('auth')
             ->group(function () {
                 Route::get('/', 'index')->name('index');
                 Route::get('/{id}', 'show')->name('show');
+                Route::patch('/{id}', 'update')->name('update');
             });
 
         Route::controller(NotificationController::class)

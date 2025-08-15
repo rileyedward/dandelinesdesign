@@ -8,6 +8,10 @@ class OrderRequest extends FormRequest
 {
     public function rules(): array
     {
+        if ($this->isMethod('patch') || $this->isMethod('put')) {
+            return $this->updateRules();
+        }
+
         return [
             // Customer Information
             'customer_email' => ['required', 'email', 'max:255'],
@@ -37,6 +41,32 @@ class OrderRequest extends FormRequest
                 },
             ],
             'products.*.quantity' => ['required', 'integer', 'min:1', 'max:99'],
+        ];
+    }
+
+    protected function updateRules(): array
+    {
+        return [
+            // Customer Information (admin updatable)
+            'customer_email' => ['sometimes', 'email', 'max:255'],
+            'customer_first_name' => ['sometimes', 'string', 'max:255'],
+            'customer_last_name' => ['sometimes', 'string', 'max:255'],
+            'customer_phone' => ['nullable', 'string', 'max:20'],
+
+            // Shipping Address (admin updatable)
+            'shipping_address_line_1' => ['sometimes', 'string', 'max:255'],
+            'shipping_address_line_2' => ['nullable', 'string', 'max:255'],
+            'shipping_city' => ['sometimes', 'string', 'max:100'],
+            'shipping_state' => ['sometimes', 'string', 'max:50'],
+            'shipping_postal_code' => ['sometimes', 'string', 'max:20'],
+            'shipping_country' => ['sometimes', 'string', 'max:2'],
+            'shipping_method' => ['nullable', 'string', 'max:100'],
+
+            // Order Status & Tracking (admin updatable)
+            'status' => ['sometimes', 'string', 'in:pending,processing,shipped,delivered,cancelled'],
+            'tracking_number' => ['nullable', 'string', 'max:100'],
+            'shipped_at' => ['nullable', 'date'],
+            'delivered_at' => ['nullable', 'date'],
         ];
     }
 
