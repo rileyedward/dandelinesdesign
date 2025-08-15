@@ -180,6 +180,7 @@ class ProductController extends BaseController
             if (! $existingProduct) {
                 $productData['category_id'] = $defaultCategory->id;
                 $productData['is_featured'] = false;
+                $productData['stock_quantity'] = 1; // Default stock for art pieces
             }
 
             return Product::query()->updateOrCreate(

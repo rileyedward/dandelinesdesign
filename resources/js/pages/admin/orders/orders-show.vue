@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import OrderInfo from '@/components/admin/orders/order-info/order-info.vue';
+import OrderInventoryInfo from '@/components/admin/orders/order-inventory-info/order-inventory-info.vue';
 import OrderLineItems from '@/components/admin/orders/order-line-items/order-line-items.vue';
 import OrderShippingInfo from '@/components/admin/orders/order-shipping-info/order-shipping-info.vue';
 import OrderStatusActions from '@/components/admin/orders/order-status-actions/order-status-actions.vue';
@@ -36,6 +37,7 @@ const handleBackClick = () => {
                 <div class="space-y-6 lg:col-span-2">
                     <order-status-actions :order="order" />
                     <order-shipping-info :order="order" />
+                    <order-inventory-info :order="order" />
                     <order-line-items :line-items="order.line_items" :currency="order.currency" />
                 </div>
                 <div class="lg:col-span-1">

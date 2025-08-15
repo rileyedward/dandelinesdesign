@@ -119,6 +119,11 @@ class CheckoutController extends Controller
                     'stripe_price_id' => $lineItem->price->id,
                     'stripe_product_id' => $lineItem->price->product->id,
                 ]);
+
+                // Deduct stock for the purchased product
+                if ($product && $product->isInStock()) {
+                    $product->decrementStock($lineItem->quantity);
+                }
             }
 
             // TODO: Send order confirmation email to customer

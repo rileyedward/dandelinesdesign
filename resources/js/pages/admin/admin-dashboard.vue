@@ -3,7 +3,23 @@ import CommonPageHeader from '@/components/common/page-header/common-page-header
 import UiCard from '@/components/ui/layout/card/ui-card.vue';
 import SidebarLayout from '@/layouts/sidebar/sidebar-layout.vue';
 import { Head, Link } from '@inertiajs/vue3';
-import { FileText, Home, Image, Mail, MessageSquare, Newspaper, Package, ShoppingBag, Star, Tag, UserCheck, Users } from 'lucide-vue-next';
+import {
+    Clock,
+    DollarSign,
+    FileText,
+    Home,
+    Image,
+    Mail,
+    MessageSquare,
+    Newspaper,
+    Package,
+    ShoppingBag,
+    Star,
+    Tag,
+    Truck,
+    UserCheck,
+    Users,
+} from 'lucide-vue-next';
 
 defineProps<{
     metrics: {
@@ -14,6 +30,19 @@ defineProps<{
         totalSubscribers: number;
         totalTestimonials: number;
         totalImages: number;
+        totalOrders: number;
+        pendingOrders: number;
+        processingOrders: number;
+        totalRevenue: number;
+        recentOrders: Array<{
+            id: number;
+            order_number: string;
+            status: string;
+            total_amount: number;
+            customer_first_name: string;
+            customer_last_name: string;
+            created_at: string;
+        }>;
     };
 }>();
 </script>
@@ -65,6 +94,126 @@ defineProps<{
                         </div>
                     </ui-card>
                 </div>
+            </section>
+
+            <!-- Order Metrics Section -->
+            <section>
+                <div class="mb-4 flex items-center justify-between">
+                    <h2 class="text-xl font-semibold text-gray-900">Order Metrics</h2>
+                    <Link href="/admin/orders" class="text-sm font-medium text-indigo-600 hover:text-indigo-500"> View All Orders </Link>
+                </div>
+                <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4">
+                    <ui-card class="border-0 bg-gradient-to-br from-indigo-50 to-blue-50">
+                        <div class="flex items-center justify-between p-4">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Total Orders</p>
+                                <p class="text-2xl font-bold text-gray-900">{{ metrics.totalOrders }}</p>
+                            </div>
+                            <div class="flex h-12 w-12 items-center justify-center rounded-full bg-indigo-100">
+                                <ShoppingBag class="h-6 w-6 text-indigo-600" />
+                            </div>
+                        </div>
+                    </ui-card>
+
+                    <ui-card class="border-0 bg-gradient-to-br from-amber-50 to-yellow-50">
+                        <div class="flex items-center justify-between p-4">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Pending Orders</p>
+                                <p class="text-2xl font-bold text-gray-900">{{ metrics.pendingOrders }}</p>
+                            </div>
+                            <div class="flex h-12 w-12 items-center justify-center rounded-full bg-amber-100">
+                                <Clock class="h-6 w-6 text-amber-600" />
+                            </div>
+                        </div>
+                    </ui-card>
+
+                    <ui-card class="border-0 bg-gradient-to-br from-blue-50 to-sky-50">
+                        <div class="flex items-center justify-between p-4">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Processing Orders</p>
+                                <p class="text-2xl font-bold text-gray-900">{{ metrics.processingOrders }}</p>
+                            </div>
+                            <div class="flex h-12 w-12 items-center justify-center rounded-full bg-blue-100">
+                                <Truck class="h-6 w-6 text-blue-600" />
+                            </div>
+                        </div>
+                    </ui-card>
+
+                    <ui-card class="border-0 bg-gradient-to-br from-green-50 to-emerald-50">
+                        <div class="flex items-center justify-between p-4">
+                            <div>
+                                <p class="text-sm font-medium text-gray-500">Total Revenue</p>
+                                <p class="text-2xl font-bold text-gray-900">${{ metrics?.totalRevenue }}</p>
+                            </div>
+                            <div class="flex h-12 w-12 items-center justify-center rounded-full bg-green-100">
+                                <DollarSign class="h-6 w-6 text-green-600" />
+                            </div>
+                        </div>
+                    </ui-card>
+                </div>
+            </section>
+
+            <!-- Recent Orders Section -->
+            <section>
+                <h2 class="mb-4 text-xl font-semibold text-gray-900">Recent Orders</h2>
+                <ui-card>
+                    <div class="overflow-x-auto">
+                        <table class="min-w-full divide-y divide-gray-200">
+                            <thead class="bg-gray-50">
+                                <tr>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
+                                        Order #
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">
+                                        Customer
+                                    </th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">Status</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">Amount</th>
+                                    <th scope="col" class="px-6 py-3 text-left text-xs font-medium tracking-wider text-gray-500 uppercase">Date</th>
+                                    <th scope="col" class="relative px-6 py-3">
+                                        <span class="sr-only">View</span>
+                                    </th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200 bg-white">
+                                <tr v-for="order in metrics.recentOrders" :key="order.id">
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm font-medium text-gray-900">{{ order.order_number }}</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900">{{ order.customer_first_name }} {{ order.customer_last_name }}</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <span
+                                            class="inline-flex rounded-full px-2 text-xs leading-5 font-semibold"
+                                            :class="{
+                                                'bg-yellow-100 text-yellow-800': order.status === 'pending',
+                                                'bg-blue-100 text-blue-800': order.status === 'processing',
+                                                'bg-indigo-100 text-indigo-800': order.status === 'shipped',
+                                                'bg-green-100 text-green-800': order.status === 'delivered',
+                                                'bg-red-100 text-red-800': order.status === 'cancelled',
+                                            }"
+                                        >
+                                            {{ order.status.charAt(0).toUpperCase() + order.status.slice(1) }}
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-900">${{ order.total_amount }}</div>
+                                    </td>
+                                    <td class="px-6 py-4 whitespace-nowrap">
+                                        <div class="text-sm text-gray-500">{{ new Date(order.created_at).toLocaleDateString() }}</div>
+                                    </td>
+                                    <td class="px-6 py-4 text-right text-sm font-medium whitespace-nowrap">
+                                        <Link :href="`/admin/orders/${order.id}`" class="text-indigo-600 hover:text-indigo-900"> View </Link>
+                                    </td>
+                                </tr>
+                                <tr v-if="metrics.recentOrders.length === 0">
+                                    <td colspan="6" class="px-6 py-4 text-center text-sm text-gray-500">No recent orders found</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </ui-card>
             </section>
 
             <!-- Main Navigation Sections -->

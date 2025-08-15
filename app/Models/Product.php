@@ -31,6 +31,7 @@ class Product extends Model
         'unit_label',
         'is_active',
         'is_featured',
+        'stock_quantity',
     ];
 
     protected $casts = [
@@ -39,6 +40,7 @@ class Product extends Model
         'shippable' => 'boolean',
         'weight' => 'decimal:2',
         'category_id' => 'integer',
+        'stock_quantity' => 'integer',
         'images' => 'array',
         'metadata' => 'array',
     ];
@@ -165,5 +167,33 @@ class Product extends Model
     public static function findByStripeId(string $stripeProductId): ?self
     {
         return static::where('stripe_product_id', $stripeProductId)->first();
+    }
+
+    // Stock management methods
+    public function isInStock(): bool
+    {
+        return $this->stock_quantity > 0;
+    }
+
+    public function decrementStock(int $quantity): bool
+    {
+        if ($this->stock_quantity >= $quantity) {
+            $this->decrement('stock_quantity', $quantity);
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public function getAvailableQuantityAttribute(): int
+    {
+        return $this->stock_quantity;
+    }
+
+    // Stock-related scopes
+    public function scopeInStock($query)
+    {
+        return $query->where('stock_quantity', '>', 0);
     }
 }

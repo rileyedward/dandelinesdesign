@@ -36,7 +36,7 @@ class OrderController extends BaseController
     public function show(string $id): Response
     {
         $model = $this->service->getById($id);
-        $model->load('lineItems');
+        $model->load(['lineItems.product']);
 
         return Inertia::render('admin/orders/orders-show', [
             'order' => $model,

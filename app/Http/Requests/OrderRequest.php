@@ -37,10 +37,28 @@ class OrderRequest extends FormRequest
                     $product = \App\Models\Product::find($value);
                     if ($product && ! $product->is_active) {
                         $fail('The selected product is no longer available.');
+                    } elseif ($product && ! $product->isInStock()) {
+                        $fail('The selected product is currently out of stock.');
                     }
                 },
             ],
-            'products.*.quantity' => ['required', 'integer', 'min:1', 'max:99'],
+            'products.*.quantity' => [
+                'required',
+                'integer',
+                'min:1',
+                'max:99',
+                function ($attribute, $value, $fail) {
+                    $productIndex = explode('.', $attribute)[1];
+                    $productId = $this->input("products.{$productIndex}.product_id");
+
+                    if ($productId) {
+                        $product = \App\Models\Product::find($productId);
+                        if ($product && $value > $product->stock_quantity) {
+                            $fail("Only {$product->stock_quantity} items available in stock.");
+                        }
+                    }
+                },
+            ],
         ];
     }
 

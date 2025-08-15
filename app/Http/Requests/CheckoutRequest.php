@@ -20,10 +20,31 @@ class CheckoutRequest extends FormRequest
                         $fail('The selected price is invalid.');
                     } elseif (! $price->active) {
                         $fail('The selected price is no longer available.');
+                    } elseif (! $price->product->isInStock()) {
+                        $fail('This product is currently out of stock.');
                     }
                 },
             ],
-            'items.*.quantity' => ['required', 'integer', 'min:1', 'max:99'],
+            'items.*.quantity' => [
+                'required',
+                'integer',
+                'min:1',
+                'max:99',
+                function ($attribute, $value, $fail) {
+                    $itemIndex = explode('.', $attribute)[1];
+                    $priceId = $this->input("items.{$itemIndex}.price_id");
+
+                    if ($priceId) {
+                        $price = Price::query()->where('stripe_price_id', $priceId)->first();
+                        if ($price && $price->product) {
+                            $availableStock = $price->product->stock_quantity;
+                            if ($value > $availableStock) {
+                                $fail("Only {$availableStock} items available in stock.");
+                            }
+                        }
+                    }
+                },
+            ],
         ];
     }
 
