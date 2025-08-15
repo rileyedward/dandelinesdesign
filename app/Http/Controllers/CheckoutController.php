@@ -8,6 +8,7 @@ use App\Models\LineItem;
 use App\Models\Order;
 use App\Models\Product;
 use Illuminate\Http\RedirectResponse;
+use Illuminate\Http\Request;
 use Laravel\Cashier\Checkout;
 use Stripe\StripeClient;
 
@@ -23,7 +24,7 @@ class CheckoutController extends Controller
         }
 
         $checkoutOptions = [
-            'success_url' => route('checkout.success'),
+            'success_url' => route('checkout.success') . '?session_id={CHECKOUT_SESSION_ID}',
             'cancel_url' => route('home'),
             'shipping_address_collection' => ['allowed_countries' => ['US']],
             'phone_number_collection' => ['enabled' => true],
@@ -37,14 +38,14 @@ class CheckoutController extends Controller
         ];
 
         $shippingOptions = $this->getShippingOptions();
-        if (! empty($shippingOptions)) {
+        if (!empty($shippingOptions)) {
             $checkoutOptions['shipping_options'] = $shippingOptions;
         }
 
         try {
             return Checkout::guest()->create($lineItems, $checkoutOptions);
         } catch (\Exception $e) {
-            \Log::error('Checkout creation failed: '.$e->getMessage(), [
+            \Log::error('Checkout creation failed: ' . $e->getMessage(), [
                 'line_items' => $lineItems,
                 'checkout_options' => $checkoutOptions,
             ]);
@@ -53,14 +54,22 @@ class CheckoutController extends Controller
         }
     }
 
-    public function success(CheckoutSuccessRequest $request): RedirectResponse
+    public function success(Request $request): RedirectResponse
     {
-        $sessionId = $request->validated()['session_id'];
+        $sessionId = $request->query('session_id');
+
+        if (!$sessionId) {
+            \Log::error('No session_id provided to checkout success', [
+                'query_params' => $request->query(),
+                'all_params' => $request->all()
+            ]);
+            return redirect()->route('home')->with('error', 'Invalid checkout session.');
+        }
 
         try {
             $stripe = new StripeClient(config('cashier.secret'));
             $session = $stripe->checkout->sessions->retrieve($sessionId, [
-                'expand' => ['line_items', 'line_items.data.price.product', 'customer', 'shipping_details']
+                'expand' => ['line_items', 'line_items.data.price.product', 'customer']
             ]);
 
             $existingOrder = Order::query()->where('stripe_checkout_session_id', $sessionId)->first();
@@ -68,9 +77,8 @@ class CheckoutController extends Controller
                 return redirect()->route('home')->with('success', 'Thank you for your order! Order #' . $existingOrder->order_number);
             }
 
-            // Create the order
             $order = Order::query()->create([
-                'status' => 'paid',
+                'status' => 'processing',
                 'subtotal' => $session->amount_subtotal / 100,
                 'tax_amount' => $session->amount_total - $session->amount_subtotal > 0 ? ($session->amount_total - $session->amount_subtotal) / 100 : null,
                 'shipping_cost' => $session->shipping_cost ? $session->shipping_cost->amount_total / 100 : null,
@@ -80,19 +88,19 @@ class CheckoutController extends Controller
                 'customer_first_name' => $session->customer_details->name ? explode(' ', $session->customer_details->name)[0] : null,
                 'customer_last_name' => $session->customer_details->name ? implode(' ', array_slice(explode(' ', $session->customer_details->name), 1)) : null,
                 'customer_phone' => $session->customer_details->phone,
-                'shipping_address_line_1' => $session->shipping_details->address->line1 ?? null,
-                'shipping_address_line_2' => $session->shipping_details->address->line2 ?? null,
-                'shipping_city' => $session->shipping_details->address->city ?? null,
-                'shipping_state' => $session->shipping_details->address->state ?? null,
-                'shipping_postal_code' => $session->shipping_details->address->postal_code ?? null,
-                'shipping_country' => $session->shipping_details->address->country ?? null,
-                'payment_status' => 'completed',
+                'shipping_address_line_1' => $session->shipping_details?->address?->line1,
+                'shipping_address_line_2' => $session->shipping_details?->address?->line2,
+                'shipping_city' => $session->shipping_details?->address?->city,
+                'shipping_state' => $session->shipping_details?->address?->state,
+                'shipping_postal_code' => $session->shipping_details?->address?->postal_code,
+                'shipping_country' => $session->shipping_details?->address?->country,
+                'payment_status' => 'paid',
                 'payment_method' => 'stripe',
                 'payment_transaction_id' => $session->payment_intent,
                 'payment_completed_at' => now(),
                 'stripe_checkout_session_id' => $sessionId,
                 'stripe_payment_intent_id' => $session->payment_intent,
-                'stripe_customer_id' => $session->customer,
+                'stripe_customer_id' => is_string($session->customer) ? $session->customer : $session->customer?->id,
             ]);
 
             foreach ($session->line_items->data as $lineItem) {
@@ -148,7 +156,7 @@ class CheckoutController extends Controller
             return $shippingOptions;
 
         } catch (\Exception $e) {
-            \Log::error('Failed to fetch shipping rates: '.$e->getMessage());
+            \Log::error('Failed to fetch shipping rates: ' . $e->getMessage());
 
             return [];
         }
