@@ -21,7 +21,15 @@ class CheckoutController extends Controller
         $checkoutOptions = [
             'success_url' => route('home'),
             'cancel_url' => route('home'),
+            'shipping_address_collection' => ['allowed_countries' => ['US']],
+            'phone_number_collection' => ['enabled' => true],
+            'customer_creation' => 'always',
+            // TODO: Uncomment once this is reolved in Stripe Dashboard...
             // 'automatic_tax' => ['enabled' => true],
+            'metadata' => [
+                'cart_items' => json_encode($lineItems),
+                'source' => 'website_store',
+            ],
         ];
 
         $shippingOptions = $this->getShippingOptions();
