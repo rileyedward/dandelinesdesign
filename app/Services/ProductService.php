@@ -9,7 +9,7 @@ class ProductService extends BaseService implements ProductServiceInterface
 {
     public mixed $repository;
 
-    public array $relations = ['category'];
+    public array $relations = ['category', 'prices', 'orders'];
 
     public function __construct(ProductRepositoryInterface $repository)
     {

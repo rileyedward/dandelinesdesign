@@ -2,6 +2,7 @@ export interface Product {
     id: number;
     stripe_product_id?: string;
     category_id: number;
+    category?: Category;
     name: string;
     slug: string;
     description: string;
@@ -19,6 +20,17 @@ export interface Product {
     created_at: string;
     updated_at: string;
     deleted_at?: string;
+}
+
+export interface Category {
+    id: number;
+    name: string;
+    slug: string;
+    description?: string;
+    is_active: boolean;
+    sort_order: number;
+    created_at: string;
+    updated_at: string;
 }
 
 export interface Price {

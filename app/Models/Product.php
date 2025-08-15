@@ -78,7 +78,6 @@ class Product extends Model
             ->withTimestamps();
     }
 
-    // Helper methods
     public function getFormattedPriceAttribute(): string
     {
         $defaultPrice = $this->defaultPrice();

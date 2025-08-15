@@ -14,17 +14,6 @@ class ProductRequest extends FormRequest
 
         return [
             'category_id' => ['required', 'exists:categories,id'],
-            'name' => ['required', 'string'],
-            'slug' => [
-                'required',
-                'string',
-                Rule::unique('products', 'slug')->ignore($isUpdate ? $productId : null),
-            ],
-            'description' => ['required', 'string'],
-            'price' => ['required', 'numeric', 'min:0'],
-            'image_url' => ['nullable', 'url'],
-            'is_active' => ['boolean'],
-            'is_featured' => ['boolean'],
         ];
     }
 }
