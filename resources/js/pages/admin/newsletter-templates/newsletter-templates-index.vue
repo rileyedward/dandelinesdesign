@@ -7,9 +7,16 @@ import type { NewsletterTemplate } from '@/types/newsletter-template';
 import { Head } from '@inertiajs/vue3';
 import { Mail, Plus } from 'lucide-vue-next';
 
-defineProps<{
-    newsletterTemplates: NewsletterTemplate[];
+const props = defineProps<{
+    draftTemplates?: NewsletterTemplate[];
+    sentTemplates?: NewsletterTemplate[];
+    // Legacy support for old prop structure
+    newsletterTemplates?: NewsletterTemplate[];
 }>();
+
+// Handle both new and legacy prop structures
+const draftTemplates = props.draftTemplates || props.newsletterTemplates?.filter(t => t.status === 'draft') || [];
+const sentTemplates = props.sentTemplates || props.newsletterTemplates?.filter(t => t.status === 'sent') || [];
 
 const handleCreateTemplate = () => {
     window.location.href = route('admin.newsletter.templates.create');
@@ -27,7 +34,7 @@ const handleCreateTemplate = () => {
                 </template>
             </common-page-header>
 
-            <newsletter-template-list :newsletter-templates="newsletterTemplates" />
+            <newsletter-template-list :draft-templates="draftTemplates" :sent-templates="sentTemplates" />
         </div>
     </sidebar-layout>
 </template>

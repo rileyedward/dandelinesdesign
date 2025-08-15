@@ -67,7 +67,9 @@ class NewsletterTemplateController extends BaseController
 
         // TODO: Mail integration...
 
-        $newsletterTemplate->status = 'send';
+        $newsletterTemplate->status = 'sent';
+        $newsletterTemplate->sent_at = now();
+        // TODO: Modify the recipients count after mail integration...
         $newsletterTemplate->save();
 
         return to_route('admin.newsletter.templates.show', $newsletterTemplate->id);

@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import CommonPageHeader from '@/components/common/page-header/common-page-header.vue';
 import NewsletterTemplateForm from '@/components/newsletter-template/newsletter-template-form/newsletter-template-form.vue';
+import NewsletterTemplateSend from '@/components/newsletter-template/newsletter-template-send/newsletter-template-send.vue';
 import UiButton from '@/components/ui/forms/button/ui-button.vue';
 import SidebarLayout from '@/layouts/sidebar/sidebar-layout.vue';
 import type { NewsletterTemplate } from '@/types/newsletter-template';
@@ -22,6 +23,8 @@ const form = useForm({
 });
 
 const deleteForm = useForm({});
+const sendForm = useForm({});
+const sendComponentRef = ref();
 
 const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
@@ -68,6 +71,16 @@ const handleSubmit = () => {
     });
 };
 
+const handleSend = () => {
+    sendForm.post(route('admin.newsletter.templates.send', props.newsletterTemplate.id), {
+        onSuccess: () => {
+            if (sendComponentRef.value) {
+                sendComponentRef.value.handleSuccess();
+            }
+        },
+    });
+};
+
 const handleDelete = () => {
     if (confirm('Are you sure you want to delete this newsletter template? This action cannot be undone.')) {
         deleteForm.delete(route('admin.newsletter.templates.destroy', props.newsletterTemplate.id));
@@ -102,6 +115,15 @@ const handleDelete = () => {
                 submit-label="Update Template"
                 :is-editing="true"
                 @submit="handleSubmit"
+            />
+
+            <!-- Send Newsletter Component -->
+            <newsletter-template-send
+                v-if="!isEditing"
+                ref="sendComponentRef"
+                :newsletter-template="newsletterTemplate"
+                :form="sendForm"
+                @send="handleSend"
             />
 
             <!-- Template Analytics (for sent templates) -->
