@@ -36,10 +36,11 @@ const updateShipping = () => {
     if (isUpdating.value) return;
 
     isUpdating.value = true;
-    
+
     router.patch(route('admin.orders.update', props.order.id), {
         shipping_method: form.shipping_method,
         tracking_number: form.tracking_number,
+        status: 'shipped',
     }, {
         preserveScroll: true,
         onSuccess: () => {
