@@ -31,6 +31,18 @@ const totalPrice = computed(() => {
     return selectedPrice.value.unit_amount * quantity.value;
 });
 
+const maxQuantity = computed(() => {
+    return props.product.stock_quantity || 1;
+});
+
+const isOutOfStock = computed(() => {
+    return props.product.stock_quantity === 0;
+});
+
+const showQuantitySelector = computed(() => {
+    return props.product.stock_quantity > 1;
+});
+
 const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
         style: 'currency',
@@ -39,7 +51,9 @@ const formatCurrency = (amount: number) => {
 };
 
 const increaseQuantity = () => {
-    quantity.value++;
+    if (quantity.value < maxQuantity.value) {
+        quantity.value++;
+    }
 };
 
 const decreaseQuantity = () => {
@@ -110,6 +124,18 @@ const handleAddToCart = () => {
                                 <TruckIcon class="mr-1 h-4 w-4" />
                                 Free Shipping
                             </span>
+                            <span
+                                v-if="isOutOfStock"
+                                class="inline-flex items-center rounded-full bg-red-100 px-3 py-1 text-sm font-medium text-red-800"
+                            >
+                                Out of Stock
+                            </span>
+                            <span
+                                v-else-if="product.stock_quantity <= 2"
+                                class="inline-flex items-center rounded-full bg-amber-100 px-3 py-1 text-sm font-medium text-amber-800"
+                            >
+                                Only {{ product.stock_quantity }} left
+                            </span>
                         </div>
                     </div>
 
@@ -133,7 +159,7 @@ const handleAddToCart = () => {
                     </div>
 
                     <!-- Quantity Selector -->
-                    <div class="space-y-4">
+                    <div v-if="showQuantitySelector && !isOutOfStock" class="space-y-4">
                         <h3 class="text-lg font-medium text-gray-900">Quantity</h3>
                         <div class="flex items-center space-x-3">
                             <button
@@ -144,9 +170,21 @@ const handleAddToCart = () => {
                                 <MinusIcon class="h-4 w-4" />
                             </button>
                             <span class="w-12 text-center text-xl font-medium">{{ quantity }}</span>
-                            <button @click="increaseQuantity" class="rounded-lg border border-gray-300 p-2 hover:bg-gray-50">
+                            <button 
+                                @click="increaseQuantity" 
+                                :disabled="quantity >= maxQuantity"
+                                class="rounded-lg border border-gray-300 p-2 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
+                            >
                                 <PlusIcon class="h-4 w-4" />
                             </button>
+                        </div>
+                        <p class="text-sm text-gray-500">Maximum {{ maxQuantity }} available</p>
+                    </div>
+                    
+                    <!-- Single Item Message -->
+                    <div v-else-if="!isOutOfStock && product.stock_quantity === 1" class="space-y-4">
+                        <div class="rounded-lg bg-blue-50 border border-blue-200 p-4">
+                            <p class="text-sm text-blue-800 font-medium">Limited Edition - Only 1 available</p>
                         </div>
                     </div>
 
@@ -161,8 +199,15 @@ const handleAddToCart = () => {
                     </div>
 
                     <!-- Add to Cart Button -->
-                    <UiButton @click="handleAddToCart" :disabled="!selectedPrice" variant="primary" size="lg" class="w-full" :icon="ShoppingCartIcon">
-                        Add to Cart
+                    <UiButton 
+                        @click="handleAddToCart" 
+                        :disabled="!selectedPrice || isOutOfStock" 
+                        variant="primary" 
+                        size="lg" 
+                        class="w-full" 
+                        :icon="ShoppingCartIcon"
+                    >
+                        {{ isOutOfStock ? 'Out of Stock' : 'Add to Cart' }}
                     </UiButton>
                 </div>
             </div>

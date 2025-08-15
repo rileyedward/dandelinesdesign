@@ -12,7 +12,8 @@ class ProductRequest extends FormRequest
         $isUpdate = $this->isMethod('patch') || $this->isMethod('put');
 
         return [
-            'category_id' => ['required', 'exists:categories,id'],
+            'category_id' => ['nullable', 'exists:categories,id'],
+            'stock_quantity' => ['nullable', 'integer', 'min:0'],
         ];
     }
 }

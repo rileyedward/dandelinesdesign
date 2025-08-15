@@ -14,6 +14,10 @@ class StoreController extends Controller
         $products = Product::query()
             ->with(['category', 'prices'])
             ->where('is_active', true)
+            ->inStock()
+            ->whereDoesntHave('category', function ($query) {
+                $query->where('slug', 'imported-from-stripe');
+            })
             ->get();
 
         $categories = Category::query()

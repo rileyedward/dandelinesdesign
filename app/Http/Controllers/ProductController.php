@@ -55,6 +55,15 @@ class ProductController extends BaseController
             ])
             ->findOrFail($id);
 
+        // Get orders for this product through line items
+        $orders = \App\Models\Order::query()
+            ->whereHas('lineItems', function ($query) use ($id) {
+                $query->where('product_id', $id);
+            })
+            ->with('lineItems')
+            ->orderBy('updated_at', 'desc')
+            ->get();
+
         $categories = Category::query()
             ->where('is_active', true)
             ->orderBy('sort_order')
@@ -64,6 +73,7 @@ class ProductController extends BaseController
         return inertia('admin/products/products-show', [
             'product' => $product,
             'categories' => $categories,
+            'orders' => $orders,
         ]);
     }
 

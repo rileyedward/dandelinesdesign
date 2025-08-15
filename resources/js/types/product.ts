@@ -16,6 +16,7 @@ export interface Product {
     unit_label?: string;
     is_active: boolean;
     is_featured: boolean;
+    stock_quantity: number;
     prices?: Price[];
     created_at: string;
     updated_at: string;

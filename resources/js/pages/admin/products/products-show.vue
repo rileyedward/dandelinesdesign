@@ -1,10 +1,13 @@
 <script setup lang="ts">
 import CommonPageHeader from '@/components/common/page-header/common-page-header.vue';
 import ProductInfo from '@/components/product/product-info/product-info.vue';
+import ProductStockManagement from '@/components/admin/products/product-stock-management/product-stock-management.vue';
+import OrderList from '@/components/admin/orders/order-list/order-list.vue';
 import UiButton from '@/components/ui/forms/button/ui-button.vue';
 import UiSelect from '@/components/ui/forms/select/ui-select.vue';
 import SidebarLayout from '@/layouts/sidebar/sidebar-layout.vue';
 import type { Category, Product } from '@/types/product';
+import type { Order } from '@/types/order';
 import { Head, router, useForm } from '@inertiajs/vue3';
 import { ArrowLeft, Edit3, Package, Trash2 } from 'lucide-vue-next';
 import { watch } from 'vue';
@@ -12,6 +15,7 @@ import { watch } from 'vue';
 interface Props {
     product: Product;
     categories: Category[];
+    orders: Order[];
 }
 
 const props = defineProps<Props>();
@@ -121,9 +125,19 @@ const deleteProduct = () => {
                 </div>
             </div>
 
+            <!-- Stock Management -->
+            <div class="rounded-lg border border-gray-200 bg-white p-6">
+                <ProductStockManagement :product="product" />
+            </div>
+
             <!-- Product Information -->
             <div class="rounded-lg border border-gray-200 bg-white p-6">
                 <ProductInfo :product="product" />
+            </div>
+
+            <!-- Product Orders -->
+            <div class="rounded-lg border border-gray-200 bg-white p-6">
+                <order-list :orders="orders" />
             </div>
         </div>
     </sidebar-layout>

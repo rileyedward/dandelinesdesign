@@ -19,13 +19,19 @@ const emit = defineEmits<Emits>();
 const { formatCurrency } = useCart();
 
 const increaseQuantity = () => {
-    emit('update-quantity', props.item.id, props.item.quantity + 1);
+    if (props.item.quantity < props.item.product.stock_quantity) {
+        emit('update-quantity', props.item.id, props.item.quantity + 1);
+    }
 };
 
 const decreaseQuantity = () => {
     if (props.item.quantity > 1) {
         emit('update-quantity', props.item.id, props.item.quantity - 1);
     }
+};
+
+const isAtMaxQuantity = () => {
+    return props.item.quantity >= props.item.product.stock_quantity;
 };
 
 const removeItem = () => {
@@ -61,6 +67,9 @@ const itemTotal = () => {
             <p v-if="item.price.nickname" class="text-xs text-gray-500">
                 {{ item.price.nickname }}
             </p>
+            <p v-if="item.product.stock_quantity <= 2" class="text-xs text-amber-600">
+                Only {{ item.product.stock_quantity }} available
+            </p>
         </div>
 
         <!-- Quantity Controls -->
@@ -75,7 +84,8 @@ const itemTotal = () => {
             <span class="w-8 text-center text-sm font-medium">{{ item.quantity }}</span>
             <button
                 @click="increaseQuantity"
-                class="flex h-8 w-8 items-center justify-center rounded-md border border-gray-300 text-gray-600 hover:bg-gray-50"
+                :disabled="isAtMaxQuantity()"
+                class="flex h-8 w-8 items-center justify-center rounded-md border border-gray-300 text-gray-600 hover:bg-gray-50 disabled:cursor-not-allowed disabled:opacity-50"
             >
                 <PlusIcon class="h-4 w-4" />
             </button>

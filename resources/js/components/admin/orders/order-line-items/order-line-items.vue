@@ -1,7 +1,8 @@
 <script setup lang="ts">
 import UiCard from '@/components/ui/layout/card/ui-card.vue';
 import type { LineItem } from '@/types/order';
-import { Image, Package } from 'lucide-vue-next';
+import { router } from '@inertiajs/vue3';
+import { Image, Package, ExternalLink } from 'lucide-vue-next';
 
 interface Props {
     lineItems: LineItem[];
@@ -28,6 +29,16 @@ const getProductName = (item: LineItem) => {
 const getProductSku = (item: LineItem) => {
     return item.product?.sku || item.product_sku;
 };
+
+const handleProductClick = (item: LineItem) => {
+    if (item.product_id) {
+        router.visit(route('admin.products.show', item.product_id));
+    }
+};
+
+const hasProductLink = (item: LineItem) => {
+    return !!item.product_id;
+};
 </script>
 
 <template>
@@ -43,7 +54,13 @@ const getProductSku = (item: LineItem) => {
             <div v-for="item in lineItems" :key="item.id" class="flex items-start space-x-4 border-b border-gray-200 pb-6 last:border-b-0 last:pb-0">
                 <!-- Product Image -->
                 <div class="flex-shrink-0">
-                    <div class="h-16 w-16 overflow-hidden rounded-lg border border-gray-200">
+                    <div 
+                        :class="[
+                            'h-16 w-16 overflow-hidden rounded-lg border border-gray-200',
+                            hasProductLink(item) ? 'cursor-pointer hover:ring-2 hover:ring-blue-500 hover:ring-offset-1 transition-all' : ''
+                        ]"
+                        @click="hasProductLink(item) ? handleProductClick(item) : null"
+                    >
                         <img
                             v-if="getImageUrl(item)"
                             :src="getImageUrl(item)"
@@ -60,9 +77,24 @@ const getProductSku = (item: LineItem) => {
                 <div class="min-w-0 flex-1">
                     <div class="flex justify-between">
                         <div class="flex-1">
-                            <h4 class="text-sm font-medium text-gray-900">
-                                {{ getProductName(item) }}
-                            </h4>
+                            <div class="flex items-center gap-2">
+                                <h4 
+                                    :class="[
+                                        'text-sm font-medium',
+                                        hasProductLink(item) 
+                                            ? 'text-blue-600 hover:text-blue-800 cursor-pointer hover:underline' 
+                                            : 'text-gray-900'
+                                    ]"
+                                    @click="hasProductLink(item) ? handleProductClick(item) : null"
+                                >
+                                    {{ getProductName(item) }}
+                                </h4>
+                                <ExternalLink 
+                                    v-if="hasProductLink(item)" 
+                                    class="h-3 w-3 text-blue-500 cursor-pointer" 
+                                    @click="handleProductClick(item)"
+                                />
+                            </div>
 
                             <div v-if="getProductSku(item)" class="mt-1">
                                 <p class="text-xs text-gray-500">SKU: {{ getProductSku(item) }}</p>

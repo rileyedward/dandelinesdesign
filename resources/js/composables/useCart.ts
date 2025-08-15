@@ -15,6 +15,12 @@ export function useCart() {
     };
 
     const addToCart = (product: Product, quantity: number = 1): void => {
+        // Check stock availability
+        if (product.stock_quantity === 0) {
+            console.error('Product is out of stock');
+            return;
+        }
+
         // First try to find the current price
         let price = product.prices?.find((price) => price.is_current);
 
@@ -32,13 +38,17 @@ export function useCart() {
         const existingItem = cartState.items.find((item) => item.id === itemId);
 
         if (existingItem) {
-            existingItem.quantity += quantity;
+            // Respect stock limits when adding to existing item
+            const newQuantity = Math.min(existingItem.quantity + quantity, product.stock_quantity);
+            existingItem.quantity = newQuantity;
         } else {
+            // Respect stock limits for new items
+            const finalQuantity = Math.min(quantity, product.stock_quantity);
             const newItem: CartItem = {
                 id: itemId,
                 product,
                 price,
-                quantity,
+                quantity: finalQuantity,
                 addedAt: new Date(),
             };
             cartState.items.push(newItem);
@@ -61,7 +71,8 @@ export function useCart() {
             if (quantity <= 0) {
                 removeFromCart(itemId);
             } else {
-                item.quantity = quantity;
+                // Respect stock limits when updating quantity
+                item.quantity = Math.min(quantity, item.product.stock_quantity);
                 updateCartTotals();
             }
         }
