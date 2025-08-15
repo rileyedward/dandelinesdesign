@@ -157,6 +157,31 @@ class ProductController extends BaseController
         }
     }
 
+    public function setCurrentPrice(Request $request, int $productId, int $priceId): RedirectResponse
+    {
+        try {
+            Price::query()
+                ->where('product_id', $productId)
+                ->update(['is_current' => false]);
+
+            Price::query()
+                ->where('product_id', $productId)
+                ->where('is_current', true)
+                ->update(['is_current' => false]);
+
+            $price = Price::query()
+                ->where('id', $priceId)
+                ->where('product_id', $productId)
+                ->firstOrFail();
+
+            $price->update(['is_current' => true]);
+
+            return back()->with('success', 'Current price updated successfully.');
+        } catch (\Exception $e) {
+            return back()->with('error', 'Failed to update current price.');
+        }
+    }
+
     private function importPricesForProduct(StripeClient $stripe, string $stripeProductId, Product $product): void
     {
         try {

@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { type Product } from '@/types/product';
+import { router } from '@inertiajs/vue3';
 import {
     CalendarIcon,
     CheckCircleIcon,
@@ -13,7 +14,6 @@ import {
     TruckIcon,
     XCircleIcon,
 } from 'lucide-vue-next';
-
 interface Props {
     product: Product;
 }
@@ -35,6 +35,15 @@ const formatCurrency = (amount: number, currency: string = 'USD') => {
         style: 'currency',
         currency: currency,
     }).format(amount);
+};
+
+const setCurrentPrice = (productId: number, priceId: number) => {
+    router.patch(`/admin/products/${productId}/price/${priceId}/set-current`, {}, {
+        preserveScroll: true,
+        onSuccess: () => {
+            // Success message is handled by flash message from controller
+        },
+    });
 };
 </script>
 
@@ -199,21 +208,43 @@ const formatCurrency = (amount: number, currency: string = 'USD') => {
                 Pricing
             </h2>
 
+            <p class="text-sm text-gray-600">Click on a price card to set it as the current price for checkout. The current price is highlighted in blue.</p>
+
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-                <div v-for="price in product.prices" :key="price.id" class="space-y-3 rounded-lg border border-gray-200 p-4">
+                <div
+                    v-for="price in product.prices"
+                    :key="price.id"
+                    :class="[
+                        'space-y-3 rounded-lg border p-4 cursor-pointer transition-all duration-300 hover:shadow',
+                        price.is_current
+                            ? 'border-blue-500 bg-blue-50 shadow-lg ring-2 ring-blue-500 ring-opacity-50 transform scale-[1.02]'
+                            : 'border-gray-200 hover:border-blue-200 hover:bg-blue-50/30'
+                    ]"
+                    @click="setCurrentPrice(product.id, price.id)"
+                    title="Click to set as current price"
+                >
                     <div class="flex items-center justify-between">
-                        <span class="text-lg font-semibold text-gray-900">
+                        <span class="text-lg font-semibold text-gray-900" :class="{'text-blue-700': price.is_current}">
                             {{ formatCurrency(price.unit_amount, price.currency) }}
                         </span>
-                        <span
-                            :class="
-                                price.active
-                                    ? 'inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800'
-                                    : 'inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800'
-                            "
-                        >
-                            {{ price.active ? 'Active' : 'Inactive' }}
-                        </span>
+                        <div class="flex space-x-2">
+                            <span
+                                v-if="price.is_current"
+                                class="inline-flex items-center rounded-full bg-blue-600 px-2.5 py-0.5 text-xs font-medium text-white shadow-sm"
+                            >
+                                <StarIcon class="mr-1 h-3 w-3" />
+                                Current Price
+                            </span>
+                            <span
+                                :class="
+                                    price.active
+                                        ? 'inline-flex items-center rounded-full bg-green-100 px-2.5 py-0.5 text-xs font-medium text-green-800'
+                                        : 'inline-flex items-center rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-800'
+                                "
+                            >
+                                {{ price.active ? 'Active' : 'Inactive' }}
+                            </span>
+                        </div>
                     </div>
 
                     <div class="space-y-2 text-sm">
@@ -322,3 +353,4 @@ const formatCurrency = (amount: number, currency: string = 'USD') => {
         </div>
     </div>
 </template>
+

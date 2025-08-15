@@ -17,6 +17,7 @@ class Price extends Model
         'stripe_price_id',
         'product_id',
         'active',
+        'is_current',
         'currency',
         'type',
         'unit_amount',
@@ -32,6 +33,7 @@ class Price extends Model
 
     protected $casts = [
         'active' => 'boolean',
+        'is_current' => 'boolean',
         'unit_amount' => 'decimal:2',
         'unit_amount_decimal' => 'integer',
         'tax_behavior' => 'boolean',

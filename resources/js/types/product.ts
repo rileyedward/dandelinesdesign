@@ -38,6 +38,7 @@ export interface Price {
     stripe_price_id: string;
     product_id: number;
     active: boolean;
+    is_current: boolean;
     currency: string;
     type: 'one_time' | 'recurring';
     unit_amount: number;

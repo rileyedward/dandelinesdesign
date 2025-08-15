@@ -90,6 +90,7 @@ Route::middleware('auth')
                 Route::post('/import-stripe', 'importFromStripe')->name('import-stripe');
                 Route::get('/{id}', 'show')->name('show');
                 Route::patch('/{id}', 'update')->name('update');
+                Route::patch('/{productId}/price/{priceId}/set-current', 'setCurrentPrice')->name('set-current-price');
                 Route::delete('/{id}', 'destroy')->name('destroy');
             });
 
