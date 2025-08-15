@@ -4,7 +4,7 @@ import UiSelect from '@/components/ui/forms/select/ui-select.vue';
 import UiCard from '@/components/ui/layout/card/ui-card.vue';
 import type { Order } from '@/types/order';
 import { router } from '@inertiajs/vue3';
-import { CheckCircle, Package, Truck, PackageCheck, XCircle, RefreshCcw } from 'lucide-vue-next';
+import { Package, PackageCheck, RefreshCcw, Truck, XCircle } from 'lucide-vue-next';
 import { ref } from 'vue';
 
 interface Props {
@@ -26,7 +26,7 @@ const selectedStatus = ref(props.order.status);
 const isUpdating = ref(false);
 
 const getCurrentStatus = () => {
-    return statusOptions.find(option => option.value === props.order.status);
+    return statusOptions.find((option) => option.value === props.order.status);
 };
 
 const getQuickActions = () => {
@@ -35,22 +35,18 @@ const getQuickActions = () => {
 
     if (currentStatus === 'pending') {
         quickActions.push(
-            statusOptions.find(s => s.value === 'processing'),
-            statusOptions.find(s => s.value === 'cancelled')
+            statusOptions.find((s) => s.value === 'processing'),
+            statusOptions.find((s) => s.value === 'cancelled'),
         );
     } else if (currentStatus === 'processing') {
         quickActions.push(
-            statusOptions.find(s => s.value === 'shipped'),
-            statusOptions.find(s => s.value === 'cancelled')
+            statusOptions.find((s) => s.value === 'shipped'),
+            statusOptions.find((s) => s.value === 'cancelled'),
         );
     } else if (currentStatus === 'shipped') {
-        quickActions.push(
-            statusOptions.find(s => s.value === 'delivered')
-        );
+        quickActions.push(statusOptions.find((s) => s.value === 'delivered'));
     } else if (currentStatus === 'delivered') {
-        quickActions.push(
-            statusOptions.find(s => s.value === 'refunded')
-        );
+        quickActions.push(statusOptions.find((s) => s.value === 'refunded'));
     }
 
     return quickActions.filter(Boolean);
@@ -60,15 +56,19 @@ const updateStatus = (newStatus: string) => {
     if (newStatus === props.order.status || isUpdating.value) return;
 
     isUpdating.value = true;
-    
-    router.patch(route('admin.orders.update', props.order.id), {
-        status: newStatus
-    }, {
-        preserveScroll: true,
-        onFinish: () => {
-            isUpdating.value = false;
-        }
-    });
+
+    router.patch(
+        route('admin.orders.update', props.order.id),
+        {
+            status: newStatus,
+        },
+        {
+            preserveScroll: true,
+            onFinish: () => {
+                isUpdating.value = false;
+            },
+        },
+    );
 };
 
 const updateFromSelect = () => {
@@ -87,7 +87,7 @@ const updateFromSelect = () => {
 
         <div class="space-y-4">
             <!-- Current Status Display -->
-            <div class="flex items-center gap-3 p-3 rounded-lg border" :class="getCurrentStatus()?.bgColor">
+            <div class="flex items-center gap-3 rounded-lg border p-3" :class="getCurrentStatus()?.bgColor">
                 <component :is="getCurrentStatus()?.icon" class="h-5 w-5" :class="getCurrentStatus()?.color" />
                 <div>
                     <p class="font-medium" :class="getCurrentStatus()?.color">
@@ -121,16 +121,11 @@ const updateFromSelect = () => {
                     <div class="flex-1">
                         <ui-select
                             v-model="selectedStatus"
-                            :options="statusOptions.map(opt => ({ value: opt.value, label: opt.label }))"
+                            :options="statusOptions.map((opt) => ({ value: opt.value, label: opt.label }))"
                             placeholder="Select status..."
                         />
                     </div>
-                    <ui-button
-                        @click="updateFromSelect"
-                        :disabled="selectedStatus === order.status || isUpdating"
-                        size="sm"
-                        label="Update"
-                    />
+                    <ui-button @click="updateFromSelect" :disabled="selectedStatus === order.status || isUpdating" size="sm" label="Update" />
                 </div>
             </div>
         </div>

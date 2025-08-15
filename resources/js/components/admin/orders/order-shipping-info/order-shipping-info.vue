@@ -1,12 +1,12 @@
 <script setup lang="ts">
+import UiModal from '@/components/ui/feedback/modal/ui-modal.vue';
 import UiButton from '@/components/ui/forms/button/ui-button.vue';
 import UiInput from '@/components/ui/forms/input/ui-input.vue';
 import UiCard from '@/components/ui/layout/card/ui-card.vue';
-import UiModal from '@/components/ui/feedback/modal/ui-modal.vue';
 import type { Order } from '@/types/order';
 import { router } from '@inertiajs/vue3';
-import { Truck, Edit, Package, MapPin } from 'lucide-vue-next';
-import { ref, reactive } from 'vue';
+import { Edit, MapPin, Package, Truck } from 'lucide-vue-next';
+import { reactive, ref } from 'vue';
 
 interface Props {
     order: Order;
@@ -37,19 +37,23 @@ const updateShipping = () => {
 
     isUpdating.value = true;
 
-    router.patch(route('admin.orders.update', props.order.id), {
-        shipping_method: form.shipping_method,
-        tracking_number: form.tracking_number,
-        status: 'shipped',
-    }, {
-        preserveScroll: true,
-        onSuccess: () => {
-            closeModal();
+    router.patch(
+        route('admin.orders.update', props.order.id),
+        {
+            shipping_method: form.shipping_method,
+            tracking_number: form.tracking_number,
+            status: 'shipped',
         },
-        onFinish: () => {
-            isUpdating.value = false;
-        }
-    });
+        {
+            preserveScroll: true,
+            onSuccess: () => {
+                closeModal();
+            },
+            onFinish: () => {
+                isUpdating.value = false;
+            },
+        },
+    );
 };
 
 const hasShippingInfo = () => {
@@ -65,20 +69,14 @@ const hasShippingInfo = () => {
                     <Truck class="h-5 w-5" />
                     <span class="font-medium">Shipping Information</span>
                 </div>
-                <ui-button
-                    @click="openModal"
-                    variant="outline"
-                    size="sm"
-                    :prefix-icon="Edit"
-                    label="Update Shipping"
-                />
+                <ui-button @click="openModal" variant="outline" size="sm" :prefix-icon="Edit" label="Update Shipping" />
             </div>
         </template>
 
         <div class="space-y-4">
             <!-- Current Shipping Info Display -->
             <div v-if="hasShippingInfo()" class="space-y-3">
-                <div v-if="order.shipping_method" class="flex items-center gap-3 p-3 rounded-lg bg-blue-50 border">
+                <div v-if="order.shipping_method" class="flex items-center gap-3 rounded-lg border bg-blue-50 p-3">
                     <Package class="h-5 w-5 text-blue-600" />
                     <div>
                         <p class="font-medium text-blue-900">{{ order.shipping_method }}</p>
@@ -86,31 +84,29 @@ const hasShippingInfo = () => {
                     </div>
                 </div>
 
-                <div v-if="order.tracking_number" class="flex items-center gap-3 p-3 rounded-lg bg-green-50 border">
+                <div v-if="order.tracking_number" class="flex items-center gap-3 rounded-lg border bg-green-50 p-3">
                     <MapPin class="h-5 w-5 text-green-600" />
                     <div>
-                        <p class="font-medium text-green-900 font-mono">{{ order.tracking_number }}</p>
+                        <p class="font-mono font-medium text-green-900">{{ order.tracking_number }}</p>
                         <p class="text-sm text-green-600">Tracking Number</p>
                     </div>
                 </div>
             </div>
 
             <!-- Empty State -->
-            <div v-else class="text-center py-6 text-gray-500">
-                <Truck class="h-8 w-8 mx-auto mb-2 text-gray-400" />
+            <div v-else class="py-6 text-center text-gray-500">
+                <Truck class="mx-auto mb-2 h-8 w-8 text-gray-400" />
                 <p class="text-sm">No shipping information available</p>
                 <p class="text-xs text-gray-400">Click "Update Shipping" to add details</p>
             </div>
 
             <!-- Placeholder for Shipping Updates -->
             <div class="border-t pt-4">
-                <div class="flex items-center gap-2 mb-2">
+                <div class="mb-2 flex items-center gap-2">
                     <div class="h-2 w-2 rounded-full bg-gray-300"></div>
                     <span class="text-sm font-medium text-gray-600">Shipping Updates</span>
                 </div>
-                <div class="text-sm text-gray-400 italic">
-                    Tracking updates will appear here when available
-                </div>
+                <div class="text-sm text-gray-400 italic">Tracking updates will appear here when available</div>
             </div>
         </div>
     </ui-card>
@@ -135,17 +131,8 @@ const hasShippingInfo = () => {
 
         <template #footer>
             <div class="flex gap-3">
-                <ui-button
-                    @click="closeModal"
-                    variant="outline"
-                    label="Cancel"
-                    :disabled="isUpdating"
-                />
-                <ui-button
-                    @click="updateShipping"
-                    label="Update Shipping"
-                    :loading="isUpdating"
-                />
+                <ui-button @click="closeModal" variant="outline" label="Cancel" :disabled="isUpdating" />
+                <ui-button @click="updateShipping" label="Update Shipping" :loading="isUpdating" />
             </div>
         </template>
     </ui-modal>
