@@ -19,29 +19,10 @@ const isEditing = ref(false);
 
 const form = useForm({
     title: props.blogPost.title,
-    slug: props.blogPost.slug,
     content: props.blogPost.content,
     image_url: props.blogPost.image_url || '',
     is_published: props.blogPost.is_published,
 });
-
-const generateSlug = (title: string) => {
-    return title
-        .toLowerCase()
-        .replace(/[^a-z0-9 -]/g, '')
-        .replace(/\s+/g, '-')
-        .replace(/-+/g, '-')
-        .trim('-');
-};
-
-const originalSlug = ref(props.blogPost.slug);
-
-const handleTitleChange = (value: string) => {
-    form.title = value;
-    if (form.slug === originalSlug.value || form.slug === generateSlug(form.title)) {
-        form.slug = generateSlug(value);
-    }
-};
 
 const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
@@ -101,18 +82,6 @@ const handleDelete = () => {
                             placeholder="Enter blog post title"
                             :error="form.errors.title"
                             required
-                            @input="handleTitleChange"
-                        />
-                    </div>
-
-                    <!-- Slug -->
-                    <div>
-                        <ui-input
-                            v-model="form.slug"
-                            label="Slug"
-                            placeholder="auto-generated-from-title"
-                            :error="form.errors.slug"
-                            help="URL-friendly version of the title"
                         />
                     </div>
 

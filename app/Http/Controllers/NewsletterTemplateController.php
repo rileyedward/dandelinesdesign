@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Contracts\NewsletterTemplateServiceInterface;
 use App\Http\Requests\NewsletterTemplateRequest;
 use App\Models\NewsletterTemplate;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
 
@@ -39,5 +40,17 @@ class NewsletterTemplateController extends BaseController
         return inertia('admin/newsletter-templates/newsletter-templates-show', [
             'newsletterTemplate' => $newsletterTemplate,
         ]);
+    }
+
+    public function destroy(int $id): RedirectResponse
+    {
+        $model = $this->service->getById($id);
+
+        // TODO: Uncomment once authorization policy structure is setup...
+        // $this->authorize('destroy', $model);
+
+        $this->service->delete($model);
+
+        return to_route('admin.newsletter.templates.index');
     }
 }

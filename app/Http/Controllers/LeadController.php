@@ -78,4 +78,16 @@ class LeadController extends BaseController
             'lead' => $lead,
         ]);
     }
+
+    public function destroy(int $id): RedirectResponse
+    {
+        $model = $this->service->getById($id);
+
+        // TODO: Uncomment once authorization policy structure is setup...
+        // $this->authorize('destroy', $model);
+
+        $this->service->delete($model);
+
+        return to_route('admin.leads.index');
+    }
 }
