@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import UiButton from '@/components/ui/forms/button/ui-button.vue';
 import { type Product } from '@/types/product';
-import { ImageIcon, MinusIcon, PlusIcon, ShoppingCartIcon, StarIcon, TruckIcon } from 'lucide-vue-next';
+import { ImageIcon, MinusIcon, PlusIcon, ShoppingCartIcon, StarIcon } from 'lucide-vue-next';
 import { computed, ref } from 'vue';
 
 interface Props {
