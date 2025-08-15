@@ -2,6 +2,7 @@
 import OrderInfo from '@/components/admin/orders/order-info/order-info.vue';
 import OrderLineItems from '@/components/admin/orders/order-line-items/order-line-items.vue';
 import OrderStatusActions from '@/components/admin/orders/order-status-actions/order-status-actions.vue';
+import OrderShippingInfo from '@/components/admin/orders/order-shipping-info/order-shipping-info.vue';
 import CommonPageHeader from '@/components/common/page-header/common-page-header.vue';
 import UiButton from '@/components/ui/forms/button/ui-button.vue';
 import SidebarLayout from '@/layouts/sidebar/sidebar-layout.vue';
@@ -34,6 +35,7 @@ const handleBackClick = () => {
             <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
                 <div class="lg:col-span-2 space-y-6">
                     <order-status-actions :order="order" />
+                    <order-shipping-info :order="order" />
                     <order-line-items :line-items="order.line_items" :currency="order.currency" />
                 </div>
                 <div class="lg:col-span-1">
