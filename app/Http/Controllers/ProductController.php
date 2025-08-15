@@ -18,7 +18,9 @@ class ProductController extends BaseController
 
     public function index(Request $request): Response
     {
-        $products = Product::query()->get();
+        $products = Product::query()
+            ->with('prices')
+            ->get();
 
         return inertia('admin/products/products-index', [
             'products' => $products,

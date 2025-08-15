@@ -1,10 +1,9 @@
 <script setup lang="ts">
-import type { TableColumn, TableRow } from '@/components/ui/layout/table/ui-table';
-import UiTable from '@/components/ui/layout/table/ui-table.vue';
+import ProductBanner from '@/components/product/product-banner/product-banner.vue';
+import UiButton from '@/components/ui/forms/button/ui-button.vue';
 import type { Product } from '@/types/product';
-import { Calendar, CheckCircle, DollarSign, XCircle } from 'lucide-vue-next';
-import { computed, h } from 'vue';
-import type { ProductListProps as Props } from './product-list';
+import { Grid, Plus } from 'lucide-vue-next';
+import type { ProductListProps as Props, ProductListEmits } from './product-list';
 
 const props = withDefaults(defineProps<Props>(), {
     loading: false,
@@ -12,105 +11,85 @@ const props = withDefaults(defineProps<Props>(), {
     loadingText: 'Loading products...',
 });
 
-const formatDate = (dateString: string) => {
-    return new Date(dateString).toLocaleDateString('en-US', {
-        year: 'numeric',
-        month: 'short',
-        day: 'numeric',
-    });
+const emit = defineEmits<ProductListEmits>();
+
+const handleViewProduct = (product: Product) => {
+    emit('view', product);
 };
 
-const truncateDescription = (description: string, maxLength: number = 100) => {
-    if (!description) return 'No description';
-    if (description.length <= maxLength) return description;
-    return description.substring(0, maxLength) + '...';
+const handleEditProduct = (product: Product) => {
+    emit('edit', product);
 };
 
-const getStatusBadge = (isActive: boolean) => {
-    const classes = 'inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium';
-
-    if (isActive) {
-        return h('span', { class: `${classes} bg-green-100 text-green-800` }, [h(CheckCircle, { class: 'w-3 h-3 mr-1' }), 'Active']);
-    } else {
-        return h('span', { class: `${classes} bg-red-100 text-red-800` }, [h(XCircle, { class: 'w-3 h-3 mr-1' }), 'Inactive']);
-    }
-};
-
-const getPriceDisplay = (price: string) => {
-    return h('div', { class: 'flex items-center text-sm font-medium text-gray-900' }, [h(DollarSign, { class: 'w-3 h-3 mr-1' }), price || '0.00']);
-};
-
-const getDateDisplay = (dateString: string) => {
-    return h('div', { class: 'flex items-center text-sm text-gray-600' }, [h(Calendar, { class: 'w-4 h-4 mr-1' }), formatDate(dateString)]);
-};
-
-const columns: TableColumn[] = [
-    {
-        key: 'id',
-        label: 'ID',
-        width: '80px',
-        align: 'center',
-    },
-    {
-        key: 'name',
-        label: 'Name',
-        render: (value: string) => h('div', { class: 'font-medium text-gray-900' }, value),
-    },
-    {
-        key: 'description',
-        label: 'Description',
-        render: (value: string) => h('div', { class: 'text-sm text-gray-600' }, truncateDescription(value)),
-    },
-    {
-        key: 'price',
-        label: 'Price',
-        align: 'center',
-        render: (value: string) => getPriceDisplay(value),
-    },
-    {
-        key: 'is_active',
-        label: 'Status',
-        align: 'center',
-        render: (value: boolean) => getStatusBadge(value),
-    },
-    {
-        key: 'created_at',
-        label: 'Created',
-        align: 'center',
-        render: (value: string) => getDateDisplay(value),
-    },
-];
-
-const tableData = computed<TableRow[]>(() => {
-    return props.products.map((product) => ({
-        id: product.id,
-        name: product.name,
-        slug: product.slug,
-        description: product.description,
-        price: product.price,
-        category_id: product.category_id,
-        is_active: product.is_active,
-        created_at: product.created_at,
-        updated_at: product.updated_at,
-        deleted_at: product.deleted_at,
-        _product: product,
-    }));
-});
-
-const handleRowClick = (row: TableRow) => {
-    const product = row._product as Product;
-    window.location.href = `/admin/products/${product.id}`;
+const handleCreateProduct = () => {
+    emit('create');
 };
 </script>
 
 <template>
-    <ui-table
-        :columns="columns"
-        :data="tableData"
-        :loading="loading"
-        :no-data-text="noDataText"
-        :loading-text="loadingText"
-        hoverable
-        @row-click="handleRowClick"
-    />
+  <div class="space-y-4">
+    <!-- Header with product count and actions -->
+    <div class="flex items-center justify-between">
+      <div class="flex items-center space-x-2">
+        <span class="text-sm text-gray-600">
+          {{ products.length }} {{ products.length === 1 ? 'product' : 'products' }}
+        </span>
+      </div>
+      
+      <UiButton
+        variant="default"
+        size="sm"
+        @click="handleCreateProduct"
+      >
+        <Plus class="mr-2 h-4 w-4" />
+        Add Product
+      </UiButton>
+    </div>
+
+    <!-- Products Grid -->
+    <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <!-- Loading State -->
+      <template v-if="loading">
+        <div
+          v-for="i in 8"
+          :key="i"
+          class="aspect-square animate-pulse rounded-lg bg-gray-200"
+        />
+        <div class="text-center text-sm text-gray-500 col-span-full">
+          {{ loadingText }}
+        </div>
+      </template>
+      
+      <!-- Products -->
+      <template v-else-if="products.length > 0">
+        <ProductBanner
+          v-for="product in products"
+          :key="product.id"
+          :product="product"
+          @view="handleViewProduct"
+          @edit="handleEditProduct"
+        />
+      </template>
+      
+      <!-- Empty State -->
+      <div
+        v-else
+        class="col-span-full flex flex-col items-center justify-center py-12 text-center"
+      >
+        <div class="text-gray-400">
+          <Grid class="mx-auto h-12 w-12 mb-4" />
+          <p class="text-lg font-medium text-gray-900">{{ noDataText }}</p>
+          <p class="text-sm text-gray-500">Get started by creating your first product.</p>
+        </div>
+        <UiButton
+          variant="default"
+          class="mt-4"
+          @click="handleCreateProduct"
+        >
+          <Plus class="mr-2 h-4 w-4" />
+          Add Product
+        </UiButton>
+      </div>
+    </div>
+  </div>
 </template>
