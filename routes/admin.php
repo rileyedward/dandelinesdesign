@@ -120,6 +120,8 @@ Route::middleware('auth')
                 Route::get('/create', 'create')->name('create');
                 Route::post('/', 'store')->name('store');
                 Route::get('/{id}', 'show')->name('show');
+                Route::patch('/{id}', 'update')->name('update');
+                Route::post('/{id}/send', 'send')->name('send');
                 Route::delete('/{id}', 'destroy')->name('destroy');
             });
 

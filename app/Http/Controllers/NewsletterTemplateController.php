@@ -8,6 +8,7 @@ use App\Models\NewsletterTemplate;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Inertia\Response;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
 
 class NewsletterTemplateController extends BaseController
 {
@@ -33,6 +34,24 @@ class NewsletterTemplateController extends BaseController
         return inertia('admin/newsletter-templates/newsletter-templates-create');
     }
 
+    public function store(): RedirectResponse
+    {
+        if (! $this->requestClass) {
+            throw new MethodNotAllowedHttpException([], 'Method not allowed');
+        }
+
+        $request = app($this->requestClass);
+        $validatedData = $request->validated();
+
+        // TODO: Uncomment once authorization policy structure is setup...
+        // $this->authorize('store', $this->modelClass);
+
+        $storeData = $this->filterInputData($validatedData);
+        $newsletterTemplate = $this->service->store($storeData);
+
+        return to_route('admin.newsletter.templates.show', $newsletterTemplate->id);;
+    }
+
     public function show(Request $request, int $id): Response
     {
         $newsletterTemplate = NewsletterTemplate::findOrFail($id);
@@ -40,6 +59,18 @@ class NewsletterTemplateController extends BaseController
         return inertia('admin/newsletter-templates/newsletter-templates-show', [
             'newsletterTemplate' => $newsletterTemplate,
         ]);
+    }
+
+    public function send(int $id): RedirectResponse
+    {
+        $newsletterTemplate = NewsletterTemplate::query()->findOrFail($id);
+
+        // TODO: Mail integration...
+
+        $newsletterTemplate->status = 'send';
+        $newsletterTemplate->save();
+
+        return to_route('admin.newsletter.templates.show', $newsletterTemplate->id);
     }
 
     public function destroy(int $id): RedirectResponse

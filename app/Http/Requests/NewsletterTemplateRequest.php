@@ -13,7 +13,6 @@ class NewsletterTemplateRequest extends FormRequest
             'name' => ['required', 'string', 'max:255'],
             'subject' => ['required', 'string', 'max:255'],
             'content' => ['required', 'string'],
-            'status' => ['required', Rule::in(['draft', 'scheduled', 'sent'])],
         ];
     }
 }

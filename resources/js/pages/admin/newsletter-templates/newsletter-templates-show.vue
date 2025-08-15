@@ -1,16 +1,27 @@
 <script setup lang="ts">
 import CommonPageHeader from '@/components/common/page-header/common-page-header.vue';
+import NewsletterTemplateForm from '@/components/newsletter-template/newsletter-template-form/newsletter-template-form.vue';
 import UiButton from '@/components/ui/forms/button/ui-button.vue';
 import SidebarLayout from '@/layouts/sidebar/sidebar-layout.vue';
 import type { NewsletterTemplate } from '@/types/newsletter-template';
 import { Head, useForm } from '@inertiajs/vue3';
-import { Calendar, Eye, Mail, Send, Trash2, Users } from 'lucide-vue-next';
+import { Calendar, Edit, Eye, Mail, Send, Trash2, Users } from 'lucide-vue-next';
+import { ref } from 'vue';
 
 const props = defineProps<{
     newsletterTemplate: NewsletterTemplate;
 }>();
 
-const form = useForm({});
+const isEditing = ref(false);
+
+const form = useForm({
+    name: props.newsletterTemplate.name,
+    subject: props.newsletterTemplate.subject,
+    content: props.newsletterTemplate.content,
+    preview_text: props.newsletterTemplate.preview_text || '',
+});
+
+const deleteForm = useForm({});
 
 const formatDate = (dateString: string) => {
     return new Date(dateString).toLocaleDateString('en-US', {
@@ -45,9 +56,21 @@ const getClickRate = () => {
     return Math.round((props.newsletterTemplate.clicks_count / props.newsletterTemplate.recipients_count) * 100);
 };
 
+const toggleEdit = () => {
+    isEditing.value = !isEditing.value;
+};
+
+const handleSubmit = () => {
+    form.patch(route('admin.newsletter.templates.update', props.newsletterTemplate.id), {
+        onSuccess: () => {
+            isEditing.value = false;
+        },
+    });
+};
+
 const handleDelete = () => {
     if (confirm('Are you sure you want to delete this newsletter template? This action cannot be undone.')) {
-        form.delete(route('admin.newsletter.templates.destroy', props.newsletterTemplate.id));
+        deleteForm.delete(route('admin.newsletter.templates.destroy', props.newsletterTemplate.id));
     }
 };
 </script>
@@ -57,13 +80,29 @@ const handleDelete = () => {
 
     <sidebar-layout>
         <div class="space-y-6">
-            <common-page-header :title="newsletterTemplate.name" subtitle="Newsletter template preview" :icon="Mail" variant="primary">
+            <common-page-header
+                :title="isEditing ? `Edit: ${newsletterTemplate.name}` : newsletterTemplate.name"
+                :subtitle="isEditing ? 'Update newsletter template content and settings' : 'Newsletter template preview'"
+                :icon="Mail"
+                variant="primary"
+            >
                 <template #actions>
                     <div class="flex space-x-2">
-                        <ui-button label="Delete" variant="destructive" size="sm" :prefix-icon="Trash2" @click="handleDelete" />
+                        <ui-button v-if="!isEditing" label="Edit Template" variant="primary" size="sm" :prefix-icon="Edit" @click="toggleEdit" />
+                        <ui-button v-if="isEditing" label="Delete" variant="destructive" size="sm" :prefix-icon="Trash2" @click="handleDelete" />
+                        <ui-button v-if="isEditing" label="View Template" variant="secondary" size="sm" :prefix-icon="Eye" @click="toggleEdit" />
                     </div>
                 </template>
             </common-page-header>
+
+            <!-- Edit Form -->
+            <newsletter-template-form
+                v-if="isEditing"
+                :form="form"
+                submit-label="Update Template"
+                :is-editing="true"
+                @submit="handleSubmit"
+            />
 
             <!-- Template Analytics (for sent templates) -->
             <div v-if="newsletterTemplate.status === 'sent' && newsletterTemplate.recipients_count > 0" class="grid grid-cols-1 gap-4 sm:grid-cols-4">
