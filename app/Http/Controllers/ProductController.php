@@ -97,7 +97,7 @@ class ProductController extends BaseController
 
             foreach ($stripeProducts->data as $stripeProduct) {
                 $existingProduct = Product::where('stripe_product_id', $stripeProduct->id)->first();
-                
+
                 $product = $this->importProduct($stripeProduct);
 
                 if ($product) {
@@ -106,7 +106,7 @@ class ProductController extends BaseController
                     } else {
                         $createdCount++;
                     }
-                    
+
                     // Always update/sync prices for the product
                     $this->importPricesForProduct($stripe, $stripeProduct->id, $product);
                 } else {
@@ -143,16 +143,16 @@ class ProductController extends BaseController
             $baseSlug = \Str::slug($stripeProduct->name);
             $slug = $baseSlug;
             $counter = 1;
-            
+
             // Check if we're updating an existing product
             $existingProduct = Product::where('stripe_product_id', $stripeProduct->id)->first();
-            
+
             // Only check for slug conflicts if this is a new product or slug has changed
-            if (!$existingProduct || $existingProduct->slug !== $baseSlug) {
+            if (! $existingProduct || $existingProduct->slug !== $baseSlug) {
                 while (Product::where('slug', $slug)
-                    ->when($existingProduct, fn($query) => $query->where('id', '!=', $existingProduct->id))
+                    ->when($existingProduct, fn ($query) => $query->where('id', '!=', $existingProduct->id))
                     ->exists()) {
-                    $slug = $baseSlug . '-' . $counter;
+                    $slug = $baseSlug.'-'.$counter;
                     $counter++;
                 }
             } else {
@@ -177,7 +177,7 @@ class ProductController extends BaseController
             ];
 
             // Only set category for new products, preserve existing category for updates
-            if (!$existingProduct) {
+            if (! $existingProduct) {
                 $productData['category_id'] = $defaultCategory->id;
                 $productData['is_featured'] = false;
             }
@@ -190,8 +190,9 @@ class ProductController extends BaseController
         } catch (\Exception $e) {
             \Log::error('Failed to import/update product from Stripe', [
                 'stripe_product_id' => $stripeProduct->id,
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ]);
+
             return null;
         }
     }
@@ -257,7 +258,7 @@ class ProductController extends BaseController
                 $importedPriceIds[] = $price->id;
 
                 // Set the first active price as current if no current price exists
-                if ($stripePrice->active && !$product->prices()->where('is_current', true)->exists()) {
+                if ($stripePrice->active && ! $product->prices()->where('is_current', true)->exists()) {
                     $price->update(['is_current' => true]);
                 }
             }
@@ -272,7 +273,7 @@ class ProductController extends BaseController
             \Log::error('Failed to import prices for product', [
                 'product_id' => $product->id,
                 'stripe_product_id' => $stripeProductId,
-                'error' => $e->getMessage()
+                'error' => $e->getMessage(),
             ]);
         }
     }
