@@ -9,6 +9,7 @@ use App\Http\Controllers\LeadController;
 use App\Http\Controllers\NewsletterSubscriberController;
 use App\Http\Controllers\NewsletterTemplateController;
 use App\Http\Controllers\NotificationController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\QuoteRequestController;
 use App\Http\Controllers\TestimonialController;
@@ -90,6 +91,14 @@ Route::middleware('auth')
                 Route::get('/{id}', 'show')->name('show');
                 Route::patch('/{id}', 'update')->name('update');
                 Route::delete('/{id}', 'destroy')->name('destroy');
+            });
+
+        Route::controller(OrderController::class)
+            ->prefix('orders')
+            ->name('orders.')
+            ->group(function () {
+                Route::get('/', 'index')->name('index');
+                Route::get('/{id}', 'show')->name('show');
             });
 
         Route::controller(NotificationController::class)

@@ -46,6 +46,7 @@ const config: SidebarLayoutConfig = {
             children: [
                 { label: 'Categories', route: '/admin/categories', icon: Tag },
                 { label: 'Products', route: '/admin/products', icon: Package },
+                { label: 'Orders', route: '/admin/orders', icon: ShoppingBag },
             ],
         },
         {

@@ -18,6 +18,8 @@ use App\Contracts\NewsletterTemplateRepositoryInterface;
 use App\Contracts\NewsletterTemplateServiceInterface;
 use App\Contracts\NotificationRepositoryInterface;
 use App\Contracts\NotificationServiceInterface;
+use App\Contracts\OrderRepositoryInterface;
+use App\Contracts\OrderServiceInterface;
 use App\Contracts\ProductRepositoryInterface;
 use App\Contracts\ProductServiceInterface;
 use App\Contracts\QuoteRequestRepositoryInterface;
@@ -32,6 +34,7 @@ use App\Repositories\LeadRepository;
 use App\Repositories\NewsletterSubscriberRepository;
 use App\Repositories\NewsletterTemplateRepository;
 use App\Repositories\NotificationRepository;
+use App\Repositories\OrderRepository;
 use App\Repositories\ProductRepository;
 use App\Repositories\QuoteRequestRepository;
 use App\Repositories\TestimonialRepository;
@@ -43,6 +46,7 @@ use App\Services\LeadService;
 use App\Services\NewsletterSubscriberService;
 use App\Services\NewsletterTemplateService;
 use App\Services\NotificationService;
+use App\Services\OrderService;
 use App\Services\ProductService;
 use App\Services\QuoteRequestService;
 use App\Services\TestimonialService;
@@ -79,6 +83,10 @@ class AppServiceProvider extends ServiceProvider
         // Products
         $this->app->bind(ProductRepositoryInterface::class, ProductRepository::class);
         $this->app->bind(ProductServiceInterface::class, ProductService::class);
+
+        // Orders
+        $this->app->bind(OrderRepositoryInterface::class, OrderRepository::class);
+        $this->app->bind(OrderServiceInterface::class, OrderService::class);
 
         // Notifications
         $this->app->bind(NotificationRepositoryInterface::class, NotificationRepository::class);
