@@ -24,20 +24,9 @@ const handleBackClick = () => {
 
     <sidebar-layout>
         <div class="space-y-6">
-            <common-page-header
-                :title="`Order ${order.order_number}`"
-                subtitle="Order details and management"
-                :icon="Package"
-                variant="primary"
-            >
+            <common-page-header :title="`Order ${order.order_number}`" subtitle="Order details and management" :icon="Package" variant="primary">
                 <template #actions>
-                    <ui-button
-                        @click="handleBackClick"
-                        variant="outline"
-                        size="sm"
-                        :prefix-icon="ArrowLeft"
-                        label="Back to Orders"
-                    />
+                    <ui-button @click="handleBackClick" variant="outline" size="sm" :prefix-icon="ArrowLeft" label="Back to Orders" />
                 </template>
             </common-page-header>
 

@@ -11,7 +11,9 @@ use Inertia\Response;
 class OrderController extends BaseController
 {
     protected string $modelClass = Order::class;
+
     protected $serviceInterface = OrderServiceInterface::class;
+
     protected ?string $requestClass = OrderRequest::class;
 
     public function index(): Response

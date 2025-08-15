@@ -2,17 +2,7 @@
 import UiButton from '@/components/ui/forms/button/ui-button.vue';
 import UiCard from '@/components/ui/layout/card/ui-card.vue';
 import type { Order } from '@/types/order';
-import { 
-    User, 
-    MapPin, 
-    CreditCard, 
-    Package, 
-    Truck,
-    CheckCircle,
-    Phone,
-    Mail,
-    ExternalLink
-} from 'lucide-vue-next';
+import { CheckCircle, CreditCard, ExternalLink, Mail, MapPin, Package, Phone, Truck, User } from 'lucide-vue-next';
 
 interface Props {
     order: Order;
@@ -74,31 +64,25 @@ const getShippingAddress = (order: Order) => {
         order.shipping_postal_code,
         order.shipping_country,
     ].filter(Boolean);
-    
+
     return parts.length > 0 ? parts.join(', ') : 'N/A';
 };
 
 const getStripePaymentUrl = (paymentIntentId: string) => {
     const isTestMode = paymentIntentId.startsWith('pi_test_');
-    const baseUrl = isTestMode 
-        ? 'https://dashboard.stripe.com/test/payments'
-        : 'https://dashboard.stripe.com/payments';
+    const baseUrl = isTestMode ? 'https://dashboard.stripe.com/test/payments' : 'https://dashboard.stripe.com/payments';
     return `${baseUrl}/${paymentIntentId}`;
 };
 
 const getStripeCustomerUrl = (customerId: string) => {
     const isTestMode = customerId.startsWith('cus_test_') || customerId.includes('test');
-    const baseUrl = isTestMode 
-        ? 'https://dashboard.stripe.com/test/customers'
-        : 'https://dashboard.stripe.com/customers';
+    const baseUrl = isTestMode ? 'https://dashboard.stripe.com/test/customers' : 'https://dashboard.stripe.com/customers';
     return `${baseUrl}/${customerId}`;
 };
 
 const getStripeCheckoutUrl = (sessionId: string) => {
     const isTestMode = sessionId.startsWith('cs_test_');
-    const baseUrl = isTestMode 
-        ? 'https://dashboard.stripe.com/test/checkout/sessions'
-        : 'https://dashboard.stripe.com/checkout/sessions';
+    const baseUrl = isTestMode ? 'https://dashboard.stripe.com/test/checkout/sessions' : 'https://dashboard.stripe.com/checkout/sessions';
     return `${baseUrl}/${sessionId}`;
 };
 
@@ -120,13 +104,23 @@ const openStripeLink = (url: string) => {
             <div class="space-y-4">
                 <div class="flex items-center justify-between">
                     <span class="text-sm font-medium text-gray-500">Status</span>
-                    <span :class="['inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize', getStatusBadgeClasses(order.status)]">
+                    <span
+                        :class="[
+                            'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize',
+                            getStatusBadgeClasses(order.status),
+                        ]"
+                    >
                         {{ order.status }}
                     </span>
                 </div>
                 <div class="flex items-center justify-between">
                     <span class="text-sm font-medium text-gray-500">Payment</span>
-                    <span :class="['inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize', getPaymentStatusBadgeClasses(order.payment_status)]">
+                    <span
+                        :class="[
+                            'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize',
+                            getPaymentStatusBadgeClasses(order.payment_status),
+                        ]"
+                    >
                         {{ order.payment_status }}
                     </span>
                 </div>
@@ -197,7 +191,7 @@ const openStripeLink = (url: string) => {
                         <Truck class="mr-1 h-4 w-4 text-gray-400" />
                         <span class="text-sm font-medium text-gray-500">Tracking</span>
                     </div>
-                    <span class="text-sm text-gray-900 font-mono">{{ order.tracking_number }}</span>
+                    <span class="font-mono text-sm text-gray-900">{{ order.tracking_number }}</span>
                 </div>
             </div>
         </UiCard>
@@ -264,9 +258,9 @@ const openStripeLink = (url: string) => {
                             View
                         </UiButton>
                     </div>
-                    <p class="mt-1 text-xs text-gray-900 font-mono break-all">{{ order.stripe_checkout_session_id }}</p>
+                    <p class="mt-1 font-mono text-xs break-all text-gray-900">{{ order.stripe_checkout_session_id }}</p>
                 </div>
-                
+
                 <div v-if="order.stripe_payment_intent_id">
                     <div class="flex items-center justify-between">
                         <span class="text-sm font-medium text-gray-500">Payment Intent</span>
@@ -279,9 +273,9 @@ const openStripeLink = (url: string) => {
                             View
                         </UiButton>
                     </div>
-                    <p class="mt-1 text-xs text-gray-900 font-mono break-all">{{ order.stripe_payment_intent_id }}</p>
+                    <p class="mt-1 font-mono text-xs break-all text-gray-900">{{ order.stripe_payment_intent_id }}</p>
                 </div>
-                
+
                 <div v-if="order.stripe_customer_id">
                     <div class="flex items-center justify-between">
                         <span class="text-sm font-medium text-gray-500">Customer</span>
@@ -294,12 +288,12 @@ const openStripeLink = (url: string) => {
                             View
                         </UiButton>
                     </div>
-                    <p class="mt-1 text-xs text-gray-900 font-mono break-all">{{ order.stripe_customer_id }}</p>
+                    <p class="mt-1 font-mono text-xs break-all text-gray-900">{{ order.stripe_customer_id }}</p>
                 </div>
-                
+
                 <!-- Quick Actions -->
                 <div class="border-t border-gray-200 pt-4">
-                    <div class="text-sm font-medium text-gray-500 mb-2">Quick Actions</div>
+                    <div class="mb-2 text-sm font-medium text-gray-500">Quick Actions</div>
                     <div class="space-y-2">
                         <UiButton
                             v-if="order.stripe_payment_intent_id"

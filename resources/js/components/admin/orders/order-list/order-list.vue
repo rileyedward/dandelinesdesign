@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import UiButton from '@/components/ui/forms/button/ui-button.vue';
 import type { Order } from '@/types/order';
-import { Eye, User, CreditCard, Package } from 'lucide-vue-next';
 import { router } from '@inertiajs/vue3';
+import { CreditCard, Eye, Package, User } from 'lucide-vue-next';
 
 interface Props {
     orders: Order[];
@@ -66,45 +66,27 @@ const handleViewOrder = (orderId: number) => {
 <template>
     <div class="bg-white shadow-sm ring-1 ring-gray-900/5 sm:rounded-xl">
         <div class="px-4 py-6 sm:px-6">
-            <h2 class="text-base font-semibold leading-7 text-gray-900">Orders</h2>
-            <p class="mt-1 text-sm leading-6 text-gray-600">
-                {{ orders.length }} order{{ orders.length !== 1 ? 's' : '' }} found
-            </p>
+            <h2 class="text-base leading-7 font-semibold text-gray-900">Orders</h2>
+            <p class="mt-1 text-sm leading-6 text-gray-600">{{ orders.length }} order{{ orders.length !== 1 ? 's' : '' }} found</p>
         </div>
 
         <div v-if="orders.length === 0" class="px-4 py-12 text-center sm:px-6">
             <Package class="mx-auto h-12 w-12 text-gray-400" />
             <h3 class="mt-2 text-sm font-semibold text-gray-900">No orders</h3>
-            <p class="mt-1 text-sm text-gray-500">
-                No orders found for the selected criteria.
-            </p>
+            <p class="mt-1 text-sm text-gray-500">No orders found for the selected criteria.</p>
         </div>
 
         <div v-else class="overflow-hidden">
             <table class="min-w-full divide-y divide-gray-300">
                 <thead class="bg-gray-50">
                     <tr>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500">
-                            Order
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500">
-                            Customer
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500">
-                            Items
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500">
-                            Total
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500">
-                            Status
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500">
-                            Payment
-                        </th>
-                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium uppercase tracking-wide text-gray-500">
-                            Date
-                        </th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium tracking-wide text-gray-500 uppercase">Order</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium tracking-wide text-gray-500 uppercase">Customer</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium tracking-wide text-gray-500 uppercase">Items</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium tracking-wide text-gray-500 uppercase">Total</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium tracking-wide text-gray-500 uppercase">Status</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium tracking-wide text-gray-500 uppercase">Payment</th>
+                        <th scope="col" class="px-6 py-3 text-left text-xs font-medium tracking-wide text-gray-500 uppercase">Date</th>
                         <th scope="col" class="relative px-6 py-3">
                             <span class="sr-only">Actions</span>
                         </th>
@@ -115,17 +97,15 @@ const handleViewOrder = (orderId: number) => {
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="flex items-center">
                                 <div class="flex-shrink-0">
-                                    <div class="h-8 w-8 rounded-full bg-primary-100 flex items-center justify-center">
-                                        <Package class="h-4 w-4 text-primary-600" />
+                                    <div class="bg-primary-100 flex h-8 w-8 items-center justify-center rounded-full">
+                                        <Package class="text-primary-600 h-4 w-4" />
                                     </div>
                                 </div>
                                 <div class="ml-3">
                                     <div class="text-sm font-medium text-gray-900">
                                         {{ order.order_number }}
                                     </div>
-                                    <div class="text-xs text-gray-500">
-                                        ID: {{ order.id }}
-                                    </div>
+                                    <div class="text-xs text-gray-500">ID: {{ order.id }}</div>
                                 </div>
                             </div>
                         </td>
@@ -144,7 +124,7 @@ const handleViewOrder = (orderId: number) => {
                                 </div>
                             </div>
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                        <td class="px-6 py-4 text-sm whitespace-nowrap text-gray-900">
                             {{ getTotalItems(order) }} item{{ getTotalItems(order) !== 1 ? 's' : '' }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
@@ -153,30 +133,33 @@ const handleViewOrder = (orderId: number) => {
                             </div>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
-                            <span :class="['inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize', getStatusBadgeClasses(order.status)]">
+                            <span
+                                :class="[
+                                    'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize',
+                                    getStatusBadgeClasses(order.status),
+                                ]"
+                            >
                                 {{ order.status }}
                             </span>
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             <div class="flex items-center">
-                                <CreditCard class="h-4 w-4 text-gray-400 mr-1" />
-                                <span :class="['inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium capitalize', getPaymentStatusBadgeClasses(order.payment_status)]">
+                                <CreditCard class="mr-1 h-4 w-4 text-gray-400" />
+                                <span
+                                    :class="[
+                                        'inline-flex items-center rounded-full px-2.5 py-0.5 text-xs font-medium capitalize',
+                                        getPaymentStatusBadgeClasses(order.payment_status),
+                                    ]"
+                                >
                                     {{ order.payment_status }}
                                 </span>
                             </div>
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
+                        <td class="px-6 py-4 text-sm whitespace-nowrap text-gray-500">
                             {{ formatDate(order.created_at) }}
                         </td>
-                        <td class="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                            <UiButton
-                                @click="handleViewOrder(order.id)"
-                                variant="outline"
-                                size="sm"
-                                :icon="Eye"
-                            >
-                                View
-                            </UiButton>
+                        <td class="px-6 py-4 text-right text-sm font-medium whitespace-nowrap">
+                            <UiButton @click="handleViewOrder(order.id)" variant="outline" size="sm" :icon="Eye"> View </UiButton>
                         </td>
                     </tr>
                 </tbody>

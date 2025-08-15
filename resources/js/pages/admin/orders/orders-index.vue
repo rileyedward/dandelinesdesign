@@ -55,7 +55,7 @@ const filteredOrders = computed(() => {
     if (activeTab.value === 'all') {
         return props.orders;
     }
-    return props.orders.filter(order => order.status === activeTab.value);
+    return props.orders.filter((order) => order.status === activeTab.value);
 });
 
 const handleTabChange = (tab: string) => {
@@ -68,19 +68,10 @@ const handleTabChange = (tab: string) => {
 
     <sidebar-layout>
         <div class="space-y-6">
-            <common-page-header 
-                title="Orders" 
-                subtitle="Manage customer orders and fulfillment" 
-                :icon="ShoppingCart" 
-                variant="primary"
-            />
-            
-            <OrderBanner 
-                :tabs="tabs" 
-                :active-tab="activeTab" 
-                @tab-change="handleTabChange" 
-            />
-            
+            <common-page-header title="Orders" subtitle="Manage customer orders and fulfillment" :icon="ShoppingCart" variant="primary" />
+
+            <OrderBanner :tabs="tabs" :active-tab="activeTab" @tab-change="handleTabChange" />
+
             <OrderList :orders="filteredOrders" />
         </div>
     </sidebar-layout>

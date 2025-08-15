@@ -22,7 +22,7 @@ const getCurrentPrice = () => {
     if (!props.product.prices?.length) return null;
 
     // First try to find the current price
-    const currentPrice = props.product.prices.find(price => price.is_current);
+    const currentPrice = props.product.prices.find((price) => price.is_current);
     if (currentPrice) return currentPrice.unit_amount;
 
     // Fall back to the lowest price if no current price is set

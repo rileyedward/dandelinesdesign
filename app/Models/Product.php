@@ -92,6 +92,7 @@ class Product extends Model
         }
 
         $defaultPrice = $this->defaultPrice();
+
         return $defaultPrice ? $defaultPrice->formatted_price : 'N/A';
     }
 

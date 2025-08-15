@@ -47,7 +47,7 @@ const goToShowPage = () => {
                 <div class="flex items-center justify-between">
                     <div class="flex items-center space-x-2">
                         <span v-if="product?.prices?.length" class="text-xl font-bold">
-                            ${{ product.prices.find(price => price.is_current)?.unit_amount || product.prices[0]?.unit_amount }}
+                            ${{ product.prices.find((price) => price.is_current)?.unit_amount || product.prices[0]?.unit_amount }}
                         </span>
                         <span v-else class="text-sm text-gray-300"> Price not set </span>
                     </div>

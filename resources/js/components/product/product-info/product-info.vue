@@ -38,12 +38,16 @@ const formatCurrency = (amount: number, currency: string = 'USD') => {
 };
 
 const setCurrentPrice = (productId: number, priceId: number) => {
-    router.patch(`/admin/products/${productId}/price/${priceId}/set-current`, {}, {
-        preserveScroll: true,
-        onSuccess: () => {
-            // Success message is handled by flash message from controller
+    router.patch(
+        `/admin/products/${productId}/price/${priceId}/set-current`,
+        {},
+        {
+            preserveScroll: true,
+            onSuccess: () => {
+                // Success message is handled by flash message from controller
+            },
         },
-    });
+    );
 };
 </script>
 
@@ -208,23 +212,25 @@ const setCurrentPrice = (productId: number, priceId: number) => {
                 Pricing
             </h2>
 
-            <p class="text-sm text-gray-600">Click on a price card to set it as the current price for checkout. The current price is highlighted in blue.</p>
+            <p class="text-sm text-gray-600">
+                Click on a price card to set it as the current price for checkout. The current price is highlighted in blue.
+            </p>
 
             <div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
                 <div
                     v-for="price in product.prices"
                     :key="price.id"
                     :class="[
-                        'space-y-3 rounded-lg border p-4 cursor-pointer transition-all duration-300 hover:shadow',
+                        'cursor-pointer space-y-3 rounded-lg border p-4 transition-all duration-300 hover:shadow',
                         price.is_current
-                            ? 'border-blue-500 bg-blue-50 shadow-lg ring-2 ring-blue-500 ring-opacity-50 transform scale-[1.02]'
-                            : 'border-gray-200 hover:border-blue-200 hover:bg-blue-50/30'
+                            ? 'ring-opacity-50 scale-[1.02] transform border-blue-500 bg-blue-50 shadow-lg ring-2 ring-blue-500'
+                            : 'border-gray-200 hover:border-blue-200 hover:bg-blue-50/30',
                     ]"
                     @click="setCurrentPrice(product.id, price.id)"
                     title="Click to set as current price"
                 >
                     <div class="flex items-center justify-between">
-                        <span class="text-lg font-semibold text-gray-900" :class="{'text-blue-700': price.is_current}">
+                        <span class="text-lg font-semibold text-gray-900" :class="{ 'text-blue-700': price.is_current }">
                             {{ formatCurrency(price.unit_amount, price.currency) }}
                         </span>
                         <div class="flex space-x-2">
@@ -353,4 +359,3 @@ const setCurrentPrice = (productId: number, priceId: number) => {
         </div>
     </div>
 </template>
-

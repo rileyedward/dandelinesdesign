@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import UiCard from '@/components/ui/layout/card/ui-card.vue';
 import type { LineItem } from '@/types/order';
-import { Package, Image } from 'lucide-vue-next';
+import { Image, Package } from 'lucide-vue-next';
 
 interface Props {
     lineItems: LineItem[];
@@ -40,11 +40,7 @@ const getProductSku = (item: LineItem) => {
         </template>
 
         <div class="space-y-6">
-            <div 
-                v-for="item in lineItems" 
-                :key="item.id"
-                class="flex items-start space-x-4 border-b border-gray-200 pb-6 last:border-b-0 last:pb-0"
-            >
+            <div v-for="item in lineItems" :key="item.id" class="flex items-start space-x-4 border-b border-gray-200 pb-6 last:border-b-0 last:pb-0">
                 <!-- Product Image -->
                 <div class="flex-shrink-0">
                     <div class="h-16 w-16 overflow-hidden rounded-lg border border-gray-200">
@@ -54,43 +50,34 @@ const getProductSku = (item: LineItem) => {
                             :alt="getProductName(item)"
                             class="h-full w-full object-cover object-center"
                         />
-                        <div 
-                            v-else 
-                            class="flex h-full w-full items-center justify-center bg-gray-50"
-                        >
+                        <div v-else class="flex h-full w-full items-center justify-center bg-gray-50">
                             <Image class="h-6 w-6 text-gray-400" />
                         </div>
                     </div>
                 </div>
 
                 <!-- Product Details -->
-                <div class="flex-1 min-w-0">
+                <div class="min-w-0 flex-1">
                     <div class="flex justify-between">
                         <div class="flex-1">
                             <h4 class="text-sm font-medium text-gray-900">
                                 {{ getProductName(item) }}
                             </h4>
-                            
+
                             <div v-if="getProductSku(item)" class="mt-1">
-                                <p class="text-xs text-gray-500">
-                                    SKU: {{ getProductSku(item) }}
-                                </p>
+                                <p class="text-xs text-gray-500">SKU: {{ getProductSku(item) }}</p>
                             </div>
 
                             <div v-if="item.product_description" class="mt-2">
-                                <p class="text-sm text-gray-600 line-clamp-2">
+                                <p class="line-clamp-2 text-sm text-gray-600">
                                     {{ item.product_description }}
                                 </p>
                             </div>
 
                             <!-- Stripe Information -->
                             <div class="mt-2 space-y-1">
-                                <div v-if="item.stripe_price_id" class="text-xs text-gray-500">
-                                    Price ID: {{ item.stripe_price_id }}
-                                </div>
-                                <div v-if="item.stripe_product_id" class="text-xs text-gray-500">
-                                    Product ID: {{ item.stripe_product_id }}
-                                </div>
+                                <div v-if="item.stripe_price_id" class="text-xs text-gray-500">Price ID: {{ item.stripe_price_id }}</div>
+                                <div v-if="item.stripe_product_id" class="text-xs text-gray-500">Product ID: {{ item.stripe_product_id }}</div>
                             </div>
                         </div>
 
@@ -99,10 +86,8 @@ const getProductSku = (item: LineItem) => {
                             <div class="text-sm font-medium text-gray-900">
                                 {{ formatCurrency(item.unit_price, currency) }}
                             </div>
-                            <div class="text-xs text-gray-500 mt-1">
-                                Qty: {{ item.quantity }}
-                            </div>
-                            <div class="text-sm font-bold text-gray-900 mt-2">
+                            <div class="mt-1 text-xs text-gray-500">Qty: {{ item.quantity }}</div>
+                            <div class="mt-2 text-sm font-bold text-gray-900">
                                 {{ formatCurrency(item.total_price, currency) }}
                             </div>
                         </div>
@@ -117,7 +102,12 @@ const getProductSku = (item: LineItem) => {
                         Total Items: {{ lineItems.reduce((sum, item) => sum + item.quantity, 0) }}
                     </span>
                     <span class="text-base font-bold text-gray-900">
-                        {{ formatCurrency(lineItems.reduce((sum, item) => sum + (Number(item.total_price) || 0), 0), currency) }}
+                        {{
+                            formatCurrency(
+                                lineItems.reduce((sum, item) => sum + (Number(item.total_price) || 0), 0),
+                                currency,
+                            )
+                        }}
                     </span>
                 </div>
             </div>

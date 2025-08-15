@@ -48,8 +48,8 @@ class ProductController extends BaseController
                 'category',
                 'prices' => function ($query) {
                     $query->where('active', true)
-                          ->orderBy('is_current', 'desc')
-                          ->orderBy('unit_amount');
+                        ->orderBy('is_current', 'desc')
+                        ->orderBy('unit_amount');
                 },
                 'lineItems.order',
             ])
