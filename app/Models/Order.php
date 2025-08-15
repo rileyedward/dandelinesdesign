@@ -40,6 +40,9 @@ class Order extends Model
         'payment_method',
         'payment_transaction_id',
         'payment_completed_at',
+        'stripe_checkout_session_id',
+        'stripe_payment_intent_id',
+        'stripe_customer_id',
     ];
 
     protected $casts = [
