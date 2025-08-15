@@ -1,9 +1,12 @@
 <script setup lang="ts">
+import CartButton from '@/components/cart/cart-button/cart-button.vue';
+import CartDrawer from '@/components/cart/cart-drawer/cart-drawer.vue';
 import StoreProductList from '@/components/store/product-list/store-product-list.vue';
 import StoreProductModal from '@/components/store/product-modal/store-product-modal.vue';
 import StoreSplash from '@/components/store/store-splash.vue';
 import type { StoreTabItem } from '@/components/store/store-tabs/store-tabs';
 import StoreTabs from '@/components/store/store-tabs/store-tabs.vue';
+import { useCart } from '@/composables/useCart';
 import NavbarLayout from '@/layouts/navbar/navbar-layout.vue';
 import type { Category, Product } from '@/types/product';
 import { Head } from '@inertiajs/vue3';
@@ -20,6 +23,8 @@ const props = defineProps<Props>();
 const activeTab = ref('all');
 const selectedProduct = ref<Product | null>(null);
 const showProductModal = ref(false);
+
+const { addToCart, toggleCart, cart } = useCart();
 
 const tabs = computed((): StoreTabItem[] => {
     const allTab: StoreTabItem = {
@@ -61,9 +66,55 @@ const handleCloseModal = () => {
 };
 
 const handleAddToCart = (product: Product, quantity: number) => {
-    // TODO: Implement cart functionality
-    console.log('Add to cart:', product, quantity);
+    addToCart(product, quantity);
     handleCloseModal();
+};
+
+const handleCartButtonClick = () => {
+    toggleCart();
+};
+
+const handleCartDrawerClose = (value: boolean) => {
+    cart.isOpen = value;
+};
+
+const handleCheckout = () => {
+    const checkoutItems = cart.items.map((item) => ({
+        price_id: item.price.stripe_price_id,
+        quantity: item.quantity,
+    }));
+
+    cart.isOpen = false;
+
+    // Create a form and submit it to allow proper redirect to Stripe
+    const form = document.createElement('form');
+    form.method = 'POST';
+    form.action = route('checkout');
+
+    // Add CSRF token
+    const csrfInput = document.createElement('input');
+    csrfInput.type = 'hidden';
+    csrfInput.name = '_token';
+    csrfInput.value = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content') || '';
+    form.appendChild(csrfInput);
+
+    // Add items data
+    checkoutItems.forEach((item, index) => {
+        const priceIdInput = document.createElement('input');
+        priceIdInput.type = 'hidden';
+        priceIdInput.name = `items[${index}][price_id]`;
+        priceIdInput.value = item.price_id;
+        form.appendChild(priceIdInput);
+
+        const quantityInput = document.createElement('input');
+        quantityInput.type = 'hidden';
+        quantityInput.name = `items[${index}][quantity]`;
+        quantityInput.value = item.quantity.toString();
+        form.appendChild(quantityInput);
+    });
+
+    document.body.appendChild(form);
+    form.submit();
 };
 </script>
 
@@ -98,5 +149,9 @@ const handleAddToCart = (product: Product, quantity: number) => {
 
         <!-- Product Modal -->
         <StoreProductModal :show="showProductModal" :product="selectedProduct" @close="handleCloseModal" @add-to-cart="handleAddToCart" />
+
+        <!-- Cart Components -->
+        <CartButton @click="handleCartButtonClick" />
+        <CartDrawer :show="cart.isOpen" @update:show="handleCartDrawerClose" @checkout="handleCheckout" />
     </navbar-layout>
 </template>

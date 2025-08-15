@@ -15,7 +15,7 @@ class CheckoutRequest extends FormRequest
                 'required',
                 'string',
                 function ($attribute, $value, $fail) {
-                    $price = Price::where('stripe_price_id', $value)->first();
+                    $price = Price::query()->where('stripe_price_id', $value)->first();
                     if (! $price) {
                         $fail('The selected price is invalid.');
                     } elseif (! $price->active) {

@@ -3,12 +3,13 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\CheckoutRequest;
+use Illuminate\Http\RedirectResponse;
 use Laravel\Cashier\Checkout;
 use Stripe\StripeClient;
 
 class CheckoutController extends Controller
 {
-    public function __invoke(CheckoutRequest $request): Checkout
+    public function __invoke(CheckoutRequest $request): Checkout|RedirectResponse
     {
         $validated = $request->validated();
 
@@ -18,19 +19,26 @@ class CheckoutController extends Controller
         }
 
         $checkoutOptions = [
-            // TODO: Uncomment once we have this in there.
-            // 'success_url' => route('checkout.success'),
-            // 'cancel_url' => route('checkout.cancel'),
-            'automatic_tax' => ['enabled' => true],
+            'success_url' => route('home'),
+            'cancel_url' => route('home'),
+            // 'automatic_tax' => ['enabled' => true],
         ];
 
         $shippingOptions = $this->getShippingOptions();
-
         if (! empty($shippingOptions)) {
             $checkoutOptions['shipping_options'] = $shippingOptions;
         }
 
-        return Checkout::guest()->create($lineItems, $checkoutOptions);
+        try {
+            return Checkout::guest()->create($lineItems, $checkoutOptions);
+        } catch (\Exception $e) {
+            \Log::error('Checkout creation failed: '.$e->getMessage(), [
+                'line_items' => $lineItems,
+                'checkout_options' => $checkoutOptions,
+            ]);
+
+            return back()->with('error', 'Failed to create checkout session. Please try again.');
+        }
     }
 
     private function getShippingOptions(): array
