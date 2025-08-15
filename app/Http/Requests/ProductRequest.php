@@ -25,7 +25,6 @@ class ProductRequest extends FormRequest
             'image_url' => ['nullable', 'url'],
             'is_active' => ['boolean'],
             'is_featured' => ['boolean'],
-            'stock_quantity' => ['nullable', 'integer', 'min:0'],
         ];
     }
 }

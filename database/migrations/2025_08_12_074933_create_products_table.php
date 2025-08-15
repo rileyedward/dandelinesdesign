@@ -18,7 +18,6 @@ return new class extends Migration
             $table->string('image_url')->nullable();
             $table->boolean('is_active')->default(true);
             $table->boolean('is_featured')->default(false);
-            $table->integer('stock_quantity')->default(0);
             $table->timestamps();
             $table->softDeletes();
         });

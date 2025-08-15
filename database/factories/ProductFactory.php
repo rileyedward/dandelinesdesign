@@ -36,7 +36,6 @@ class ProductFactory extends Factory
             'image_url' => $this->faker->optional(0.8)->imageUrl(400, 400, 'nature'),
             'is_active' => $this->faker->boolean(90),
             'is_featured' => $this->faker->boolean(20),
-            'stock_quantity' => $this->faker->numberBetween(0, 50),
         ];
     }
 }

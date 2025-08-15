@@ -22,14 +22,12 @@ class Product extends Model
         'image_url',
         'is_active',
         'is_featured',
-        'stock_quantity',
     ];
 
     protected $casts = [
         'price' => 'decimal:2',
         'is_active' => 'boolean',
         'is_featured' => 'boolean',
-        'stock_quantity' => 'integer',
         'category_id' => 'integer',
     ];
 
