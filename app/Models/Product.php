@@ -16,26 +16,51 @@ class Product extends Model
     protected $table = 'products';
 
     protected $fillable = [
+        'stripe_product_id',
         'category_id',
         'name',
         'slug',
         'description',
-        'price',
         'image_url',
+        'images',
+        'package_dimensions',
+        'weight',
+        'shippable',
+        'tax_code',
+        'metadata',
+        'unit_label',
         'is_active',
         'is_featured',
     ];
 
     protected $casts = [
-        'price' => 'decimal:2',
         'is_active' => 'boolean',
         'is_featured' => 'boolean',
+        'shippable' => 'boolean',
+        'weight' => 'decimal:2',
         'category_id' => 'integer',
+        'images' => 'array',
+        'metadata' => 'array',
     ];
 
     public function category(): BelongsTo
     {
         return $this->belongsTo(Category::class);
+    }
+
+    public function prices(): HasMany
+    {
+        return $this->hasMany(Price::class);
+    }
+
+    public function activePrices(): HasMany
+    {
+        return $this->hasMany(Price::class)->where('active', true);
+    }
+
+    public function defaultPrice(): Price|null
+    {
+        return $this->activePrices()->first();
     }
 
     public function orderProducts(): HasMany
@@ -56,7 +81,26 @@ class Product extends Model
     // Helper methods
     public function getFormattedPriceAttribute(): string
     {
-        return '$' . number_format($this->price, 2);
+        $defaultPrice = $this->defaultPrice();
+        return $defaultPrice ? $defaultPrice->formatted_price : 'N/A';
+    }
+
+    public function getPrimaryImageAttribute(): string|null
+    {
+        if ($this->images && is_array($this->images) && count($this->images) > 0) {
+            return $this->images[0];
+        }
+        return $this->image_url;
+    }
+
+    public function getDisplayNameAttribute(): string
+    {
+        return $this->name;
+    }
+
+    public function getIsShippableAttribute(): bool
+    {
+        return $this->shippable ?? true;
     }
 
     public function getTotalOrdersAttribute(): int
@@ -92,6 +136,22 @@ class Product extends Model
 
     public function scopeInPriceRange($query, $minPrice, $maxPrice)
     {
-        return $query->whereBetween('price', [$minPrice, $maxPrice]);
+        return $query->whereHas('prices', function ($priceQuery) use ($minPrice, $maxPrice) {
+            $priceQuery->where('active', true)
+                      ->whereBetween('unit_amount', [$minPrice, $maxPrice]);
+        });
+    }
+
+    public function scopeWithActivePrices($query)
+    {
+        return $query->with(['prices' => function ($priceQuery) {
+            $priceQuery->where('active', true)->orderBy('unit_amount');
+        }]);
+    }
+
+    // Static methods
+    public static function findByStripeId(string $stripeProductId): ?self
+    {
+        return static::where('stripe_product_id', $stripeProductId)->first();
     }
 }

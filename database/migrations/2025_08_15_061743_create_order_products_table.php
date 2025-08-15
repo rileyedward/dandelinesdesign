@@ -18,6 +18,7 @@ return new class extends Migration
 
             $table->integer('quantity')->default(1);
             $table->decimal('unit_price', 8, 2); // Product price at time of order
+            $table->string('price_id')->nullable(); // Reference to Price model for Stripe prices`
             $table->timestamps();
 
             $table->unique(['order_id', 'product_id']);

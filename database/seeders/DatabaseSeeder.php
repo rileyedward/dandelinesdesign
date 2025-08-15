@@ -22,7 +22,6 @@ class DatabaseSeeder extends Seeder
             TestimonialSeeder::class,
             QuoteRequestSeeder::class,
             CategorySeeder::class,
-            ProductSeeder::class,
             NotificationSeeder::class,
             NewsletterSubscriberSeeder::class,
         ]);

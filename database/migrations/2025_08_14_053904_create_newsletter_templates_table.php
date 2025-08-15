@@ -20,7 +20,6 @@ return new class extends Migration
             $table->softDeletes();
 
             $table->index('status');
-            $table->index('scheduled_at');
             $table->index('sent_at');
         });
     }
