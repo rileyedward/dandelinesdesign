@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import CommonPageHeader from '@/components/common/page-header/common-page-header.vue';
 import ProductList from '@/components/product/product-list/product-list.vue';
-import SidebarLayout from '@/layouts/sidebar/sidebar-layout.vue';
-import UiTab from '@/components/ui/navigation/tab/ui-tab.vue';
 import type { TabItem } from '@/components/ui/navigation/tab/ui-tab';
-import type { Product, Category } from '@/types/product';
+import UiTab from '@/components/ui/navigation/tab/ui-tab.vue';
+import SidebarLayout from '@/layouts/sidebar/sidebar-layout.vue';
+import type { Category, Product } from '@/types/product';
 import { Head } from '@inertiajs/vue3';
-import { Package, Grid, Tag } from 'lucide-vue-next';
-import { ref, computed } from 'vue';
+import { Grid, Package, Tag } from 'lucide-vue-next';
+import { computed, ref } from 'vue';
 
 interface Props {
     products: Product[];
@@ -23,13 +23,13 @@ const tabs = computed((): TabItem[] => {
     const allTab: TabItem = {
         label: `All (${props.products.length})`,
         value: 'all',
-        icon: Grid
+        icon: Grid,
     };
 
-    const categoryTabs: TabItem[] = props.categories.map(category => ({
-        label: `${category.name} (${props.products.filter(product => product.category_id === category.id).length})`,
+    const categoryTabs: TabItem[] = props.categories.map((category) => ({
+        label: `${category.name} (${props.products.filter((product) => product.category_id === category.id).length})`,
         value: category.id.toString(),
-        icon: Tag
+        icon: Tag,
     }));
 
     return [allTab, ...categoryTabs];
@@ -42,7 +42,7 @@ const filteredProducts = computed(() => {
     }
 
     const categoryId = parseInt(activeTab.value);
-    return props.products.filter(product => product.category_id === categoryId);
+    return props.products.filter((product) => product.category_id === categoryId);
 });
 </script>
 
@@ -54,8 +54,8 @@ const filteredProducts = computed(() => {
             <common-page-header title="Products" subtitle="Manage your products" :icon="Package" variant="info" />
 
             <!-- Category Tabs -->
-            <div class="bg-white rounded-lg border border-gray-200 p-6">
-                <div class="flex items-center justify-between mb-4">
+            <div class="rounded-lg border border-gray-200 bg-white p-6">
+                <div class="mb-4 flex items-center justify-between">
                     <h2 class="text-lg font-semibold text-gray-900">Filter by Category</h2>
                     <span class="text-sm text-gray-500">
                         {{ filteredProducts.length }} {{ filteredProducts.length === 1 ? 'product' : 'products' }}
@@ -63,12 +63,7 @@ const filteredProducts = computed(() => {
                 </div>
 
                 <div class="overflow-x-auto">
-                    <UiTab
-                        v-model="activeTab"
-                        :items="tabs"
-                        variant="underline"
-                        class="min-w-max"
-                    />
+                    <UiTab v-model="activeTab" :items="tabs" variant="underline" class="min-w-max" />
                 </div>
             </div>
 
