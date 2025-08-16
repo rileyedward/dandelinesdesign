@@ -2,6 +2,8 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+**Dandelines Design** is a creative business platform offering event planning, floral arrangements, and custom artwork. This is a full-stack Laravel application with Vue 3 frontend, implementing comprehensive CRUD patterns with ecommerce functionality.
+
 ## Development Commands
 
 ### Backend (Laravel)
@@ -29,59 +31,86 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 This is a Laravel application with Vue 3 frontend using Inertia.js for seamless SPA-like experience without API complexity.
 
 ### Backend Architecture (Laravel)
-The application follows a layered architecture pattern:
+The application follows a clean layered architecture with strict separation of concerns:
 
-**Repository Pattern**: 
+**Repository Pattern (Data Access Layer)**: 
 - All data access goes through repositories that extend `BaseRepository`
 - Repositories implement specific interfaces (e.g., `ContactMessageRepositoryInterface`)
-- Located in `app/Repositories/`
+- Located in `app/Repositories/` with interfaces in `app/Contracts/`
+- **Actual Implementation**: Uses method signatures `findById(int $id)`, `store(array $data)`, `update(array $data, Model $model)`, `delete(Model $model)`
 
-**Service Layer**:
+**Service Layer (Business Logic)**:
 - Business logic is encapsulated in services that extend `BaseService`
-- Services use repositories for data access and handle relationship loading
-- Located in `app/Services/`
+- Services use repositories for data access and handle relationship loading via `$relations` array
+- Located in `app/Services/` with interfaces in `app/Contracts/`
+- **Actual Implementation**: Provides `getById()`, `store()`, `update()`, `delete()` with automatic relationship loading
 
-**Controller Layer**:
+**Controller Layer (HTTP Interface)**:
 - Controllers extend `BaseController` which provides standard CRUD operations
-- Controllers use services and handle HTTP concerns
-- Authorization is prepared but commented out (TODO items exist)
+- Controllers use services and handle HTTP concerns with automatic validation
+- Authorization hooks prepared but commented out (TODO items exist)
 - Located in `app/Http/Controllers/`
+- **Actual Implementation**: Auto-resolves services, validates requests, filters input data
 
 **Key Base Classes**:
-- `BaseController`: Provides standard store/update/destroy methods with request validation
-- `BaseRepository`: Handles basic CRUD operations with Eloquent models
-- `BaseService`: Manages business logic and eager loading of relationships
+- `BaseController`: Provides `store()`, `update()`, `destroy()` with automatic validation and service resolution
+- `BaseRepository`: Handles `findById()`, `store()`, `update()`, `delete()` with Eloquent models
+- `BaseService`: Manages relationship loading via configurable `$relations` array and business logic coordination
 
 ### Frontend Architecture (Vue 3 + Inertia)
 
-**Components**: 
-- Comprehensive UI component library in `resources/js/components/ui/`
-- Components organized by category: forms, data, feedback, layout, navigation
-- Each component has both `.vue` and `.ts` files for implementation and configuration
+**Component System**: 
+- **Comprehensive UI Library**: `resources/js/components/ui/` with organized categories:
+  - `forms/`: button, input, select, textarea, checkbox, radio, datepicker, file-upload, rich-text-editor
+  - `data/`: accordion, chart, dropdown-menu, tooltip, table
+  - `feedback/`: alert, modal, toast
+  - `layout/`: card, container, drawer
+  - `navigation/`: breadcrumbs, dropdown, menu, navbar, sidebar, tab
+- **Business Components**: Domain-specific components in `resources/js/components/` organized by entity
+- **TypeScript Integration**: Each component has both `.vue` and `.ts` files for implementation and type definitions
 
 **Layout System**:
-- Multiple layout types: auth, navbar, sidebar
-- Located in `resources/js/layouts/`
+- **Multiple Layout Types**: auth, navbar, sidebar layouts in `resources/js/layouts/`
+- **Responsive Design**: Mobile-first approach with TailwindCSS
+- **State Management**: Composables for cart (`useCart`), notifications (`useNotifications`), sidebar (`useSidebarState`)
 
-**Tech Stack**:
-- Vue 3 with Composition API
-- TypeScript for type safety
-- Inertia.js for SPA experience without API complexity
-- TailwindCSS with custom UI components
-- Reka UI component library
-- Vite for build tooling
+**Tech Stack & Patterns**:
+- **Vue 3**: Composition API with `<script setup>` syntax
+- **TypeScript**: Full type safety with custom type definitions in `resources/js/types/`
+- **Inertia.js**: SSR-like experience without API complexity
+- **TailwindCSS**: Utility-first CSS with custom design system
+- **Vite**: Fast build tooling with hot module replacement
+- **Pages**: File-based routing in `resources/js/pages/` matching Laravel routes
 
-### Database
-- SQLite database for development (`database/database.sqlite`)
-- Migrations in `database/migrations/`
-- Factories for testing in `database/factories/`
+### Database Architecture
+- **SQLite**: Lightweight database for development (`database/database.sqlite`)
+- **Migrations**: Comprehensive schema in `database/migrations/` with soft deletes on all entities
+- **Factories**: Rich test data generation in `database/factories/` with realistic faker data
+- **Seeders**: Development data seeding for all entities
+- **Observers**: Model observers for Contact Messages, Quote Requests, and Leads (automatic notification creation)
+- **Relationships**: Well-defined relationships with proper foreign key constraints
 
-### Key Conventions
-- All repositories must extend `BaseRepository` and implement corresponding interface
-- All services must extend `BaseService` 
-- Controllers should extend `BaseController` when following standard CRUD patterns
-- Authorization policies are planned but not yet implemented (see TODO comments)
-- Input filtering removes 'with' parameter from request data in base controller
+### Key Conventions & Patterns
+- **Interface-Based Architecture**: All repositories and services implement interfaces for dependency injection
+- **Service Provider Bindings**: All interfaces bound to implementations in `AppServiceProvider`
+- **Consistent Naming**: Entity naming follows Laravel conventions (singular models, plural tables)
+- **Soft Deletes**: All entities support soft deletion via `SoftDeletes` trait
+- **Request Validation**: Dedicated FormRequest classes with unique field handling for updates
+- **Relationship Loading**: Services handle eager loading via configurable `$relations` arrays
+- **Input Filtering**: Base controller automatically filters 'with' parameter to prevent injection
+- **Authorization**: Policy structure prepared but not implemented (TODO comments throughout)
+- **Type Safety**: Full TypeScript integration on frontend with custom type definitions
+
+## Documentation
+
+For comprehensive documentation on the CRUD architecture patterns, see the [`docs/`](docs/) directory:
+
+- **[Complete Documentation](docs/README.md)** - Start here for full guides and examples
+- **[Architecture Overview](docs/architecture.md)** - High-level system design and patterns
+- **[CRUD Implementation Guide](docs/crud-guide.md)** - Step-by-step implementation instructions
+- **[Complete Example](docs/example-implementation.md)** - Full walkthrough from migration to routes
+- **[Base Classes](docs/base-classes.md)** - BaseRepository, BaseService, BaseController documentation
+- **[Best Practices](docs/best-practices.md)** - Coding standards and conventions
 
 ## Working with Backend CRUD
 
@@ -142,36 +171,82 @@ For each new entity (e.g., `BlogPost`), create these files in this order:
 11. **Register Services** (`app/Providers/AppServiceProvider.php`)
     - Bind repository and service interfaces to implementations
 
-### Available Entities
+### Current CRUD Entities
 
-Current CRUD entities in the system:
-- **Contact Messages**: Customer inquiries and messages
-- **Blog Posts**: Content management with title, slug, and markdown content
-- **Quote Requests**: Service quote requests for floral design/event planning
-- **Testimonials**: Customer testimonials with ratings and featured status
-- **Leads**: CRM-style lead management with status tracking
-- **Categories**: Product organization and filtering system
-- **Products**: Ecommerce items (design prints, artwork, floral arrangements) with pricing and inventory
+The system implements 13 fully-featured CRUD entities with complete frontend/backend integration:
 
-### Base Class Features
+**Core Business Entities**:
+- **Contact Messages**: Customer inquiries with observer-based notification creation
+- **Quote Requests**: Service quotes for events/floral design with status workflow and observer notifications
+- **Leads**: CRM lead management with status tracking and automatic notification generation
+- **Testimonials**: Customer testimonials with featured/unfeatured status
 
-- **BaseRepository**: Provides `findById()`, `store()`, `update()`, `delete()`
-- **BaseService**: Adds relationship loading via `$relations` array
-- **BaseController**: Handles validation, filtering, and standard CRUD operations
+**Content Management**:
+- **Blog Posts**: Content management with title, slug, markdown content, and image integration
+- **Newsletter Subscribers**: Email list management with unsubscribe functionality
+- **Newsletter Templates**: Email template creation and sending system
+- **Images**: File upload and management system with organized storage
 
-### Ecommerce System
+**Ecommerce System**:
+- **Categories**: Product organization with hierarchical structure
+- **Products**: Complex ecommerce products with Stripe integration, pricing, inventory, and stock management
+- **Orders**: Order management with line items, Stripe integration, and fulfillment workflow
+- **Prices**: Stripe-integrated pricing system with current/historical price tracking
+- **Line Items**: Order line items linking products to orders with quantities and pricing
 
-Simple ecommerce implementation for gallery-style product sales:
+**System Features**:
+- **Notifications**: In-app notification system with read/unread states
+- **Users**: Authentication and user management
 
-**Categories**:
+### Base Class Implementation Details
+
+**BaseRepository** (`app/Repositories/BaseRepository.php`):
+- `findById(int $id): Model` - Uses `findOrFail()` for automatic 404 handling
+- `store(array $data): Model` - Creates new model instance with mass assignment
+- `update(array $data, Model $model): Model` - Updates existing model and returns fresh instance
+- `delete(Model $model): bool` - Soft deletes model (returns boolean success)
+
+**BaseService** (`app/Services/BaseService.php`):
+- `getById(int $id, ?array $relations = null): Model` - Retrieves with relationship loading
+- Automatic relationship resolution via `$relations` and `$commonRelations` arrays
+- Relationship filtering to prevent unauthorized access
+- Delegates CRUD operations to repository layer
+
+**BaseController** (`app/Http/Controllers/BaseController.php`):
+- Auto-resolves services via dependency injection using `$serviceInterface` property
+- Validates requests using `$requestClass` with automatic FormRequest resolution
+- `store()`, `update(int $id)`, `destroy(int $id)` methods with automatic validation
+- Input filtering removes 'with' parameter to prevent relationship injection attacks
+- Authorization hooks prepared (commented out) for future policy implementation
+
+### Ecommerce System Architecture
+
+**Stripe-Integrated Ecommerce** for creative business products:
+
+**Categories** (`app/Models/Category.php`):
 - Organize products into logical groups (Floral Arrangements, Design Prints, etc.)
 - Fields: name, slug, description, is_active, sort_order
 - One-to-many relationship with Products
+- Admin interface with create/update modals and category filtering
 
-**Products**:
-- Simple product catalog without variations or complex options
-- Fields: category_id, name, slug, description, price, image_url, is_active, is_featured, stock_quantity
-- Belongs-to relationship with Category
-- Designed for items like design prints, artwork, floral arrangements
-- Basic inventory tracking with stock_quantity
-- Featured flag for highlighting special products
+**Products** (`app/Models/Product.php`):
+- **Stripe Integration**: `stripe_product_id`, product import from Stripe catalog
+- **Rich Metadata**: name, slug, description, images array, package_dimensions, weight, tax_code
+- **Inventory Management**: `stock_quantity` with increment/decrement methods, stock scopes
+- **Pricing System**: Relationships with Price model for current/historical pricing
+- **Complex Relationships**: Category, Prices, Orders (via LineItems), LineItems
+- **Business Logic**: `isInStock()`, `decrementStock()`, revenue calculation, formatted pricing
+- **Scopes**: active, featured, by category, in stock, price range filtering
+
+**Orders & Checkout** (`app/Models/Order.php`):
+- **Stripe Integration**: Full checkout flow with Stripe session management
+- **Line Items**: Complex order structure with products, quantities, pricing
+- **Order Management**: Status tracking, fulfillment workflow, admin interface
+- **Customer Data**: Billing/shipping information, order history
+
+**Advanced Features**:
+- **Stock Management**: Real-time inventory tracking with admin controls
+- **Cart System**: Frontend cart with persistent state via composables
+- **Product Import**: Automated Stripe product catalog synchronization
+- **Price Management**: Multiple prices per product with current price designation
+- **Order Processing**: Complete order lifecycle from cart to fulfillment

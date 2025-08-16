@@ -91,3 +91,16 @@ Ensure you have the following prerequisites installed on your system. You can ve
    ```bash
    npm run dev
    ```
+
+## Documentation
+
+For comprehensive documentation on the application's CRUD architecture patterns and development workflows, see the [`docs/`](docs/) directory:
+
+- **[Complete Documentation](docs/README.md)** - Start here for full guides and examples
+- **[Architecture Overview](docs/architecture.md)** - High-level system design and patterns  
+- **[CRUD Implementation Guide](docs/crud-guide.md)** - Step-by-step implementation instructions
+- **[Complete Example](docs/example-implementation.md)** - Full walkthrough from migration to routes
+- **[Base Classes](docs/base-classes.md)** - BaseRepository, BaseService, BaseController documentation
+- **[Best Practices](docs/best-practices.md)** - Coding standards and conventions
+
+This documentation provides everything needed to understand and implement the established CRUD patterns consistently across the application.
