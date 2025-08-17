@@ -1,5 +1,4 @@
 <script setup lang="ts">
-import { computed } from 'vue';
 import type { StoreTabsEmits as Emits, StoreTabsProps as Props, StoreTabItem } from './store-tabs';
 
 const props = withDefaults(defineProps<Props>(), {
@@ -8,10 +7,6 @@ const props = withDefaults(defineProps<Props>(), {
 });
 
 const emit = defineEmits<Emits>();
-
-const activeTab = computed(() => {
-    return props.items.find((item) => item.value === props.modelValue);
-});
 
 const selectTab = (item: StoreTabItem): void => {
     if (!props.disabled && !item.disabled) {

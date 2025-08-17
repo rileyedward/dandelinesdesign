@@ -22,10 +22,6 @@ const emit = defineEmits<Emits>();
 const handleTabClick = (tab: string) => {
     emit('tab-change', tab);
 };
-
-const getTabVariant = (tabKey: string, activeTab: string) => {
-    return tabKey === activeTab ? 'primary' : 'outline';
-};
 </script>
 
 <template>

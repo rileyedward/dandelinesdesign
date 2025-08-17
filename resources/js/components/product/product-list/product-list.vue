@@ -4,7 +4,7 @@ import type { Product } from '@/types/product';
 import { Grid } from 'lucide-vue-next';
 import type { ProductListEmits, ProductListProps as Props } from './product-list';
 
-const props = withDefaults(defineProps<Props>(), {
+withDefaults(defineProps<Props>(), {
     loading: false,
     noDataText: 'No products found',
     loadingText: 'Loading products...',

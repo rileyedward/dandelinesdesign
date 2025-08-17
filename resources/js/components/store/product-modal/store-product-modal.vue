@@ -13,7 +13,7 @@ interface Emits {
     'add-to-cart': [product: Product, quantity: number];
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 const emit = defineEmits<Emits>();
 
 const handleClose = () => {

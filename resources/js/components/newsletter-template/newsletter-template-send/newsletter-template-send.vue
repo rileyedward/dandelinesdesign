@@ -10,7 +10,7 @@ interface Props {
     form: InertiaForm<any>;
 }
 
-const props = defineProps<Props>();
+defineProps<Props>();
 
 const emit = defineEmits<{
     send: [];

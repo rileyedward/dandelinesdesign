@@ -25,6 +25,8 @@ const props = withDefaults(defineProps<Props>(), {
     showPreviewToggle: true,
 });
 
+const form = ref(props.form);
+
 const emit = defineEmits<{
     submit: [];
 }>();
