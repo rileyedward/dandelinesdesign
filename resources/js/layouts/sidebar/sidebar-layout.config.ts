@@ -20,26 +20,18 @@ const config: SidebarLayoutConfig = {
             label: 'Customer Relations',
             icon: Users,
             children: [
-                { label: 'Leads', route: '/admin/leads', icon: UserCheck },
                 { label: 'Messages', route: '/admin/messages', icon: Mail },
                 { label: 'Quotes', route: '/admin/quotes', icon: MessageSquare },
+                { label: 'Leads', route: '/admin/leads', icon: UserCheck },
             ],
         },
         {
             label: 'Ecommerce',
             icon: ShoppingBag,
             children: [
-                { label: 'Categories', route: '/admin/categories', icon: Tag },
-                { label: 'Products', route: '/admin/products', icon: Package },
                 { label: 'Orders', route: '/admin/orders', icon: ShoppingBag },
-            ],
-        },
-        {
-            label: 'Content Management',
-            icon: FileText,
-            children: [
-                { label: 'Blog Posts', route: '/admin/blog', icon: FileText },
-                { label: 'Testimonials', route: '/admin/testimonials', icon: Star },
+                { label: 'Products', route: '/admin/products', icon: Package },
+                { label: 'Categories', route: '/admin/categories', icon: Tag },
             ],
         },
         {
@@ -48,6 +40,14 @@ const config: SidebarLayoutConfig = {
             children: [
                 { label: 'Subscribers', route: '/admin/newsletter/subscribers', icon: Users },
                 { label: 'Templates', route: '/admin/newsletter/templates', icon: Mail },
+            ],
+        },
+        {
+            label: 'Content Management',
+            icon: FileText,
+            children: [
+                { label: 'Blog Posts', route: '/admin/blog', icon: FileText },
+                { label: 'Testimonials', route: '/admin/testimonials', icon: Star },
             ],
         },
         { label: 'Notifications', route: '#notifications', icon: Bell },
