@@ -147,7 +147,7 @@ const formatTime = (timeString: string) => {
                         <div class="h-2 w-2 rounded-full bg-gray-300"></div>
                         <span class="text-sm font-medium text-gray-600">Shipping Updates</span>
                     </div>
-                    <ui-button 
+                    <ui-button
                         v-if="order.tracking_number && trackingData"
                         @click="refreshTracking"
                         variant="outline"
@@ -174,36 +174,30 @@ const formatTime = (timeString: string) => {
 
                     <!-- Tracking Events Timeline -->
                     <div class="space-y-3">
-                        <div 
-                            v-for="(event, index) in trackingData.events" 
+                        <div
+                            v-for="(event, index) in trackingData.events"
                             :key="index"
                             class="flex gap-4 pb-3"
                             :class="{ 'border-b': index < trackingData.events.length - 1 }"
                         >
                             <!-- Timeline dot -->
                             <div class="flex flex-col items-center">
-                                <component 
-                                    :is="getStatusIcon(event.status)" 
-                                    :class="['h-4 w-4 mt-0.5', getStatusColor(event.status)]" 
-                                />
-                                <div 
-                                    v-if="index < trackingData.events.length - 1" 
-                                    class="w-px h-8 bg-gray-200 mt-2"
-                                ></div>
+                                <component :is="getStatusIcon(event.status)" :class="['mt-0.5 h-4 w-4', getStatusColor(event.status)]" />
+                                <div v-if="index < trackingData.events.length - 1" class="mt-2 h-8 w-px bg-gray-200"></div>
                             </div>
 
                             <!-- Event details -->
-                            <div class="flex-1 min-w-0">
+                            <div class="min-w-0 flex-1">
                                 <div class="flex items-start justify-between">
                                     <div>
                                         <p class="text-sm font-medium text-gray-900">{{ event.status }}</p>
-                                        <p class="text-sm text-gray-600 mt-1">{{ event.description }}</p>
-                                        <div v-if="event.location" class="flex items-center gap-1 mt-2">
+                                        <p class="mt-1 text-sm text-gray-600">{{ event.description }}</p>
+                                        <div v-if="event.location" class="mt-2 flex items-center gap-1">
                                             <MapPin class="h-3 w-3 text-gray-400" />
                                             <span class="text-xs text-gray-500">{{ event.location }}</span>
                                         </div>
                                     </div>
-                                    <div class="text-right text-xs text-gray-500 ml-4">
+                                    <div class="ml-4 text-right text-xs text-gray-500">
                                         <div>{{ formatDate(event.date) }}</div>
                                         <div v-if="event.time">{{ formatTime(event.time) }}</div>
                                     </div>
@@ -214,9 +208,7 @@ const formatTime = (timeString: string) => {
                 </div>
 
                 <!-- No tracking data available -->
-                <div v-else-if="!order.tracking_number" class="text-sm text-gray-400 italic">
-                    Add a tracking number to see shipping updates
-                </div>
+                <div v-else-if="!order.tracking_number" class="text-sm text-gray-400 italic">Add a tracking number to see shipping updates</div>
 
                 <!-- Error state -->
                 <div v-else-if="trackingData && trackingData.status === 'Error'" class="rounded-lg border border-red-200 bg-red-50 p-4">
@@ -230,9 +222,7 @@ const formatTime = (timeString: string) => {
                 </div>
 
                 <!-- Loading state -->
-                <div v-else class="text-sm text-gray-400 italic">
-                    Loading tracking information...
-                </div>
+                <div v-else class="text-sm text-gray-400 italic">Loading tracking information...</div>
             </div>
         </div>
     </ui-card>

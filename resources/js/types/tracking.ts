@@ -15,11 +15,4 @@ export interface TrackingData {
     events: TrackingEvent[];
 }
 
-export type TrackingStatus = 
-    | 'DELIVERED'
-    | 'OUT_FOR_DELIVERY'
-    | 'IN_TRANSIT'
-    | 'SHIPPED'
-    | 'PRE_SHIPMENT'
-    | 'ERROR'
-    | 'UNKNOWN';
+export type TrackingStatus = 'DELIVERED' | 'OUT_FOR_DELIVERY' | 'IN_TRANSIT' | 'SHIPPED' | 'PRE_SHIPMENT' | 'ERROR' | 'UNKNOWN';
