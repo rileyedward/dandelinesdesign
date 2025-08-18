@@ -2,7 +2,6 @@
 import CommonPageHeader from '@/components/common/page-header/common-page-header.vue';
 import UiButton from '@/components/ui/forms/button/ui-button.vue';
 import UiCheckbox from '@/components/ui/forms/checkbox/ui-checkbox.vue';
-import UiImageSelect from '@/components/ui/forms/image-select/ui-image-select.vue';
 import UiInput from '@/components/ui/forms/input/ui-input.vue';
 import UiRichTextEditor from '@/components/ui/forms/rich-text-editor/ui-rich-text-editor.vue';
 import SidebarLayout from '@/layouts/sidebar/sidebar-layout.vue';
@@ -20,7 +19,6 @@ const isEditing = ref(false);
 const form = useForm({
     title: props.blogPost.title,
     content: props.blogPost.content,
-    image_url: props.blogPost.image_url || '',
     is_published: props.blogPost.is_published,
 });
 
@@ -77,17 +75,6 @@ const handleDelete = () => {
                     <!-- Title -->
                     <div>
                         <ui-input v-model="form.title" label="Title" placeholder="Enter blog post title" :error="form.errors.title" required />
-                    </div>
-
-                    <!-- Image -->
-                    <div>
-                        <ui-image-select
-                            v-model="form.image_url"
-                            label="Image"
-                            placeholder="Select a featured image for this post"
-                            :error="form.errors.image_url"
-                            help="Choose an image to represent this blog post"
-                        />
                     </div>
 
                     <!-- Content -->

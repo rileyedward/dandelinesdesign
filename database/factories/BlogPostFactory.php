@@ -15,7 +15,6 @@ class BlogPostFactory extends Factory
             'title' => $title,
             'slug' => Str::slug($title),
             'content' => $this->faker->paragraphs(5, true),
-            'image_url' => $this->faker->optional(0.6)->imageUrl(),
             'is_published' => $this->faker->boolean(70),
         ];
     }
