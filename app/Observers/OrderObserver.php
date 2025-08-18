@@ -12,6 +12,13 @@ class OrderObserver
         private EmailService $emailService
     ) {}
 
+    public function creating(Order $order): void
+    {
+        if (empty($order->original_status) && !empty($order->status)) {
+            $order->original_status = $order->status;
+        }
+    }
+
     public function created(Order $order): void
     {
         try {

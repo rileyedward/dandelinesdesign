@@ -4,6 +4,7 @@ namespace App\Services;
 
 use App\Mail\ContactFormConfirmation;
 use App\Mail\OrderConfirmation;
+use App\Mail\OrderShipped;
 use App\Mail\OrderStatusUpdate;
 use App\Mail\QuoteRequestConfirmation;
 use App\Models\ContactMessage;
@@ -42,6 +43,35 @@ class EmailService
         }
     }
 
+    public function sendOrderShipped(Order $order): bool
+    {
+        try {
+            if (! $order->customer_email) {
+                Log::warning('Cannot send order shipped email: no customer email', ['order_id' => $order->id]);
+
+                return false;
+            }
+
+            Mail::to($order->customer_email)
+                ->queue(new OrderShipped($order));
+
+            Log::info('Order shipped email queued', [
+                'order_id' => $order->id,
+                'email' => $order->customer_email,
+                'tracking_number' => $order->tracking_number,
+            ]);
+
+            return true;
+        } catch (\Exception $e) {
+            Log::error('Failed to send order shipped email', [
+                'order_id' => $order->id,
+                'error' => $e->getMessage(),
+            ]);
+
+            return false;
+        }
+    }
+
     public function sendOrderStatusUpdate(Order $order, string $previousStatus): bool
     {
         try {
@@ -49,6 +79,11 @@ class EmailService
                 Log::warning('Cannot send order status update: no customer email', ['order_id' => $order->id]);
 
                 return false;
+            }
+
+            // Send specific shipped email for shipped status
+            if ($order->status === 'shipped') {
+                return $this->sendOrderShipped($order);
             }
 
             // Only send status updates for meaningful changes

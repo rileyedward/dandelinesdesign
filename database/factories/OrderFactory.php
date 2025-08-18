@@ -17,9 +17,12 @@ class OrderFactory extends Factory
         $shippingCost = $this->faker->randomFloat(2, 5, 25);
         $totalAmount = $subtotal + $taxAmount + $shippingCost;
 
+        $status = $this->faker->randomElement(['pending', 'processing', 'shipped', 'delivered', 'cancelled']);
+
         return [
             'order_number' => 'ORD-'.strtoupper($this->faker->unique()->bothify('??######')),
-            'status' => $this->faker->randomElement(['pending', 'processing', 'shipped', 'delivered', 'cancelled']),
+            'status' => $status,
+            'original_status' => $status,
             'subtotal' => $subtotal,
             'tax_amount' => $taxAmount,
             'shipping_cost' => $shippingCost,
@@ -64,6 +67,7 @@ class OrderFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'status' => 'pending',
+            'original_status' => 'pending',
             'payment_status' => 'pending',
             'shipped_at' => null,
             'delivered_at' => null,
@@ -76,6 +80,7 @@ class OrderFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'status' => 'processing',
+            'original_status' => 'pending',
             'payment_status' => 'paid',
             'shipped_at' => null,
             'delivered_at' => null,
@@ -87,6 +92,7 @@ class OrderFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'status' => 'shipped',
+            'original_status' => 'pending',
             'payment_status' => 'paid',
             'shipped_at' => $this->faker->dateTimeBetween('-7 days', 'now'),
             'delivered_at' => null,
@@ -102,6 +108,7 @@ class OrderFactory extends Factory
 
         return $this->state(fn (array $attributes) => [
             'status' => 'delivered',
+            'original_status' => 'pending',
             'payment_status' => 'paid',
             'shipped_at' => $shippedAt,
             'delivered_at' => $deliveredAt,
@@ -114,6 +121,7 @@ class OrderFactory extends Factory
     {
         return $this->state(fn (array $attributes) => [
             'status' => 'cancelled',
+            'original_status' => 'pending',
             'payment_status' => $this->faker->randomElement(['pending', 'refunded']),
             'shipped_at' => null,
             'delivered_at' => null,

@@ -44,5 +44,4 @@
 
 <p>We'll send you another email when your order ships. If you have any questions, please don't hesitate to contact us.</p>
 
-<a href="{{ config('app.url') }}/orders/{{ $order->id }}" class="button">View Order Details</a>
 @endsection

@@ -31,5 +31,4 @@
 <p>If you have any questions about your cancellation or would like to place a new order, please contact us.</p>
 @endif
 
-<a href="{{ config('app.url') }}/orders/{{ $order->id }}" class="button">View Order Details</a>
 @endsection

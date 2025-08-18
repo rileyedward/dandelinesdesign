@@ -23,6 +23,7 @@ export interface Order {
     id: number;
     order_number: string;
     status: string;
+    original_status: string | null;
     payment_status: string;
     subtotal: number;
     tax_amount: number | null;
