@@ -55,6 +55,8 @@ use App\Services\OrderService;
 use App\Services\ProductService;
 use App\Services\QuoteRequestService;
 use App\Services\TestimonialService;
+use App\Services\USPS\USPSConnector;
+use App\Services\USPS\USPSTrackingService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -107,6 +109,10 @@ class AppServiceProvider extends ServiceProvider
 
         // Email Service
         $this->app->singleton(EmailService::class);
+
+        // USPS Services
+        $this->app->singleton(USPSConnector::class);
+        $this->app->singleton(USPSTrackingService::class);
     }
 
     public function boot(): void

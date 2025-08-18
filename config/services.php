@@ -39,4 +39,10 @@ return [
         'api_key' => env('TINY_MCE_API_KEY'),
     ],
 
+    'usps' => [
+        'enabled' => env('USPS_ENABLED', false),
+        'user_id' => env('USPS_USER_ID'),
+        'base_url' => env('USPS_BASE_URL', 'https://secure.shippingapis.com/ShippingApi.dll'),
+    ],
+
 ];

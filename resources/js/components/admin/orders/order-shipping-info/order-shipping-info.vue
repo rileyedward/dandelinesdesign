@@ -4,12 +4,14 @@ import UiButton from '@/components/ui/forms/button/ui-button.vue';
 import UiInput from '@/components/ui/forms/input/ui-input.vue';
 import UiCard from '@/components/ui/layout/card/ui-card.vue';
 import type { Order } from '@/types/order';
+import type { TrackingData } from '@/types/tracking';
 import { router } from '@inertiajs/vue3';
-import { Edit, MapPin, Package, Truck } from 'lucide-vue-next';
+import { CheckCircle, Clock, Edit, MapPin, Package, RefreshCw, Truck, XCircle } from 'lucide-vue-next';
 import { reactive, ref } from 'vue';
 
 interface Props {
     order: Order;
+    trackingData?: TrackingData | null;
 }
 
 const props = defineProps<Props>();
@@ -59,6 +61,44 @@ const updateShipping = () => {
 const hasShippingInfo = () => {
     return props.order.shipping_method || props.order.tracking_number;
 };
+
+const refreshTracking = () => {
+    router.reload({ only: ['trackingData'] });
+};
+
+const getStatusIcon = (status: string) => {
+    const statusLower = status.toLowerCase();
+    if (statusLower.includes('delivered')) return CheckCircle;
+    if (statusLower.includes('out for delivery')) return Truck;
+    if (statusLower.includes('error')) return XCircle;
+    return Clock;
+};
+
+const getStatusColor = (status: string) => {
+    const statusLower = status.toLowerCase();
+    if (statusLower.includes('delivered')) return 'text-green-600';
+    if (statusLower.includes('out for delivery')) return 'text-blue-600';
+    if (statusLower.includes('error')) return 'text-red-600';
+    return 'text-gray-600';
+};
+
+const formatDate = (dateString: string) => {
+    const date = new Date(dateString);
+    return date.toLocaleDateString('en-US', {
+        month: 'short',
+        day: 'numeric',
+        year: 'numeric',
+    });
+};
+
+const formatTime = (timeString: string) => {
+    if (!timeString) return '';
+    const [hours, minutes] = timeString.split(':');
+    const hour = parseInt(hours);
+    const ampm = hour >= 12 ? 'PM' : 'AM';
+    const displayHour = hour % 12 || 12;
+    return `${displayHour}:${minutes} ${ampm}`;
+};
 </script>
 
 <template>
@@ -100,13 +140,99 @@ const hasShippingInfo = () => {
                 <p class="text-xs text-gray-400">Click "Update Shipping" to add details</p>
             </div>
 
-            <!-- Placeholder for Shipping Updates -->
+            <!-- Shipping Updates / Tracking Timeline -->
             <div class="border-t pt-4">
-                <div class="mb-2 flex items-center gap-2">
-                    <div class="h-2 w-2 rounded-full bg-gray-300"></div>
-                    <span class="text-sm font-medium text-gray-600">Shipping Updates</span>
+                <div class="mb-4 flex items-center justify-between">
+                    <div class="flex items-center gap-2">
+                        <div class="h-2 w-2 rounded-full bg-gray-300"></div>
+                        <span class="text-sm font-medium text-gray-600">Shipping Updates</span>
+                    </div>
+                    <ui-button 
+                        v-if="order.tracking_number && trackingData"
+                        @click="refreshTracking"
+                        variant="outline"
+                        size="sm"
+                        :prefix-icon="RefreshCw"
+                        label="Refresh"
+                    />
                 </div>
-                <div class="text-sm text-gray-400 italic">Tracking updates will appear here when available</div>
+
+                <!-- Tracking Timeline -->
+                <div v-if="trackingData && trackingData.events.length > 0" class="space-y-4">
+                    <!-- Current Status Summary -->
+                    <div v-if="trackingData.status !== 'Error'" class="rounded-lg border bg-blue-50 p-4">
+                        <div class="flex items-center gap-3">
+                            <component :is="getStatusIcon(trackingData.status)" :class="['h-5 w-5', getStatusColor(trackingData.status)]" />
+                            <div>
+                                <p class="font-medium text-blue-900">{{ trackingData.status }}</p>
+                                <p v-if="trackingData.expected_delivery" class="text-sm text-blue-600">
+                                    Expected delivery: {{ formatDate(trackingData.expected_delivery) }}
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tracking Events Timeline -->
+                    <div class="space-y-3">
+                        <div 
+                            v-for="(event, index) in trackingData.events" 
+                            :key="index"
+                            class="flex gap-4 pb-3"
+                            :class="{ 'border-b': index < trackingData.events.length - 1 }"
+                        >
+                            <!-- Timeline dot -->
+                            <div class="flex flex-col items-center">
+                                <component 
+                                    :is="getStatusIcon(event.status)" 
+                                    :class="['h-4 w-4 mt-0.5', getStatusColor(event.status)]" 
+                                />
+                                <div 
+                                    v-if="index < trackingData.events.length - 1" 
+                                    class="w-px h-8 bg-gray-200 mt-2"
+                                ></div>
+                            </div>
+
+                            <!-- Event details -->
+                            <div class="flex-1 min-w-0">
+                                <div class="flex items-start justify-between">
+                                    <div>
+                                        <p class="text-sm font-medium text-gray-900">{{ event.status }}</p>
+                                        <p class="text-sm text-gray-600 mt-1">{{ event.description }}</p>
+                                        <div v-if="event.location" class="flex items-center gap-1 mt-2">
+                                            <MapPin class="h-3 w-3 text-gray-400" />
+                                            <span class="text-xs text-gray-500">{{ event.location }}</span>
+                                        </div>
+                                    </div>
+                                    <div class="text-right text-xs text-gray-500 ml-4">
+                                        <div>{{ formatDate(event.date) }}</div>
+                                        <div v-if="event.time">{{ formatTime(event.time) }}</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- No tracking data available -->
+                <div v-else-if="!order.tracking_number" class="text-sm text-gray-400 italic">
+                    Add a tracking number to see shipping updates
+                </div>
+
+                <!-- Error state -->
+                <div v-else-if="trackingData && trackingData.status === 'Error'" class="rounded-lg border border-red-200 bg-red-50 p-4">
+                    <div class="flex items-center gap-3">
+                        <XCircle class="h-5 w-5 text-red-600" />
+                        <div>
+                            <p class="font-medium text-red-900">Unable to fetch tracking information</p>
+                            <p class="text-sm text-red-600">Please verify the tracking number or try again later</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loading state -->
+                <div v-else class="text-sm text-gray-400 italic">
+                    Loading tracking information...
+                </div>
             </div>
         </div>
     </ui-card>

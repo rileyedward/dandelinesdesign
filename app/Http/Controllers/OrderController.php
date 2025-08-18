@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Contracts\OrderServiceInterface;
 use App\Http\Requests\OrderRequest;
 use App\Models\Order;
+use App\Services\USPS\USPSTrackingService;
 use Inertia\Inertia;
 use Inertia\Response;
 
@@ -33,13 +34,19 @@ class OrderController extends BaseController
         ]);
     }
 
-    public function show(string $id): Response
+    public function show(string $id, USPSTrackingService $uspsTrackingService): Response
     {
         $model = $this->service->getById($id);
         $model->load('lineItems');
 
+        $trackingData = null;
+        if ($model->tracking_number) {
+            $trackingData = $uspsTrackingService->getTrackingInfo($model->tracking_number);
+        }
+
         return Inertia::render('admin/orders/orders-show', [
             'order' => $model,
+            'trackingData' => $trackingData,
         ]);
     }
 }

@@ -7,11 +7,13 @@ import CommonPageHeader from '@/components/common/page-header/common-page-header
 import UiButton from '@/components/ui/forms/button/ui-button.vue';
 import SidebarLayout from '@/layouts/sidebar/sidebar-layout.vue';
 import type { Order } from '@/types/order';
+import type { TrackingData } from '@/types/tracking';
 import { Head, router } from '@inertiajs/vue3';
 import { ArrowLeft, Package } from 'lucide-vue-next';
 
 interface Props {
     order: Order;
+    trackingData?: TrackingData | null;
 }
 
 defineProps<Props>();
@@ -35,7 +37,7 @@ const handleBackClick = () => {
             <div class="grid grid-cols-1 gap-6 lg:grid-cols-3">
                 <div class="space-y-6 lg:col-span-2">
                     <order-status-actions :order="order" />
-                    <order-shipping-info :order="order" />
+                    <order-shipping-info :order="order" :tracking-data="trackingData" />
                     <order-line-items :line-items="order.line_items" :currency="order.currency" />
                 </div>
                 <div class="lg:col-span-1">
