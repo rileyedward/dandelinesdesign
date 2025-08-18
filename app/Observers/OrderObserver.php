@@ -14,7 +14,7 @@ class OrderObserver
 
     public function creating(Order $order): void
     {
-        if (empty($order->original_status) && !empty($order->status)) {
+        if (empty($order->original_status) && ! empty($order->status)) {
             $order->original_status = $order->status;
         }
     }
