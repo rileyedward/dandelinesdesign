@@ -29,7 +29,6 @@ defineProps<{
         totalProducts: number;
         totalSubscribers: number;
         totalTestimonials: number;
-        totalImages: number;
         totalOrders: number;
         pendingOrders: number;
         processingOrders: number;

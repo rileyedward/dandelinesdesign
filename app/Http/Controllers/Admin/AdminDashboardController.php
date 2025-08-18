@@ -4,7 +4,6 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\ContactMessage;
-use App\Models\Image;
 use App\Models\Lead;
 use App\Models\NewsletterSubscriber;
 use App\Models\Order;
@@ -25,7 +24,6 @@ class AdminDashboardController extends Controller
             'totalProducts' => Product::query()->where('is_active', true)->count(),
             'totalSubscribers' => NewsletterSubscriber::query()->where('status', 'active')->count(),
             'totalTestimonials' => Testimonial::query()->where('is_active', true)->count(),
-            'totalImages' => Image::query()->count(),
 
             'totalOrders' => Order::query()->count(),
             'pendingOrders' => Order::query()->where('status', 'pending')->count(),

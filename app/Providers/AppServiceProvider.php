@@ -8,8 +8,6 @@ use App\Contracts\CategoryRepositoryInterface;
 use App\Contracts\CategoryServiceInterface;
 use App\Contracts\ContactMessageRepositoryInterface;
 use App\Contracts\ContactMessageServiceInterface;
-use App\Contracts\ImageRepositoryInterface;
-use App\Contracts\ImageServiceInterface;
 use App\Contracts\LeadRepositoryInterface;
 use App\Contracts\LeadServiceInterface;
 use App\Contracts\NewsletterSubscriberRepositoryInterface;
@@ -29,7 +27,6 @@ use App\Contracts\TestimonialServiceInterface;
 use App\Repositories\BlogPostRepository;
 use App\Repositories\CategoryRepository;
 use App\Repositories\ContactMessageRepository;
-use App\Repositories\ImageRepository;
 use App\Repositories\LeadRepository;
 use App\Repositories\NewsletterSubscriberRepository;
 use App\Repositories\NewsletterTemplateRepository;
@@ -41,7 +38,6 @@ use App\Repositories\TestimonialRepository;
 use App\Services\BlogPostService;
 use App\Services\CategoryService;
 use App\Services\ContactMessageService;
-use App\Services\ImageService;
 use App\Services\LeadService;
 use App\Services\NewsletterSubscriberService;
 use App\Services\NewsletterTemplateService;
@@ -99,10 +95,6 @@ class AppServiceProvider extends ServiceProvider
         // Newsletter Templates
         $this->app->bind(NewsletterTemplateRepositoryInterface::class, NewsletterTemplateRepository::class);
         $this->app->bind(NewsletterTemplateServiceInterface::class, NewsletterTemplateService::class);
-
-        // Images
-        $this->app->bind(ImageRepositoryInterface::class, ImageRepository::class);
-        $this->app->bind(ImageServiceInterface::class, ImageService::class);
     }
 
     public function boot(): void

@@ -1,22 +1,7 @@
 import type { DropdownMenuItem } from '@/components/ui/data/dropdown-menu/ui-dropdown-menu';
 import type { SidebarItem } from '@/components/ui/navigation/sidebar/ui-sidebar';
 import { router } from '@inertiajs/vue3';
-import {
-    Bell,
-    FileText,
-    Home,
-    Image,
-    LogOut,
-    Mail,
-    MessageSquare,
-    Newspaper,
-    Package,
-    ShoppingBag,
-    Star,
-    Tag,
-    UserCheck,
-    Users,
-} from 'lucide-vue-next';
+import { Bell, FileText, Home, LogOut, Mail, MessageSquare, Newspaper, Package, ShoppingBag, Star, Tag, UserCheck, Users } from 'lucide-vue-next';
 
 export interface SidebarLayoutConfig {
     title: string;
@@ -55,7 +40,6 @@ const config: SidebarLayoutConfig = {
             children: [
                 { label: 'Blog Posts', route: '/admin/blog', icon: FileText },
                 { label: 'Testimonials', route: '/admin/testimonials', icon: Star },
-                { label: 'Images', route: '/admin/images', icon: Image },
             ],
         },
         {

@@ -4,7 +4,6 @@ use App\Http\Controllers\Admin\AdminDashboardController;
 use App\Http\Controllers\BlogPostController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\ContactMessageController;
-use App\Http\Controllers\ImageController;
 use App\Http\Controllers\LeadController;
 use App\Http\Controllers\NewsletterSubscriberController;
 use App\Http\Controllers\NewsletterTemplateController;
@@ -133,16 +132,6 @@ Route::middleware('auth')
                 Route::get('/{id}', 'show')->name('show');
                 Route::patch('/{id}', 'update')->name('update');
                 Route::post('/{id}/send', 'send')->name('send');
-                Route::delete('/{id}', 'destroy')->name('destroy');
-            });
-
-        Route::controller(ImageController::class)
-            ->prefix('images')
-            ->name('images.')
-            ->group(function () {
-                Route::get('/', 'index')->name('index');
-                Route::get('/list', 'list')->name('list');
-                Route::post('/', 'store')->name('store');
                 Route::delete('/{id}', 'destroy')->name('destroy');
             });
     });
