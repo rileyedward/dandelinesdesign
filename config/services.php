@@ -41,8 +41,9 @@ return [
 
     'usps' => [
         'enabled' => env('USPS_ENABLED', false),
-        'user_id' => env('USPS_USER_ID'),
-        'base_url' => env('USPS_BASE_URL', 'https://secure.shippingapis.com/ShippingApi.dll'),
+        'consumer_key' => env('USPS_CONSUMER_KEY'),
+        'consumer_secret' => env('USPS_CONSUMER_SECRET'),
+        'base_url' => env('USPS_BASE_URL', 'https://api.usps.com'),
     ],
 
 ];

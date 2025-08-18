@@ -13,15 +13,13 @@ class USPSTrackingRequest extends Request
 
     public function resolveEndpoint(): string
     {
-        return '?API=TrackV2&XML='.urlencode($this->buildTrackingXML());
+        return '/tracking/v3/tracking/'.$this->trackingNumber;
     }
 
-    protected function buildTrackingXML(): string
+    protected function defaultQuery(): array
     {
-        $userId = config('services.usps.user_id', 'YOUR_USPS_USER_ID');
-
-        return '<TrackRequest USERID="'.$userId.'">'.
-               '<TrackID ID="'.$this->trackingNumber.'"></TrackID>'.
-               '</TrackRequest>';
+        return [
+            'expand' => 'detail',
+        ];
     }
 }

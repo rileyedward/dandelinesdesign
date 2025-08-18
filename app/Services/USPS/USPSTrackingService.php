@@ -21,7 +21,7 @@ class USPSTrackingService
             $request = new USPSTrackingRequest($trackingNumber);
             $response = $this->connector->send($request);
 
-            return $this->parseUSPSResponse($response->body());
+            return $this->parseUSPSJsonResponse($response->json());
         } catch (RequestException $e) {
             Log::error('USPS API Error', [
                 'tracking_number' => $trackingNumber,
@@ -98,27 +98,39 @@ class USPSTrackingService
         ];
     }
 
-    protected function parseUSPSResponse(string $xmlResponse): array
+    protected function parseUSPSJsonResponse(array $jsonResponse): array
     {
-        // Parse actual USPS XML response
-        // This would contain the logic to parse the USPS XML format
+        // Parse actual USPS JSON response from Tracking API v3
+        // This would contain the logic to parse the USPS JSON format
         // and convert it to our standardized format
 
         try {
-            $xml = simplexml_load_string($xmlResponse);
+            $trackingInfo = $jsonResponse['trackingInfo'] ?? [];
+            $summary = $trackingInfo['summary'] ?? [];
+            $events = $trackingInfo['events'] ?? [];
 
-            // TODO: Implement actual USPS XML parsing
-            // This is a placeholder for the actual implementation
+            // Parse tracking events
+            $parsedEvents = [];
+            foreach ($events as $event) {
+                $parsedEvents[] = [
+                    'date' => $event['eventDate'] ?? '',
+                    'time' => $event['eventTime'] ?? '',
+                    'status' => $event['eventType'] ?? '',
+                    'description' => $event['eventDescription'] ?? '',
+                    'location' => $event['eventCity'].', '.$event['eventState'].' '.$event['eventZIP'] ?? null,
+                    'facility' => $event['eventFacility'] ?? null,
+                ];
+            }
 
             return [
-                'tracking_number' => (string) $xml->TrackInfo['ID'] ?? '',
-                'status' => (string) $xml->TrackInfo->Status ?? 'Unknown',
-                'status_code' => $this->mapUSPSStatus((string) $xml->TrackInfo->Status ?? ''),
-                'expected_delivery' => (string) $xml->TrackInfo->ExpectedDeliveryDate ?? null,
-                'events' => [], // Parse events from XML
+                'tracking_number' => $trackingInfo['trackingNumber'] ?? '',
+                'status' => $summary['status'] ?? 'Unknown',
+                'status_code' => $this->mapUSPSStatus($summary['status'] ?? ''),
+                'expected_delivery' => $summary['expectedDeliveryDate'] ?? null,
+                'events' => $parsedEvents,
             ];
         } catch (\Exception $e) {
-            Log::error('USPS XML Parse Error', ['error' => $e->getMessage()]);
+            Log::error('USPS JSON Parse Error', ['error' => $e->getMessage()]);
 
             return $this->getErrorTrackingData('');
         }
