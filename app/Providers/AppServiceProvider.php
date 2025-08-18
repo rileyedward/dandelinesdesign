@@ -24,6 +24,14 @@ use App\Contracts\QuoteRequestRepositoryInterface;
 use App\Contracts\QuoteRequestServiceInterface;
 use App\Contracts\TestimonialRepositoryInterface;
 use App\Contracts\TestimonialServiceInterface;
+use App\Models\ContactMessage;
+use App\Models\Lead;
+use App\Models\Order;
+use App\Models\QuoteRequest;
+use App\Observers\ContactMessageObserver;
+use App\Observers\LeadObserver;
+use App\Observers\OrderObserver;
+use App\Observers\QuoteRequestObserver;
 use App\Repositories\BlogPostRepository;
 use App\Repositories\CategoryRepository;
 use App\Repositories\ContactMessageRepository;
@@ -38,6 +46,7 @@ use App\Repositories\TestimonialRepository;
 use App\Services\BlogPostService;
 use App\Services\CategoryService;
 use App\Services\ContactMessageService;
+use App\Services\EmailService;
 use App\Services\LeadService;
 use App\Services\NewsletterSubscriberService;
 use App\Services\NewsletterTemplateService;
@@ -95,13 +104,16 @@ class AppServiceProvider extends ServiceProvider
         // Newsletter Templates
         $this->app->bind(NewsletterTemplateRepositoryInterface::class, NewsletterTemplateRepository::class);
         $this->app->bind(NewsletterTemplateServiceInterface::class, NewsletterTemplateService::class);
+
+        // Email Service
+        $this->app->singleton(EmailService::class);
     }
 
     public function boot(): void
     {
-        // Register model observers
-        \App\Models\ContactMessage::observe(\App\Observers\ContactMessageObserver::class);
-        \App\Models\QuoteRequest::observe(\App\Observers\QuoteRequestObserver::class);
-        \App\Models\Lead::observe(\App\Observers\LeadObserver::class);
+        ContactMessage::observe(ContactMessageObserver::class);
+        QuoteRequest::observe(QuoteRequestObserver::class);
+        Lead::observe(LeadObserver::class);
+        Order::observe(OrderObserver::class);
     }
 }
